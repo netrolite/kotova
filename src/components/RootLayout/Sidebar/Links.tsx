@@ -26,7 +26,7 @@ export default function SidebarLinks({ className }: Props) {
     <nav className={cn("flex flex-col gap-1", className)}>
       <ul>
         {LINKS.map((item) => (
-          <li>
+          <li key={item.href}>
             <Link
               key={item.href}
               href={item.href}
