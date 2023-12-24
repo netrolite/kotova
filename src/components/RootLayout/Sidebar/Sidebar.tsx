@@ -1,13 +1,14 @@
 import Logo from "@/components/Logo";
 import HeaderWrapper from "../Header/Header/Wrapper";
+import SidebarLinks from "./Links";
 
 export default function Sidebar() {
   return (
-    <aside className="hidden w-full max-w-[260px] md:block">
+    <aside className="hidden w-full max-w-[260px] space-y-2 md:block">
       <HeaderWrapper className="border-none" asDiv={true}>
         <Logo className="max-w-[100px]" />
       </HeaderWrapper>
-      <div className="px-4 py-3">content</div>
+      <SidebarLinks />
     </aside>
   );
 }
