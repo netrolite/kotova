@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: {
+    absolute: "Учитель Русского Языка и Литературы Котова Виктория",
+  },
+};
+
 export default function Home() {
   return (
     <>
