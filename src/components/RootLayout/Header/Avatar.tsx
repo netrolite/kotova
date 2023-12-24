@@ -25,14 +25,14 @@ export default function HeaderAvatar() {
           <AvatarFallback>{username.slice(0, 1)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="mr-1 min-w-[200px] max-w-[350px] p-3">
+      <DropdownMenuContent align="end" className="min-w-[200px] max-w-[350px]">
         <DropdownMenuLabel className="truncate">{username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer space-x-2"
           onClick={() => signOut()}
         >
-          <LogOutIcon />
+          <LogOutIcon width={16} />
           <span>Выйти</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
