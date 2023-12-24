@@ -23,9 +23,9 @@ export default async function RootLayout({
     <html lang="ru">
       <SessionProvider {...{ session }}>
         <body className="min-h-screen">
-          <div className="m-auto flex md:max-w-[800px]">
+          <div className="flex w-full justify-center">
             <Sidebar />
-            <main className="min-h-screen w-full md:max-w-[600px] md:border-l md:border-r md:border-slate-200">
+            <main className="min-h-screen w-full md:max-w-[650px] md:border-l md:border-r md:border-slate-200">
               <Header />
               <div className="px-4 py-3">{children}</div>
             </main>
