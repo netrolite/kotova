@@ -20,7 +20,7 @@ export default function HeaderAvatar() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
+        <Avatar className="h-8 w-8">
           <AvatarImage src={avatarSrc} />
           <AvatarFallback>{username.slice(0, 1)}</AvatarFallback>
         </Avatar>
