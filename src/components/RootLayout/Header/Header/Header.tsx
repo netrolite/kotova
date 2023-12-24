@@ -24,7 +24,7 @@ export default function Header() {
         <HeaderBackBtn />
       )}
 
-      <div className="ml-auto">
+      <div className="ml-auto flex items-center">
         {isUnauthed ? <SignInBtn /> : <HeaderAvatar />}
       </div>
     </HeaderWrapper>
