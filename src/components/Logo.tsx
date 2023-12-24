@@ -2,12 +2,13 @@ import { cn } from "@/lib/shadcnUtils";
 import Link from "next/link";
 
 type Props = {
+  linkClassName?: string;
   className?: string;
 };
 
-export default function Logo({ className }: Props) {
+export default function Logo({ className, linkClassName }: Props) {
   return (
-    <Link href="/">
+    <Link href="/" className={cn(linkClassName)}>
       <svg
         viewBox="0 0 370 113.32641010712379"
         className={cn("w-full h-full", className)}
