@@ -8,8 +8,66 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(cuid())
-  name  String
-  email String  @unique
-  image String?
+  id           String       @id @default(cuid())
+  name         String
+  email        String       @unique
+  image        String?
+  role         Role         @default(STUDENT)
+  testResults  TestResult[]
+  createdTests Test[]
+  createdAt    DateTime     @default(now())
+}
+
+model Test {
+  id          String         @id @default(cuid())
+  title       String
+  createdBy   User           @relation(fields: [userId], references: [id])
+  questions   TestQuestion[]
+  testResults TestResult[]
+  userId      String
+  maxScore    Int
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model TestQuestion {
+  id                String               @id @default(cuid())
+  test              Test                 @relation(fields: [testId], references: [id])
+  testId            String
+  type              TestQuestionType
+  // prisma doesn't yet support union types so we can't use something like `options (TextQuestion | RadioQuestion)[]`
+  options           TestQuestionOption[]
+  correctAnswerText String?
+}
+
+model TestQuestionOption {
+  id             String        @id @default(cuid())
+  content        String
+  isCorrect      Boolean
+  testQuestion   TestQuestion? @relation(fields: [testQuestionId], references: [id])
+  testQuestionId String?
+}
+
+model TestResult {
+  id              String   @id @default(cuid())
+  test            Test     @relation(fields: [testId], references: [id])
+  testId          String
+  user            User     @relation(fields: [userId], references: [id])
+  score           Int
+  scorePercentage Int
+  userId          String
+  createdAt       DateTime @default(now())
+}
+
+enum TestQuestionType {
+  RADIO
+  CHECKBOX
+  TEXT
+  TABLE
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ADMIN
 }
