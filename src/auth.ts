@@ -4,28 +4,47 @@ import Vk from "next-auth/providers/vk";
 import Yandex from "next-auth/providers/yandex";
 import { type NextAuthConfig } from "next-auth";
 import { db } from "./lib/db";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import CustomUser from "./lib/types/CustomUser";
+import { ROLE } from "./lib/types/enums/Role";
 
 const PROTECTED_ROUTES = ["/protected"];
 
 export const nextAuthConfig = {
-  theme: {
-    logo: "https://next-auth.js.org/img/logo/logo-sm.png",
-    buttonText: "In Sign",
-  },
-  providers: [Google, Vk, Yandex],
+  adapter: PrismaAdapter(db),
+  trustHost: true,
+  providers: [
+    Google({
+      // the return value of this callback is used to create a user record in the database
+      profile: (profile) => {
+        console.log("profile callback:");
+        console.log(profile);
+        const result: CustomUser = {
+          role: profile.role ?? ROLE.STUDENT,
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+        };
+        return result;
+      },
+    }),
+    Vk,
+    Yandex,
+  ],
   callbacks: {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl;
       if (PROTECTED_ROUTES.includes(pathname)) return !!auth;
       return true;
     },
-    async signIn({ user: { id, email, image, name } }) {
-      if (!email || !image || !name) return false;
-
-      await db.user.create({
-        data: { email, id, name, image },
-      });
-      return true;
+    session({ session, user }) {
+      console.log(user);
+      if (session.user) {
+        (session.user as CustomUser).role = (user as any).role;
+        session.user.id = user.id;
+      }
+      return session;
     },
   },
 } satisfies NextAuthConfig;
