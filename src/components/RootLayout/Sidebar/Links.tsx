@@ -3,6 +3,7 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/shadcnUtils";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -14,14 +15,21 @@ type Link = {
   title: string;
 };
 
-const LINKS = [
-  { title: "Личный кабинет", href: "/my" },
-  { title: "Мои классы", href: "/my/classes" },
-  { title: "Тесты", href: "/tests" },
-] satisfies Link[];
-
 export default function SidebarLinks({ className }: Props) {
+  const session = useSession();
   const pathname = usePathname();
+  const LINKS = [
+    { title: "Личный кабинет", href: "/my" },
+    { title: "Мои классы", href: "/my/classes" },
+    { title: "Тесты", href: "/tests" },
+  ];
+  if (session?.data?.user?.id) {
+    LINKS.unshift({
+      href: `/users/${session.data.user.id}`,
+      title: "Мой профиль",
+    });
+  }
+
   return (
     <nav className={cn("flex flex-col gap-1", className)}>
       <ul>
