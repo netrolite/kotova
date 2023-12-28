@@ -32,12 +32,19 @@ export const nextAuthConfig = {
     Vk,
     Yandex({
       profile(profile) {
-        const { client_id, default_email, emails, real_name, display_name } =
-          profile;
+        const {
+          client_id,
+          default_email,
+          emails,
+          real_name,
+          display_name,
+          default_phone,
+        } = profile;
         return {
           id: client_id,
           email: default_email || emails?.[0],
           name: real_name || display_name,
+          phone: default_phone?.number,
           role: ROLE.STUDENT,
         };
       },
@@ -50,7 +57,6 @@ export const nextAuthConfig = {
       return true;
     },
     session({ session, user }) {
-      console.log(user);
       if (session.user) {
         (session.user as CustomUser).role = (user as any).role;
         session.user.id = user.id;
