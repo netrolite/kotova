@@ -30,7 +30,18 @@ export const nextAuthConfig = {
       },
     }),
     Vk,
-    Yandex,
+    Yandex({
+      profile(profile) {
+        const { client_id, default_email, emails, real_name, display_name } =
+          profile;
+        return {
+          id: client_id,
+          email: default_email || emails?.[0],
+          name: real_name || display_name,
+          role: ROLE.STUDENT,
+        };
+      },
+    }),
   ],
   callbacks: {
     authorized({ request, auth }) {
