@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import Vk from "next-auth/providers/vk";
 import Yandex from "next-auth/providers/yandex";
 import { type NextAuthConfig } from "next-auth";
 import { db } from "./lib/db";
@@ -17,8 +16,6 @@ export const nextAuthConfig = {
     Google({
       // the return value of this callback is used to create a user record in the database
       profile: (profile) => {
-        console.log("profile callback:");
-        console.log(profile);
         const result: CustomUser = {
           role: profile.role ?? ROLE.STUDENT,
           id: profile.sub,
@@ -29,7 +26,6 @@ export const nextAuthConfig = {
         return result;
       },
     }),
-    Vk,
     Yandex({
       profile(profile) {
         const {
