@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Button } from "../ui/button";
-import Loading from "../Loading";
+import Loading from "../Loading/Loading";
 
 type Props = {
   children: ReactNode;
