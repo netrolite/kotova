@@ -17,7 +17,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Debug DB_URL
-        run: echo "${{ secrets.DB_URL }}"
+        run: echo "DB_URL"
       - name: Apply db migrations
         run: npx prisma migrate deploy
         env:
