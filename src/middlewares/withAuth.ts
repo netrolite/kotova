@@ -4,7 +4,7 @@ import { auth } from "../auth";
 
 const withAuth: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-    auth();
+    await auth();
     return next(request, _next);
   };
 };
