@@ -32,8 +32,10 @@ export default async function User({
       <section className="flex gap-6">
         <Avatar className="h-[100px] w-[100px]">
           <AvatarImage src={user.image || UserIcon.toString()} />
-          <AvatarFallback>
-            <Skeleton />
+          <AvatarFallback className="bg-transparent text-4xl">
+            {user.name?.slice(0, 1) ?? (
+              <UserIcon className="h-[100px] w-[100px] text-slate-500" />
+            )}
           </AvatarFallback>
         </Avatar>
         <div className="space-y-2">
