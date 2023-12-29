@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
-import Header from "@/components/RootLayout/Header/Header/Header";
-import Sidebar from "@/components/RootLayout/Sidebar/Sidebar";
+import Sidebar from "@/components/routes/layouts/root/Sidebar/Sidebar";
+import Header from "@/components/routes/layouts/root/Header/Header";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +24,7 @@ export default async function RootLayout({
     <html lang="ru">
       <SessionProvider {...{ session }}>
         <body className="min-h-screen">
+          <Toaster />
           <div className="flex w-full justify-center">
             <Sidebar />
             <main className="min-h-screen w-full md:max-w-[650px] md:border-l md:border-r md:border-slate-200">
