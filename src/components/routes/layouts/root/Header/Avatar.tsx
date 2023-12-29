@@ -30,7 +30,7 @@ export default function HeaderAvatar() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer space-x-2"
-          onClick={() => signOut()}
+          onClick={() => signOut({ callbackUrl: "/" })}
         >
           <LogOutIcon width={16} />
           <span>Выйти</span>

@@ -1,5 +1,5 @@
 import Logo from "@/components/Logo";
-import HeaderWrapper from "../Header/Header/Wrapper";
+import HeaderWrapper from "../Header/Wrapper";
 import SidebarLinks from "./Links";
 
 export default function Sidebar() {

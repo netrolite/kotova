@@ -1,9 +1,9 @@
 import { auth } from "@/auth";
 import PageTitle from "@/components/PageTitle";
+import UserEditProfileBtn from "@/components/routes/users/EditProfileBtn";
+import UserTestResults from "@/components/routes/users/TestResults";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
-import UserEditProfileBtn from "@/components/users/EditProfileBtn";
-import UserTestResults from "@/components/users/TestResults";
 import { db } from "@/lib/db";
 import getUserRoleName from "@/lib/getUserRoleName";
 import { UserIcon } from "lucide-react";
@@ -43,7 +43,7 @@ export default async function User({
               <h3 className="text-muted-foreground">{userRoleName}</h3>
             )}
           </div>
-          {isOwnAccount && <UserEditProfileBtn />}
+          {isOwnAccount && <UserEditProfileBtn userId={id} />}
         </div>
       </section>
       <section>
