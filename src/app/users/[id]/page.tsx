@@ -1,6 +1,8 @@
+import { auth } from "@/auth";
 import PageTitle from "@/components/PageTitle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
+import UserEditProfileBtn from "@/components/users/EditProfileBtn";
 import UserTestResults from "@/components/users/TestResults";
 import { db } from "@/lib/db";
 import getUserRoleName from "@/lib/getUserRoleName";
@@ -13,13 +15,17 @@ export default async function User({
 }: {
   params: { id: string };
 }) {
-  const data = await db.user.findFirst({
+  const sessionPromise = auth();
+  const dataPromise = await db.user.findFirst({
     where: { id },
     include: { testResults: { include: { test: true } } },
   });
+  const [session, data] = await Promise.all([sessionPromise, dataPromise]);
   if (!data) notFound();
+
   const { testResults, ...user } = data;
   const userRoleName = getUserRoleName(user.role);
+  const isOwnAccount = session?.user?.id === user.id;
 
   return (
     <div className="space-y-8">
@@ -30,11 +36,14 @@ export default async function User({
             <Skeleton />
           </AvatarFallback>
         </Avatar>
-        <div>
-          <PageTitle className="-mb-1">{user.name}</PageTitle>
-          {userRoleName && (
-            <h3 className="text-muted-foreground">{userRoleName}</h3>
-          )}
+        <div className="space-y-2">
+          <div className="space-y-1">
+            <PageTitle className="-mb-1">{user.name}</PageTitle>
+            {userRoleName && (
+              <h3 className="text-muted-foreground">{userRoleName}</h3>
+            )}
+          </div>
+          {isOwnAccount && <UserEditProfileBtn />}
         </div>
       </section>
       <section>
