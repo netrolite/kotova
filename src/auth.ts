@@ -7,8 +7,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import CustomUser from "./lib/types/CustomUser";
 import { ROLE } from "./lib/types/enums/Role";
 
-const PROTECTED_ROUTES = ["/protected"];
-
 export const nextAuthConfig = {
   adapter: PrismaAdapter(db),
   trustHost: true,
