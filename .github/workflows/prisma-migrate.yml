@@ -1,24 +1,68 @@
-name: Migrate database
+name: Prisma Migrate
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - "./prisma/**/*.*"
 
 jobs:
-  deploy:
+  install:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Debug DB_URL
-        run: echo "DB_URL"
-      - name: Apply db migrations
+      - uses: actions/checkout@v2
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: "npm"
+
+      - name: Install
+        run: npm i
+
+  generate:
+    runs-on: ubuntu-latest
+
+    needs: install
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: "npm"
+
+      - name: Install
+        run: npm i
+
+      - run: rm -rf node_modules/.prisma
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+  migrate:
+    runs-on: ubuntu-latest
+
+    needs: install
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: "npm"
+
+      - name: Install
+        run: npm i
+
+      - run: rm -rf node_modules/.prisma
+
+      - name: Deploy Migrations
         run: npx prisma migrate deploy
         env:
           DB_URL: ${{ secrets.DB_URL }}
