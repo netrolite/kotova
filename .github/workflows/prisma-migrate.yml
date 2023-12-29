@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "./prisma/**/*.*"
+  workflow_dispatch:
 
 jobs:
   install:
