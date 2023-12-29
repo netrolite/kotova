@@ -1,5 +1,6 @@
 import urlRegex from "@/lib/regexes/url";
 import { z } from "zod";
+
 const NAME_MIN_LEN = 3;
 const NAME_MAX_WORDS = 5;
 const NAME_MAX_LEN = 100;
