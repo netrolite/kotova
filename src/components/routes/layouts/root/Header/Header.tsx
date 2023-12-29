@@ -1,12 +1,12 @@
 "use client";
 
-import Logo from "../../../Logo";
-import SignInBtn from "../SignInBtn";
-import HeaderAvatar from "../Avatar";
-import { HeaderBackBtn } from "../BackBtn";
+import SignInBtn from "./SignInBtn";
+import HeaderAvatar from "./Avatar";
+import { HeaderBackBtn } from "./BackBtn";
 import useIsOnHomepage from "@/lib/hooks/useIsOnHomepage";
 import { useSession } from "next-auth/react";
 import HeaderWrapper from "./Wrapper";
+import Logo from "@/components/Logo";
 
 export default function Header() {
   const isOnHomepage = useIsOnHomepage();
