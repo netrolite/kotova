@@ -38,13 +38,13 @@ const UserEditSchema = z.object({
     ),
   avatarUrl: z
     .string()
-    .regex(
-      urlRegex,
-      "Ссылка на аватар должна быть рабочей ссылкой на изображение",
-    )
-    .max(
-      AVATAR_URL_MAX_LEN,
+    .refine(
+      (data) => data === "" || data.length <= AVATAR_URL_MAX_LEN,
       `Ссылка на аватар должна быть не длиннее ${AVATAR_URL_MAX_LEN} символов`,
+    )
+    .refine(
+      (data) => data === "" || urlRegex.test(data),
+      "Ссылка на аватар должна быть рабочей ссылкой на изображение",
     ),
 });
 
