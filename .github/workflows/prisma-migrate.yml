@@ -1,69 +1,14 @@
-name: Prisma Migrate
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - "./prisma/**/*.*"
-  workflow_dispatch:
+name: test
+on: push
+    branches:
+      - main
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Nodejs
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: "npm"
-
-      - name: Install
-        run: npm i
-
-  generate:
-    runs-on: ubuntu-latest
-
-    needs: install
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Nodejs
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          cache: "npm"
-
-      - name: Install
-        run: npm i
-
-      - run: rm -rf node_modules/.prisma
-
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
-  migrate:
-    runs-on: ubuntu-latest
-
-    needs: install
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Nodejs
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          cache: "npm"
-
-      - name: Install
-        run: npm i
-
-      - run: rm -rf node_modules/.prisma
-
-      - name: Deploy Migrations
-        run: npx prisma migrate deploy
-        env:
-          DATABASE_URL: ${{ secrets.DB_URL }}
+          node-version: '20'
+      - run: npm install
+      - run: npm run build
+      - run: npx prisma migrate deploy
