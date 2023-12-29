@@ -1,26 +1,26 @@
 -- CreateTable
 CREATE TABLE "Account" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "type" TEXT NOT NULL,
-    "provider" TEXT NOT NULL,
-    "providerAccountId" TEXT NOT NULL,
-    "refresh_token" TEXT,
-    "access_token" TEXT,
-    "expires_at" INTEGER,
-    "token_type" TEXT,
-    "scope" TEXT,
-    "id_token" TEXT,
-    "session_state" TEXT,
+    "id" STRING NOT NULL,
+    "userId" STRING NOT NULL,
+    "type" STRING NOT NULL,
+    "provider" STRING NOT NULL,
+    "providerAccountId" STRING NOT NULL,
+    "refresh_token" STRING,
+    "access_token" STRING,
+    "expires_at" INT4,
+    "token_type" STRING,
+    "scope" STRING,
+    "id_token" STRING,
+    "session_state" STRING,
 
     CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Session" (
-    "id" TEXT NOT NULL,
-    "sessionToken" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "sessionToken" STRING NOT NULL,
+    "userId" STRING NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
@@ -28,13 +28,13 @@ CREATE TABLE "Session" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
-    "name" TEXT,
-    "email" TEXT,
+    "id" STRING NOT NULL,
+    "name" STRING,
+    "email" STRING,
     "emailVerified" TIMESTAMP(3),
-    "phone" TEXT,
-    "image" TEXT,
-    "role" INTEGER NOT NULL,
+    "phone" STRING,
+    "image" STRING,
+    "role" INT4 NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -42,53 +42,53 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "VerificationToken" (
-    "identifier" TEXT NOT NULL,
-    "token" TEXT NOT NULL,
+    "identifier" STRING NOT NULL,
+    "token" STRING NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "Test" (
-    "id" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "maxScore" INTEGER NOT NULL,
-    "avgScore" INTEGER,
+    "id" STRING NOT NULL,
+    "title" STRING NOT NULL,
+    "maxScore" INT4 NOT NULL,
+    "avgScore" INT4,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "subjectCategoryId" TEXT NOT NULL,
-    "gradeCategoryId" TEXT NOT NULL,
-    "createdByUserId" TEXT NOT NULL,
+    "subjectCategoryId" STRING NOT NULL,
+    "gradeCategoryId" STRING NOT NULL,
+    "createdByUserId" STRING NOT NULL,
 
     CONSTRAINT "Test_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "TestQuestion" (
-    "id" TEXT NOT NULL,
-    "testId" TEXT NOT NULL,
-    "type" INTEGER NOT NULL,
-    "correctAnswerText" TEXT,
+    "id" STRING NOT NULL,
+    "testId" STRING NOT NULL,
+    "type" INT4 NOT NULL,
+    "correctAnswerText" STRING,
 
     CONSTRAINT "TestQuestion_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "TestQuestionOption" (
-    "id" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
-    "isCorrect" BOOLEAN NOT NULL,
-    "testQuestionId" TEXT,
+    "id" STRING NOT NULL,
+    "content" STRING NOT NULL,
+    "isCorrect" BOOL NOT NULL,
+    "testQuestionId" STRING,
 
     CONSTRAINT "TestQuestionOption_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "TestResult" (
-    "id" TEXT NOT NULL,
-    "testId" TEXT NOT NULL,
-    "score" INTEGER NOT NULL,
-    "scorePercentage" INTEGER NOT NULL,
-    "userId" TEXT,
+    "id" STRING NOT NULL,
+    "testId" STRING NOT NULL,
+    "score" INT4 NOT NULL,
+    "scorePercentage" INT4 NOT NULL,
+    "userId" STRING,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "TestResult_pkey" PRIMARY KEY ("id")
@@ -96,16 +96,16 @@ CREATE TABLE "TestResult" (
 
 -- CreateTable
 CREATE TABLE "SubjectCategory" (
-    "id" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "title" STRING NOT NULL,
 
     CONSTRAINT "SubjectCategory_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "GradeCategory" (
-    "id" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "title" STRING NOT NULL,
 
     CONSTRAINT "GradeCategory_pkey" PRIMARY KEY ("id")
 );
