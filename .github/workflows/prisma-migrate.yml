@@ -16,7 +16,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v2
         with:
-          node-version: latest
+          node-version: 18
           cache: "npm"
 
       - name: Install
@@ -33,7 +33,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v2
         with:
-          node-version: latest
+          node-version: 18
           cache: "npm"
 
       - name: Install
@@ -55,7 +55,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v2
         with:
-          node-version: latest
+          node-version: 18
           cache: "npm"
 
       - name: Install
