@@ -47,11 +47,6 @@ export const nextAuthConfig = {
     }),
   ],
   callbacks: {
-    authorized({ request, auth }) {
-      const { pathname } = request.nextUrl;
-      if (PROTECTED_ROUTES.includes(pathname)) return !!auth;
-      return true;
-    },
     session({ session, user }) {
       if (session.user) {
         (session.user as CustomUser).role = (user as any).role;
