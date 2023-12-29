@@ -5,9 +5,11 @@ import { cn } from "@/lib/shadcnUtils";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { ROLE, Role } from "@/lib/types/enums/Role";
 
 type Props = {
   className?: string;
+  userRole: null | Role;
 };
 
 type Link = {
@@ -15,14 +17,16 @@ type Link = {
   title: string;
 };
 
-export default function SidebarLinks({ className }: Props) {
+export default function SidebarLinks({ className, userRole }: Props) {
   const session = useSession();
   const pathname = usePathname();
   const LINKS = [
     { title: "Личный кабинет", href: "/my" },
-    { title: "Мои классы", href: "/my/classes" },
     { title: "Тесты", href: "/tests" },
   ];
+  if (userRole === ROLE.TEACHER) {
+    LINKS.push({ title: "Мои классы", href: "/my/classes" });
+  }
   if (session?.data?.user?.id) {
     LINKS.unshift({
       href: `/users/${session.data.user.id}`,
