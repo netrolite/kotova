@@ -55,7 +55,7 @@ export default function UserEditProfileForm({ user }: Props) {
       toast.success("Профиль успешно изменен");
       router.replace(`/users/${user.id}`);
     }
-  }, [data]);
+  }, [data, user.id, router]);
 
   return (
     <FormProvider {...form}>
