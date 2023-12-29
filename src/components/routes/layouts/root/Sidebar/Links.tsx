@@ -20,14 +20,12 @@ type Link = {
 export default function SidebarLinks({ className, userRole }: Props) {
   const session = useSession();
   const pathname = usePathname();
-  const LINKS = [
-    { title: "Личный кабинет", href: "/my" },
-    { title: "Тесты", href: "/tests" },
-  ];
+  const LINKS = [{ title: "Тесты", href: "/tests" }];
   if (userRole === ROLE.TEACHER) {
     LINKS.push({ title: "Мои классы", href: "/my/classes" });
   }
   if (session?.data?.user?.id) {
+    LINKS.unshift({ title: "Личный кабинет", href: "/my" });
     LINKS.unshift({
       href: `/users/${session.data.user.id}`,
       title: "Мой профиль",
