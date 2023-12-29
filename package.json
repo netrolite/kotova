@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npx prisma generate && next build",
+    "buildnoqueryengine": "npx prisma generate --no-engine && next build",
     "start": "next start",
     "lint": "next lint",
     "dbstart": "cockroach start --insecure --store=cockroachdb --listen-addr=localhost:26257 --http-addr=localhost:8080 --join=localhost:26257",
@@ -27,7 +28,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.300.0",
-    "next": "13.5.6",
+    "next": "14.0.5-canary.30",
     "next-auth": "5.0.0-beta.4",
     "next-themes": "^0.2.1",
     "react": "^18",
