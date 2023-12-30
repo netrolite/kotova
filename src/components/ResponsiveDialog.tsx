@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, createContext, useEffect, useState } from "react";
 import { useMediaQuery, useWindowSize } from "@uidotdev/usehooks";
 import {
   Drawer,
@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/shadcnUtils";
+import SetState from "@/lib/types/SetState";
 
 type Props = {
   children: ReactNode;
@@ -31,6 +32,10 @@ type Props = {
   drawerChildrenContainerClassName?: string;
 };
 
+type ResponsiveDialogContextType = null | [boolean, SetState<boolean>];
+export const ResponsiveDialogContext =
+  createContext<ResponsiveDialogContextType>(null);
+
 export default function ResponsiveDialog({
   children,
   trigger,
@@ -38,7 +43,7 @@ export default function ResponsiveDialog({
   description,
   drawerChildrenContainerClassName,
 }: Props) {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { width } = useWindowSize();
   const [isDesktop, setIsDesktop] = useState(false);
   const shouldShowHeader = title || description;
@@ -51,7 +56,7 @@ export default function ResponsiveDialog({
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           {shouldShowHeader && (
@@ -62,14 +67,16 @@ export default function ResponsiveDialog({
               )}
             </DialogHeader>
           )}
-          {children}
+          <ResponsiveDialogContext.Provider value={[isOpen, setIsOpen]}>
+            {children}
+          </ResponsiveDialogContext.Provider>
         </DialogContent>
       </Dialog>
     );
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent>
         {shouldShowHeader && (
@@ -81,7 +88,9 @@ export default function ResponsiveDialog({
           </DrawerHeader>
         )}
         <div className={cn("p-4", drawerChildrenContainerClassName)}>
-          {children}
+          <ResponsiveDialogContext.Provider value={[isOpen, setIsOpen]}>
+            {children}
+          </ResponsiveDialogContext.Provider>
         </div>
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
