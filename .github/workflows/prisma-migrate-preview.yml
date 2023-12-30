@@ -5,10 +5,8 @@ on:
   pull_request:
     types:
       - opened
-    # branches:
-    #   - "releases/**"
-    # paths:
-    #   - "./prisma/**/*.*"
+    paths:
+      - "./prisma/**/*.*"
 
 jobs:
   migrate:
