@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import getSignedInUserOrRedirect from "@/lib/data/getSignedInUserOrRedirect";
 import UserEditProfileForm from "@/components/routes/users/edit/Form";
+import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
 
 export default async function UserEdit({
   params: { id },

@@ -1,16 +1,13 @@
 "use server";
 
-import { Subject } from "@prisma/client";
-import { db } from "../db";
-import ServerActionReturn from "../types/ServerActionReturn";
-import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { db } from "../db";
+import { revalidatePath } from "next/cache";
 
-export default async function deleteSubjectAction(
-  data: unknown,
-): Promise<ServerActionReturn<Subject>> {
+export default async function deleteSubjectAction(data: unknown) {
   const validationResult = z.string().safeParse(data);
   if (!validationResult.success) return { error: true };
+  console.log("hello");
 
   const id = validationResult.data;
   try {
