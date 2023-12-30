@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
-  url      = env("DB_URL")
+  provider  = "cockroachdb"
+  url       = env("DB_URL")
+  directUrl = env("DIRECT_DB_URL")
 }
 
 model Account {
