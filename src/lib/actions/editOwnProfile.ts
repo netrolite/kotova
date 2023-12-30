@@ -16,10 +16,14 @@ export default async function editOwnProfileAction(
     data: { avatarUrl: image, ...profileData },
   } = validationResult;
 
-  await db.user.update({
-    where: { id: session.user.id },
-    data: { ...profileData, image },
-  });
+  try {
+    await db.user.update({
+      where: { id: session.user.id },
+      data: { ...profileData, image },
+    });
+  } catch (err) {
+    return { error: true };
+  }
 
   revalidatePath(`/users/${session.user.id}`);
   return { data: true };
