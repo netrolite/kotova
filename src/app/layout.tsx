@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import Sidebar from "@/components/routes/layouts/root/Sidebar/Sidebar";
 import Header from "@/components/routes/layouts/root/Header/Header";
 import { Toaster } from "@/components/ui/sonner";
+import MobileNav from "@/components/routes/layouts/root/MobileNav/MobileNav";
 
 export const metadata: Metadata = {
   title: {
@@ -32,6 +33,7 @@ export default async function RootLayout({
               <div className="px-4 py-3">{children}</div>
             </main>
           </div>
+          <MobileNav />
         </body>
       </SessionProvider>
     </html>
