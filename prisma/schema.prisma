@@ -58,17 +58,16 @@ model VerificationToken {
 }
 
 model Test {
-  id                String          @id @default(cuid())
+  id                String         @id @default(cuid())
   title             String
   questions         TestQuestion[]
   testResults       TestResult[]
   maxScore          Int
   avgScore          Int?
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
-  createdBy         User            @relation(fields: [createdByUserId], references: [id])
-  subjectCategory   SubjectCategory @relation(fields: [subjectCategoryId], references: [id])
-  gradeCategory     GradeCategory   @relation(fields: [gradeCategoryId], references: [id])
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  createdBy         User           @relation(fields: [createdByUserId], references: [id])
+  subject           Subject        @relation(fields: [subjectCategoryId], references: [id])
   subjectCategoryId String
   gradeCategoryId   String
   createdByUserId   String
@@ -103,13 +102,7 @@ model TestResult {
   createdAt       DateTime @default(now())
 }
 
-model SubjectCategory {
-  id    String @id @default(cuid())
-  title String
-  tests Test[]
-}
-
-model GradeCategory {
+model Subject {
   id    String @id @default(cuid())
   title String
   tests Test[]
