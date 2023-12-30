@@ -14,7 +14,7 @@ export default function Header() {
   const isUnauthed = session.status === "unauthenticated";
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper className="sticky left-0 right-0 top-0 z-20 bg-white/80 backdrop-blur-md md:flex">
       {isOnHomepage ? (
         <>
           <Logo className="max-w-[100px]" linkClassName="md:hidden" />
