@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = {
   title: {
@@ -9,8 +9,9 @@ export const metadata = {
 export default async function Home() {
   return (
     <>
-      <h1>Home page</h1>
-      <Link href="/protected">Protected page</Link>
+      <h1 className="text-xl font-black">Добрый день</h1>
+      <h2 className="text-xl font-bold">Добро пожаловать в якласс</h2>
+      <Image alt="bird" src={"/bird.jpg"} width={400} height={300} />
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae id
       debitis saepe facere ab eum exercitationem voluptatem nam error ratione
       adipisci molestiae quis ex enim dolores laudantium libero voluptate
