@@ -4,6 +4,7 @@ import { Subject } from "@prisma/client";
 import { db } from "../db";
 import ServerActionReturn from "../types/ServerActionReturn";
 import AddSubjectSchema from "../zod/schemas/AddSubject";
+import { revalidatePath } from "next/cache";
 
 export default async function addSubjectAction(
   data: unknown,
@@ -14,6 +15,7 @@ export default async function addSubjectAction(
   const { title } = validationResult.data;
   try {
     const addedSubject = await db.subject.create({ data: { title } });
+    revalidatePath("/tests");
     return { data: addedSubject };
   } catch (err) {
     return { error: true };
