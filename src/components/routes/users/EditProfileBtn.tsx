@@ -1,7 +1,7 @@
 import { PencilIcon } from "lucide-react";
 import Link from "next/link";
-import getSignedInUser from "@/lib/data/getSignedInUser";
 import { Button } from "@/components/ui/button";
+import getSignedInUser from "@/lib/fetchers/getSignedInUser";
 
 type Props = {
   userId: string;
