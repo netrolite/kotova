@@ -32,7 +32,7 @@ export default async function MobileNav() {
   }
 
   return (
-    <nav className="sticky bottom-0 left-0 right-0 border-t border-slate-300 bg-white/70 px-8 py-3 text-slate-500 backdrop-blur-md md:hidden">
+    <nav className="sticky bottom-0 left-0 right-0 z-20 border-t border-slate-300 bg-white/80 px-8 py-3 text-slate-500 backdrop-blur-md md:hidden">
       <ul className="flex justify-around">
         {navItems.map(({ href, icon, label }) => (
           <Link href={href}>
