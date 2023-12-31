@@ -6,7 +6,6 @@ import wait from "@/lib/wait";
 export default async function DashboardTestsCard() {
   const user = await getSignedInUserOrRedirect();
   const testsCount = await getTestsCount(user);
-  await wait(2000);
 
   return (
     <DashboardCard

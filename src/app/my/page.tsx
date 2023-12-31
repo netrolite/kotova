@@ -1,17 +1,15 @@
 import PageTitle from "@/components/PageTitle";
-import DashboardCardSkeleton from "@/components/routes/users/my/Card/Skeleton";
 import DashboardCardWrapper from "@/components/routes/users/my/Card/Wrapper";
+import DashboardSubjectsCard from "@/components/routes/users/my/Cards/Subjects";
 import DashboardTestsCard from "@/components/routes/users/my/Cards/Tests";
 
-type Props = {};
-
-export default async function Dashboard({}: Props) {
+export default async function Dashboard() {
   return (
     <>
       <PageTitle className="mb-8">Личный кабинет</PageTitle>
-      <section>
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <DashboardCardWrapper card={<DashboardTestsCard />} />
-        <DashboardCardSkeleton />
+        <DashboardCardWrapper card={<DashboardSubjectsCard />} />
       </section>
     </>
   );
