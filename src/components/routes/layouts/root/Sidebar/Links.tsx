@@ -12,21 +12,16 @@ type Props = {
   userRole: null | Role;
 };
 
-type Link = {
-  href: string;
-  title: string;
-};
-
 export default function SidebarLinks({ className, userRole }: Props) {
   const session = useSession();
   const pathname = usePathname();
-  const LINKS = [{ title: "Тесты", href: "/tests" }];
+  const links = [{ title: "Тесты", href: "/tests" }];
   if (userRole === ROLE.TEACHER) {
-    LINKS.push({ title: "Мои классы", href: "/my/classes" });
+    links.push({ title: "Мои классы", href: "/my/classes" });
   }
   if (session?.data?.user?.id) {
-    LINKS.unshift({ title: "Личный кабинет", href: "/my" });
-    LINKS.unshift({
+    links.unshift({ title: "Личный кабинет", href: "/my" });
+    links.unshift({
       href: `/users/${session.data.user.id}`,
       title: "Мой профиль",
     });
@@ -35,7 +30,7 @@ export default function SidebarLinks({ className, userRole }: Props) {
   return (
     <nav className={cn("flex flex-col gap-1", className)}>
       <ul>
-        {LINKS.map((item) => (
+        {links.map((item) => (
           <li key={item.href}>
             <Link
               key={item.href}
