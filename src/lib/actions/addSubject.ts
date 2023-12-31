@@ -15,9 +15,11 @@ export default async function addSubjectAction(
   const { title } = validationResult.data;
   try {
     const addedSubject = await db.subject.create({ data: { title } });
-    revalidatePath("/tests");
     return { data: addedSubject };
   } catch (err) {
     return { error: true };
   }
 }
+
+export const addSubjectMutation = async (data: unknown) =>
+  (await addSubjectAction(data)).data ?? undefined;
