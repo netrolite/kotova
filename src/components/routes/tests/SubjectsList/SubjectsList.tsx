@@ -1,26 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Subject } from "@prisma/client";
-import { TrashIcon } from "lucide-react";
 import Link from "next/link";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import deleteSubjectAction from "@/lib/actions/deleteSubject";
-import SubjectDeleteBtn from "./SubjectDeleteBtn";
 
 type Props = {
   subjects: Subject[];
-  isAdmin: boolean;
 };
 
-export default function SubjectsListContent({ subjects, isAdmin }: Props) {
+export default function SubjectsListContent({ subjects }: Props) {
   if (!subjects?.length) {
     return (
       <div>
@@ -40,7 +26,7 @@ export default function SubjectsListContent({ subjects, isAdmin }: Props) {
                 {title}
               </Button>
             </Link>
-            {isAdmin && (
+            {/* {isAdmin && (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant="ghost" className="hover:text-destructive">
@@ -62,7 +48,7 @@ export default function SubjectsListContent({ subjects, isAdmin }: Props) {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-            )}
+            )} */}
           </li>
         );
       })}
