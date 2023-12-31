@@ -1,0 +1,10 @@
+.cardLink {
+  svg {
+    transition: 200ms;
+  }
+  &:hover {
+    svg {
+      translate: 12px;
+    }
+  }
+}
