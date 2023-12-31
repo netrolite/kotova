@@ -18,7 +18,7 @@ export default async function MobileNav() {
       icon: <ListTodoIcon />,
     },
     {
-      href: "/dashboard",
+      href: "/my",
       label: "Лич. Кабинет",
       icon: <LayoutDashboardIcon />,
     },
