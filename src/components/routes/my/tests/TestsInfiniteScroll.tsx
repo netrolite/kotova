@@ -32,7 +32,6 @@ export default function TestListTestsInfiniteScroll({
     (async () => {
       if (!inView || hasReachedEnd) return;
       const newTests = await getTestsForMyTestsListAction(page);
-      await wait(1000);
       if (newTests.length < GET_TESTS_FOR_MY_TEST_LIST_TESTS_PER_PAGE) {
         setHasReachedEnd(true);
       } else {
