@@ -1,5 +1,5 @@
+import { genericErrorMsg } from "@/lib/constants";
 import { ReactNode } from "react";
-import genericErrorMsg from "@/lib/constants/genericErrorMsg";
 
 type Props = {
   error?: string | null | undefined | boolean;
