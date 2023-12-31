@@ -1,5 +1,5 @@
 import PageTitle from "@/components/PageTitle";
-import SubjectsList from "@/components/routes/tests/SubjectsList/SubjectsList";
+import SubjectsList from "@/components/routes/tests/SubjectsList";
 import { db } from "@/lib/db";
 
 export const metadata = {

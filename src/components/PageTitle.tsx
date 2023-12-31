@@ -8,6 +8,6 @@ type Props = {
 
 export default function PageTitle({ children, className }: Props) {
   return (
-    <h1 className={cn("mb-2 text-3xl font-semibold", className)}>{children}</h1>
+    <h1 className={cn("text-3xl font-semibold", className)}>{children}</h1>
   );
 }

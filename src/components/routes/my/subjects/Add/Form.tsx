@@ -10,7 +10,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import addSubjectAction from "@/lib/actions/addSubject";
+import addSubjectAction, { addSubjectMutation } from "@/lib/actions/addSubject";
+import useSubjectsSwr from "@/lib/hooks/swr/useSubjects";
 import useLoading from "@/lib/hooks/useLoading";
 import useResponsiveDialogState from "@/lib/hooks/useResponsiveDialogState";
 import AddSubjectSchema, {
@@ -18,36 +19,35 @@ import AddSubjectSchema, {
   AddSubjectSchemaType,
 } from "@/lib/zod/schemas/AddSubject";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { nanoid } from "nanoid";
+import { Button } from "@/components/ui/button";
+import BtnWithLoading from "@/components/BtnWithLoading";
 
 export default function AddSubjectForm() {
   const [_isDialogOpen, setIsDialogOpen] = useResponsiveDialogState();
+  const { mutate, data: subjects } = useSubjectsSwr();
+  const { isLoading, setIsLoading } = useLoading();
   const form = useForm<AddSubjectSchemaInputType>({
     resolver: zodResolver(AddSubjectSchema),
     defaultValues: {
       title: "",
     },
   });
-  const { isLoading, setIsLoading } = useLoading();
-  const [data, setData] = useState<Awaited<
-    ReturnType<typeof addSubjectAction>
-  > | null>(null);
 
   async function handleSubmit(data: AddSubjectSchemaType) {
     setIsLoading(true);
-    setData(await addSubjectAction(data));
+    const result = await addSubjectAction(data);
     setIsLoading(false);
-  }
+    setIsDialogOpen(false);
 
-  useEffect(() => {
-    if (data?.data) {
-      toast.success("Предмет успешно добавлен");
-      setIsDialogOpen(false);
+    if (result.error) {
+      return toast.error("Не удалось добавить предмет");
     }
-  }, [data]);
+    toast.success("Предмет успешно добавлен");
+    await mutate([...(subjects || []), result.data]);
+  }
 
   return (
     <FormProvider {...form}>
@@ -66,8 +66,7 @@ export default function AddSubjectForm() {
           )}
         />
 
-        <FormSubmitBtn {...{ isLoading }}>Создать</FormSubmitBtn>
-        <FormError error={data?.error} />
+        <BtnWithLoading {...{ isLoading }}>Создать</BtnWithLoading>
       </form>
     </FormProvider>
   );

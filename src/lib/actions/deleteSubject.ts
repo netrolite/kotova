@@ -11,10 +11,20 @@ export default async function deleteSubjectAction(data: unknown) {
 
   const id = validationResult.data;
   try {
-    const deletedSubject = await db.subject.delete({ where: { id } });
+    const deletedSubjectPromise = db.subject.delete({ where: { id } });
+    const subjectsPromise = db.subject.findMany();
+    const [deletedSubject, subjects] = await Promise.all([
+      deletedSubjectPromise,
+      subjectsPromise,
+    ]);
     revalidatePath("/tests");
-    return { data: deletedSubject };
+    return { data: subjects.filter((s) => s.id !== deletedSubject?.id) };
   } catch (err) {
     return { error: true };
   }
+}
+
+export async function deleteSubjectMutation(data: unknown) {
+  const result = await deleteSubjectAction(data);
+  return result.data;
 }
