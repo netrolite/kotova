@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import TestListTest from "./Test";
 import deepCopy from "@/lib/deepCopy";
 import getTestsForMyTestsListAction from "@/lib/actions/getTestsForMyTestsList";
-import { GET_TESTS_FOR_MY_TEST_LIST_TESTS_PER_PAGE } from "@/lib/constants";
+import { MY_TESTS_LIST_TESTS_PER_PAGE } from "@/lib/constants";
 import wait from "@/lib/wait";
 
 type Props = {
@@ -22,7 +22,7 @@ export default function TestListTestsInfiniteScroll({
     Awaited<ReturnType<typeof getTestsForMyTestsListAction>>
   >([]);
   const { ref, inView } = useInView();
-  if (serverFetchResultsLength < GET_TESTS_FOR_MY_TEST_LIST_TESTS_PER_PAGE) {
+  if (serverFetchResultsLength < MY_TESTS_LIST_TESTS_PER_PAGE) {
     setHasReachedEnd(true);
   }
 
@@ -32,7 +32,7 @@ export default function TestListTestsInfiniteScroll({
     (async () => {
       if (!inView || hasReachedEnd) return;
       const newTests = await getTestsForMyTestsListAction(page);
-      if (newTests.length < GET_TESTS_FOR_MY_TEST_LIST_TESTS_PER_PAGE) {
+      if (newTests.length < MY_TESTS_LIST_TESTS_PER_PAGE) {
         setHasReachedEnd(true);
       } else {
         setPage((prev) => prev + 1);
