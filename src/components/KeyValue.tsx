@@ -7,18 +7,18 @@ type Props = {
   valueClassName?: string;
 };
 
-export default function Li({
+export default function KeyValue({
   title,
   value,
   titleClassName,
   valueClassName,
 }: Props) {
   return (
-    <li className="space-x-2">
+    <div className="space-x-2">
       <span className={cn("text-muted-foreground", titleClassName)}>
         {title}
       </span>
       <span className={cn("font-semibold", valueClassName)}>{value}</span>
-    </li>
+    </div>
   );
 }
