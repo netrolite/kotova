@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode, createContext, useEffect, useState } from "react";
-import { useMediaQuery, useWindowSize } from "@uidotdev/usehooks";
+import { useWindowSize } from "@uidotdev/usehooks";
 import {
   Drawer,
   DrawerClose,
@@ -20,6 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
 import { Button } from "./ui/button";
 import { cn } from "@/lib/shadcnUtils";
 import SetState from "@/lib/types/SetState";

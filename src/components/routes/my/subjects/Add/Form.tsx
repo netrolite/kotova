@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import addSubjectAction, { addSubjectMutation } from "@/lib/actions/addSubject";
+import addSubjectAction from "@/lib/actions/addSubject";
 import useSubjectsSwr from "@/lib/hooks/swr/useSubjects";
 import useLoading from "@/lib/hooks/useLoading";
 import useResponsiveDialogState from "@/lib/hooks/useResponsiveDialogState";
@@ -19,8 +19,6 @@ import AddSubjectSchema, {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { nanoid } from "nanoid";
-import { Button } from "@/components/ui/button";
 import BtnWithLoading from "@/components/BtnWithLoading";
 
 export default function AddSubjectForm() {
