@@ -1,4 +1,4 @@
-import Li from "@/components/Li";
+import KeyValue from "@/components/KeyValue";
 import {
   Card,
   CardContent,
@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import formatGrades from "@/lib/formatGrades";
 import getPercentage from "@/lib/getPercentage";
 import { Test } from "@prisma/client";
 import Link from "next/link";
@@ -26,11 +27,7 @@ export default function TestListTest({
           <CardHeader>
             <CardTitle>{title}</CardTitle>
             <CardDescription>
-              {!!grades.length && (
-                <span>
-                  {grades.join(", ")} класс{grades.length > 1 ? "ы" : ""}
-                </span>
-              )}
+              {!!grades.length && <span>{formatGrades(grades)}</span>}
               <span>
                 {grades.length ? ` | ${subject.title}` : subject.title}
               </span>
@@ -39,7 +36,7 @@ export default function TestListTest({
 
           <CardContent>
             <ul>
-              <Li
+              <KeyValue
                 title="Средний балл"
                 value={`${
                   avgScore
@@ -47,7 +44,7 @@ export default function TestListTest({
                     : "Нет данных"
                 }${avgScorePercentage ? ` (${avgScorePercentage}%)` : ""}`}
               />
-              <Li title="Раз пройден" value={testResults.length} />
+              <KeyValue title="Раз пройден" value={testResults.length} />
             </ul>
           </CardContent>
         </Card>

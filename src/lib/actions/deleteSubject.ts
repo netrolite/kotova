@@ -7,7 +7,6 @@ import { revalidatePath } from "next/cache";
 export default async function deleteSubjectAction(data: unknown) {
   const validationResult = z.string().safeParse(data);
   if (!validationResult.success) return { error: true };
-  console.log("hello");
 
   const id = validationResult.data;
   try {
