@@ -66,11 +66,11 @@ model Test {
   avgScore        Int?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
-  createdBy       User           @relation(fields: [createdByUserId], references: [id])
+  createdBy       User?          @relation(fields: [createdByUserId], references: [id])
   subject         Subject        @relation(fields: [subjectId], references: [id])
   subjectId       String
   grades          Int[] // which grades (1st, 2nd, 12th, etc) this test is made for
-  createdByUserId String
+  createdByUserId String?
 }
 
 model TestQuestion {
