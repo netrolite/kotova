@@ -1,6 +1,6 @@
 import PageTitle from "@/components/PageTitle";
-import TestListTest from "@/components/routes/my/tests/Test";
-import TestListInfiniteScroll from "@/components/routes/my/tests/TestsInfiniteScroll";
+import MyTestsTestListInfiniteScroll from "@/components/routes/my/tests/TestList/InfiniteScroll";
+import MyTestsTestListTest from "@/components/routes/my/tests/TestList/Test";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
 import getTestsForMyTestsList from "@/lib/fetchers/getTestsForMyTestsList";
 
@@ -14,9 +14,9 @@ export default async function Tests() {
       <section>
         <ul className="space-y-4">
           {tests.map((test) => (
-            <TestListTest test={test} key={test.id} />
+            <MyTestsTestListTest {...test} key={test.id} />
           ))}
-          <TestListInfiniteScroll serverFetchResultsLength={tests.length} />
+          <MyTestsTestListInfiniteScroll {...{ tests }} />
         </ul>
       </section>
     </>

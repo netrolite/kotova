@@ -1,8 +1,8 @@
 import { z } from "zod";
 import PageTitle from "@/components/PageTitle";
-import TestListFilter from "@/components/routes/tests/[subjectId]/Filter/Index";
+import SubjectTestListFilter from "@/components/routes/tests/[subjectId]/Filter/Index";
 import TestListSearch from "@/components/routes/tests/[subjectId]/Search";
-import TestList from "@/components/routes/tests/[subjectId]/TestList/Index";
+import SubjectTestList from "@/components/routes/tests/[subjectId]/TestList/Index";
 import getSubject from "@/lib/fetchers/getSubject";
 import getSubjectTests from "@/lib/fetchers/getSubjectTests";
 import parseUriComponent from "@/lib/parseUriComponent";
@@ -29,11 +29,11 @@ export default async function SubjectTests({
         <PageTitle>Тесты по предмету {subject.title}</PageTitle>
         <div className="space-y-2">
           <TestListSearch initQuery={query} />
-          <TestListFilter />
+          <SubjectTestListFilter />
         </div>
       </section>
 
-      <TestList {...{ query, grades, subjectId }} />
+      <SubjectTestList {...{ query, grades, subjectId }} />
     </>
   );
 }

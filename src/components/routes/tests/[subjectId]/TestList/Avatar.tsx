@@ -5,6 +5,6 @@ type Props = {
   user: User;
 };
 
-export default function TestListTestAvatar({ user: { image } }: Props) {
+export default function SubjectTestListTestAvatar({ user: { image } }: Props) {
   return <AvatarWithFallback width={24} src={image || undefined} />;
 }

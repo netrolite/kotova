@@ -1,6 +1,6 @@
-import TestListCard from "./Card";
-import TestListInfiniteScroll from "@/components/routes/my/tests/TestsInfiniteScroll";
+import SubjectTestListCard from "./Card";
 import getSubjectTests from "@/lib/fetchers/getSubjectTests";
+import SubjectTestListInfiniteScroll from "./InfiniteScroll";
 
 type Props = {
   query: string;
@@ -8,7 +8,11 @@ type Props = {
   grades: number[];
 };
 
-export default async function TestList({ query, subjectId, grades }: Props) {
+export default async function SubjectTestList({
+  query,
+  subjectId,
+  grades,
+}: Props) {
   const tests = await getSubjectTests({ query, subjectId, page: 0, grades });
   if (!tests.length) {
     return (
@@ -19,15 +23,12 @@ export default async function TestList({ query, subjectId, grades }: Props) {
     );
   }
 
-  const serverFetchResultsLength = tests.length;
   return (
     <section className="space-y-4">
       {tests.map((test) => (
-        <TestListCard key={test.id} {...test} />
+        <SubjectTestListCard key={test.id} {...test} />
       ))}
-      <TestListInfiniteScroll
-        {...{ query, grades, serverFetchResultsLength, subjectId }}
-      />
+      <SubjectTestListInfiniteScroll {...{ grades, query, subjectId, tests }} />
     </section>
   );
 }

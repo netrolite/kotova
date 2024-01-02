@@ -1,6 +1,6 @@
 import useGradesFilterStore from "@/lib/stores/routes/tests/[subjectId]/gradesFilter";
 
-export default function TestListFilterPillsList() {
+export default function SubjectTestListFilterPillsList() {
   const selectedGrades = useGradesFilterStore((sel) => sel.selectedGrades);
   return (
     <ul className="flex min-h-[32px] flex-wrap gap-1">
