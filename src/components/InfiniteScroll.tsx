@@ -25,9 +25,11 @@ export default function InfiniteScroll<T, K>({
   const [data, setData] = useState<Array<T>>([]);
   const { ref, inView } = useInView();
 
-  if (serverFetchResultsLength < MY_TESTS_LIST_TESTS_PER_PAGE) {
-    setHasReachedEnd(true);
-  }
+  useEffect(() => {
+    if (serverFetchResultsLength < MY_TESTS_LIST_TESTS_PER_PAGE) {
+      setHasReachedEnd(true);
+    }
+  }, []);
 
   // DO NOT add `page` to the dependency array!
   // if you do, it will fetch 2 pages instead of 1!
@@ -44,7 +46,7 @@ export default function InfiniteScroll<T, K>({
     };
 
     fetchData();
-  }, [inView, hasReachedEnd, fetchAction]);
+  }, [inView, hasReachedEnd]);
 
   return (
     <>
