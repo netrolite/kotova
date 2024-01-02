@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import formatGrades from "@/lib/formatGrades";
 import KeyValue from "@/components/KeyValue";
-import TestListTestAvatar from "./Avatar";
+import SubjectTestListTestAvatar from "./Avatar";
 import Link from "next/link";
 import getPercentage from "@/lib/getPercentage";
 import styles from "./styles.module.scss";
@@ -20,7 +20,7 @@ type Props = Test & {
   }[];
 };
 
-export default function TestListCard({
+export default function SubjectTestListCard({
   avgScore,
   maxScore,
   grades,
@@ -58,7 +58,7 @@ export default function TestListCard({
           className="flex gap-2 hover:underline"
           href={`/users/${createdBy.id}`}
         >
-          <TestListTestAvatar user={createdBy} />
+          <SubjectTestListTestAvatar user={createdBy} />
           {createdBy.name}
         </Link>
       </CardFooter>

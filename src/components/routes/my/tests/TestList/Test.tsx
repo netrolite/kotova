@@ -11,12 +11,19 @@ import getPercentage from "@/lib/getPercentage";
 import { Test } from "@prisma/client";
 import Link from "next/link";
 
-type Props = {
-  test: Test & { subject: { title: string }; testResults: { id: string }[] };
+type Props = Test & {
+  subject: { title: string };
+  testResults: { id: string }[];
 };
 
-export default function TestListTest({
-  test: { avgScore, grades, id, maxScore, subject, title, testResults },
+export default function MyTestsTestListTest({
+  avgScore,
+  grades,
+  id,
+  maxScore,
+  subject,
+  title,
+  testResults,
 }: Props) {
   const avgScorePercentage =
     avgScore && maxScore > 0 ? getPercentage(avgScore, maxScore) : null;

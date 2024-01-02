@@ -6,7 +6,7 @@ type Props = {
   grade: number;
 };
 
-export default function TestListFilterOption({ grade }: Props) {
+export default function SubjectTestListFilterOption({ grade }: Props) {
   const { selectedGrades, setSelectedGrades } = useGradesFilterStore();
   const [isChecked, setIsChecked] = useState(selectedGrades.includes(grade));
 

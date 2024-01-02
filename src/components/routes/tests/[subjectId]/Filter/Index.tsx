@@ -12,18 +12,18 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { FilterIcon } from "lucide-react";
-import TestListFilterOption from "./Option";
+import SubjectTestListFilterOption from "./Option";
 import useSearchParamsRouter from "@/lib/hooks/useSearchParamsRouter";
 import useUrlSearchParams from "@/lib/hooks/useUrlSearchParams";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import parseUriComponent from "@/lib/parseUriComponent";
 import { z } from "zod";
-import TestListFilterPillsList from "./PillsList";
+import SubjectTestListFilterPillsList from "./PillsList";
 
 type Props = {};
 
-export default function TestListFilter({}: Props) {
+export default function SubjectTestListFilter({}: Props) {
   const {
     allGrades,
     selectedGrades,
@@ -72,7 +72,7 @@ export default function TestListFilter({}: Props) {
           </DialogHeader>
           <section className="space-y-2">
             {allGrades.map((grade) => (
-              <TestListFilterOption grade={grade} key={grade} />
+              <SubjectTestListFilterOption grade={grade} key={grade} />
             ))}
           </section>
           <DialogClose asChild>
@@ -80,7 +80,7 @@ export default function TestListFilter({}: Props) {
           </DialogClose>
         </DialogContent>
       </Dialog>
-      <TestListFilterPillsList />
+      <SubjectTestListFilterPillsList />
     </>
   );
 }
