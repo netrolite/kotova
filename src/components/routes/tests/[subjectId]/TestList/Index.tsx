@@ -1,6 +1,6 @@
 import SubjectTestListCard from "./Card";
 import getSubjectTests from "@/lib/fetchers/getSubjectTests";
-import SubjectTestListInfiniteScroll from "./InfiniteScroll";
+import SubjectTestListInfiniteScroll from "./InfiniteScroll/Index";
 
 type Props = {
   query: string;
