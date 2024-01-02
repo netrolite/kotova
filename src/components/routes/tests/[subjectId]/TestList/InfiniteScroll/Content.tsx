@@ -1,24 +1,16 @@
 "use client";
-
-import InfiniteScroll from "@/components/InfiniteScroll";
 import getSubjectTestsAction from "@/lib/actions/getSubjectTests";
 import { SUBJECT_TESTS_TESTS_PER_PAGE } from "@/lib/constants";
-import getSubjectTests from "@/lib/fetchers/getSubjectTests";
-import SubjectTestListCard from "./Card";
+import SubjectTestListCard from "../Card";
+import InfiniteScroll from "@/components/InfiniteScroll";
+import { SubjectTestListInfiniteScrollProps } from "./Index";
 
-type Props = {
-  query: string;
-  grades: number[];
-  subjectId: string;
-  tests: Awaited<ReturnType<typeof getSubjectTests>>;
-};
-
-export default function SubjectTestListInfiniteScroll({
+export default function SubjectTestListInfiniteScrollContent({
   grades,
   query,
   subjectId,
   tests,
-}: Props) {
+}: SubjectTestListInfiniteScrollProps) {
   return (
     <InfiniteScroll
       fetchAction={getSubjectTestsAction}
