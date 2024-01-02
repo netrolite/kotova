@@ -10,8 +10,13 @@ type Props = {
   username?: string;
   src?: string;
   width?: number;
+  sizes?: string;
 };
 
+/**
+ * Please provide the `sizes` prop if you don't provide the `width` prop. Not required though!
+ * @returns
+ */
 export default function AvatarWithFallback({
   userIconClassName,
   imgClassName,
@@ -19,6 +24,7 @@ export default function AvatarWithFallback({
   username,
   containerClassName,
   width = 32,
+  sizes,
 }: Props) {
   let content: ReactNode;
   if (src) {
@@ -27,8 +33,11 @@ export default function AvatarWithFallback({
         src={src}
         alt={`Фото профиля${username ? ` пользователя ${username}` : ""}`}
         className={cn("rounded-full", imgClassName)}
-        layout="fill"
-        objectFit="cover"
+        style={{ objectFit: "cover" }}
+        fill={width ? false : true}
+        width={width}
+        height={width}
+        sizes={sizes}
       />
     );
   } else {
