@@ -6,7 +6,7 @@ import { MY_TESTS_LIST_TESTS_PER_PAGE } from "@/lib/constants";
 
 type Props<T, K> = {
   serverFetchResultsLength: number;
-  fetchAction: (data: K) => Promise<Array<T>>;
+  fetchAction: (data: K) => Promise<T[]>;
   fetchActionParams: K;
   render: (data: T) => ReactNode;
   itemsPerPage: number;
