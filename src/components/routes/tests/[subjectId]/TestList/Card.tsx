@@ -12,13 +12,9 @@ import Link from "next/link";
 import getPercentage from "@/lib/getPercentage";
 import styles from "./styles.module.scss";
 import { Test, User } from "@prisma/client";
+import getSubjectTestsAction from "@/lib/actions/getSubjectTests";
 
-type Props = Test & {
-  createdBy: User;
-  testResults: {
-    id: string;
-  }[];
-};
+type Props = Awaited<ReturnType<typeof getSubjectTestsAction>>[0];
 
 export default function SubjectTestListCard({
   avgScore,
@@ -54,12 +50,9 @@ export default function SubjectTestListCard({
         <KeyValue title="Раз пройден" value={testResults.length} />
       </CardContent>
       <CardFooter>
-        <Link
-          className="flex gap-2 hover:underline"
-          href={`/users/${createdBy.id}`}
-        >
+        <Link className="flex gap-2 hover:underline" href={`/users/deleted`}>
           <SubjectTestListTestAvatar user={createdBy} />
-          {createdBy.name}
+          {createdBy?.name || "Удаленный пользователь"}
         </Link>
       </CardFooter>
     </Card>
