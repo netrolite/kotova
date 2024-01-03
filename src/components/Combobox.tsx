@@ -1,7 +1,6 @@
 "use client";
 
 import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "@/lib/shadcnUtils";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,24 +17,26 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 
-export type ComboboxItem = {
-  value: string;
+export type ComboboxItem<T extends ComboboxItemValue> = {
+  value: T;
   label: string;
 };
 
-type Props = {
-  items: ComboboxItem[];
+type ComboboxItemValue = number | string;
+
+type Props<T extends ComboboxItemValue> = {
+  items: ComboboxItem<T>[];
   emptyMsg?: string;
   selectMsg?: string;
   inputPlaceholder?: string;
 };
 
-export function Combobox({
+export function Combobox<T>({
   items,
   emptyMsg = "Не найдено",
   inputPlaceholder,
   selectMsg = "Выберите...",
-}: Props) {
+}: Props<T extends ComboboxItemValue ? ComboboxItemValue : ComboboxItemValue>) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
@@ -62,7 +63,7 @@ export function Combobox({
             {items.map((item) => (
               <CommandItem
                 key={item.value}
-                value={item.value}
+                value={String(item.value)}
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : currentValue);
                   setOpen(false);
