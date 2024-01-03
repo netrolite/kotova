@@ -23,7 +23,7 @@ import {
 
 import { Button } from "./ui/button";
 import { cn } from "@/lib/shadcnUtils";
-import SetState from "@/lib/types/SetState";
+import ReactStateSetter from "@/lib/types/SetState";
 
 type Props = {
   children: ReactNode;
@@ -33,7 +33,7 @@ type Props = {
   drawerChildrenContainerClassName?: string;
 };
 
-type ResponsiveDialogContextType = null | [boolean, SetState<boolean>];
+type ResponsiveDialogContextType = null | [boolean, ReactStateSetter<boolean>];
 export const ResponsiveDialogContext =
   createContext<ResponsiveDialogContextType>(null);
 
