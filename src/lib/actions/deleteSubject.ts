@@ -16,7 +16,7 @@ export default async function deleteSubjectAction(data: unknown) {
       deletedSubjectPromise,
       subjectsPromise,
     ]);
-    revalidatePath("/tests");
+    revalidatePath("/subjects");
     return { data: subjects.filter((s) => s.id !== deletedSubject?.id) };
   } catch (err) {
     return { error: true };

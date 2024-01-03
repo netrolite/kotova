@@ -15,7 +15,7 @@ type Props = {
 export default function SidebarLinks({ className, userRole }: Props) {
   const session = useSession();
   const pathname = usePathname();
-  const links = [{ title: "Тесты", href: "/tests" }];
+  const links = [{ title: "Тесты", href: "/subjects" }];
   if (userRole === ROLE.TEACHER) {
     links.push({ title: "Мои классы", href: "/my/classes" });
   }

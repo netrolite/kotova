@@ -1,8 +1,8 @@
 import { z } from "zod";
 import PageTitle from "@/components/PageTitle";
-import SubjectTestListFilter from "@/components/routes/tests/[subjectId]/Filter/Index";
-import TestListSearch from "@/components/routes/tests/[subjectId]/Search";
-import SubjectTestList from "@/components/routes/tests/[subjectId]/TestList/Index";
+import SubjectTestListFilter from "@/components/routes/subjects/[subjectId]/Filter/Index";
+import TestListSearch from "@/components/routes/subjects/[subjectId]/Search";
+import SubjectTestList from "@/components/routes/subjects/[subjectId]/TestList/Index";
 import getSubject from "@/lib/fetchers/getSubject";
 import getSubjectTests from "@/lib/fetchers/getSubjectTests";
 import parseUriComponent from "@/lib/parseUriComponent";

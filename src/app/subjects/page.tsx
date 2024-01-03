@@ -1,5 +1,5 @@
 import PageTitle from "@/components/PageTitle";
-import SubjectsList from "@/components/routes/tests/SubjectsList";
+import SubjectsList from "@/components/routes/subjects/SubjectsList";
 import { db } from "@/lib/db";
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
     "На этой странице показан список предметов, по которым можно пройти тесты",
 };
 
-export default async function Tests() {
+export default async function Subjects() {
   const subjects = await db.subject.findMany({
     include: { tests: { include: { _count: true } } },
   });
