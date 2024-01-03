@@ -12,7 +12,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/shadcnUtils";
-import SetState from "@/lib/types/SetState";
+import ReactStateSetter from "@/lib/types/SetState";
 import { Button } from "./ui/button";
 
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
   childrenContainerClassName?: string;
 };
 
-type CustomDrawerContextType = null | [boolean, SetState<boolean>];
+type CustomDrawerContextType = null | [boolean, ReactStateSetter<boolean>];
 export const CustomDrawerContext = createContext<CustomDrawerContextType>(null);
 
 export default function CustomDrawer({
