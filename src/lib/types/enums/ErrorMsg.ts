@@ -1,5 +1,7 @@
+import GetEnum from "../GetEnum";
+
 export const ERROR_MSG = {
   GENERIC: "Что-то пошло не так. Попробуйте немного позже",
 } as const;
 
-export type ErrorMsg = (typeof ERROR_MSG)[keyof typeof ERROR_MSG];
+export type ErrorMsg = GetEnum<typeof ERROR_MSG>;
