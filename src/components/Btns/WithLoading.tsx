@@ -1,5 +1,5 @@
-import Loading from "./Loading/Loading";
-import { Button, ButtonProps } from "./ui/button";
+import Loading from "../Loading/Loading";
+import { Button, ButtonProps } from "../ui/button";
 
 type Props = {
   isLoading?: boolean;

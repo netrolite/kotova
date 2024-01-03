@@ -16,11 +16,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import FormSubmitBtn from "@/components/Form/SubmitBtn";
+import FormSubmitBtn from "@/components/Btns/Submit";
 import useLoading from "@/lib/hooks/useLoading";
 import editOwnProfileAction from "@/lib/actions/editOwnProfile";
 import { useEffect, useState } from "react";
-import FormError from "@/components/Form/Error";
+import FormError from "@/components/FormError";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
