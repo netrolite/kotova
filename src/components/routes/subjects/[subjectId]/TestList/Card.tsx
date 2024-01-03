@@ -50,7 +50,10 @@ export default function SubjectTestListCard({
         <KeyValue title="Раз пройден" value={testResults.length} />
       </CardContent>
       <CardFooter>
-        <Link className="flex gap-2 hover:underline" href={`/users/deleted`}>
+        <Link
+          className="flex gap-2 hover:underline"
+          href={createdBy ? `/users/${createdBy.id}` : "/users/deleted"}
+        >
           <SubjectTestListTestAvatar user={createdBy} />
           {createdBy?.name || "Удаленный пользователь"}
         </Link>
