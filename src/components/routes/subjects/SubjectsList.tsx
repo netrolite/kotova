@@ -21,7 +21,7 @@ export default function SubjectsList({ subjects }: Props) {
       {subjects?.map(({ id, title }) => {
         return (
           <li key={id} className="flex justify-between">
-            <Link className="w-full" href={`/tests/${id}`}>
+            <Link className="w-full" href={`/subjects/${id}`}>
               <Button className="w-full justify-start" variant="ghost">
                 {title}
               </Button>
