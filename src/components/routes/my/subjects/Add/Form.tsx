@@ -19,7 +19,7 @@ import AddSubjectSchema, {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import BtnWithLoading from "@/components/BtnWithLoading";
+import BtnWithLoading from "@/components/Btns/WithLoading";
 
 export default function AddSubjectForm() {
   const [_isDialogOpen, setIsDialogOpen] = useResponsiveDialogState();
