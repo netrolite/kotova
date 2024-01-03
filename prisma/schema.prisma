@@ -81,6 +81,7 @@ model TestQuestion {
   // prisma doesn't yet support union types so we can't use something like `options (TextQuestion | RadioQuestion)[]`
   options           TestQuestionOption[]
   correctAnswerText String?
+  explanation       String?
 }
 
 model TestQuestionOption {
