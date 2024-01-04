@@ -27,6 +27,10 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import FormItemField from "@/components/Form/ItemField";
 import { CheckedState } from "@radix-ui/react-checkbox";
+import { Input } from "@/components/ui/input";
+import FormSubmitBtn from "@/components/Btns/Submit";
+import wait from "@/lib/wait";
+import { toast } from "sonner";
 
 type Props = {
   subjects: ComboboxItem<string>[];
@@ -44,9 +48,9 @@ export default function AddTestForm({ subjects }: Props) {
     resolver: zodResolver(AddTestSchema),
     defaultValues: {
       grades: [],
-      name: undefined,
+      name: "",
       questions: [],
-      subject: undefined,
+      subject: "",
     },
   });
   const { control } = form;
@@ -57,9 +61,12 @@ export default function AddTestForm({ subjects }: Props) {
   // > | null>(null);
 
   async function handleSubmit(data: AddTestSchemaType) {
+    console.log(data);
     setIsLoading(true);
+    await wait(1000);
     // setData(await action(data));
     setIsLoading(false);
+    toast.success("Тест успешно создан");
   }
 
   function getGradesFieldIsChecked({
@@ -91,7 +98,24 @@ export default function AddTestForm({ subjects }: Props) {
 
   return (
     <FormProvider {...form}>
-      <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)}>
+      <form className="space-y-10" onSubmit={form.handleSubmit(handleSubmit)}>
+        <FormItemField
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <>
+              <FormLabel>Название</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormDescription>
+                Например: "Правописание безударных гласных"
+              </FormDescription>
+              <FormMessage />
+            </>
+          )}
+        />
+
         <FormItemField
           control={control}
           name="subject"
@@ -106,7 +130,9 @@ export default function AddTestForm({ subjects }: Props) {
                 </FormControl>
                 <SelectContent>
                   {subjects.map(({ label, value }) => (
-                    <SelectItem value={value.toString()}>{label}</SelectItem>
+                    <SelectItem key={value} value={value.toString()}>
+                      {label}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -168,6 +194,7 @@ export default function AddTestForm({ subjects }: Props) {
             </FormItem>
           )}
         />
+        <FormSubmitBtn {...{ isLoading }}>Создать</FormSubmitBtn>
       </form>
     </FormProvider>
   );

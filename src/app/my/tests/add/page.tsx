@@ -12,7 +12,7 @@ export default async function AddTest() {
 
   return (
     <>
-      <PageTitle className="mb-8">Добавить новый тест</PageTitle>
+      <PageTitle className="mb-10">Создать тест</PageTitle>
       <AddTestForm {...{ subjects }} />
     </>
   );
