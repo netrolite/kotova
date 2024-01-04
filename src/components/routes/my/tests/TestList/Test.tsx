@@ -22,7 +22,7 @@ export default function MyTestsTestListTest({
   id,
   maxScore,
   subject,
-  title,
+  name,
   testResults,
 }: Props) {
   const avgScorePercentage =
@@ -32,7 +32,7 @@ export default function MyTestsTestListTest({
       <Link href={`/my/tests/${id}`}>
         <Card>
           <CardHeader>
-            <CardTitle>{title}</CardTitle>
+            <CardTitle>{name}</CardTitle>
             <CardDescription>
               {!!grades.length && <span>{formatGrades(grades)}</span>}
               <span>
