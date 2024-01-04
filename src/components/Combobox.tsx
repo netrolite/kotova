@@ -1,5 +1,3 @@
-"use client";
-
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/shadcnUtils";
 import { Button } from "@/components/ui/button";
@@ -7,7 +5,6 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
 } from "@/components/ui/command";
 import {
@@ -15,38 +12,39 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useState } from "react";
+import { ZustandStateSetter } from "@/lib/types/SetState";
 
-export type ComboboxItem<T extends ComboboxItemValue> = {
+export type ComboboxItem<T extends number | string> = {
   value: T;
   label: string;
 };
 
-type ComboboxItemValue = number | string;
-
-type Props<T extends ComboboxItemValue> = {
+type Props<T extends number | string> = {
   items: ComboboxItem<T>[];
-  emptyMsg?: string;
+  notFoundMsg?: string;
   selectMsg?: string;
-  inputPlaceholder?: string;
+  isOpen: boolean;
+  setIsOpen: ZustandStateSetter<boolean>;
+  value: string | null;
+  setValue: ZustandStateSetter<string | null>;
 };
 
 export function Combobox<T>({
   items,
-  emptyMsg = "Не найдено",
-  inputPlaceholder,
+  notFoundMsg = "Не найдено",
   selectMsg = "Выберите...",
-}: Props<T extends ComboboxItemValue ? ComboboxItemValue : ComboboxItemValue>) {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
-
+  isOpen,
+  setIsOpen,
+  setValue,
+  value,
+}: Props<T extends number ? number : string>) {
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
-          aria-expanded={open}
+          aria-expanded={isOpen}
           className="w-[200px] justify-between"
         >
           {value
@@ -57,16 +55,15 @@ export function Combobox<T>({
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder={inputPlaceholder} />
-          <CommandEmpty>{emptyMsg}</CommandEmpty>
+          <CommandEmpty>{notFoundMsg}</CommandEmpty>
           <CommandGroup>
             {items.map((item) => (
               <CommandItem
                 key={item.value}
                 value={String(item.value)}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue);
-                  setOpen(false);
+                onSelect={(currVal) => {
+                  setValue(currVal === value ? null : currVal);
+                  setIsOpen(false);
                 }}
               >
                 <Check
