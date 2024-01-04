@@ -1,11 +1,19 @@
+import { ComboboxItem } from "@/components/Combobox";
 import PageTitle from "@/components/PageTitle";
-import AddTestSubjectsCombobox from "@/components/routes/my/tests/add/SubjectsCombobox/Index";
+import AddTestForm from "@/components/routes/my/tests/add/Form/Index";
+import getSubjects from "@/lib/fetchers/getSubjects";
 
 export default async function AddTest() {
+  const subjectsRaw = await getSubjects();
+  const subjects: ComboboxItem<string>[] = subjectsRaw.map((subject) => ({
+    label: subject.title,
+    value: subject.id,
+  }));
+
   return (
     <>
-      <PageTitle className="mb-4">Добавить новый тест</PageTitle>
-      <AddTestSubjectsCombobox />
+      <PageTitle className="mb-8">Добавить новый тест</PageTitle>
+      <AddTestForm {...{ subjects }} />
     </>
   );
 }
