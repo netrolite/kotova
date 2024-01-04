@@ -21,7 +21,7 @@ const AddTestSchema = z.object({
     .cuid({ message: "Неверный формат предмета" }),
   name: z
     .string()
-    .min(1, "Имя не заполнено")
+    .min(1, "Название не заполнено")
     .max(NAME_MAX_LEN, `Имя должно быть не длиннее ${NAME_MAX_LEN} символов`),
   questions: z.array(
     z.object({
