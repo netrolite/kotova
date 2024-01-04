@@ -59,7 +59,7 @@ model VerificationToken {
 
 model Test {
   id              String         @id @default(cuid())
-  title           String
+  name            String
   questions       TestQuestion[]
   testResults     TestResult[]
   maxScore        Int

@@ -15,7 +15,7 @@ const getSubjectTests = cache(
     return db.test.findMany({
       where: {
         subjectId,
-        title: { contains: query || undefined, mode: "insensitive" },
+        name: { contains: query || undefined, mode: "insensitive" },
         grades: grades.length ? { hasSome: grades } : undefined,
       },
       include: { createdBy: true, testResults: { select: { id: true } } },

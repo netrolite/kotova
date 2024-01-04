@@ -16,7 +16,7 @@ export default async function UserTestResults({ user, testResults }: Props) {
     <ul>
       {testResults.map((result) => (
         <li key={result.id}>
-          <h3>{result.test.title}</h3>
+          <h3>{result.test.name}</h3>
           {/* TODO: add subjects and grades */}
           <div>
             <span>Баллы:</span>
