@@ -31,6 +31,7 @@ import { Input } from "@/components/ui/input";
 import FormSubmitBtn from "@/components/Btns/Submit";
 import wait from "@/lib/wait";
 import { toast } from "sonner";
+import AddTestFormAddQuestionBtn from "./AddQuestionBtn";
 
 type Props = {
   subjects: ComboboxItem<string>[];
@@ -194,7 +195,8 @@ export default function AddTestForm({ subjects }: Props) {
             </FormItem>
           )}
         />
-        <FormSubmitBtn {...{ isLoading }}>Создать</FormSubmitBtn>
+        <AddTestFormAddQuestionBtn />
+        <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
       </form>
     </FormProvider>
   );

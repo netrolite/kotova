@@ -1,6 +1,9 @@
 import { makeArr } from "@/lib/makeArr";
 import { create } from "zustand";
-import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
+import {
+  TEST_QUESTION_TYPE,
+  TestQuestionType,
+} from "@/lib/types/enums/TestQuestionType";
 import GetEnum from "@/lib/types/GetEnum";
 import { ComboboxItem } from "@/components/Combobox";
 import deepCopy from "@/lib/deepCopy";
@@ -38,6 +41,9 @@ type AddTestStore = {
   questions: (TextQuestion | OptionsQuestion)[];
   addTextQuestion: () => void;
   addOptionsQuestion: (questionType: OptionsQuestion["type"]) => void;
+
+  isQuestionTypeDialogOpen: boolean;
+  setIsQuestionTypeDialogOpen: (val: boolean) => void;
 };
 
 const useAddTestStore = create<AddTestStore>()((set, get) => ({
@@ -65,6 +71,9 @@ const useAddTestStore = create<AddTestStore>()((set, get) => ({
     }),
   isSubjectsComboboxOpen: false,
   setIsSubjectsComboboxOpen: (val) => set({ isSubjectsComboboxOpen: val }),
+
+  isQuestionTypeDialogOpen: false,
+  setIsQuestionTypeDialogOpen: (val) => set({ isQuestionTypeDialogOpen: val }),
 }));
 
 export default useAddTestStore;
