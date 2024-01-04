@@ -31,7 +31,7 @@ export default async function RootLayout({
             <Sidebar />
             <main className="flex min-h-screen w-full flex-col md:max-w-[650px] md:border-l md:border-r md:border-slate-200">
               <Header />
-              <div className="flex-grow px-4 py-3">{children}</div>
+              <div className="flex-grow px-4 pb-3 pt-8">{children}</div>
               <MobileNav />
             </main>
           </div>
