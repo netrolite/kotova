@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, forwardRef } from "react";
 import { Button, ButtonProps } from "../ui/button";
 import { cn } from "@/lib/shadcnUtils";
 
@@ -7,11 +7,15 @@ type Props = ButtonProps & {
   children: ReactNode;
 };
 
-export default function BtnWithIcon({ icon, children, ...restProps }: Props) {
-  return (
-    <Button {...restProps} className={cn("flex gap-1", restProps.className)}>
-      {icon}
-      <span>{children}</span>
-    </Button>
-  );
-}
+const BtnWithIcon = forwardRef<HTMLButtonElement, Props>(
+  ({ icon, children, ...restProps }: Props, ref) => {
+    return (
+      <Button {...restProps} className={cn("flex gap-1", restProps.className)}>
+        {icon}
+        <span>{children}</span>
+      </Button>
+    );
+  },
+);
+
+export default BtnWithIcon;
