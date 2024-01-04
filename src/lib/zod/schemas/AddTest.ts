@@ -11,9 +11,9 @@ const AddTestSchema = z.object({
     .refine(
       (selectedGrades) =>
         selectedGrades.some((selectedGrade) =>
-          allGrades.some((grade) => grade === selectedGrade),
+          allGrades.includes(selectedGrade),
         ),
-      { message: "Неверные классы" },
+      { message: "Выберите хотя бы один класс" },
     ),
   subject: z
     .string()
