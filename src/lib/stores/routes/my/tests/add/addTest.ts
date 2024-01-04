@@ -1,11 +1,6 @@
-import { makeArr } from "@/lib/makeArr";
 import { create } from "zustand";
-import {
-  TEST_QUESTION_TYPE,
-  TestQuestionType,
-} from "@/lib/types/enums/TestQuestionType";
+import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
 import GetEnum from "@/lib/types/GetEnum";
-import { ComboboxItem } from "@/components/Combobox";
 import deepCopy from "@/lib/deepCopy";
 
 type QuestionBase = {
@@ -27,17 +22,7 @@ type QuestionOption = {
   isCorrect: boolean;
 };
 
-type Grade = number;
-
 type AddTestStore = {
-  selectedSubject: string | null;
-  setSelectedSubject: (subject: string | null) => void;
-  isSubjectsComboboxOpen: boolean;
-  setIsSubjectsComboboxOpen: (val: boolean) => void;
-
-  grades: ComboboxItem<Grade>[];
-  selectedGrades: Grade[];
-
   questions: (TextQuestion | OptionsQuestion)[];
   addTextQuestion: () => void;
   addOptionsQuestion: (questionType: OptionsQuestion["type"]) => void;
@@ -47,14 +32,7 @@ type AddTestStore = {
 };
 
 const useAddTestStore = create<AddTestStore>()((set, get) => ({
-  selectedSubject: null,
-  setSelectedSubject: (subject) => set({ selectedSubject: subject }),
   questions: [],
-  grades: makeArr({ from: 1, to: 11 }).map((grade) => ({
-    value: grade,
-    label: `${grade} класс`,
-  })),
-  selectedGrades: [],
   addTextQuestion: () =>
     set({
       questions: [
@@ -69,8 +47,6 @@ const useAddTestStore = create<AddTestStore>()((set, get) => ({
         { type: questionType, options: [] },
       ],
     }),
-  isSubjectsComboboxOpen: false,
-  setIsSubjectsComboboxOpen: (val) => set({ isSubjectsComboboxOpen: val }),
 
   isQuestionTypeDialogOpen: false,
   setIsQuestionTypeDialogOpen: (val) => set({ isQuestionTypeDialogOpen: val }),
