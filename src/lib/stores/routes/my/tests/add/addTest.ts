@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
-import GetEnum from "@/lib/types/GetEnum";
+import GetUnion from "@/lib/types/GetEnum";
 import deepCopy from "@/lib/deepCopy";
 
 type QuestionBase = {
@@ -13,7 +13,7 @@ type TextQuestion = QuestionBase & {
 };
 
 type OptionsQuestion = QuestionBase & {
-  type: GetEnum<Omit<typeof TEST_QUESTION_TYPE, "TEXT">>;
+  type: GetUnion<Omit<typeof TEST_QUESTION_TYPE, "TEXT">>;
   options: QuestionOption[];
 };
 

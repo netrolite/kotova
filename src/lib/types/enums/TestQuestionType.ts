@@ -1,4 +1,4 @@
-import GetEnum from "../GetEnum";
+import GetUnion from "../GetEnum";
 
 export const TEST_QUESTION_TYPE = {
   TEXT: 1,
@@ -6,13 +6,13 @@ export const TEST_QUESTION_TYPE = {
   CHECKBOX: 3,
   TABLE: 4,
 } as const;
-const { CHECKBOX, RADIO, TABLE, TEXT } = TEST_QUESTION_TYPE;
 
 export const TEST_QUESTION_TYPE_LABEL = {
-  [CHECKBOX]: "Множественный выбор",
-  [RADIO]: "Одиночный выбор",
-  [TABLE]: "Таблица",
-  [TEXT]: "Текст",
+  CHECKBOX: "Множественный выбор",
+  RADIO: "Одиночный выбор",
+  TABLE: "Таблица",
+  TEXT: "Текст",
 } as const;
 
-export type TestQuestionType = GetEnum<typeof TEST_QUESTION_TYPE>;
+export type TestQuestionType = GetUnion<typeof TEST_QUESTION_TYPE>;
+export type TestQuestionTypeLabel = GetUnion<typeof TEST_QUESTION_TYPE_LABEL>;

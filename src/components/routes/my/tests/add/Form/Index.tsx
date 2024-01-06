@@ -32,6 +32,8 @@ import FormSubmitBtn from "@/components/Btns/Submit";
 import wait from "@/lib/wait";
 import { toast } from "sonner";
 import AddTestFormAddQuestionBtn from "./AddQuestionBtn";
+import AddTestFormQuestions from "./Questions";
+import usePersistAddTestForm from "@/lib/hooks/routes/my/tests/add/persistForm";
 
 type Props = {
   subjects: ComboboxItem<string>[];
@@ -44,25 +46,30 @@ type GetGradesFieldPropParams<T = false> = {
   isChecked: T extends true ? CheckedState : undefined;
 };
 
+export const ADD_TEST_FORM_DEFAULT_VALUES: AddTestSchemaInputType = {
+  grades: [],
+  name: "",
+  questions: [],
+  subject: "",
+};
+
 export default function AddTestForm({ subjects }: Props) {
   const form = useForm<AddTestSchemaInputType>({
     resolver: zodResolver(AddTestSchema),
-    defaultValues: {
-      grades: [],
-      name: "",
-      questions: [],
-      subject: "",
-    },
+    defaultValues: ADD_TEST_FORM_DEFAULT_VALUES,
   });
-  const { control } = form;
+  const { control, getValues } = form;
+  const formData = getValues();
+  usePersistAddTestForm(form.setValue, formData);
+
   const { grades } = form.watch();
   const { isLoading, setIsLoading } = useLoading();
+
   // const [data, setData] = useState<Awaited<
   //   ReturnType<typeof editOwnProfileAction>
   // > | null>(null);
 
   async function handleSubmit(data: AddTestSchemaType) {
-    console.log(data);
     setIsLoading(true);
     await wait(1000);
     // setData(await action(data));
@@ -195,6 +202,7 @@ export default function AddTestForm({ subjects }: Props) {
             </FormItem>
           )}
         />
+        <AddTestFormQuestions />
         <AddTestFormAddQuestionBtn />
         <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
       </form>

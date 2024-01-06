@@ -1,4 +1,4 @@
-import GetEnum from "../GetEnum";
+import GetUnion from "../GetEnum";
 
 export const ROLE = {
   STUDENT: 1,
@@ -6,4 +6,4 @@ export const ROLE = {
   ADMIN: 3,
 } as const;
 
-export type Role = GetEnum<typeof ROLE>;
+export type Role = GetUnion<typeof ROLE>;
