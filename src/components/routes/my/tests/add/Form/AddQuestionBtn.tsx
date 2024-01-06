@@ -18,7 +18,7 @@ import {
   TEST_QUESTION_TYPE_LABEL,
 } from "@/lib/types/enums/TestQuestionType";
 import { PlusIcon } from "lucide-react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { FormEvent } from "react";
 import useAddTestStore from "@/lib/stores/routes/my/tests/add/addTest";
 import { Button } from "@/components/ui/button";
@@ -30,38 +30,39 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import AddTestQuestionSchema, {
-  AddTestQuestionSchemaInputType,
-  AddTestQuestionSchemaType,
-} from "@/lib/zod/schemas/AddTestQuestionSchema";
-import {
-  getQuestionTypeLabelByNumber,
-  getQuestionTypeLabelByString,
-} from "@/lib/getQuestionType";
+import { AddTestQuestionSchemaInputType } from "@/lib/zod/schemas/AddTestQuestion";
+import { getQuestionTypeLabelByNumber } from "@/lib/getQuestionType";
+import { AddTestSchemaInputType } from "@/lib/zod/schemas/AddTest";
+import AddTestQuestionTypeSchema from "@/lib/zod/schemas/AddTestQuestionType";
+import AddTestQuestionModalSchema, {
+  AddTestQuestionModalSchemaInputType,
+  AddTestQuestionModalSchemaType,
+} from "@/lib/zod/schemas/AddTestQuestionModal";
 
 type Props = {};
 
+const QUESTION_DEFAULT_VALUES = {
+  correctAnswerText: "",
+  explanation: "",
+  options: [],
+  question: "",
+} satisfies Omit<AddTestQuestionSchemaInputType, "type">;
+
 export default function AddTestFormAddQuestionBtn({}: Props) {
   const form = useForm<
-    AddTestQuestionSchemaInputType,
+    AddTestQuestionModalSchemaInputType,
     any,
-    AddTestQuestionSchemaType
+    AddTestQuestionModalSchemaType
   >({
-    resolver: zodResolver(AddTestQuestionSchema),
+    resolver: zodResolver(AddTestQuestionModalSchema),
     defaultValues: {
       type: null,
     },
   });
-  const {
-    questions,
-    addTextQuestion,
-    addOptionsQuestion,
-    isDialogOpen,
-    setIsDialogOpen,
-  } = useAddTestStore((s) => ({
-    questions: s.questions,
-    addTextQuestion: s.addTextQuestion,
-    addOptionsQuestion: s.addOptionsQuestion,
+  const addTestForm = useFormContext<AddTestSchemaInputType>();
+  const { setValue } = addTestForm;
+  const questions = addTestForm.watch("questions");
+  const { isDialogOpen, setIsDialogOpen } = useAddTestStore((s) => ({
     isDialogOpen: s.isQuestionTypeDialogOpen,
     setIsDialogOpen: s.setIsQuestionTypeDialogOpen,
   }));
@@ -71,11 +72,10 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
     e.stopPropagation(); // prevents the other form from triggering
     form.handleSubmit(async ({ type }) => {
       form.reset();
-      if (type === TEST_QUESTION_TYPE.TEXT) {
-        addTextQuestion();
-      } else {
-        addOptionsQuestion(type);
-      }
+      setValue("questions", [
+        ...questions,
+        { ...QUESTION_DEFAULT_VALUES, type },
+      ]);
       setIsDialogOpen(false);
     })(e);
   }
@@ -92,14 +92,17 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
           <DialogTitle>Добавить вопрос</DialogTitle>
         </DialogHeader>
         <FormProvider {...form}>
-          <form className="space-y-4" onSubmit={(e) => handleSubmit(e)}>
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <FormField
               control={form.control}
               name="type"
-              render={({ field }) => (
+              render={({ field: { onChange, value } }) => (
                 <FormItem>
                   <FormLabel>Тип вопроса</FormLabel>
-                  <Select onValueChange={(val) => field.onChange(Number(val))}>
+                  <Select
+                    value={value ? String(value) : undefined}
+                    onValueChange={(val) => onChange(Number(val))}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Выберите тип вопроса" />

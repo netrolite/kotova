@@ -5,28 +5,30 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { getQuestionTypeLabelByNumber } from "@/lib/getQuestionType";
-import useAddTestStore from "@/lib/stores/routes/my/tests/add/addTest";
 import { AddTestSchemaInputType } from "@/lib/zod/schemas/AddTest";
-import { useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
 type Props = {};
 
 export default function AddTestFormQuestions({}: Props) {
-  const form = useFormContext<AddTestSchemaInputType>();
-  const questions = useAddTestStore((s) => s.questions);
+  const { control } = useFormContext<AddTestSchemaInputType>();
+  const { fields } = useFieldArray({
+    control,
+    name: "questions",
+  });
 
-  return questions.map((question, i) => {
-    const questionType = getQuestionTypeLabelByNumber(question.type);
+  return fields.map((question, i) => {
+    console.log(question.correctAnswerText);
     return (
       <FormItemField
-        control={form.control}
+        key={question.id}
+        control={control}
         name="questions"
         render={({ field }) => (
           <>
             <FormLabel>Вопрос {i + 1}</FormLabel>
             <FormControl></FormControl>
-            <FormDescription>{questionType}</FormDescription>
+            <FormDescription></FormDescription>
             <FormMessage />
           </>
         )}

@@ -58,10 +58,11 @@ export default function AddTestForm({ subjects }: Props) {
     resolver: zodResolver(AddTestSchema),
     defaultValues: ADD_TEST_FORM_DEFAULT_VALUES,
   });
-  const { control, getValues } = form;
+  const { control, getValues, watch, setValue } = form;
+  watch(); // re-render this component when form state changes to save it to localStorage
   const formData = getValues();
   const { grades } = formData;
-  usePersistAddTestForm(formData, form.setValue);
+  usePersistAddTestForm(formData, setValue);
   const { isLoading, setIsLoading } = useLoading();
 
   // const [data, setData] = useState<Awaited<
@@ -129,7 +130,7 @@ export default function AddTestForm({ subjects }: Props) {
           render={({ field }) => (
             <>
               <FormLabel>Предмет</FormLabel>
-              <Select onValueChange={field.onChange}>
+              <Select value={field.value} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Выберите предмет" />
