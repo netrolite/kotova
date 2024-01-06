@@ -11,8 +11,8 @@ import parseJson from "@/lib/parseJson";
 const ADD_TEST_FORM_DATA_KEY = "add-test-form";
 
 export default function usePersistAddTestForm(
-  setValue: UseFormSetValue<AddTestSchemaInputType>,
   formData: AddTestSchemaInputType,
+  setValue: UseFormSetValue<AddTestSchemaInputType>,
 ) {
   const isMounted = useRef(false);
 
