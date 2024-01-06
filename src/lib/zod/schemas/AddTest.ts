@@ -1,14 +1,10 @@
 import { z } from "zod";
 import { grades as allGrades } from "@/lib/constants";
-import { ROLE } from "@/lib/types/enums/Role";
+import AddTestQuestionSchema, {
+  AddTestSavedQuestionSchema,
+} from "./AddTestQuestion";
 
 const NAME_MAX_LEN = 300;
-
-const AddTestSchemaQuestion = z.object({
-  type: z
-    .number()
-    .refine((data) => (Object.values(ROLE) as number[]).includes(data)),
-});
 
 const AddTestSchema = z.object({
   grades: z
@@ -29,14 +25,14 @@ const AddTestSchema = z.object({
     .string()
     .min(1, "Название не заполнено")
     .max(NAME_MAX_LEN, `Имя должно быть не длиннее ${NAME_MAX_LEN} символов`),
-  questions: z.array(AddTestSchemaQuestion),
+  questions: z.array(AddTestQuestionSchema),
 });
 
 export const AddTestSchemaSavedValues = AddTestSchema.extend({
   grades: z.number().array(),
   subject: z.string(),
   name: z.string(),
-  questions: z.array(AddTestSchemaQuestion),
+  questions: z.array(AddTestSavedQuestionSchema),
 });
 
 export type AddTestSchemaType = z.infer<typeof AddTestSchema>;
