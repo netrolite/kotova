@@ -34,6 +34,10 @@ import AddTestQuestionSchema, {
   AddTestQuestionSchemaInputType,
   AddTestQuestionSchemaType,
 } from "@/lib/zod/schemas/AddTestQuestionSchema";
+import {
+  getQuestionTypeLabelByNumber,
+  getQuestionTypeLabelByString,
+} from "@/lib/getQuestionType";
 
 type Props = {};
 
@@ -61,7 +65,6 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
     isDialogOpen: s.isQuestionTypeDialogOpen,
     setIsDialogOpen: s.setIsQuestionTypeDialogOpen,
   }));
-  console.log(questions);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -105,7 +108,7 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
                     <SelectContent>
                       {Object.values(TEST_QUESTION_TYPE).map((type) => (
                         <SelectItem key={type} value={type.toString()}>
-                          {TEST_QUESTION_TYPE_LABEL[type]}
+                          {getQuestionTypeLabelByNumber(type)}
                         </SelectItem>
                       ))}
                     </SelectContent>
