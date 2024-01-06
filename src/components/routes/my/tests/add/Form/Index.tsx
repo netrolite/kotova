@@ -60,9 +60,8 @@ export default function AddTestForm({ subjects }: Props) {
   });
   const { control, getValues } = form;
   const formData = getValues();
-  usePersistAddTestForm(form.setValue, formData);
-
-  const { grades } = form.watch();
+  const { grades } = formData;
+  usePersistAddTestForm(formData, form.setValue);
   const { isLoading, setIsLoading } = useLoading();
 
   // const [data, setData] = useState<Awaited<
