@@ -9,7 +9,7 @@ import { getQuestionTypeLabelByNumber } from "@/lib/getQuestionType";
 import FormItemField from "@/components/Form/ItemField";
 import { useFormContext } from "react-hook-form";
 import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
-import { FormLabel } from "@/components/ui/form";
+import { FormControl, FormLabel } from "@/components/ui/form";
 import QuestionTypesList from "@/components/QuestionTypesList";
 
 type Props = {
@@ -29,9 +29,11 @@ export default function AddTestFormQuestionQuestionType({ index }: Props) {
             onValueChange={(val) => field.onChange(Number(val))}
             defaultValue={field.value.toString()}
           >
-            <SelectTrigger>
-              <SelectValue placeholder="Выберите тип вопроса" />
-            </SelectTrigger>
+            <FormControl>
+              <SelectTrigger>
+                <SelectValue placeholder="Выберите тип вопроса" />
+              </SelectTrigger>
+            </FormControl>
             <SelectContent>
               <QuestionTypesList
                 render={({ type }) => (
