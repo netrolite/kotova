@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import FormSubmitBtn from "@/components/Btns/Submit";
-import useLoading from "@/lib/hooks/useLoading";
+import useLoading from "@/lib/hooks/loading";
 import editOwnProfileAction from "@/lib/actions/editOwnProfile";
 import { useEffect, useState } from "react";
 import FormError from "@/components/Form/Error";

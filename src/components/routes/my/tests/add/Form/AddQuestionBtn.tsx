@@ -13,14 +13,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import BtnWithIcon from "@/components/Btns/WithIcon";
-import {
-  TEST_QUESTION_TYPE,
-  TEST_QUESTION_TYPE_LABEL,
-} from "@/lib/types/enums/TestQuestionType";
 import { PlusIcon } from "lucide-react";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { FormEvent } from "react";
-import useAddTestStore from "@/lib/stores/routes/my/tests/add/addTest";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -30,14 +25,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { AddTestQuestionSchemaInputType } from "@/lib/zod/schemas/AddTestQuestion";
 import { getQuestionTypeLabelByNumber } from "@/lib/getQuestionType";
-import { AddTestSchemaInputType } from "@/lib/zod/schemas/AddTest";
-import AddTestQuestionTypeSchema from "@/lib/zod/schemas/AddTestQuestionType";
-import AddTestQuestionModalSchema, {
-  AddTestQuestionModalSchemaInputType,
-  AddTestQuestionModalSchemaType,
-} from "@/lib/zod/schemas/AddTestQuestionModal";
+import AddTestFormAddQuestionFormSchema, {
+  AddTestFormAddQuestionFormSchemaInputType,
+  AddTestFormAddQuestionFormSchemaType,
+} from "@/lib/zod/schemas/addTestForm/AddQuestionForm";
+import QuestionTypesList from "@/components/QuestionTypesList";
+import useAddTestFormQuestionsArr from "@/lib/hooks/addTestForm/questionsArr";
+import useAddTestFormStore from "@/lib/stores/addTestForm";
 
 type Props = {};
 
@@ -46,23 +41,22 @@ const QUESTION_DEFAULT_VALUES = {
   explanation: "",
   options: [],
   question: "",
-} satisfies Omit<AddTestQuestionSchemaInputType, "type">;
+} satisfies Omit<AddTestFormAddQuestionFormSchemaType, "type">;
 
 export default function AddTestFormAddQuestionBtn({}: Props) {
   const form = useForm<
-    AddTestQuestionModalSchemaInputType,
+    AddTestFormAddQuestionFormSchemaInputType,
     any,
-    AddTestQuestionModalSchemaType
+    AddTestFormAddQuestionFormSchemaType
   >({
-    resolver: zodResolver(AddTestQuestionModalSchema),
+    resolver: zodResolver(AddTestFormAddQuestionFormSchema),
     defaultValues: {
       type: null,
     },
   });
-  const addTestForm = useFormContext<AddTestSchemaInputType>();
-  const { setValue } = addTestForm;
-  const questions = addTestForm.watch("questions");
-  const { isDialogOpen, setIsDialogOpen } = useAddTestStore((s) => ({
+  const questionsArr = useAddTestFormQuestionsArr();
+
+  const { isDialogOpen, setIsDialogOpen } = useAddTestFormStore((s) => ({
     isDialogOpen: s.isQuestionTypeDialogOpen,
     setIsDialogOpen: s.setIsQuestionTypeDialogOpen,
   }));
@@ -70,12 +64,10 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     e.stopPropagation(); // prevents the other form from triggering
-    form.handleSubmit(async ({ type }) => {
+    form.handleSubmit(({ type }) => {
       form.reset();
-      setValue("questions", [
-        ...questions,
-        { ...QUESTION_DEFAULT_VALUES, type },
-      ]);
+      // questionsArr.append({ ...QUESTION_DEFAULT_VALUES, type });
+      questionsArr.prepend({ ...QUESTION_DEFAULT_VALUES, type });
       setIsDialogOpen(false);
     })(e);
   }
@@ -109,11 +101,13 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {Object.values(TEST_QUESTION_TYPE).map((type) => (
-                        <SelectItem key={type} value={type.toString()}>
-                          {getQuestionTypeLabelByNumber(type)}
-                        </SelectItem>
-                      ))}
+                      <QuestionTypesList
+                        render={({ type }) => (
+                          <SelectItem key={type} value={type.toString()}>
+                            {getQuestionTypeLabelByNumber(type)}
+                          </SelectItem>
+                        )}
+                      />
                     </SelectContent>
                   </Select>
                   <FormMessage />

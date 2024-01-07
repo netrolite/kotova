@@ -5,16 +5,24 @@ import { ComponentProps } from "react";
 type Props<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = ComponentProps<typeof FormField<TFieldValues, TName>>;
+> = ComponentProps<typeof FormField<TFieldValues, TName>> & {
+  formItemClassName?: string;
+};
 
 export default function FormItemField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({ render, ...formFieldProps }: Props<TFieldValues, TName>) {
+>({
+  formItemClassName,
+  render,
+  ...formFieldProps
+}: Props<TFieldValues, TName>) {
   return (
     <FormField
       {...formFieldProps}
-      render={(renderArgs) => <FormItem>{render(renderArgs)}</FormItem>}
+      render={(renderArgs) => (
+        <FormItem className={formItemClassName}>{render(renderArgs)}</FormItem>
+      )}
     />
   );
 }

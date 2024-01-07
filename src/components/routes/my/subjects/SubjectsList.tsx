@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { deleteSubjectMutation } from "@/lib/actions/deleteSubject";
 import { genericErrorMsg } from "@/lib/constants";
-import useSubjectsSwr from "@/lib/hooks/swr/useSubjects";
+import useSubjectsSwr from "@/lib/hooks/swr/subjects";
 import { Subject } from "@prisma/client";
 import { TrashIcon } from "lucide-react";
 import Link from "next/link";

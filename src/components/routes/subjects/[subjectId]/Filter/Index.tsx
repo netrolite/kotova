@@ -1,6 +1,5 @@
 "use client";
 
-import useGradesFilterStore from "@/lib/stores/routes/tests/[subjectId]/gradesFilter";
 import {
   Dialog,
   DialogClose,
@@ -13,13 +12,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { FilterIcon } from "lucide-react";
 import SubjectTestListFilterOption from "./Option";
-import useSearchParamsRouter from "@/lib/hooks/useSearchParamsRouter";
-import useUrlSearchParams from "@/lib/hooks/useUrlSearchParams";
+import useSearchParamsRouter from "@/lib/hooks/searchParamsRouter";
+import useUrlSearchParams from "@/lib/hooks/urlSearchParams";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import parseUriComponent from "@/lib/parseUriComponent";
 import { z } from "zod";
 import SubjectTestListFilterPillsList from "./PillsList";
+import useGradesFilterStore from "@/lib/stores/gradesFilter";
 
 type Props = {};
 

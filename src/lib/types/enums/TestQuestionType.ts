@@ -1,4 +1,4 @@
-import GetUnion from "../GetEnum";
+import GetUnion from "../GetUnion";
 
 export const TEST_QUESTION_TYPE = {
   TEXT: 1,
@@ -12,7 +12,7 @@ export const TEST_QUESTION_TYPE_LABEL = {
   RADIO: "Одиночный выбор",
   TABLE: "Таблица",
   TEXT: "Текст",
-} as const;
+} as const satisfies Record<keyof typeof TEST_QUESTION_TYPE, string>;
 
 export type TestQuestionType = GetUnion<typeof TEST_QUESTION_TYPE>;
 export type TestQuestionTypeLabel = GetUnion<typeof TEST_QUESTION_TYPE_LABEL>;

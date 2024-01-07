@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import isProduction from "./isProduction";
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
@@ -8,4 +9,4 @@ const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 export const db =
   globalForPrisma.prisma || new PrismaClient().$extends(withAccelerate());
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+if (!isProduction()) globalForPrisma.prisma = db;

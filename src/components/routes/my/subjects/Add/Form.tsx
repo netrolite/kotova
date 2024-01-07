@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import addSubjectAction from "@/lib/actions/addSubject";
-import useSubjectsSwr from "@/lib/hooks/swr/useSubjects";
-import useLoading from "@/lib/hooks/useLoading";
-import useResponsiveDialogState from "@/lib/hooks/useResponsiveDialogState";
+import useSubjectsSwr from "@/lib/hooks/swr/subjects";
+import useLoading from "@/lib/hooks/loading";
+import useResponsiveDialogState from "@/lib/hooks/responsiveDialogState";
 import AddSubjectSchema, {
   AddSubjectSchemaInputType,
   AddSubjectSchemaType,

@@ -3,7 +3,7 @@ import { z } from "zod";
 
 const { CHECKBOX, RADIO, TABLE, TEXT } = TEST_QUESTION_TYPE;
 
-const AddTestQuestionTypeSchema = z
+const AddTestFormAddQuestionQuestionType = z
   .union([
     z.literal(TEXT),
     z.literal(RADIO),
@@ -13,9 +13,4 @@ const AddTestQuestionTypeSchema = z
   ])
   .refine((data) => data !== null, { message: "Не выбран тип вопроса" });
 
-export type AddTestQuestionTypeType = z.infer<typeof AddTestQuestionTypeSchema>;
-export type AddTestQuestionTypeInputType = z.input<
-  typeof AddTestQuestionTypeSchema
->;
-
-export default AddTestQuestionTypeSchema;
+export default AddTestFormAddQuestionQuestionType;
