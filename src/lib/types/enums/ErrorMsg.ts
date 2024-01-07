@@ -1,4 +1,4 @@
-import GetUnion from "../GetEnum";
+import GetUnion from "../GetUnion";
 
 export const ERROR_MSG = {
   GENERIC: "Что-то пошло не так. Попробуйте немного позже",

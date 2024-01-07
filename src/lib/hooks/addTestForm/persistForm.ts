@@ -1,24 +1,25 @@
-import AddTestSchema, {
-  AddTestSchemaInputType,
-  AddTestSchemaSavedValues,
-  AddTestSchemaType,
-} from "@/lib/zod/schemas/AddTest";
 import { ADD_TEST_FORM_DEFAULT_VALUES } from "@/components/routes/my/tests/add/Form/Index";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { useEffect, useRef } from "react";
 import parseJson from "@/lib/parseJson";
+import {
+  AddTestFormSavedValuesSchema,
+  AddTestFormSchemaType,
+} from "@/lib/zod/schemas/addTestForm/Index";
 
 const ADD_TEST_FORM_DATA_KEY = "add-test-form";
 
 export default function usePersistAddTestForm(
-  formData: AddTestSchemaInputType,
-  setValue: UseFormSetValue<AddTestSchemaInputType>,
+  form: UseFormReturn<AddTestFormSchemaType>,
 ) {
+  const { setValue, getValues, watch } = form;
+  watch(); // trigger a re-render when the form updates
+  const formData = getValues();
   const isMounted = useRef(false);
 
   useEffect(() => {
     const rawSavedValue = localStorage.getItem(ADD_TEST_FORM_DATA_KEY);
-    const savedValue = parseJson(rawSavedValue, AddTestSchemaSavedValues);
+    const savedValue = parseJson(rawSavedValue, AddTestFormSavedValuesSchema);
     if (!savedValue) return;
 
     for (const k in ADD_TEST_FORM_DEFAULT_VALUES) {

@@ -1,4 +1,4 @@
-import GetUnion from "../GetEnum";
+import GetUnion from "../GetUnion";
 
 export const ERROR = {
   INTERNAL: "Internal server error",

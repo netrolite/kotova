@@ -13,14 +13,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ZustandStateSetter } from "@/lib/types/SetState";
+import SelectItemType, { SelectItemValueType } from "@/lib/types/SelectItem";
 
-export type ComboboxItem<T extends number | string> = {
-  value: T;
-  label: string;
-};
-
-type Props<T extends number | string> = {
-  items: ComboboxItem<T>[];
+type Props<T extends SelectItemValueType> = {
+  items: SelectItemType<T>[];
   notFoundMsg?: string;
   selectMsg?: string;
   isOpen: boolean;
@@ -29,7 +25,7 @@ type Props<T extends number | string> = {
   setValue: ZustandStateSetter<string | null>;
 };
 
-export function Combobox<T>({
+export function Combobox<T extends SelectItemValueType>({
   items,
   notFoundMsg = "Не найдено",
   selectMsg = "Выберите...",
@@ -37,7 +33,7 @@ export function Combobox<T>({
   setIsOpen,
   setValue,
   value,
-}: Props<T extends number ? number : string>) {
+}: Props<T>) {
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>

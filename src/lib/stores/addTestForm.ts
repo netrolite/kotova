@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
-import GetUnion from "@/lib/types/GetEnum";
+import GetUnion from "@/lib/types/GetUnion";
 import deepCopy from "@/lib/deepCopy";
 
 type QuestionBase = {
@@ -31,7 +31,7 @@ type AddTestStore = {
   setIsQuestionTypeDialogOpen: (val: boolean) => void;
 };
 
-const useAddTestStore = create<AddTestStore>()((set, get) => ({
+const useAddTestFormStore = create<AddTestStore>()((set, get) => ({
   questions: [],
   addTextQuestion: () =>
     set({
@@ -52,4 +52,4 @@ const useAddTestStore = create<AddTestStore>()((set, get) => ({
   setIsQuestionTypeDialogOpen: (val) => set({ isQuestionTypeDialogOpen: val }),
 }));
 
-export default useAddTestStore;
+export default useAddTestFormStore;

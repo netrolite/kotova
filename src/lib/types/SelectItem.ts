@@ -1,8 +1,8 @@
-export type SelectItemValue = string | number;
+export type SelectItemValueType = string | number;
 
-type SelectItem<T extends SelectItemValue> = {
+type SelectItemType<T extends SelectItemValueType> = {
   label: string;
   value: T;
 };
 
-export default SelectItem;
+export default SelectItemType;

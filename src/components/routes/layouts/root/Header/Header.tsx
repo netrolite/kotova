@@ -3,7 +3,7 @@
 import SignInBtn from "./SignInBtn";
 import HeaderAvatar from "./Avatar";
 import { HeaderBackBtn } from "./BackBtn";
-import useIsOnHomepage from "@/lib/hooks/useIsOnHomepage";
+import useIsOnHomepage from "@/lib/hooks/isOnHomepage";
 import { useSession } from "next-auth/react";
 import HeaderWrapper from "./Wrapper";
 import Logo from "@/components/Logo";

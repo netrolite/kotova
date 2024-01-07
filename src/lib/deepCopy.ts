@@ -1,3 +1,3 @@
-export default function deepCopy(val: unknown) {
+export default function deepCopy<T>(val: T): T {
   return JSON.parse(JSON.stringify(val));
 }

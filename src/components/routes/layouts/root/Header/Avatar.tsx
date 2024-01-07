@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import useUsername from "@/lib/hooks/useUsername";
+import useUsername from "@/lib/hooks/username";
 import { signOut, useSession } from "next-auth/react";
 import {
   DropdownMenu,
