@@ -24,7 +24,7 @@ export default function AddTestFormSubject({ subjects }: Props) {
       render={({ field }) => (
         <>
           <FormLabel>Предмет</FormLabel>
-          <Select value={field.value} onValueChange={field.onChange}>
+          <Select onValueChange={field.onChange} value={field.value}>
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder="Выберите предмет" />
@@ -32,7 +32,7 @@ export default function AddTestFormSubject({ subjects }: Props) {
             </FormControl>
             <SelectContent>
               {subjects.map(({ label, value }) => (
-                <SelectItem key={value} value={value.toString()}>
+                <SelectItem key={value} value={value}>
                   {label}
                 </SelectItem>
               ))}

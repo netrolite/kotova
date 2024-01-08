@@ -8,6 +8,6 @@ export default function AddTestFormTableQuestion({
   options,
   question,
 }: Props) {
-  console.log("table question");
-  return <></>;
+  // console.log("table question");
+  return <>table question</>;
 }

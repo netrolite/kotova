@@ -8,6 +8,6 @@ export default function AddTestFormTextQuestion({
   options,
   question,
 }: Props) {
-  console.log("text question");
-  return <></>;
+  // console.log("text question");
+  return <>text question</>;
 }

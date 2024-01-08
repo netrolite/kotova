@@ -31,19 +31,21 @@ import AddTestFormAddQuestionFormSchema, {
   AddTestFormAddQuestionFormSchemaType,
 } from "@/lib/zod/schemas/addTestForm/AddQuestionForm";
 import QuestionTypesList from "@/components/QuestionTypesList";
-import useAddTestFormQuestionsArr from "@/lib/hooks/addTestForm/questionsArr";
 import useAddTestFormStore from "@/lib/stores/addTestForm";
+import { AddTestFormQuestions } from "./Index";
 
-type Props = {};
+type Props = {
+  questions: AddTestFormQuestions;
+};
 
-const QUESTION_DEFAULT_VALUES = {
+export const QUESTION_DEFAULT_VALUES = {
   correctAnswerText: "",
   explanation: "",
   options: [],
   question: "",
 } satisfies Omit<AddTestFormAddQuestionFormSchemaType, "type">;
 
-export default function AddTestFormAddQuestionBtn({}: Props) {
+export default function AddTestFormAddQuestionBtn({ questions }: Props) {
   const form = useForm<
     AddTestFormAddQuestionFormSchemaInputType,
     any,
@@ -54,7 +56,6 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
       type: null,
     },
   });
-  const questionsArr = useAddTestFormQuestionsArr();
 
   const { isDialogOpen, setIsDialogOpen } = useAddTestFormStore((s) => ({
     isDialogOpen: s.isQuestionTypeDialogOpen,
@@ -66,8 +67,10 @@ export default function AddTestFormAddQuestionBtn({}: Props) {
     e.stopPropagation(); // prevents the other form from triggering
     form.handleSubmit(({ type }) => {
       form.reset();
-      // questionsArr.append({ ...QUESTION_DEFAULT_VALUES, type });
-      questionsArr.prepend({ ...QUESTION_DEFAULT_VALUES, type });
+      questions.append({
+        ...QUESTION_DEFAULT_VALUES,
+        type,
+      });
       setIsDialogOpen(false);
     })(e);
   }

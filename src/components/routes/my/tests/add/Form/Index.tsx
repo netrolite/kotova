@@ -5,11 +5,19 @@ import AddTestFormSchema, {
   AddTestFormSchemaType,
 } from "@/lib/zod/schemas/addTestForm/Index";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldErrors, FormProvider, useForm } from "react-hook-form";
+import {
+  FieldErrors,
+  FormProvider,
+  UseFieldArrayReturn,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import FormSubmitBtn from "@/components/Btns/Submit";
 import wait from "@/lib/wait";
 import { toast } from "sonner";
-import AddTestFormAddQuestionBtn from "./AddQuestionBtn";
+import AddTestFormAddQuestionBtn, {
+  QUESTION_DEFAULT_VALUES,
+} from "./AddQuestionBtn";
 import usePersistAddTestForm from "@/lib/hooks/addTestForm/persistForm";
 import AddTestFormQuestions from "./Questions/Index";
 import AddTestFormSubject from "./Subject";
@@ -29,10 +37,16 @@ export const ADD_TEST_FORM_DEFAULT_VALUES: AddTestFormSchemaType = {
   subject: "",
 };
 
+export type AddTestFormQuestions = UseFieldArrayReturn<AddTestFormSchemaType>;
+
 export default function AddTestForm({ subjects }: Props) {
   const form = useForm<AddTestFormSchemaType>({
     resolver: zodResolver(AddTestFormSchema),
     defaultValues: ADD_TEST_FORM_DEFAULT_VALUES,
+  });
+  const questions = useFieldArray<AddTestFormSchemaType>({
+    control: form.control,
+    name: "questions",
   });
   usePersistAddTestForm(form);
   const { isLoading, setIsLoading } = useLoading();
@@ -64,8 +78,8 @@ export default function AddTestForm({ subjects }: Props) {
         <AddTestFormName />
         <AddTestFormSubject {...{ subjects }} />
         <AddTestFormGrades />
-        <AddTestFormQuestions />
-        <AddTestFormAddQuestionBtn />
+        <AddTestFormQuestions {...{ questions }} />
+        <AddTestFormAddQuestionBtn {...{ questions }} />
         <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
       </form>
     </FormProvider>

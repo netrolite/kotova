@@ -18,13 +18,13 @@ export default function usePersistAddTestForm(
   const isMounted = useRef(false);
 
   useEffect(() => {
-    const rawSavedValue = localStorage.getItem(ADD_TEST_FORM_DATA_KEY);
-    const savedValue = parseJson(rawSavedValue, AddTestFormSavedValuesSchema);
-    if (!savedValue) return;
+    const rawSavedValues = localStorage.getItem(ADD_TEST_FORM_DATA_KEY);
+    const savedValues = parseJson(rawSavedValues, AddTestFormSavedValuesSchema);
+    if (!savedValues) return;
 
     for (const k in ADD_TEST_FORM_DEFAULT_VALUES) {
       const key = k as keyof typeof ADD_TEST_FORM_DEFAULT_VALUES;
-      setValue(key, savedValue[key]);
+      setValue(key, savedValues[key]);
     }
   }, []);
 

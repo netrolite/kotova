@@ -9,7 +9,6 @@ import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
 import { useFormContext } from "react-hook-form";
 import { Grade, allGrades as allGrades } from "@/lib/constants";
 import { Checkbox } from "@/components/ui/checkbox";
-import useAddTestFormGradesArr from "@/lib/hooks/addTestForm/gradesArr";
 import { Label } from "@/components/ui/label";
 
 type Props = {};
@@ -27,8 +26,6 @@ export default function AddTestFormGrades({}: Props) {
       );
     }
   }
-
-  console.log(selectedGrades);
 
   return (
     <FormItemField
