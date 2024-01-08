@@ -8,6 +8,6 @@ export default function AddTestFormCheckboxQuestion({
   options,
   question,
 }: Props) {
-  console.log("checkbox question");
-  return <></>;
+  // console.log("checkbox question");
+  return <>checkbox question</>;
 }

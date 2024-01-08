@@ -8,6 +8,6 @@ export default function AddTestFormRadioQuestion({
   options,
   question,
 }: Props) {
-  console.log("radio question");
-  return <></>;
+  // console.log("radio question");
+  return <>radio question</>;
 }

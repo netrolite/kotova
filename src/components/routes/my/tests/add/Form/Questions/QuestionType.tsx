@@ -27,7 +27,7 @@ export default function AddTestFormQuestionQuestionType({ index }: Props) {
           <FormLabel>Тип вопроса</FormLabel>
           <Select
             onValueChange={(val) => field.onChange(Number(val))}
-            defaultValue={field.value.toString()}
+            value={field.value.toString()}
           >
             <FormControl>
               <SelectTrigger>

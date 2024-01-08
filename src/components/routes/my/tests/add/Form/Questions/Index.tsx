@@ -1,32 +1,37 @@
 import { FormMessage } from "@/components/ui/form";
-import AddTestFormQuestion from "./Question";
 import { AddTestFormQuestionSchemaType } from "@/lib/zod/schemas/addTestForm/Question";
 import { Separator } from "@/components/ui/separator";
 import AddTestFormQuestionQuestionType from "./QuestionType";
 import AddTestFormQuestionAnswerExplanation from "./QuestionAnswerExplanation";
-import useAddTestFormQuestionsArr from "@/lib/hooks/addTestForm/questionsArr";
+import AddTestFormQuestionActions from "./Actions";
+import AddTestFormQuestion from "./Question";
+import { AddTestFormQuestions } from "../Index";
 
 export type AddTestFormQuestionSchemaWithId = AddTestFormQuestionSchemaType & {
   id: string;
 };
 
-export default function AddTestFormQuestions() {
-  const { fields: questions } = useAddTestFormQuestionsArr();
+type Props = {
+  questions: AddTestFormQuestions;
+};
 
-  if (!questions.length) return null;
+export default function AddTestFormQuestions({ questions }: Props) {
+  if (!questions.fields) return null;
   return (
     <div className="space-y-6">
       <h3 className="mb-4 text-xl font-semibold">Вопросы</h3>
       <div className="space-y-10">
-        {questions.map((question, i) => {
-          const { id } = question;
+        {questions.fields.map((question, i) => {
           return (
-            <div key={id} className="space-y-14">
+            <div key={question.id} className="space-y-14">
               <div className="space-y-3">
-                <p className="font-bold">Вопрос {i + 1}</p>
+                <div className="flex gap-2">
+                  <p className="font-bold">Вопрос {i + 1}</p>
+                  <AddTestFormQuestionActions {...{ questions, index: i }} />
+                </div>
                 <div className="space-y-1">
                   <AddTestFormQuestionQuestionType index={i} />
-                  <AddTestFormQuestion {...question} />
+                  <AddTestFormQuestion index={i} />
                   <AddTestFormQuestionAnswerExplanation index={i} />
                 </div>
                 <FormMessage />
