@@ -9,6 +9,7 @@ import { useFieldArray } from "react-hook-form";
 import AddTestFormRadioQuestionOptionInput from "./Option/Input";
 import AddTestFormRadioQuestionOptionActionBtns from "./Option/ActionBtns/Index";
 import AddTestFormCheckboxQuestionContext from "@/lib/contexts/addTestForm/radioQuestion";
+import AddTestFormQuestionOptionContext from "@/lib/contexts/addTestForm/options";
 
 export default function AddTestFormRadioQuestion() {
   const { index } = useContextVal(AddTestFormQuestionContext);
@@ -30,14 +31,15 @@ export default function AddTestFormRadioQuestion() {
             <FormLabel htmlFor={undefined}>Варианты ответа</FormLabel>
             <ul className="space-y-1">
               {options.map((option, i) => (
-                <li className="flex gap-1" key={i}>
-                  <AddTestFormRadioQuestionOptionInput
-                    {...{ option, optionIndex: i }}
-                  />
-                  <AddTestFormRadioQuestionOptionActionBtns
-                    {...{ option, optionIndex: i }}
-                  />
-                </li>
+                <AddTestFormQuestionOptionContext.Provider
+                  value={{ option, optionIndex: i }}
+                  key={i}
+                >
+                  <li className="flex gap-1">
+                    <AddTestFormRadioQuestionOptionInput />
+                    <AddTestFormRadioQuestionOptionActionBtns />
+                  </li>
+                </AddTestFormQuestionOptionContext.Provider>
               ))}
             </ul>
             {fieldState.error?.message && <FormMessage />}

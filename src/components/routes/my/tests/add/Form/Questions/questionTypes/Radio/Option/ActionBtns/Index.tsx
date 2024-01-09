@@ -1,22 +1,15 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AddTestFormSavedQuestionOptionSchemaType } from "@/lib/zod/schemas/addTestForm/QuestionOption";
 import AddTestFormRadioQuestionOptionMarkAsCorrectBtn from "./MarkAsCorrect";
 import AddTestFormRadioQuestionOptionDeleteBtn from "./Delete";
+import useAddTestFormQuestionOption from "@/lib/hooks/addTestForm/questionOption";
 
-type Props = {
-  optionIndex: number;
-  option: AddTestFormSavedQuestionOptionSchemaType;
-};
+type Props = {};
 
-export default function AddTestFormRadioQuestionOptionActionBtns({
-  option,
-  optionIndex,
-}: Props) {
+export default function AddTestFormRadioQuestionOptionActionBtns({}: Props) {
+  const { optionIndex } = useAddTestFormQuestionOption();
   return (
     <TooltipProvider>
-      <AddTestFormRadioQuestionOptionMarkAsCorrectBtn
-        {...{ option, optionIndex }}
-      />
+      <AddTestFormRadioQuestionOptionMarkAsCorrectBtn />
       <AddTestFormRadioQuestionOptionDeleteBtn {...{ optionIndex }} />
     </TooltipProvider>
   );
