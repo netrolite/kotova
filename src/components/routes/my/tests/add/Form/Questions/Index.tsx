@@ -7,39 +7,43 @@ import AddTestFormQuestionActions from "./Actions";
 import AddTestFormQuestion from "./Question";
 import { AddTestFormQuestions } from "../Index";
 import AddTestFormQuestionText from "./QuestionText";
+import { cn } from "@/lib/shadcnUtils";
+import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
+import AddTestFormQuestionContext from "@/lib/contexts/addTestForm/question";
 
 export type AddTestFormQuestionSchemaWithId = AddTestFormQuestionSchemaType & {
   id: string;
 };
 
-type Props = {
-  questions: AddTestFormQuestions;
-};
+export default function AddTestFormQuestions() {
+  const { questions } = useAddTestFormContext();
 
-export default function AddTestFormQuestions({ questions }: Props) {
-  if (!questions.fields) return null;
+  if (!questions.fields.length) return null;
   return (
-    <div className="space-y-6">
+    <div className={cn("space-y-6")}>
       <h3 className="mb-4 text-xl font-semibold">Вопросы</h3>
       <div className="space-y-10">
-        {questions.fields.map((question, i) => {
+        {questions.fields.map((question, i, arr) => {
+          const isLast = arr.length - 1 === i;
           return (
             <div key={question.id} className="space-y-14">
-              <div className="space-y-3">
-                <div className="flex gap-2">
-                  <p className="font-bold">Вопрос {i + 1}</p>
-                  <AddTestFormQuestionActions {...{ questions, index: i }} />
+              <AddTestFormQuestionContext.Provider value={{ index: i }}>
+                <div className="space-y-3">
+                  <div className="flex gap-2">
+                    <p className="font-bold">Вопрос {i + 1}</p>
+                    <AddTestFormQuestionActions />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <AddTestFormQuestionType index={i} />
+                    <AddTestFormQuestionText index={i} />
+                    <AddTestFormQuestion index={i} />
+                    <AddTestFormQuestionAnswerExplanation index={i} />
+                  </div>
+                  <FormMessage />
                 </div>
-                <div className="flex flex-col gap-4">
-                  <AddTestFormQuestionType index={i} />
-                  <AddTestFormQuestionText index={i} />
-                  <AddTestFormQuestion index={i} />
-                  <AddTestFormQuestionAnswerExplanation index={i} />
-                </div>
-                <FormMessage />
-              </div>
+              </AddTestFormQuestionContext.Provider>
 
-              <Separator />
+              {!isLast && <Separator />}
             </div>
           );
         })}

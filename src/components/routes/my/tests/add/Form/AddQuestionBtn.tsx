@@ -32,11 +32,7 @@ import AddTestFormAddQuestionFormSchema, {
 } from "@/lib/zod/schemas/addTestForm/AddQuestionForm";
 import QuestionTypesList from "@/components/QuestionTypesList";
 import useAddTestFormStore from "@/lib/stores/addTestForm";
-import { AddTestFormQuestions } from "./Index";
-
-type Props = {
-  questions: AddTestFormQuestions;
-};
+import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 
 export const QUESTION_DEFAULT_VALUES = {
   correctAnswerText: "",
@@ -45,7 +41,8 @@ export const QUESTION_DEFAULT_VALUES = {
   question: "",
 } satisfies Omit<AddTestFormAddQuestionFormSchemaType, "type">;
 
-export default function AddTestFormAddQuestionBtn({ questions }: Props) {
+export default function AddTestFormAddQuestionBtn() {
+  const { questions } = useAddTestFormContext();
   const form = useForm<
     AddTestFormAddQuestionFormSchemaInputType,
     any,

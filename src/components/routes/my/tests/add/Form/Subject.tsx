@@ -7,16 +7,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import SelectItemType from "@/lib/types/SelectItem";
+import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
 import { useFormContext } from "react-hook-form";
 
-type Props = {
-  subjects: SelectItemType<string>[];
-};
-
-export default function AddTestFormSubject({ subjects }: Props) {
+export default function AddTestFormSubject() {
+  const { subjects } = useAddTestFormContext();
   const { control } = useFormContext<AddTestFormSchemaType>();
+
   return (
     <FormItemField
       control={control}
