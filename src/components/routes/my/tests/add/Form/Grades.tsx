@@ -6,7 +6,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { Grade, allGrades as allGrades } from "@/lib/constants";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -40,32 +40,28 @@ export default function AddTestFormGrades({}: Props) {
               Выберите классы, для которых предназначен этот тест
             </FormDescription>
           </div>
-          <div className="flex flex-col gap-2">
-            {allGrades.map((grade) => (
-              <FormField
-                key={grade}
-                control={control}
-                name={`grades`}
-                render={() => {
-                  return (
-                    <Label className="flex items-center gap-2">
-                      <Checkbox
-                        checked={selectedGrades.includes(grade)}
-                        onCheckedChange={(isChecked) => {
-                          isChecked =
-                            typeof isChecked === "string" ? true : isChecked;
-                          handleCheckedChange(grade, isChecked);
-                        }}
-                      />
-                      <span>{grade} класс</span>
-                    </Label>
-                  );
-                }}
-              />
-            ))}
-          </div>
-
-          <FormMessage />
+          <Controller
+            name="grades"
+            control={control}
+            render={() => (
+              <div className="flex flex-col gap-2">
+                {allGrades.map((grade) => (
+                  <Label className="flex items-center gap-2">
+                    <Checkbox
+                      checked={selectedGrades.includes(grade)}
+                      onCheckedChange={(isChecked) => {
+                        isChecked =
+                          typeof isChecked === "string" ? true : isChecked;
+                        handleCheckedChange(grade, isChecked);
+                      }}
+                    />
+                    <span>{grade} класс</span>
+                  </Label>
+                ))}
+                <FormMessage />
+              </div>
+            )}
+          />
         </>
       )}
     />
