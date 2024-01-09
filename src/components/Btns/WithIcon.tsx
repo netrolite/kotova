@@ -18,4 +18,6 @@ const BtnWithIcon = forwardRef<HTMLButtonElement, Props>(
   },
 );
 
+BtnWithIcon.displayName = "BtnWithIcon";
+
 export default BtnWithIcon;

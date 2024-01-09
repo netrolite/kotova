@@ -1,4 +1,4 @@
-import useGradesFilterStore from "@/lib/stores/routes/tests/[subjectId]/gradesFilter";
+import useGradesFilterStore from "@/lib/stores/gradesFilter";
 
 export default function SubjectTestListFilterPillsList() {
   const selectedGrades = useGradesFilterStore((sel) => sel.selectedGrades);

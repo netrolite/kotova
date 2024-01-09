@@ -1,5 +1,5 @@
 import FilterOption from "@/components/Filter/Option";
-import useGradesFilterStore from "@/lib/stores/routes/tests/[subjectId]/gradesFilter";
+import useGradesFilterStore from "@/lib/stores/gradesFilter";
 import { useEffect, useState } from "react";
 
 type Props = {
