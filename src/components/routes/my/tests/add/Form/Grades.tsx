@@ -45,8 +45,8 @@ export default function AddTestFormGrades({}: Props) {
             control={control}
             render={() => (
               <div className="flex flex-col gap-2">
-                {allGrades.map((grade) => (
-                  <Label className="flex items-center gap-2">
+                {allGrades.map((grade, i) => (
+                  <Label key={i} className="flex items-center gap-2">
                     <Checkbox
                       checked={selectedGrades.includes(grade)}
                       onCheckedChange={(isChecked) => {

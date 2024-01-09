@@ -1,6 +1,12 @@
+import FormItemField from "@/components/Form/ItemField";
+import { FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import AddTestFormQuestionContext from "@/lib/contexts/addTestForm/question";
+import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
+import useContextVal from "@/lib/hooks/contextVal";
 import { AddTestFormSavedQuestionSchemaType } from "@/lib/zod/schemas/addTestForm/Question";
 
-type Props = AddTestFormSavedQuestionSchemaType;
+type Props = AddTestFormSavedQuestionSchemaType & {};
 
 export default function AddTestFormTextQuestion({
   correctAnswerText,
@@ -8,6 +14,21 @@ export default function AddTestFormTextQuestion({
   options,
   question,
 }: Props) {
-  // console.log("text question");
-  return <>text question</>;
+  const { index } = useContextVal(AddTestFormQuestionContext);
+  const { control } = useAddTestFormContext();
+  return (
+    <div>
+      <FormItemField
+        name={`questions.${index}.correctAnswerText`}
+        control={control}
+        render={({ field }) => (
+          <>
+            <FormLabel>Правильный ответ</FormLabel>
+            <Input {...field} value={field.value || ""} />
+            <FormMessage />
+          </>
+        )}
+      />
+    </div>
+  );
 }
