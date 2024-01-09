@@ -4,16 +4,10 @@ import { Input } from "@/components/ui/input";
 import AddTestFormQuestionContext from "@/lib/contexts/addTestForm/question";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 import useContextVal from "@/lib/hooks/contextVal";
-import { AddTestFormSavedQuestionSchemaType } from "@/lib/zod/schemas/addTestForm/Question";
 
-type Props = AddTestFormSavedQuestionSchemaType & {};
+type Props = {};
 
-export default function AddTestFormTextQuestion({
-  correctAnswerText,
-  explanation,
-  options,
-  question,
-}: Props) {
+export default function AddTestFormTextQuestion({}: Props) {
   const { index } = useContextVal(AddTestFormQuestionContext);
   const { control } = useAddTestFormContext();
   return (
