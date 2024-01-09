@@ -56,7 +56,12 @@ export default function AddTestForm({ subjects }: Props) {
     await wait(1000);
     // setData(await action(data));
     setIsLoading(false);
-    toast.success("Тест успешно создан");
+    toast.success(
+      <div>
+        Submitted values:
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      </div>,
+    );
   }, []);
 
   const handleSubmitError = useCallback(

@@ -16,7 +16,7 @@ type Props = {
   index: number;
 };
 
-export default function AddTestFormQuestionQuestionType({ index }: Props) {
+export default function AddTestFormQuestionType({ index }: Props) {
   const { control } = useFormContext<AddTestFormSchemaType>();
   return (
     <FormItemField

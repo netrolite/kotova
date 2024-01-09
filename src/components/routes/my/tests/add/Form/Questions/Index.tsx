@@ -1,11 +1,12 @@
 import { FormMessage } from "@/components/ui/form";
 import { AddTestFormQuestionSchemaType } from "@/lib/zod/schemas/addTestForm/Question";
 import { Separator } from "@/components/ui/separator";
-import AddTestFormQuestionQuestionType from "./QuestionType";
+import AddTestFormQuestionType from "./QuestionType";
 import AddTestFormQuestionAnswerExplanation from "./QuestionAnswerExplanation";
 import AddTestFormQuestionActions from "./Actions";
 import AddTestFormQuestion from "./Question";
 import { AddTestFormQuestions } from "../Index";
+import AddTestFormQuestionText from "./QuestionText";
 
 export type AddTestFormQuestionSchemaWithId = AddTestFormQuestionSchemaType & {
   id: string;
@@ -29,8 +30,9 @@ export default function AddTestFormQuestions({ questions }: Props) {
                   <p className="font-bold">Вопрос {i + 1}</p>
                   <AddTestFormQuestionActions {...{ questions, index: i }} />
                 </div>
-                <div className="space-y-1">
-                  <AddTestFormQuestionQuestionType index={i} />
+                <div className="flex flex-col gap-4">
+                  <AddTestFormQuestionType index={i} />
+                  <AddTestFormQuestionText index={i} />
                   <AddTestFormQuestion index={i} />
                   <AddTestFormQuestionAnswerExplanation index={i} />
                 </div>
