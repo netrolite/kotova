@@ -6,11 +6,12 @@ import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 import useContextVal from "@/lib/hooks/contextVal";
 import { PlusIcon } from "lucide-react";
 import { useFieldArray } from "react-hook-form";
-import AddTestFormRadioQuestionOptionInput from "./Option/Input";
-import AddTestFormRadioQuestionOptionActionBtns from "./Option/ActionBtns/Index";
+import AddTestFormCheckboxQuestionOptionInput from "./Option/Input";
+import AddTestFormCheckboxQuestionOptionActionBtns from "./Option/ActionBtns/Index";
 import AddTestFormCheckboxQuestionContext from "@/lib/contexts/addTestForm/radioQuestion";
+import AddTestFormQuestionOptionContext from "@/lib/contexts/addTestForm/options";
 
-export default function AddTestFormRadioQuestion() {
+export default function AddTestFormCheckboxQuestion() {
   const { index } = useContextVal(AddTestFormQuestionContext);
   const { control } = useAddTestFormContext();
   const optionsFields = useFieldArray({
@@ -30,14 +31,15 @@ export default function AddTestFormRadioQuestion() {
             <FormLabel htmlFor={undefined}>Варианты ответа</FormLabel>
             <ul className="space-y-1">
               {options.map((option, i) => (
-                <li className="flex gap-1" key={i}>
-                  <AddTestFormRadioQuestionOptionInput
-                    {...{ option, optionIndex: i }}
-                  />
-                  <AddTestFormRadioQuestionOptionActionBtns
-                    {...{ option, optionIndex: i }}
-                  />
-                </li>
+                <AddTestFormQuestionOptionContext.Provider
+                  value={{ option, optionIndex: i }}
+                  key={i}
+                >
+                  <li className="flex gap-1">
+                    <AddTestFormCheckboxQuestionOptionInput />
+                    <AddTestFormCheckboxQuestionOptionActionBtns />
+                  </li>
+                </AddTestFormQuestionOptionContext.Provider>
               ))}
             </ul>
             {fieldState.error?.message && <FormMessage />}
