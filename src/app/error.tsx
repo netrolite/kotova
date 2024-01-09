@@ -7,7 +7,7 @@ import NextError from "@/lib/types/nextError";
 export default function Error({ reset }: NextError) {
   return (
     <>
-      <PageTitle>Произошла неожиданная ошибка</PageTitle>
+      <PageTitle className="mb-4">Произошла неожиданная ошибка</PageTitle>
       <Button onClick={reset} variant="outline">
         Попробовать еще раз
       </Button>

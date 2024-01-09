@@ -5,6 +5,10 @@ const AddTestFormQuestionOption = z.object({
   isCorrect: z.boolean(),
 });
 
+export const AddTestFormSavedQuestionOption = AddTestFormQuestionOption.extend({
+  content: z.string(),
+});
+
 export default AddTestFormQuestionOption;
 
 export type AddTestFormQuestionOptionSchemaType = z.infer<
@@ -12,4 +16,11 @@ export type AddTestFormQuestionOptionSchemaType = z.infer<
 >;
 export type AddTestFormQuestionOptionInputSchemaType = z.input<
   typeof AddTestFormQuestionOption
+>;
+
+export type AddTestFormSavedQuestionOptionSchemaType = z.infer<
+  typeof AddTestFormSavedQuestionOption
+>;
+export type AddTestFormSavedQuestionOptionInputSchemaType = z.input<
+  typeof AddTestFormSavedQuestionOption
 >;

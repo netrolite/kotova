@@ -17,18 +17,16 @@ export default function AddTestFormTextQuestion({
   const { index } = useContextVal(AddTestFormQuestionContext);
   const { control } = useAddTestFormContext();
   return (
-    <div>
-      <FormItemField
-        name={`questions.${index}.correctAnswerText`}
-        control={control}
-        render={({ field }) => (
-          <>
-            <FormLabel>Правильный ответ</FormLabel>
-            <Input {...field} value={field.value || ""} />
-            <FormMessage />
-          </>
-        )}
-      />
-    </div>
+    <FormItemField
+      name={`questions.${index}.correctAnswerText`}
+      control={control}
+      render={({ field }) => (
+        <>
+          <FormLabel>Правильный ответ</FormLabel>
+          <Input {...field} value={field.value || ""} />
+          <FormMessage />
+        </>
+      )}
+    />
   );
 }

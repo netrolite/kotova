@@ -25,6 +25,7 @@ import SelectItemType from "@/lib/types/SelectItem";
 import AddTestFormName from "./Name";
 import { useCallback } from "react";
 import AddTestFormGrades from "./Grades";
+import AddTestFormContext from "@/lib/contexts/addTestForm";
 
 type Props = {
   subjects: SelectItemType<string>[];
@@ -76,17 +77,23 @@ export default function AddTestForm({ subjects }: Props) {
 
   return (
     <FormProvider {...form}>
-      <form
-        className="space-y-10"
-        onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
-      >
-        <AddTestFormName />
-        <AddTestFormSubject {...{ subjects }} />
-        <AddTestFormGrades />
-        <AddTestFormQuestions {...{ questions }} />
-        <AddTestFormAddQuestionBtn {...{ questions }} />
-        <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
-      </form>
+      <AddTestFormContext.Provider value={{ questions, subjects }}>
+        <form
+          className="space-y-16"
+          onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
+        >
+          <div className="space-y-10">
+            <AddTestFormName />
+            <AddTestFormSubject />
+            <AddTestFormGrades />
+          </div>
+          <AddTestFormQuestions />
+          <div className="space-y-12">
+            <AddTestFormAddQuestionBtn />
+            <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
+          </div>
+        </form>
+      </AddTestFormContext.Provider>
     </FormProvider>
   );
 }
