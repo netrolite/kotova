@@ -2,6 +2,7 @@
 
 import useLoading from "@/lib/hooks/loading";
 import AddTestFormSchema, {
+  AddTestFormSchemaInputType,
   AddTestFormSchemaType,
 } from "@/lib/zod/schemas/addTestForm/Index";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -77,7 +78,9 @@ export default function AddTestForm({ subjects }: Props) {
 
   return (
     <FormProvider {...form}>
-      <AddTestFormContext.Provider value={{ questions, subjects }}>
+      <AddTestFormContext.Provider
+        value={{ questionsFields: questions, subjects }}
+      >
         <form
           className="space-y-16"
           onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}

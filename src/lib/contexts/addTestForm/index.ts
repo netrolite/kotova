@@ -4,7 +4,7 @@ import { createContext } from "react";
 import { UseFieldArrayReturn } from "react-hook-form";
 
 type AddTestFormContextType = {
-  questions: UseFieldArrayReturn<AddTestFormSchemaType>;
+  questionsFields: UseFieldArrayReturn<AddTestFormSchemaType>;
   subjects: SelectItemType<string>[];
 };
 const AddTestFormContext = createContext<AddTestFormContextType | null>(null);

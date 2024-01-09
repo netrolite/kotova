@@ -14,7 +14,7 @@ import { useState } from "react";
 export default function AddTestFormQuestionActions() {
   const [isOpen, setIsOpen] = useState(false);
   const { index } = useContextVal(AddTestFormQuestionContext);
-  const { questions } = useAddTestFormContext();
+  const { questionsFields: questions } = useAddTestFormContext();
 
   function handleDeleteQuestion() {
     console.log(index);

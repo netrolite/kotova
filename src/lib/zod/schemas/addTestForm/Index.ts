@@ -31,6 +31,7 @@ export const AddTestFormSavedValuesSchema = AddTestFormSchema.extend({
   questions: AddTestFormSavedQuestionSchema.array(),
 });
 
+export type AddTestFormSchemaInputType = z.input<typeof AddTestFormSchema>;
 export type AddTestFormSchemaType = z.infer<typeof AddTestFormSchema>;
 
 export default AddTestFormSchema;

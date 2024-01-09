@@ -1,6 +1,6 @@
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
 import AddTestFormTextQuestion from "./questionTypes/Text";
-import AddTestFormRadioQuestion from "./questionTypes/Radio";
+import AddTestFormRadioQuestion from "./questionTypes/Radio/Index";
 import AddTestFormCheckboxQuestion from "./questionTypes/Checkbox";
 import AddTestFormTableQuestion from "./questionTypes/Table";
 import { Controller, useFormContext } from "react-hook-form";
