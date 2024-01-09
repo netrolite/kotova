@@ -3,8 +3,6 @@ name: Prisma Migrate Preview
 on:
   workflow_dispatch:
   pull_request:
-    types:
-      - opened
     paths:
       - "./prisma/**/*.*"
 
