@@ -10,10 +10,7 @@ const NAME_MAX_LEN = 300;
 const AddTestFormGrades = z.number().array();
 
 const AddTestFormSchema = z.object({
-  grades: AddTestFormGrades.refine(
-    (grades) => grades.every((grade) => allGrades.includes(grade as Grade)),
-    { message: "Не выбран класс" },
-  ),
+  grades: AddTestFormGrades.min(1, { message: "Не выбран класс" }),
   subject: z
     .string()
     .min(1, { message: "Не выбран предмет" })
