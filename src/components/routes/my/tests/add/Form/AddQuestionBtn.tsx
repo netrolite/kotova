@@ -42,7 +42,7 @@ export const QUESTION_DEFAULT_VALUES = {
 } satisfies Omit<AddTestFormAddQuestionFormSchemaType, "type">;
 
 export default function AddTestFormAddQuestionBtn() {
-  const { questions } = useAddTestFormContext();
+  const { questionsFields: questions } = useAddTestFormContext();
   const form = useForm<
     AddTestFormAddQuestionFormSchemaInputType,
     any,

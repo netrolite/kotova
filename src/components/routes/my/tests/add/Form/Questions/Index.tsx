@@ -16,7 +16,7 @@ export type AddTestFormQuestionSchemaWithId = AddTestFormQuestionSchemaType & {
 };
 
 export default function AddTestFormQuestions() {
-  const { questions } = useAddTestFormContext();
+  const { questionsFields: questions } = useAddTestFormContext();
 
   if (!questions.fields.length) return null;
   return (

@@ -58,6 +58,7 @@ export default function AddTestFormGrades({}: Props) {
                     <span>{grade} класс</span>
                   </Label>
                 ))}
+
                 <FormMessage />
               </div>
             )}

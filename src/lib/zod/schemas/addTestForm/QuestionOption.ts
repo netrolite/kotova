@@ -21,6 +21,6 @@ export type AddTestFormQuestionOptionInputSchemaType = z.input<
 export type AddTestFormSavedQuestionOptionSchemaType = z.infer<
   typeof AddTestFormSavedQuestionOption
 >;
-export type AddTestFormSavedQuestionOptionInputSchemaType = z.input<
+export type AddTestFormSavedQuestionOptionSchemaInputType = z.input<
   typeof AddTestFormSavedQuestionOption
 >;
