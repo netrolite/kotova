@@ -15,11 +15,15 @@ export default function AddTestFormTableQuestionOptionColumn({}: Props) {
   return (
     <FormItemField
       control={control}
-      name={`questions.${questionIndex}.options.${optionIndex}.table.column`}
+      name={`questions.${questionIndex}.options.${optionIndex}.tableColumn`}
       formItemClassName="w-full"
       render={({ field }) => (
         <>
-          <Input {...field} placeholder={`Столбец ${optionIndex + 1}`} />
+          <Input
+            {...field}
+            value={field.value || ""}
+            placeholder={`Столбец ${optionIndex + 1}`}
+          />
           <FormMessage />
         </>
       )}

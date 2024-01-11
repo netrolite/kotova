@@ -5,14 +5,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
 import useAddTestFormQuestionOption from "@/lib/hooks/addTestForm/questionOptionContext";
-import useAddTestFormQuestionWithOptionsContext from "@/lib/hooks/addTestForm/questionWithOptionsContext";
 import { TrashIcon } from "lucide-react";
 
 type Props = {};
 
 export default function AddTestFormTableQuestionOptionDeleteBtn({}: Props) {
-  const { optionsFields } = useAddTestFormQuestionWithOptionsContext();
+  const { optionsFields } = useAddTestFormQuestionContext();
   const { optionIndex } = useAddTestFormQuestionOption();
   return (
     <TooltipProvider>

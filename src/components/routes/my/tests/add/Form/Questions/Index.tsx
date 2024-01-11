@@ -10,6 +10,7 @@ import AddTestFormQuestionText from "./QuestionText";
 import { cn } from "@/lib/shadcnUtils";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 import AddTestFormQuestionContext from "@/lib/contexts/addTestForm/question";
+import AddTestFormQuestionContextProvider from "@/lib/contexts/addTestForm/questionProvider";
 
 export type AddTestFormQuestionSchemaWithId = AddTestFormQuestionSchemaType & {
   id: string;
@@ -27,7 +28,7 @@ export default function AddTestFormQuestions() {
           const isLast = arr.length - 1 === i;
           return (
             <div key={question.id} className="space-y-14">
-              <AddTestFormQuestionContext.Provider value={{ index: i }}>
+              <AddTestFormQuestionContextProvider questionIndex={i}>
                 <div className="space-y-3">
                   <div className="flex gap-2">
                     <p className="font-bold">Вопрос {i + 1}</p>
@@ -41,7 +42,7 @@ export default function AddTestFormQuestions() {
                   </div>
                   <FormMessage />
                 </div>
-              </AddTestFormQuestionContext.Provider>
+              </AddTestFormQuestionContextProvider>
 
               {!isLast && <Separator />}
             </div>

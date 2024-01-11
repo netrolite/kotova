@@ -20,9 +20,7 @@ export default async function UserTestResults({ user, testResults }: Props) {
           {/* TODO: add subjects and grades */}
           <div>
             <span>Баллы:</span>
-            <span>
-              {result.score}/{result.test.maxScore} ({result.scorePercentage}%)
-            </span>
+            <span>{result.score}%</span>
           </div>
         </li>
       ))}

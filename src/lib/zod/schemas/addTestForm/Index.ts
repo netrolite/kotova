@@ -10,7 +10,7 @@ const AddTestFormGrades = z.number().array();
 
 const AddTestFormSchema = z.object({
   grades: AddTestFormGrades.min(1, { message: "Не выбран класс" }),
-  subject: z
+  subjectId: z
     .string()
     .min(1, { message: "Не выбран предмет" })
     .cuid({ message: "Неверный формат предмета" }),
@@ -26,7 +26,7 @@ const AddTestFormSchema = z.object({
 
 export const AddTestFormSavedValuesSchema = AddTestFormSchema.extend({
   grades: AddTestFormGrades,
-  subject: z.string(),
+  subjectId: z.string(),
   name: z.string(),
   questions: AddTestFormSavedQuestionSchema.array(),
 });

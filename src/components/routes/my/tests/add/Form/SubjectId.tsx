@@ -18,7 +18,7 @@ export default function AddTestFormSubject() {
   return (
     <FormItemField
       control={control}
-      name="subject"
+      name="subjectId"
       render={({ field }) => (
         <>
           <FormLabel>Предмет</FormLabel>

@@ -22,6 +22,7 @@ export default function AddTestFormCheckboxQuestionOptionInput({}: Props) {
         <>
           <Input
             {...field}
+            value={field.value || ""}
             placeholder={`Ответ ${optionIndex + 1}`}
             className={cn(
               "border",
