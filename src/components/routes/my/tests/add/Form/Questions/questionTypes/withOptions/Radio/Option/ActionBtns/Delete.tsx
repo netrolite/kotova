@@ -4,17 +4,22 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import useAddTestFormRadioQuestionContext from "@/lib/hooks/addTestForm/radioQuestionContext";
+import useAddTestFormQuestionWithOptionsContext from "@/lib/hooks/addTestForm/questionWithOptionsContext";
 import { TrashIcon } from "lucide-react";
 
 type Props = {
   optionIndex: number;
 };
 
-export default function AddTestFormCheckboxQuestionOptionDeleteBtn({
+export default function AddTestFormRadioQuestionOptionDeleteBtn({
   optionIndex,
 }: Props) {
-  const { optionsFields } = useAddTestFormRadioQuestionContext();
+  const { optionsFields } = useAddTestFormQuestionWithOptionsContext();
+
+  function handleDeleteOption() {
+    console.log(`deleting option ${optionIndex}`);
+    optionsFields.remove(optionIndex);
+  }
 
   return (
     <Tooltip>
@@ -23,7 +28,7 @@ export default function AddTestFormCheckboxQuestionOptionDeleteBtn({
           variant="ghost"
           type="button"
           className="text-muted-foreground hover:text-destructive"
-          onClick={() => optionsFields.remove(optionIndex)}
+          onClick={handleDeleteOption}
         >
           <TrashIcon />
         </Button>

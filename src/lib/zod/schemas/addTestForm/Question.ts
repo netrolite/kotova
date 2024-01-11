@@ -3,7 +3,10 @@ import AddTestFormQuestionOption, {
   AddTestFormSavedQuestionOption,
 } from "./QuestionOption";
 import AddTestFormQuestionTypeSchema from "./QuestionType";
-import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
+import {
+  TEST_QUESTION_TYPE,
+  TestQuestionType,
+} from "@/lib/types/enums/TestQuestionType";
 
 const AddTestFormQuestionSchema = z
   .object({
@@ -11,10 +14,7 @@ const AddTestFormQuestionSchema = z
     type: AddTestFormQuestionTypeSchema,
     explanation: z.string().nullable(),
     correctAnswerText: z.string().nullable(),
-    options: AddTestFormQuestionOption.array().refine(
-      (options) => options.some((option) => option.isCorrect),
-      { message: "Выберите правильный вариант ответа", path: [""] },
-    ),
+    options: AddTestFormQuestionOption.array(),
   })
   .refine(
     (data) =>
@@ -23,6 +23,25 @@ const AddTestFormQuestionSchema = z
       message: "Правильный вариант ответа не заполнен",
       path: ["correctAnswerText"],
     },
+  )
+  .refine(
+    (data) => {
+      const isOptionsQuestion = !(
+        [
+          TEST_QUESTION_TYPE.TEXT,
+          TEST_QUESTION_TYPE.TABLE,
+        ] as TestQuestionType[]
+      ).includes(data.type);
+      if (isOptionsQuestion) {
+        return data.options.some((option) => {
+          console.log(`${data.question}:`);
+          console.log(option.isCorrect);
+          return option.isCorrect;
+        });
+      }
+      return true;
+    },
+    { message: "Выберите правильный вариант ответа", path: ["options"] },
   );
 
 export const AddTestFormSavedQuestionSchema = z.object({

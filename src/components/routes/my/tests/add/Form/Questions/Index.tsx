@@ -33,11 +33,11 @@ export default function AddTestFormQuestions() {
                     <p className="font-bold">Вопрос {i + 1}</p>
                     <AddTestFormQuestionActions />
                   </div>
-                  <div className="flex flex-col gap-4">
-                    <AddTestFormQuestionType index={i} />
-                    <AddTestFormQuestionText index={i} />
-                    <AddTestFormQuestion index={i} />
-                    <AddTestFormQuestionAnswerExplanation index={i} />
+                  <div className="space-y-4">
+                    <AddTestFormQuestionType />
+                    <AddTestFormQuestionText />
+                    <AddTestFormQuestion />
+                    <AddTestFormQuestionAnswerExplanation />
                   </div>
                   <FormMessage />
                 </div>

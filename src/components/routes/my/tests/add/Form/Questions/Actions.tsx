@@ -17,7 +17,6 @@ export default function AddTestFormQuestionActions() {
   const { questionsFields: questions } = useAddTestFormContext();
 
   function handleDeleteQuestion() {
-    console.log(index);
     questions.remove(index);
     setIsOpen(false);
   }
