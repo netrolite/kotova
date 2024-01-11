@@ -11,13 +11,14 @@ import { useFormContext } from "react-hook-form";
 import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
 import { FormControl, FormLabel } from "@/components/ui/form";
 import QuestionTypesList from "@/components/QuestionTypesList";
+import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
 
-type Props = {
-  index: number;
-};
+type Props = {};
 
-export default function AddTestFormQuestionType({ index }: Props) {
+export default function AddTestFormQuestionType({}: Props) {
   const { control } = useFormContext<AddTestFormSchemaType>();
+  const { index } = useAddTestFormQuestionContext();
+
   return (
     <FormItemField
       name={`questions.${index}.type`}

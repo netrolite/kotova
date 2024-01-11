@@ -2,13 +2,13 @@ import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
 import { createContext } from "react";
 import { UseFieldArrayReturn } from "react-hook-form";
 
-type AddTestFormCheckboxQuestionContextType = {
+type AddTestFormQuestionWithOptionsContextType = {
   optionsFields: UseFieldArrayReturn<
     AddTestFormSchemaType,
     `questions.${number}.options`,
     "id"
   >;
 };
-const AddTestFormCheckboxQuestionContext =
-  createContext<AddTestFormCheckboxQuestionContextType | null>(null);
-export default AddTestFormCheckboxQuestionContext;
+const AddTestFormQuestionWithOptionsContext =
+  createContext<AddTestFormQuestionWithOptionsContextType | null>(null);
+export default AddTestFormQuestionWithOptionsContext;

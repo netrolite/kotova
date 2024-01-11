@@ -4,15 +4,15 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import useAddTestFormQuestionOption from "@/lib/hooks/addTestForm/questionOption";
-import useAddTestFormRadioQuestionContext from "@/lib/hooks/addTestForm/radioQuestionContext";
+import useAddTestFormQuestionOption from "@/lib/hooks/addTestForm/questionOptionContext";
+import useAddTestFormQuestionWithOptionsContext from "@/lib/hooks/addTestForm/questionWithOptionsContext";
 import { cn } from "@/lib/shadcnUtils";
 import { CheckIcon } from "lucide-react";
 
 type Props = {};
 
 export default function AddTestFormRadioQuestionOptionMarkAsCorrectBtn({}: Props) {
-  const { optionsFields } = useAddTestFormRadioQuestionContext();
+  const { optionsFields } = useAddTestFormQuestionWithOptionsContext();
   const { option, optionIndex } = useAddTestFormQuestionOption();
 
   function handleMarkAnswerAsCorrect(indexToUpdate: number) {
