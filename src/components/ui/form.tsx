@@ -8,10 +8,12 @@ import {
   FieldValues,
   FormProvider,
   useFormContext,
+  useFormState,
 } from "react-hook-form";
 
 import { cn } from "@/lib/shadcnUtils";
 import { Label } from "@/components/ui/label";
+import deepCopy from "@/lib/deepCopy";
 
 const Form = FormProvider;
 
@@ -147,12 +149,9 @@ const FormMessage = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField();
-  const body = error ? String(error?.message) : children;
+  const content = error?.message || error?.root?.message || children;
 
-  if (!body) {
-    return null;
-  }
-
+  if (!content) return null;
   return (
     <p
       ref={ref}
@@ -160,7 +159,7 @@ const FormMessage = React.forwardRef<
       className={cn("text-sm font-medium text-destructive", className)}
       {...props}
     >
-      {body}
+      {content}
     </p>
   );
 });

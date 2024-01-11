@@ -4,7 +4,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import useAddTestFormQuestionWithOptionsContext from "@/lib/hooks/addTestForm/questionWithOptionsContext";
+import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
 import { cn } from "@/lib/shadcnUtils";
 import { AddTestFormSavedQuestionOptionSchemaType } from "@/lib/zod/schemas/addTestForm/QuestionOption";
 import { CheckIcon } from "lucide-react";
@@ -18,7 +18,7 @@ export default function AddTestFormCheckboxQuestionOptionMarkAsCorrectBtn({
   option,
   optionIndex,
 }: Props) {
-  const { optionsFields } = useAddTestFormQuestionWithOptionsContext();
+  const { optionsFields } = useAddTestFormQuestionContext();
 
   function handleMarkAnswerAsCorrect(indexToUpdate: number) {
     optionsFields.update(indexToUpdate, {

@@ -50,14 +50,13 @@ CREATE TABLE "VerificationToken" (
 -- CreateTable
 CREATE TABLE "Test" (
     "id" STRING NOT NULL,
-    "title" STRING NOT NULL,
-    "maxScore" INT4 NOT NULL,
+    "name" STRING NOT NULL,
     "avgScore" INT4,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "subjectCategoryId" STRING NOT NULL,
-    "gradeCategoryId" STRING NOT NULL,
-    "createdByUserId" STRING NOT NULL,
+    "subjectId" STRING NOT NULL,
+    "grades" INT4[],
+    "createdByUserId" STRING,
 
     CONSTRAINT "Test_pkey" PRIMARY KEY ("id")
 );
@@ -66,8 +65,10 @@ CREATE TABLE "Test" (
 CREATE TABLE "TestQuestion" (
     "id" STRING NOT NULL,
     "testId" STRING NOT NULL,
+    "question" STRING NOT NULL,
     "type" INT4 NOT NULL,
     "correctAnswerText" STRING,
+    "explanation" STRING,
 
     CONSTRAINT "TestQuestion_pkey" PRIMARY KEY ("id")
 );
@@ -77,6 +78,8 @@ CREATE TABLE "TestQuestionOption" (
     "id" STRING NOT NULL,
     "content" STRING NOT NULL,
     "isCorrect" BOOL NOT NULL,
+    "tableColumn" STRING,
+    "tableColumnAnswer" STRING,
     "testQuestionId" STRING,
 
     CONSTRAINT "TestQuestionOption_pkey" PRIMARY KEY ("id")
@@ -95,19 +98,11 @@ CREATE TABLE "TestResult" (
 );
 
 -- CreateTable
-CREATE TABLE "SubjectCategory" (
+CREATE TABLE "Subject" (
     "id" STRING NOT NULL,
     "title" STRING NOT NULL,
 
-    CONSTRAINT "SubjectCategory_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "GradeCategory" (
-    "id" STRING NOT NULL,
-    "title" STRING NOT NULL,
-
-    CONSTRAINT "GradeCategory_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Subject_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -135,13 +130,10 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Test" ADD CONSTRAINT "Test_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Test" ADD CONSTRAINT "Test_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Test" ADD CONSTRAINT "Test_subjectCategoryId_fkey" FOREIGN KEY ("subjectCategoryId") REFERENCES "SubjectCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Test" ADD CONSTRAINT "Test_gradeCategoryId_fkey" FOREIGN KEY ("gradeCategoryId") REFERENCES "GradeCategory"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Test" ADD CONSTRAINT "Test_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "TestQuestion" ADD CONSTRAINT "TestQuestion_testId_fkey" FOREIGN KEY ("testId") REFERENCES "Test"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

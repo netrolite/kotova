@@ -62,8 +62,7 @@ model Test {
   name            String
   questions       TestQuestion[]
   testResults     TestResult[]
-  maxScore        Int
-  avgScore        Int?
+  avgScore        Int? // average correct questions percentage (e.g. 80%)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
   createdBy       User?          @relation(fields: [createdByUserId], references: [id])
@@ -77,19 +76,22 @@ model TestQuestion {
   id                String               @id @default(cuid())
   test              Test                 @relation(fields: [testId], references: [id])
   testId            String
-  type              Int
   // prisma doesn't yet support union types so we can't use something like `options (TextQuestion | RadioQuestion)[]`
+  question          String
+  type              Int
   options           TestQuestionOption[]
   correctAnswerText String?
   explanation       String?
 }
 
 model TestQuestionOption {
-  id             String        @id @default(cuid())
-  content        String
-  isCorrect      Boolean
-  testQuestion   TestQuestion? @relation(fields: [testQuestionId], references: [id])
-  testQuestionId String?
+  id                String       @id @default(cuid())
+  content           String?
+  isCorrect         Boolean
+  tableColumn       String?
+  tableColumnAnswer String?
+  testQuestion      TestQuestion @relation(fields: [testQuestionId], references: [id])
+  testQuestionId    String
 }
 
 model TestResult {

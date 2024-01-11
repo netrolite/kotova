@@ -1,3 +1,4 @@
+import { db } from "@/lib/db";
 import Image from "next/image";
 
 export const metadata = {
@@ -7,6 +8,12 @@ export const metadata = {
 };
 
 export default async function Home() {
+  const result = (
+    await db.test.findMany({
+      include: { questions: { include: { options: true } } },
+    })
+  )[0];
+  console.log(result);
   return (
     <>
       <h1 className="text-xl font-black">Добрый день</h1>

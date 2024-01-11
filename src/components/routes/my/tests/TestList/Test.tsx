@@ -7,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import formatGrades from "@/lib/formatGrades";
-import getPercentage from "@/lib/getPercentage";
 import { Test } from "@prisma/client";
 import Link from "next/link";
 
@@ -20,13 +19,10 @@ export default function MyTestsTestListTest({
   avgScore,
   grades,
   id,
-  maxScore,
   subject,
   name,
   testResults,
 }: Props) {
-  const avgScorePercentage =
-    avgScore && maxScore > 0 ? getPercentage(avgScore, maxScore) : null;
   return (
     <li className="max-w-[500px]">
       <Link href={`/my/tests/${id}`}>
@@ -45,11 +41,7 @@ export default function MyTestsTestListTest({
             <ul>
               <KeyValue
                 title="Средний балл"
-                value={`${
-                  avgScore
-                    ? `${avgScore}${maxScore ? ` из ${maxScore}` : ""} `
-                    : "Нет данных"
-                }${avgScorePercentage ? ` (${avgScorePercentage}%)` : ""}`}
+                value={avgScore ? `${avgScore}%` : "Нет данных"}
               />
               <KeyValue title="Раз пройден" value={testResults.length} />
             </ul>

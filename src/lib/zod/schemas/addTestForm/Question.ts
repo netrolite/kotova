@@ -26,6 +26,18 @@ const AddTestFormQuestionSchema = z
   )
   .refine(
     (data) => {
+      if (data.type !== TEST_QUESTION_TYPE.TEXT) {
+        return data.options.length >= 2;
+      }
+      return true;
+    },
+    {
+      message: "Добавьте хотя бы 2 варианта ответа",
+      path: ["options"],
+    },
+  )
+  .refine(
+    (data) => {
       const isOptionsQuestion = !(
         [
           TEST_QUESTION_TYPE.TEXT,
@@ -33,11 +45,7 @@ const AddTestFormQuestionSchema = z
         ] as TestQuestionType[]
       ).includes(data.type);
       if (isOptionsQuestion) {
-        return data.options.some((option) => {
-          console.log(`${data.question}:`);
-          console.log(option.isCorrect);
-          return option.isCorrect;
-        });
+        return data.options.some((option) => option.isCorrect);
       }
       return true;
     },

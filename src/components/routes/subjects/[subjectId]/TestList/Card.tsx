@@ -17,16 +17,12 @@ type Props = Awaited<ReturnType<typeof getSubjectTestsAction>>[0];
 
 export default function SubjectTestListCard({
   avgScore,
-  maxScore,
   grades,
   name,
   testResults,
   createdBy,
   id,
 }: Props) {
-  const avgScorePercentage =
-    avgScore && maxScore > 0 ? getPercentage(avgScore, maxScore) : null;
-
   return (
     <Card key={id}>
       <CardHeader>
@@ -39,11 +35,7 @@ export default function SubjectTestListCard({
         {avgScore && (
           <KeyValue
             title="Средний балл"
-            value={
-              avgScorePercentage
-                ? `${avgScore} из ${maxScore} (${avgScorePercentage}%)`
-                : "Нет данных"
-            }
+            value={avgScore ? `${avgScore}%` : "Нет данных"}
           />
         )}
         <KeyValue title="Раз пройден" value={testResults.length} />
