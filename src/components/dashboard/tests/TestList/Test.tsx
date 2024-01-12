@@ -11,7 +11,7 @@ import { Test } from "@prisma/client";
 import Link from "next/link";
 
 type Props = Test & {
-  subject: { title: string };
+  subject: { title: string } | null;
   testResults: { id: string }[];
 };
 
@@ -31,9 +31,11 @@ export default function DashboardTestsTestListTest({
             <CardTitle>{name}</CardTitle>
             <CardDescription>
               {!!grades.length && <span>{formatGrades(grades)}</span>}
-              <span>
-                {grades.length ? ` | ${subject.title}` : subject.title}
-              </span>
+              {subject && (
+                <span>
+                  {grades.length ? ` | ${subject.title}` : subject.title}
+                </span>
+              )}
             </CardDescription>
           </CardHeader>
 
