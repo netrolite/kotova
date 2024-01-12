@@ -1,9 +1,8 @@
 import { auth } from "@/auth";
 import PageTitle from "@/components/PageTitle";
-import UserEditProfileBtn from "@/components/routes/users/EditProfileBtn";
-import UserTestResults from "@/components/routes/users/TestResults";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Skeleton } from "@/components/ui/skeleton";
+import UserEditProfileBtn from "@/components/userProfile/EditBtn";
+import UserTestResults from "@/components/userProfile/TestResults";
 import { db } from "@/lib/db";
 import getUserRoleName from "@/lib/getUserRoleName";
 import { UserIcon } from "lucide-react";

@@ -1,7 +1,7 @@
 import PageTitle from "@/components/PageTitle";
-import DashboardCardWrapper from "@/components/routes/my/Card/Wrapper";
-import DashboardSubjectsCard from "@/components/routes/my/Cards/Subjects";
-import DashboardTestsCard from "@/components/routes/my/Cards/Tests";
+import DashboardCardWrapper from "@/components/dashboard/Card/Wrapper";
+import DashboardSubjectsCard from "@/components/dashboard/Cards/Subjects";
+import DashboardTestsCard from "@/components/dashboard/Cards/Tests";
 
 export default async function Dashboard() {
   return (

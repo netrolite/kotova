@@ -2,7 +2,7 @@ import Loading from "@/components/Loading/Loading";
 import { useEffect, useState, ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
 import deepCopy from "@/lib/deepCopy";
-import { MY_TESTS_LIST_TESTS_PER_PAGE } from "@/lib/constants";
+import { DASHBOARD_TESTS_LIST_TESTS_PER_PAGE } from "@/lib/constants";
 
 type Props<T, K> = {
   serverFetchResultsLength: number;
@@ -31,7 +31,7 @@ export default function InfiniteScroll<T, K>({
   const { ref, inView } = useInView();
 
   useEffect(() => {
-    if (serverFetchResultsLength < MY_TESTS_LIST_TESTS_PER_PAGE) {
+    if (serverFetchResultsLength < DASHBOARD_TESTS_LIST_TESTS_PER_PAGE) {
       setHasReachedEnd(true);
     }
   }, [serverFetchResultsLength]);
