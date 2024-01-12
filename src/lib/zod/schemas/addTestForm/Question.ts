@@ -2,7 +2,7 @@ import { z } from "zod";
 import AddTestFormQuestionOption, {
   AddTestFormSavedQuestionOption,
 } from "./QuestionOption";
-import AddTestFormQuestionTypeSchema from "./QuestionType";
+import QuestionTypeSchema from "../QuestionType";
 import {
   TEST_QUESTION_TYPE,
   TestQuestionType,
@@ -11,7 +11,7 @@ import {
 const AddTestFormQuestionSchema = z
   .object({
     question: z.string().min(1, { message: "Вопрос не заполнен" }),
-    type: AddTestFormQuestionTypeSchema,
+    type: QuestionTypeSchema,
     explanation: z.string().nullable(),
     correctAnswerText: z.string().nullable(),
     options: AddTestFormQuestionOption.array(),
@@ -56,7 +56,7 @@ export const AddTestFormSavedQuestionSchema = z.object({
   question: z.string(),
   correctAnswerText: z.string().nullable(),
   options: AddTestFormSavedQuestionOption.array(),
-  type: AddTestFormQuestionTypeSchema,
+  type: QuestionTypeSchema,
   explanation: z.string().nullable(),
 });
 

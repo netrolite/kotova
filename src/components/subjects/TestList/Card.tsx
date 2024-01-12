@@ -9,7 +9,6 @@ import formatGrades from "@/lib/formatGrades";
 import KeyValue from "@/components/KeyValue";
 import SubjectTestListTestAvatar from "./Avatar";
 import Link from "next/link";
-import getPercentage from "@/lib/getPercentage";
 import styles from "./styles.module.scss";
 import getSubjectTestsAction from "@/lib/actions/getSubjectTests";
 
@@ -26,7 +25,7 @@ export default function SubjectTestListCard({
   return (
     <Card key={id}>
       <CardHeader>
-        <Link href={`/take-test`} className={styles.cardHeaderLink}>
+        <Link href={`/take-test/${id}`} className={styles.cardHeaderLink}>
           <h2 className="text-2xl font-semibold">{name}</h2>
           <CardDescription>{formatGrades(grades)}</CardDescription>
         </Link>
