@@ -20,6 +20,7 @@ import takeTestFormGetDefaultValues from "@/lib/takeTest/formGetDefaultValues";
 import TakeTestQuestionError from "./QuestionError";
 import checkTestAnswers from "@/lib/actions/checkTestAnswers";
 import { GENERIC_ERROR_MSG } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 
 type Props = Test & { questions: TakeTestQuestion[] };
 export type TakeTestQuestion = TestQuestion & {
@@ -27,6 +28,7 @@ export type TakeTestQuestion = TestQuestion & {
 };
 
 export default function TakeTestQuestions({ id: testId, questions }: Props) {
+  const router = useRouter();
   const { isLoading, setIsLoading } = useLoading();
   const form = useForm<TakeTestSchemaType>({
     resolver: zodResolver(TakeTestSchema),
@@ -37,8 +39,8 @@ export default function TakeTestQuestions({ id: testId, questions }: Props) {
     console.info(formData);
     setIsLoading(true);
     const result = await checkTestAnswers(formData);
-    if (result.data) toast.success("Тест отправлен на проверку");
-    else toast.error(GENERIC_ERROR_MSG);
+    if (result.error || !result.data) toast.error(GENERIC_ERROR_MSG);
+    else router.replace(`/test-result/${result.data.testResultId}`);
     setIsLoading(false);
   }
 

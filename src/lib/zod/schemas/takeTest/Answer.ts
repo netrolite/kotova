@@ -3,7 +3,7 @@ import QuestionTypeSchema from "../QuestionType";
 
 const TakeTestAnswerSchema = z.object({
   type: QuestionTypeSchema,
-  id: z.string(),
+  questionId: z.string(),
   textAnswer: z.string().min(1, { message: "Ответ не заполнен" }).nullable(),
   options: z
     .array(
