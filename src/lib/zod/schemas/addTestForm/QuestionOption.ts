@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const AddTestFormQuestionOption = z.object({
   content: z.string().min(1, { message: "Ответ не заполнен!!!" }).nullable(),
-  isCorrect: z.boolean(),
+  isCorrect: z.boolean().nullable(),
   tableColumn: z
     .string()
     .min(1, { message: "Имя столбца не заполнено" })
