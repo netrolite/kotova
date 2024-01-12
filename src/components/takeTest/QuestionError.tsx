@@ -11,7 +11,16 @@ export default function TakeTestQuestionError({ questionIndex }: Props) {
     <FormField
       control={control}
       name={`answers.${questionIndex}`}
-      render={() => <FormMessage />}
+      render={({ fieldState: { error } }) => (
+        <>
+          {error?.message ||
+            (error?.root?.message && (
+              <div className="p-6 pt-0">
+                <FormMessage />
+              </div>
+            ))}
+        </>
+      )}
     />
   );
 }
