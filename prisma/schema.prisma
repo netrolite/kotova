@@ -87,7 +87,7 @@ model TestQuestion {
 model TestQuestionOption {
   id                String       @id @default(cuid())
   content           String?
-  isCorrect         Boolean
+  isCorrect         Boolean?
   tableColumn       String?
   tableColumnAnswer String?
   testQuestion      TestQuestion @relation(fields: [testQuestionId], references: [id])

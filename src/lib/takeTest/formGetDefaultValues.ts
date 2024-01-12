@@ -1,20 +1,27 @@
 import { TakeTestQuestion } from "@/components/takeTest/Quetions";
 import { TakeTestSchemaType } from "../zod/schemas/takeTest";
-import {
-  TEST_QUESTION_TYPE,
-  TestQuestionType,
-} from "../types/enums/TestQuestionType";
+import { TestQuestionType } from "../types/enums/TestQuestionType";
+import getTestTypes from "../getTestTypes";
 
 export default function takeTestGetQuestionsDefaultValues(
   questions: TakeTestQuestion[],
 ): TakeTestSchemaType {
   return {
-    answers: questions.map(({ type, id }) => {
-      const isTextQuestion = type === TEST_QUESTION_TYPE.TEXT;
+    answers: questions.map(({ type, id, options }) => {
+      const { isTextQuestion, isTableQuestion } = getTestTypes(
+        type as TestQuestionType,
+      );
       return {
         id,
         textAnswer: isTextQuestion ? "" : null,
         type: type as TestQuestionType,
+        options: isTextQuestion
+          ? null
+          : options.map(({ id }) => ({
+              id,
+              tableAnswer: isTableQuestion ? "" : null,
+              isChecked: isTableQuestion ? null : false,
+            })),
       };
     }),
   };

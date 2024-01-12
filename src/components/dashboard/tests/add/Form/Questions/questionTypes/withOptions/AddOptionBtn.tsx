@@ -1,9 +1,7 @@
 import BtnWithIcon from "@/components/Btns/WithIcon";
+import getTestTypes from "@/lib/getTestTypes";
 import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
-import {
-  TEST_QUESTION_TYPE,
-  TestQuestionType,
-} from "@/lib/types/enums/TestQuestionType";
+import { TestQuestionType } from "@/lib/types/enums/TestQuestionType";
 import { PlusIcon } from "lucide-react";
 
 type Props = {
@@ -16,13 +14,18 @@ export default function AddTestFormQuestionAddOptionBtn({
   const { optionsFields } = useAddTestFormQuestionContext();
 
   function handleAppendOption() {
-    const isTextQuestion = questionType === TEST_QUESTION_TYPE.TEXT;
+    const {
+      isTextQuestion,
+      isTableQuestion,
+      isCheckboxQuestion,
+      isRadioQuestion,
+    } = getTestTypes(questionType);
     console.log(isTextQuestion);
     optionsFields.append({
-      content: isTextQuestion ? null : "",
-      isCorrect: false,
-      tableColumn: null,
-      tableColumnAnswer: null,
+      content: isTextQuestion ? "" : null,
+      isCorrect: isCheckboxQuestion || isRadioQuestion ? false : null,
+      tableColumn: isTableQuestion ? "" : null,
+      tableColumnAnswer: isTableQuestion ? "" : null,
     });
   }
   return (
