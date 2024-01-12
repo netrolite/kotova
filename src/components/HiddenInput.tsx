@@ -10,5 +10,6 @@ const HiddenInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     <input {...props} type="hidden" readOnly onChange={undefined} ref={ref} />
   );
 });
+HiddenInput.displayName = "HiddenInput";
 
 export default HiddenInput;
