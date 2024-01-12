@@ -3,18 +3,16 @@ import { z } from "zod";
 
 const { CHECKBOX, RADIO, TABLE, TEXT } = TEST_QUESTION_TYPE;
 
-const AddTestFormQuestionTypeSchema = z.union([
+const QuestionTypeSchema = z.union([
   z.literal(TEXT),
   z.literal(RADIO),
   z.literal(CHECKBOX),
   z.literal(TABLE),
 ]);
 
-export type AddTestFormQuestionTypeType = z.infer<
-  typeof AddTestFormQuestionTypeSchema
->;
+export type AddTestFormQuestionTypeType = z.infer<typeof QuestionTypeSchema>;
 export type AddTestFormQuestionTypeInputType = z.input<
-  typeof AddTestFormQuestionTypeSchema
+  typeof QuestionTypeSchema
 >;
 
-export default AddTestFormQuestionTypeSchema;
+export default QuestionTypeSchema;
