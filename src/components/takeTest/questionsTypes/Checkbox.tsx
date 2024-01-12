@@ -1,24 +1,27 @@
 import FormItemField from "@/components/Form/ItemField";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FormControl, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  FormControl,
+  FormField,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import useTakeTestQuestionContext from "@/lib/hooks/takeTest/questionContext";
+import useTakeTestQuestionOptionsContext from "@/lib/hooks/takeTest/questionOptionsContext";
 import useTakeTestFormContext from "@/lib/hooks/takeTest/formContext";
-import useTakeTestQuestionContext from "@/lib/hooks/takeTest/answerContext";
-import useTakeTestAnswerOptionsContext from "@/lib/hooks/takeTest/answerOptionsContext";
+import parseCheckedState from "@/lib/parseCheckboxState";
 import { CheckedState } from "@radix-ui/react-checkbox";
-import { useFieldArray } from "react-hook-form";
 
-export default function TakeTestRadioAnswer() {
+export default function TakeTestCheckboxQuestion() {
   const { questionIndex, options: questionOptions } =
     useTakeTestQuestionContext();
   const { control } = useTakeTestFormContext();
-  const { optionsFields } = useTakeTestAnswerOptionsContext();
+  const { optionsFields } = useTakeTestQuestionOptionsContext();
 
-  function handleCheckedChange(val: CheckedState, indexToUpdate: number) {
-    optionsFields.fields.forEach((field, i) => {
-      val = val === "indeterminate" ? false : val;
-      const isChecked = i === indexToUpdate ? val : false;
-      optionsFields.update(i, { ...field, isChecked });
-    });
+  function handleCheckedChange(isChecked: CheckedState, indexToUpdate: number) {
+    isChecked = parseCheckedState(isChecked);
+    const prev = optionsFields.fields[indexToUpdate];
+    optionsFields.update(indexToUpdate, { ...prev, isChecked });
   }
 
   return (
@@ -46,7 +49,6 @@ export default function TakeTestRadioAnswer() {
           }}
         />
       ))}
-      <FormMessage />
     </>
   );
 }

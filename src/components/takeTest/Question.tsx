@@ -4,14 +4,14 @@ import {
   TEST_QUESTION_TYPE,
   TestQuestionType,
 } from "@/lib/types/enums/TestQuestionType";
-import useTakeTestQuestionContext from "@/lib/hooks/takeTest/answerContext";
+import useTakeTestQuestionContext from "@/lib/hooks/takeTest/questionContext";
 import useTakeTestFormContext from "@/lib/hooks/takeTest/formContext";
 import TakeTestQuestionOptionsContext from "@/lib/contexts/takeTest/question/options";
 import { useFieldArray } from "react-hook-form";
-import TakeTestTextQuestion from "./answerTypes/Text";
-import TakeTestRadioAnswer from "./answerTypes/Radio";
-import TakeTestCheckboxQuestion from "./answerTypes/Checkbox";
-import TakeTestTableQuestion from "./answerTypes/Table";
+import TakeTestTextQuestion from "./questionsTypes/Text";
+import TakeTestRadioQuestion from "./questionsTypes/Radio";
+import TakeTestCheckboxQuestion from "./questionsTypes/Checkbox";
+import TakeTestTableQuestion from "./questionsTypes/Table";
 
 export default function TakeTestQuestion() {
   const { questionIndex, type, id } = useTakeTestQuestionContext();
@@ -39,7 +39,7 @@ function getQuestionElem(questionType: TestQuestionType) {
     case TEST_QUESTION_TYPE.TEXT:
       return <TakeTestTextQuestion />;
     case TEST_QUESTION_TYPE.RADIO:
-      return <TakeTestRadioAnswer />;
+      return <TakeTestRadioQuestion />;
     case TEST_QUESTION_TYPE.CHECKBOX:
       return <TakeTestCheckboxQuestion />;
     case TEST_QUESTION_TYPE.TABLE:
