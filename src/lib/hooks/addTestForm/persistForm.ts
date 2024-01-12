@@ -1,4 +1,3 @@
-import { ADD_TEST_FORM_DEFAULT_VALUES } from "@/components/routes/my/tests/add/Form/Index";
 import { UseFormReturn } from "react-hook-form";
 import { useEffect, useRef } from "react";
 import parseJson from "@/lib/parseJson";
@@ -6,6 +5,7 @@ import {
   AddTestFormSavedValuesSchema,
   AddTestFormSchemaType,
 } from "@/lib/zod/schemas/addTestForm/Index";
+import { ADD_TEST_FORM_DEFAULT_VALUES } from "@/components/dashboard/tests/add/Form/Index";
 
 const ADD_TEST_FORM_DATA_KEY = "add-test-form";
 

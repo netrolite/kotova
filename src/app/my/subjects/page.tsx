@@ -1,6 +1,6 @@
 import PageTitle from "@/components/PageTitle";
-import AddSubjectBtn from "@/components/routes/my/subjects/Add/Btn";
-import SubjectsList from "@/components/routes/my/subjects/SubjectsList";
+import AddSubjectBtn from "@/components/dashboard/subjects/Add/Btn";
+import SubjectsList from "@/components/dashboard/subjects/SubjectsList";
 
 export default async function Subjects() {
   return (

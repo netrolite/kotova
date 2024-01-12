@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
-import Sidebar from "@/components/routes/layouts/root/Sidebar/Sidebar";
-import Header from "@/components/routes/layouts/root/Header/Header";
 import { Toaster } from "@/components/ui/sonner";
-import MobileNav from "@/components/routes/layouts/root/MobileNav/MobileNav";
+import Sidebar from "@/components/layout/Sidebar/Sidebar";
+import Header from "@/components/layout/Header/Header";
+import MobileNav from "@/components/layout/MobileNav/MobileNav";
 
 export const metadata: Metadata = {
   title: {

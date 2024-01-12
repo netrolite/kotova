@@ -15,7 +15,7 @@ type Props = Test & {
   testResults: { id: string }[];
 };
 
-export default function MyTestsTestListTest({
+export default function DashboardTestsTestListTest({
   avgScore,
   grades,
   id,

@@ -63,7 +63,7 @@ export default function AddTestForm({ subjects }: Props) {
         "Что-то пошло не так при создании теста. Пожалуйста, попробуйте позже",
       );
     }
-    // router.replace(`/my/tests/${data.testId}`);
+    router.replace(`/my/tests/${data.testId}`);
     toast.success("Тест успешно создан");
   }, []);
 

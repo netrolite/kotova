@@ -1,12 +1,12 @@
 import { z } from "zod";
 import PageTitle from "@/components/PageTitle";
-import SubjectTestListFilter from "@/components/routes/subjects/[subjectId]/Filter/Index";
-import TestListSearch from "@/components/routes/subjects/[subjectId]/Search";
-import SubjectTestList from "@/components/routes/subjects/[subjectId]/TestList/Index";
 import getSubject from "@/lib/fetchers/getSubject";
 import getSubjectTests from "@/lib/fetchers/getSubjectTests";
 import parseUriComponent from "@/lib/parseUriComponent";
 import { notFound } from "next/navigation";
+import TestListSearch from "@/components/subjects/Search";
+import SubjectTestListFilter from "@/components/subjects/Filter/Index";
+import SubjectTestList from "@/components/subjects/TestList/Index";
 
 type Context = {
   params: { subjectId: string };

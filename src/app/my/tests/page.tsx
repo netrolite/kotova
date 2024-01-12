@@ -1,15 +1,15 @@
 import BtnWithIcon from "@/components/Btns/WithIcon";
 import PageTitle from "@/components/PageTitle";
-import MyTestsTestListInfiniteScroll from "@/components/routes/my/tests/TestList/InfiniteScroll";
-import MyTestsTestListTest from "@/components/routes/my/tests/TestList/Test";
+import DashboardTestsTestListInfiniteScroll from "@/components/dashboard/tests/TestList/InfiniteScroll";
+import DashboardTestsTestListTest from "@/components/dashboard/tests/TestList/Test";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
-import getTestsForMyTestsList from "@/lib/fetchers/getTestsForMyTestsList";
+import getTestsForDashboardTestsList from "@/lib/fetchers/getTestsForDashboardTestsList";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
 export default async function Tests() {
   const user = await getSignedInUserOrRedirect();
-  const tests = await getTestsForMyTestsList({ user, page: 0 });
+  const tests = await getTestsForDashboardTestsList({ user, page: 0 });
 
   return (
     <>
@@ -22,9 +22,9 @@ export default async function Tests() {
       <section>
         <ul className="space-y-4">
           {tests.map((test) => (
-            <MyTestsTestListTest {...test} key={test.id} />
+            <DashboardTestsTestListTest {...test} key={test.id} />
           ))}
-          <MyTestsTestListInfiniteScroll {...{ tests }} />
+          <DashboardTestsTestListInfiniteScroll {...{ tests }} />
         </ul>
       </section>
     </>

@@ -1,5 +1,5 @@
 import PageTitle from "@/components/PageTitle";
-import AddTestForm from "@/components/routes/my/tests/add/Form/Index";
+import AddTestForm from "@/components/dashboard/tests/add/Form/Index";
 import getSubjects from "@/lib/fetchers/getSubjects";
 import SelectItemType from "@/lib/types/SelectItem";
 
