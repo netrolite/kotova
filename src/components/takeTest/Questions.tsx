@@ -68,9 +68,7 @@ export default function TakeTestQuestions({ id: testId, questions }: Props) {
                   <CardContent>
                     <TakeTestQuestion />
                   </CardContent>
-                  <CardFooter>
-                    <TakeTestQuestionError questionIndex={i} />
-                  </CardFooter>
+                  <TakeTestQuestionError questionIndex={i} />
                 </Card>
               </TakeTestQuestionContext.Provider>
             </li>
