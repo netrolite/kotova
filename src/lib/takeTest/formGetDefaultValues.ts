@@ -19,7 +19,7 @@ export default function takeTestFormGetDefaultValues({
         type as TestQuestionType,
       );
       return {
-        id,
+        questionId: id,
         textAnswer: isTextQuestion ? "" : null,
         type: type as TestQuestionType,
         options: isTextQuestion
