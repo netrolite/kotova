@@ -1,7 +1,13 @@
 "use client";
 
 import { Test, TestQuestion, TestQuestionOption } from "@prisma/client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import TakeTestQuestion from "./Question";
 import { FieldErrors, FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -10,19 +16,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import TakeTestQuestionContext from "@/lib/contexts/takeTest/question";
 import FormSubmitBtn from "../Btns/Submit";
 import useLoading from "@/lib/hooks/loading";
-import takeTestGetQuestionsDefaultValues from "@/lib/takeTest/formGetDefaultValues";
+import takeTestFormGetDefaultValues from "@/lib/takeTest/formGetDefaultValues";
 import wait from "@/lib/wait";
+import { FormField, FormMessage } from "../ui/form";
+import useTakeTestFormContext from "@/lib/hooks/takeTest/formContext";
+import TakeTestQuestionError from "./QuestionError";
 
 type Props = Test & { questions: TakeTestQuestion[] };
 export type TakeTestQuestion = TestQuestion & {
   options: TestQuestionOption[];
 };
 
-export default function TakeTestQuestions({ id, questions }: Props) {
+export default function TakeTestQuestions({ id: testId, questions }: Props) {
   const { isLoading, setIsLoading } = useLoading();
   const form = useForm<TakeTestSchemaType>({
     resolver: zodResolver(TakeTestSchema),
-    defaultValues: takeTestGetQuestionsDefaultValues(questions),
+    defaultValues: takeTestFormGetDefaultValues(questions),
   });
 
   async function handleSubmit(formData: TakeTestSchemaType) {
@@ -44,22 +53,28 @@ export default function TakeTestQuestions({ id, questions }: Props) {
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}>
-        <ul>
+      <form
+        className="space-y-8"
+        onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
+      >
+        <ul className="space-y-6">
           {questions.map((question, i) => (
             <li key={question.id}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{question.question}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <TakeTestQuestionContext.Provider
-                    value={{ ...question, questionIndex: i }}
-                  >
+              <TakeTestQuestionContext.Provider
+                value={{ ...question, questionIndex: i }}
+              >
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{question.question}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
                     <TakeTestQuestion />
-                  </TakeTestQuestionContext.Provider>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                  <CardFooter>
+                    <TakeTestQuestionError questionIndex={i} />
+                  </CardFooter>
+                </Card>
+              </TakeTestQuestionContext.Provider>
             </li>
           ))}
         </ul>

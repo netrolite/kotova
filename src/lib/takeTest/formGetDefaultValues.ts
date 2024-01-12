@@ -1,9 +1,9 @@
-import { TakeTestQuestion } from "@/components/takeTest/Quetions";
 import { TakeTestSchemaType } from "../zod/schemas/takeTest";
 import { TestQuestionType } from "../types/enums/TestQuestionType";
 import getTestTypes from "../getTestTypes";
+import { TakeTestQuestion } from "@/components/takeTest/Questions";
 
-export default function takeTestGetQuestionsDefaultValues(
+export default function takeTestFormGetDefaultValues(
   questions: TakeTestQuestion[],
 ): TakeTestSchemaType {
   return {

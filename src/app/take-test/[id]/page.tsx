@@ -1,5 +1,5 @@
 import PageTitle from "@/components/PageTitle";
-import TakeTestQuestions from "@/components/takeTest/Quetions";
+import TakeTestQuestions from "@/components/takeTest/Questions";
 import takeTestGetTest from "@/lib/fetchers/takeTest/getTest";
 import { notFound } from "next/navigation";
 
