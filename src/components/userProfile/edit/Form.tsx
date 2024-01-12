@@ -19,10 +19,9 @@ import { Input } from "@/components/ui/input";
 import FormSubmitBtn from "@/components/Btns/Submit";
 import useLoading from "@/lib/hooks/loading";
 import editOwnProfileAction from "@/lib/actions/editOwnProfile";
-import { useEffect, useState } from "react";
-import FormError from "@/components/Form/Error";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { GENERIC_ERROR_MSG } from "@/lib/constants";
 
 type Props = {
   user: User;
@@ -40,26 +39,30 @@ export default function UserEditProfileForm({ user }: Props) {
     },
   });
   const { isLoading, setIsLoading } = useLoading();
-  const [data, setData] = useState<Awaited<
-    ReturnType<typeof editOwnProfileAction>
-  > | null>(null);
 
   async function handleSubmit(data: UserEditSchemaType) {
     setIsLoading(true);
-    setData(await editOwnProfileAction(data));
+    const result = await editOwnProfileAction(data);
+    if (result.data) {
+      toast.success("Профиль успешно изменен");
+      router.replace(`/users/${user.id}`);
+    } else toast.error(GENERIC_ERROR_MSG);
+
     setIsLoading(false);
   }
 
-  useEffect(() => {
-    if (data?.data === true) {
-      toast.success("Профиль успешно изменен");
-      router.replace(`/users/${user.id}`);
-    }
-  }, [data, user.id, router]);
+  function handleSubmitError() {
+    toast.error(
+      "Не удалось изменить профиль. Пожалуйста, проверьте введенные данные на ошибки",
+    );
+  }
 
   return (
     <FormProvider {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name="name"
@@ -122,7 +125,6 @@ export default function UserEditProfileForm({ user }: Props) {
           )}
         />
         <FormSubmitBtn {...{ isLoading }}>Изменить</FormSubmitBtn>
-        <FormError error={data?.error} />
       </form>
     </FormProvider>
   );

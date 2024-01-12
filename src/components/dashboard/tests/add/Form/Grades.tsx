@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/form";
 import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
 import { Controller, useFormContext } from "react-hook-form";
-import { Grade, allGrades as allGrades } from "@/lib/constants";
+import { Grade, ALL_GRADES as ALL_GRADES } from "@/lib/constants";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
@@ -45,7 +45,7 @@ export default function AddTestFormGrades({}: Props) {
             control={control}
             render={() => (
               <div className="flex flex-col gap-2">
-                {allGrades.map((grade, i) => (
+                {ALL_GRADES.map((grade, i) => (
                   <Label key={i} className="flex items-center gap-2">
                     <Checkbox
                       checked={selectedGrades.includes(grade)}

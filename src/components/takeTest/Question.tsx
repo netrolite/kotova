@@ -24,12 +24,6 @@ export default function TakeTestQuestion() {
   return (
     <TakeTestQuestionOptionsContext.Provider value={{ optionsFields }}>
       {getQuestionElem(type as TestQuestionType)}
-      <input
-        {...control.register(`answers.${questionIndex}.id`)}
-        value={id}
-        readOnly
-        type="hidden"
-      />
     </TakeTestQuestionOptionsContext.Provider>
   );
 }

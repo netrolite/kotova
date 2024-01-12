@@ -3,7 +3,7 @@ import {
   TestQuestionType,
 } from "./types/enums/TestQuestionType";
 
-export default function getTestTypes(type: TestQuestionType) {
+export default function getQuestionTypes(type: TestQuestionType) {
   const { CHECKBOX, RADIO, TABLE, TEXT } = TEST_QUESTION_TYPE;
   let isCheckboxQuestion = false;
   let isRadioQuestion = false;

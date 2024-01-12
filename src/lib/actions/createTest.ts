@@ -4,10 +4,7 @@ import { Prisma } from "@prisma/client";
 import { db } from "../db";
 import getSignedInUserOrRedirect from "../fetchers/getSignedInUserOrRedirect";
 import ServerActionReturn from "../types/ServerActionReturn";
-import AddTestFormSchema, {
-  AddTestFormSchemaType,
-} from "../zod/schemas/addTestForm/Index";
-import { AddTestFormQuestionOptionSchemaType } from "../zod/schemas/addTestForm/QuestionOption";
+import AddTestFormSchema from "../zod/schemas/addTestForm/Index";
 
 type CreateTableActionReturn = {
   testId: string;
