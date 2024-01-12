@@ -17,10 +17,9 @@ import TakeTestQuestionContext from "@/lib/contexts/takeTest/question";
 import FormSubmitBtn from "../Btns/Submit";
 import useLoading from "@/lib/hooks/loading";
 import takeTestFormGetDefaultValues from "@/lib/takeTest/formGetDefaultValues";
-import wait from "@/lib/wait";
-import { FormField, FormMessage } from "../ui/form";
-import useTakeTestFormContext from "@/lib/hooks/takeTest/formContext";
 import TakeTestQuestionError from "./QuestionError";
+import checkTestAnswers from "@/lib/actions/checkTestAnswers";
+import { GENERIC_ERROR_MSG } from "@/lib/constants";
 
 type Props = Test & { questions: TakeTestQuestion[] };
 export type TakeTestQuestion = TestQuestion & {
@@ -31,23 +30,22 @@ export default function TakeTestQuestions({ id: testId, questions }: Props) {
   const { isLoading, setIsLoading } = useLoading();
   const form = useForm<TakeTestSchemaType>({
     resolver: zodResolver(TakeTestSchema),
-    defaultValues: takeTestFormGetDefaultValues(questions),
+    defaultValues: takeTestFormGetDefaultValues({ questions, testId }),
   });
 
   async function handleSubmit(formData: TakeTestSchemaType) {
     console.info(formData);
-    toast.success("submit success");
     setIsLoading(true);
-    try {
-      await wait(1000);
-    } catch (err) {
-      toast.error("something went wrong during sumission");
-    }
+    const result = await checkTestAnswers(formData);
+    if (result.data) toast.success("Тест отправлен на проверку");
+    else toast.error(GENERIC_ERROR_MSG);
     setIsLoading(false);
   }
 
   function handleSubmitError(err: FieldErrors<TakeTestSchemaType>) {
-    toast.error("could not submit");
+    toast.error(
+      "Не удалось отправить ответы на проверку. Пожалуйста, проверьте введенные данные на ошибки",
+    );
     console.error(err);
   }
 

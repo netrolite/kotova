@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { deleteSubjectMutation } from "@/lib/actions/deleteSubject";
-import { genericErrorMsg } from "@/lib/constants";
+import { GENERIC_ERROR_MSG } from "@/lib/constants";
 import useSubjectsSwr from "@/lib/hooks/swr/subjects";
 import { Subject } from "@prisma/client";
 import { TrashIcon } from "lucide-react";
@@ -35,7 +35,7 @@ export default function SubjectsList() {
   if (isLoading) {
     return <Loading />;
   }
-  if (error) return <p>{genericErrorMsg}</p>;
+  if (error) return <p>{GENERIC_ERROR_MSG}</p>;
   if (subjects && !subjects.length) {
     return <p>Нет предметов</p>;
   }

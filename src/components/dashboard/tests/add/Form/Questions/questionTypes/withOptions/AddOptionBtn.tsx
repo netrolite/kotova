@@ -1,5 +1,5 @@
 import BtnWithIcon from "@/components/Btns/WithIcon";
-import getTestTypes from "@/lib/getTestTypes";
+import getQuestionTypes from "@/lib/getQuestionTypes";
 import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
 import { TestQuestionType } from "@/lib/types/enums/TestQuestionType";
 import { PlusIcon } from "lucide-react";
@@ -19,7 +19,7 @@ export default function AddTestFormQuestionAddOptionBtn({
       isTableQuestion,
       isCheckboxQuestion,
       isRadioQuestion,
-    } = getTestTypes(questionType);
+    } = getQuestionTypes(questionType);
     console.log(isTextQuestion);
     optionsFields.append({
       content: isTextQuestion ? "" : null,

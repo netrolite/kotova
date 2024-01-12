@@ -65,16 +65,16 @@ model Test {
   avgScore        Int? // average correct questions percentage (e.g. 80%)
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
-  createdBy       User?          @relation(fields: [createdByUserId], references: [id])
-  subject         Subject        @relation(fields: [subjectId], references: [id])
-  subjectId       String
   grades          Int[] // which grades (1st, 2nd, 12th, etc) this test is made for
+  createdBy       User?          @relation(fields: [createdByUserId], references: [id])
   createdByUserId String?
+  subject         Subject?       @relation(fields: [subjectId], references: [id])
+  subjectId       String?
 }
 
 model TestQuestion {
   id                String               @id @default(cuid())
-  test              Test                 @relation(fields: [testId], references: [id])
+  test              Test                 @relation(fields: [testId], references: [id], onDelete: Cascade)
   testId            String
   // prisma doesn't yet support union types so we can't use something like `options (TextQuestion | RadioQuestion)[]`
   question          String
@@ -90,19 +90,19 @@ model TestQuestionOption {
   isCorrect         Boolean?
   tableColumn       String?
   tableColumnAnswer String?
-  testQuestion      TestQuestion @relation(fields: [testQuestionId], references: [id])
+  testQuestion      TestQuestion @relation(fields: [testQuestionId], references: [id], onDelete: Cascade)
   testQuestionId    String
 }
 
 model TestResult {
-  id              String   @id @default(cuid())
-  test            Test     @relation(fields: [testId], references: [id])
-  testId          String
-  user            User?    @relation(fields: [userId], references: [id])
-  score           Int
-  scorePercentage Int
-  userId          String?
-  createdAt       DateTime @default(now())
+  id             String   @id @default(cuid())
+  score          Float
+  wrongAnswerIds String[]
+  createdAt      DateTime @default(now())
+  test           Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+  testId         String
+  user           User?    @relation(fields: [userId], references: [id])
+  userId         String?
 }
 
 model Subject {

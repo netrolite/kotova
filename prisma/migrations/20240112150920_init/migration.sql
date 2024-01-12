@@ -54,9 +54,9 @@ CREATE TABLE "Test" (
     "avgScore" INT4,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "subjectId" STRING NOT NULL,
     "grades" INT4[],
-    "createdByUserId" STRING,
+    "createdByUserId" STRING NOT NULL,
+    "subjectId" STRING NOT NULL,
 
     CONSTRAINT "Test_pkey" PRIMARY KEY ("id")
 );
@@ -76,11 +76,11 @@ CREATE TABLE "TestQuestion" (
 -- CreateTable
 CREATE TABLE "TestQuestionOption" (
     "id" STRING NOT NULL,
-    "content" STRING NOT NULL,
-    "isCorrect" BOOL NOT NULL,
+    "content" STRING,
+    "isCorrect" BOOL,
     "tableColumn" STRING,
     "tableColumnAnswer" STRING,
-    "testQuestionId" STRING,
+    "testQuestionId" STRING NOT NULL,
 
     CONSTRAINT "TestQuestionOption_pkey" PRIMARY KEY ("id")
 );
@@ -88,11 +88,11 @@ CREATE TABLE "TestQuestionOption" (
 -- CreateTable
 CREATE TABLE "TestResult" (
     "id" STRING NOT NULL,
-    "testId" STRING NOT NULL,
-    "score" INT4 NOT NULL,
-    "scorePercentage" INT4 NOT NULL,
-    "userId" STRING,
+    "score" FLOAT8 NOT NULL,
+    "wrongQuestionsIds" STRING[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "testId" STRING,
+    "userId" STRING,
 
     CONSTRAINT "TestResult_pkey" PRIMARY KEY ("id")
 );
@@ -130,19 +130,19 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Test" ADD CONSTRAINT "Test_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Test" ADD CONSTRAINT "Test_createdByUserId_fkey" FOREIGN KEY ("createdByUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Test" ADD CONSTRAINT "Test_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "Subject"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "TestQuestion" ADD CONSTRAINT "TestQuestion_testId_fkey" FOREIGN KEY ("testId") REFERENCES "Test"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "TestQuestion" ADD CONSTRAINT "TestQuestion_testId_fkey" FOREIGN KEY ("testId") REFERENCES "Test"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "TestQuestionOption" ADD CONSTRAINT "TestQuestionOption_testQuestionId_fkey" FOREIGN KEY ("testQuestionId") REFERENCES "TestQuestion"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "TestQuestionOption" ADD CONSTRAINT "TestQuestionOption_testQuestionId_fkey" FOREIGN KEY ("testQuestionId") REFERENCES "TestQuestion"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "TestResult" ADD CONSTRAINT "TestResult_testId_fkey" FOREIGN KEY ("testId") REFERENCES "Test"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "TestResult" ADD CONSTRAINT "TestResult_testId_fkey" FOREIGN KEY ("testId") REFERENCES "Test"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "TestResult" ADD CONSTRAINT "TestResult_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
