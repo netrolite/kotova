@@ -29,7 +29,7 @@ const NAV_ITEMS_BASE: NavItemType[] = [
 
 export const SIDEBAR_DEPENDENT_NAV_ITEMS = {
   profile: (userId?: string) => ({
-    href: `/users/${userId || ""}`,
+    href: userId ? `/users/${userId}` : "/api/auth/signin",
     label: "Профиль",
     icon: <UserIcon />,
   }),
