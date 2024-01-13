@@ -21,24 +21,21 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
   return (
     <html lang="ru">
-      <SessionProvider {...{ session }}>
-        <body>
-          <Toaster />
-          <SpeedInsights />
+      <body>
+        <Toaster />
+        <SpeedInsights />
 
-          <div className="flex w-full justify-center">
-            <Sidebar />
-            <main className="flex min-h-screen w-full flex-col md:max-w-[650px] md:border-l md:border-r md:border-slate-200">
-              <Header />
-              <div className="flex-grow px-4 pb-3 pt-8">{children}</div>
-              <MobileNav />
-            </main>
-          </div>
-        </body>
-      </SessionProvider>
+        <div className="flex w-full justify-center">
+          <Sidebar />
+          <main className="flex min-h-screen w-full flex-col md:max-w-[650px] md:border-l md:border-r md:border-slate-200">
+            <Header />
+            <div className="flex-grow px-4 pb-3 pt-8">{children}</div>
+            <MobileNav />
+          </main>
+        </div>
+      </body>
     </html>
   );
 }

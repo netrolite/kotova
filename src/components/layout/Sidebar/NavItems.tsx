@@ -47,7 +47,7 @@ export default async function SidebarLinks() {
     <nav className="flex flex-col gap-1">
       <ul>
         {NAV_ITEMS_BASE.map((navItem) => (
-          <SidebarNavItem {...navItem} />
+          <SidebarNavItem key={navItem.href} {...navItem} />
         ))}
         <Suspense
           fallback={

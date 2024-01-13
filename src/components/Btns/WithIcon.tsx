@@ -3,14 +3,18 @@ import { Button, ButtonProps } from "../ui/button";
 import { cn } from "@/lib/shadcnUtils";
 
 type Props = ButtonProps & {
-  icon: ReactElement;
+  icon?: ReactElement;
   children: ReactNode;
 };
 
 const BtnWithIcon = forwardRef<HTMLButtonElement, Props>(
-  ({ icon, children, ...restProps }: Props, ref) => {
+  ({ icon, children, ...props }: Props, ref) => {
     return (
-      <Button {...restProps} className={cn("flex gap-1", restProps.className)}>
+      <Button
+        {...props}
+        ref={ref}
+        className={cn("flex gap-1", props.className)}
+      >
         {icon}
         <span>{children}</span>
       </Button>
