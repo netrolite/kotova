@@ -1,6 +1,6 @@
 import Logo from "@/components/Logo";
 import HeaderWrapper from "../Header/Wrapper";
-import SidebarLinks from "./Links";
+import SidebarLinks from "./NavItems";
 import { auth } from "@/auth";
 
 export default async function Sidebar() {

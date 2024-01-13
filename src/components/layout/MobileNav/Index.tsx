@@ -23,12 +23,12 @@ const NAV_ITEMS_BASE: NavItemType[] = [
   },
   {
     href: "/my",
-    label: "Лич. Кабинет",
+    label: "Личный Кабинет",
     icon: <LayoutDashboardIcon />,
   },
 ];
 
-export const DEPENDENT_NAV_ITEMS = {
+export const MOBILE_NAVBAR_DEPENDENT_NAV_ITEMS = {
   profile: (userId?: string) => ({
     href: `/users/${userId || ""}`,
     label: "Профиль",
@@ -47,7 +47,9 @@ export default async function MobileNav() {
           <MobileNavItem {...navItem} />
         ))}
         <Suspense
-          fallback={<MobileNavItem {...DEPENDENT_NAV_ITEMS.profile()} />}
+          fallback={
+            <MobileNavItem {...MOBILE_NAVBAR_DEPENDENT_NAV_ITEMS.profile()} />
+          }
         >
           <MobileNavProfileNavItem />
         </Suspense>
