@@ -23,7 +23,7 @@ const NAV_ITEMS_BASE: NavItemType[] = [
   },
   {
     href: "/my",
-    label: "Личный Кабинет",
+    label: "Лич. Кабинет",
     icon: <LayoutDashboardIcon />,
   },
 ];
@@ -41,7 +41,7 @@ export const MOBILE_NAVBAR_DEPENDENT_NAV_ITEMS = {
 
 export default async function MobileNav() {
   return (
-    <nav className="sticky bottom-0 left-0 right-0 z-20 overflow-auto border-t border-slate-300 bg-white/80 px-4 py-3 text-slate-500 backdrop-blur-md md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-20 overflow-auto border-t border-slate-300 bg-white/80 px-4 py-4 text-slate-500 backdrop-blur-md md:hidden">
       <ul className="flex justify-around">
         {NAV_ITEMS_BASE.map((navItem) => (
           <MobileNavItem key={navItem.href} {...navItem} />
