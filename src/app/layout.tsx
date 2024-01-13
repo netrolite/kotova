@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import Header from "@/components/layout/Header/Header";
-import MobileNav from "@/components/layout/MobileNav/MobileNav";
+import MobileNav from "@/components/layout/MobileNav/Index";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
