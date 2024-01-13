@@ -22,7 +22,9 @@ export default async function HeaderAvatar() {
           <AvatarFallback>{username.slice(0, 1)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <HeaderAvatarDropdownMenuContent {...{ username }} />
+      <HeaderAvatarDropdownMenuContent
+        {...{ username, userId: session.user.id }}
+      />
     </DropdownMenu>
   );
 }
