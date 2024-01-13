@@ -24,12 +24,6 @@ export default function HeaderAvatarDropdownMenuContent({ username }: Props) {
       >
         Выйти
       </HeaderAvatarDropdownMenuContentItem>
-      <HeaderAvatarDropdownMenuContentItem
-        icon={<LogOutIcon />}
-        onClick={() => console.log("fuck this")}
-      >
-        test
-      </HeaderAvatarDropdownMenuContentItem>
     </DropdownMenuContent>
   );
 }
