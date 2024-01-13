@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import Header from "@/components/layout/Header/Header";
 import MobileNav from "@/components/layout/MobileNav/MobileNav";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -26,6 +27,7 @@ export default async function RootLayout({
       <SessionProvider {...{ session }}>
         <body>
           <Toaster />
+          <SpeedInsights />
 
           <div className="flex w-full justify-center">
             <Sidebar />
