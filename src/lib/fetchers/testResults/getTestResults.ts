@@ -12,6 +12,7 @@ const getTestResult = cache(async (id: string) => {
           id: true,
           isCorrect: true,
           type: true,
+          textAnswer: true,
           options: true,
           question: {
             select: {
@@ -21,6 +22,9 @@ const getTestResult = cache(async (id: string) => {
               options: {
                 select: {
                   content: true,
+                  isCorrect: true,
+                  tableColumnAnswer: true,
+                  id: true,
                 },
               },
             },
