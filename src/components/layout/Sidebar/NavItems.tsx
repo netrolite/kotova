@@ -1,6 +1,3 @@
-import { cn } from "@/lib/shadcnUtils";
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
 import {
   LayoutDashboardIcon,
   ListTodoIcon,
@@ -8,7 +5,6 @@ import {
   UserIcon,
 } from "lucide-react";
 import { NavItemType } from "../MobileNav/Index";
-import { auth } from "@/auth";
 import SidebarNavItem from "./NavItem";
 import { Suspense } from "react";
 import SidebarProfileNavItem from "./Profile";
