@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
-import Image from "next/image"; 
+import Image from "next/image";
+import { Input } from "@/components/ui/input";
 
 export const metadata = {
   title: {
@@ -12,6 +13,7 @@ export default async function Home() {
     <>
       <h1 className="text-xl font-black">Учитель Русского Языка и Литературы Котова Виктория</h1>
       <Image alt="bird" src={"/bird.jpg"} width={400} height={300} />
+      <Input />
     </>
   );
 }
