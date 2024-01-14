@@ -86,13 +86,14 @@ model TestQuestion {
 }
 
 model TestQuestionOption {
-  id                String       @id @default(cuid())
-  content           String?
-  isCorrect         Boolean?
-  tableColumn       String?
-  tableColumnAnswer String?
-  testQuestion      TestQuestion @relation(fields: [testQuestionId], references: [id], onDelete: Cascade)
-  testQuestionId    String
+  id                      String                   @id @default(cuid())
+  content                 String?
+  isCorrect               Boolean?
+  tableColumn             String?
+  tableColumnAnswer       String?
+  testQuestion            TestQuestion             @relation(fields: [testQuestionId], references: [id], onDelete: Cascade)
+  testQuestionId          String
+  testResultAnswerOptions TestResultAnswerOption[]
 }
 
 model TestResult {
@@ -121,11 +122,13 @@ model TestResultAnswer {
 }
 
 model TestResultAnswerOption {
-  id                 String           @id @default(cuid())
-  tableAnswer        String?
-  isChecked          Boolean?
-  testResultAnswer   TestResultAnswer @relation(fields: [testResultAnswerId], references: [id], onDelete: Cascade)
-  testResultAnswerId String
+  id                   String              @id @default(cuid())
+  tableAnswer          String?
+  isChecked            Boolean?
+  testResultAnswer     TestResultAnswer    @relation(fields: [testResultAnswerId], references: [id], onDelete: Cascade)
+  testResultAnswerId   String
+  testQuestionOption   TestQuestionOption? @relation(fields: [testQuestionOptionId], references: [id])
+  testQuestionOptionId String?
 }
 
 model Subject {
