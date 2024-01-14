@@ -1,9 +1,9 @@
 import { CardTitle } from "@/components/ui/card";
-import useUserTestResult from "@/lib/hooks/user/testResults/testResult";
+import useUserTestResultContext from "@/lib/hooks/user/testResults/testResultContext";
 
 type Props = {};
 
 export default function UserTestResultTitle({}: Props) {
-  const { test } = useUserTestResult();
+  const { test } = useUserTestResultContext();
   return <CardTitle className="text-xl tracking-normal">{test.name}</CardTitle>;
 }

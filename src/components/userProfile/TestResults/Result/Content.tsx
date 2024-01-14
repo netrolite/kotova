@@ -1,9 +1,9 @@
-import useUserTestResult from "@/lib/hooks/user/testResults/testResult";
+import useUserTestResultContext from "@/lib/hooks/user/testResults/testResultContext";
 
 type Props = {};
 
 export default function UserTestResultContent({}: Props) {
-  const { score } = useUserTestResult();
+  const { score } = useUserTestResultContext();
   return (
     <div className="flex gap-2">
       <span className="text-muted-foreground">Баллы</span>
