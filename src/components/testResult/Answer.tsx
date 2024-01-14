@@ -1,21 +1,12 @@
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
 import TestResultTextAnswer from "./answersTypes/Text";
-import getTestResult from "@/lib/fetchers/testResults/getTestResults";
-import { notFound } from "next/navigation";
+import useTestResultAnswerContext from "@/lib/hooks/testResult/answerContext";
 
-type Props = {
-  testResultId: string;
-  answerId: number;
-};
+type Props = {};
 
-export default async function TestResultAnswer({
-  testResultId,
-  answerId,
-}: Props) {
-  const testResult = await getTestResult(testResultId);
-  if (!testResult) notFound();
-
-  switch (testResult.answers[answerId].type) {
+export default function TestResultAnswer({}: Props) {
+  const answer = useTestResultAnswerContext();
+  switch (answer.type) {
     case TEST_QUESTION_TYPE.TEXT:
       return <TestResultTextAnswer />;
     default:

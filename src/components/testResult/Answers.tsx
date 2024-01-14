@@ -1,37 +1,36 @@
-import getTestResult from "@/lib/fetchers/testResults/getTestResults";
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import TestResultAnswerContextProvider from "@/lib/contexts/testResult/provider";
 import TestResultAnswer from "./Answer";
-import { notFound } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import TestResultAnswerIsCorrectSection from "./IsCorrectSection/Index";
+import useTestResultContext from "@/lib/hooks/testResult/context";
+import { TestResultAnswerContext } from "@/lib/contexts/testResult/Answer";
 
-type Props = {
-  testResultId: string;
-};
+type Props = {};
 
-export default async function TestResultAnswers({ testResultId }: Props) {
-  const testResult = await getTestResult(testResultId);
-  if (!testResult) notFound();
-
+export default function TestResultAnswers({}: Props) {
+  const testResult = useTestResultContext();
   return (
     <ul className="space-y-4">
-      {testResult.answers.map((answer, i) => (
-        <li key={answer.id}>
-          <TestResultAnswerContextProvider answer={answer}>
-            <Card className="space-y-6">
-              <CardHeader className="pb-0">
-                <CardTitle>{answer.question.question}</CardTitle>
-              </CardHeader>
-              <Separator />
-              <CardContent>
-                <TestResultAnswer {...{ testResultId, answerId: i }} />
-                <TestResultAnswerIsCorrectSection />
-              </CardContent>
-            </Card>
-          </TestResultAnswerContextProvider>
-        </li>
-      ))}
+      {testResult.answers?.map((answer) => {
+        return (
+          <li key={answer.id}>
+            <TestResultAnswerContext.Provider value={answer}>
+              <Card className="space-y-6">
+                <CardHeader className="pb-0">
+                  <CardTitle>{answer.question.question}</CardTitle>
+                </CardHeader>
+                <Separator />
+                <CardContent>
+                  <TestResultAnswer />
+                  <TestResultAnswerIsCorrectSection />
+                </CardContent>
+              </Card>
+            </TestResultAnswerContext.Provider>
+          </li>
+        );
+      })}
     </ul>
   );
 }

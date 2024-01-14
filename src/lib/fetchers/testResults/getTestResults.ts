@@ -35,8 +35,9 @@ const getTestResult = cache(async (id: string) => {
   });
 });
 
-export type TestResultGetTestResultReturn = Awaited<
-  ReturnType<typeof getTestResult>
+export type TestResultGetTestResultReturn = Exclude<
+  Awaited<ReturnType<typeof getTestResult>>,
+  null
 >;
 
 export default getTestResult;

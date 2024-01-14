@@ -1,8 +1,8 @@
-"use client";
-
 import useTestResultAnswerContext from "@/lib/hooks/testResult/answerContext";
 
-export default function TestResultTextAnswer() {
-  const { options, type } = useTestResultAnswerContext();
+type Props = {};
+
+export default function TestResultTextAnswer({}: Props) {
+  const answer = useTestResultAnswerContext();
   return <></>;
 }
