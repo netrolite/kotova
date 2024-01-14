@@ -39,22 +39,6 @@ export default async function checkTestAnswers(
   if (!test) return { error: "test not found" };
   if (!user) return { error: "user not found" };
 
-  // db.testResult.create({
-  //   data: {
-  //     score: 10,
-  //     testId: "sdf",
-  //     answers: {
-  //       create: [
-  //         {
-  //           isCorrect: true,
-  //           questionId: "sdf",
-  //           type: 1,
-  //           options: { create: [{ isChecked: true, tableAnswer: "" }] },
-  //         },
-  //       ],
-  //     },
-  //   },
-  // });
   const checkedAnswers: Prisma.TestResultAnswerUncheckedCreateWithoutTestResultInput[] =
     [];
   test.questions.forEach((question, i) => {

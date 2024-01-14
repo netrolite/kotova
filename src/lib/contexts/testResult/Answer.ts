@@ -1,11 +1,8 @@
 import { TestResultGetTestResultReturn } from "@/lib/fetchers/testResults/getTestResults";
 import { createContext } from "react";
 
-export type TestResultAnswerContextType = Exclude<
-  TestResultGetTestResultReturn,
-  null
->["answers"][number];
+export type TestResultAnswerContextType =
+  TestResultGetTestResultReturn["answers"][number];
 
-const TestResultAnswerContext =
+export const TestResultAnswerContext =
   createContext<TestResultAnswerContextType | null>(null);
-export default TestResultAnswerContext;

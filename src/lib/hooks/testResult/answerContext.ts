@@ -1,4 +1,4 @@
-import TestResultAnswerContext from "@/lib/contexts/testResult";
+import { TestResultAnswerContext } from "@/lib/contexts/testResult/Answer";
 import useContextVal from "../contextVal";
 
 export default function useTestResultAnswerContext() {

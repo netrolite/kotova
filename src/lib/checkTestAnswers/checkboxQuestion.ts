@@ -27,6 +27,7 @@ export default function checkTestAnswersCheckboxQuestion({
     options.push({
       isChecked: answerOption?.isChecked,
       tableAnswer: answerOption?.tableAnswer,
+      testQuestionOptionId: questionOption.id,
     });
     if (questionOption.isCorrect !== answerOption?.isChecked) {
       isCorrect = false;
