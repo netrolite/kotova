@@ -41,11 +41,10 @@ export default function DashboardTestsTestListTest({
 
           <CardContent>
             <ul>
-              <KeyValue
-                label="Средний балл"
-                value={avgScore ? `${avgScore}%` : "Нет данных"}
-              />
-              <KeyValue label="Раз пройден" value={testResults.length} />
+              <KeyValue label="Средний балл">
+                {avgScore ? `${avgScore}%` : "Нет данных"}
+              </KeyValue>
+              <KeyValue label="Раз пройден">{testResults.length}</KeyValue>
             </ul>
           </CardContent>
         </Card>
