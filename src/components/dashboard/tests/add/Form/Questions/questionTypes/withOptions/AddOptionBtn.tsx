@@ -20,7 +20,6 @@ export default function AddTestFormQuestionAddOptionBtn({
       isCheckboxQuestion,
       isRadioQuestion,
     } = getQuestionTypes(questionType);
-    console.log(isTextQuestion);
     optionsFields.append({
       content: isTextQuestion ? "" : null,
       isCorrect: isCheckboxQuestion || isRadioQuestion ? false : null,

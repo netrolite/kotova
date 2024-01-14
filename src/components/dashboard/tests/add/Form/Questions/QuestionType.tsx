@@ -32,19 +32,16 @@ export default function AddTestFormQuestionType({}: Props) {
               const valNum = Number(val);
               if (valNum === TEST_QUESTION_TYPE.TEXT) {
                 optionsFields.fields.forEach((field, i) => {
-                  console.log(field);
                   optionsFields.update(i, { ...field, content: null });
                 });
               } else {
                 optionsFields.fields.forEach((field, i) => {
-                  console.log(field.content);
                   optionsFields.update(i, {
                     ...field,
                     content: "",
                   });
                 });
               }
-              console.log(optionsFields.fields);
               field.onChange(valNum);
             }}
             value={field.value.toString()}
