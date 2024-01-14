@@ -1,5 +1,6 @@
 import PageTitle from "@/components/PageTitle";
 import TakeTestQuestions from "@/components/takeTest/Questions";
+import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
 import takeTestGetTest from "@/lib/fetchers/takeTest/getTest";
 import { notFound } from "next/navigation";
 
@@ -8,7 +9,10 @@ type Context = {
 };
 
 export default async function TakeTest({ params: { id } }: Context) {
-  const test = await takeTestGetTest(id);
+  const [test] = await Promise.all([
+    takeTestGetTest(id),
+    getSignedInUserOrRedirect(),
+  ]);
   if (!test) notFound();
 
   return (
