@@ -1,10 +1,10 @@
 import { dateFormatterReasonableDefaults } from "@/lib/constants";
-import useUserTestResult from "@/lib/hooks/user/testResults/testResult";
+import useUserTestResultContext from "@/lib/hooks/user/testResults/testResultContext";
 
 type Props = {};
 
 export default function UserTestResultDescription({}: Props) {
-  const { test, createdAt } = useUserTestResult();
+  const { test, createdAt } = useUserTestResultContext();
   const createdAtString = new Date(createdAt).toLocaleDateString(
     "ru",
     dateFormatterReasonableDefaults,

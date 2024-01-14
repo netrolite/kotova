@@ -3,12 +3,12 @@ import { db } from "../db";
 import { Prisma } from "@prisma/client";
 import { cache } from "react";
 
-const getSignedInUser = cache(async (userSelect?: Prisma.UserSelect) => {
+const getSignedInUser = cache(async (args?: Prisma.UserFindFirstArgs) => {
   const session = await auth();
   if (!session) return null;
   return db.user.findFirst({
     where: { id: session?.user?.id },
-    select: userSelect,
+    ...args,
   });
 });
 

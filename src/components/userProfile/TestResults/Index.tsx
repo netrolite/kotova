@@ -1,6 +1,6 @@
 "use client";
 
-import UserTestResultContext from "@/lib/contexts/user/testResults/testResult";
+import UserTestResultContext from "@/lib/contexts/user/testResult";
 import { UsersGetUserTestResultsReturn } from "@/lib/fetchers/users/getUserTestResults";
 import UserTestResult from "./Result/Index";
 
