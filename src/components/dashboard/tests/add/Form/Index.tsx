@@ -55,7 +55,6 @@ export default function AddTestForm({ subjects }: Props) {
 
   const handleSubmit = useCallback(async (formData: AddTestFormSchemaType) => {
     setIsLoading(true);
-    console.log(formData);
     const { data, error } = await createTestAction(formData);
     if (error) {
       setIsLoading(false);

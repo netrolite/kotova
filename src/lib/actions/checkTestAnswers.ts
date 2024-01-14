@@ -59,6 +59,5 @@ export default async function checkTestAnswers(
     }
   });
 
-  console.log(checkedAnswers);
   return checkTestAnswersCreateTestResult({ checkedAnswers, test, user });
 }

@@ -36,7 +36,6 @@ export default function TakeTestQuestions({ id: testId, questions }: Props) {
   });
 
   async function handleSubmit(formData: TakeTestSchemaType) {
-    console.info(formData);
     setIsLoading(true);
     const result = await checkTestAnswers(formData);
     if (result.error || !result.data) toast.error(GENERIC_ERROR_MSG);
