@@ -7,7 +7,7 @@ import useUserProfileContext from "@/lib/hooks/user/context";
 
 type Props = {};
 
-export default async function UserProfileEditBtn({}: Props) {
+export default function UserProfileEditBtn({}: Props) {
   const { user, signedInUser } = useUserProfileContext();
   if (signedInUser?.id !== user.id) return null;
 

@@ -1,5 +1,3 @@
-"use client";
-
 import {
   FormControl,
   FormField,
@@ -11,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import addSubjectAction from "@/lib/actions/addSubject";
 import useSubjectsSwr from "@/lib/hooks/swr/subjects";
 import useLoading from "@/lib/hooks/loading";
-import useResponsiveDialogState from "@/lib/hooks/responsiveDialogState";
 import AddSubjectSchema, {
   AddSubjectSchemaInputType,
   AddSubjectSchemaType,
@@ -20,9 +17,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import BtnWithLoading from "@/components/Btns/WithLoading";
+import useAddSubjectStore from "@/lib/stores/addSubject";
 
 export default function AddSubjectForm() {
-  const [_isDialogOpen, setIsDialogOpen] = useResponsiveDialogState();
+  const setIsAddSubjectDialogOpen = useAddSubjectStore(
+    (s) => s.setIsAddSubjectDialogOpen,
+  );
   const { mutate, data: subjects } = useSubjectsSwr();
   const { isLoading, setIsLoading } = useLoading();
   const form = useForm<AddSubjectSchemaInputType>({
@@ -36,7 +36,7 @@ export default function AddSubjectForm() {
     setIsLoading(true);
     const result = await addSubjectAction(data);
     setIsLoading(false);
-    setIsDialogOpen(false);
+    setIsAddSubjectDialogOpen(false);
 
     if (result.error) {
       return toast.error("Не удалось добавить предмет");

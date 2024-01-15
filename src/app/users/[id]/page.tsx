@@ -1,12 +1,8 @@
-import PageTitle from "@/components/PageTitle";
-import UserProfileAvatar from "@/components/userProfile/Avatar";
-import UserProfileEditBtn from "@/components/userProfile/EditBtn";
 import UserProfileInfo from "@/components/userProfile/Info";
 import UserProfileRecentTestResults from "@/components/userProfile/RecentTestResults/Index";
 import UserProfileContextProvider from "@/lib/contexts/user/provider";
 import getSignedInUser from "@/lib/fetchers/getSignedInUser";
 import userProfileGetRecentTestResults from "@/lib/fetchers/userProfile/getRecentTestResults";
-import getUserRoleName from "@/lib/getUserRoleName";
 import { User } from "@prisma/client";
 import { notFound } from "next/navigation";
 
