@@ -9,12 +9,12 @@ import SubjectTestListFilter from "@/components/subjects/Filter/Index";
 import SubjectTestList from "@/components/subjects/TestList/Index";
 
 type Context = {
-  params: { subjectId: string };
+  params: { id: string };
   searchParams: { q?: string; grades?: string };
 };
 
 export default async function SubjectTests({
-  params: { subjectId },
+  params: { id: subjectId },
   searchParams: { q: queryRaw, grades: gradesRaw },
 }: Context) {
   const grades = parseUriComponent(gradesRaw || "", z.number().array()) || [];
