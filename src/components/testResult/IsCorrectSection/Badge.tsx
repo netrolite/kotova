@@ -8,7 +8,12 @@ export default function TestResultAnswerIsCorrectSectionBadge({}: Props) {
   const { isCorrect } = useTestResultAnswerContext();
   return (
     <Badge
-      className={cn("mb-1", isCorrect ? "bg-green-600" : "bg-destructive")}
+      className={cn(
+        "mb-1",
+        isCorrect
+          ? "bg-green-600 hover:bg-green-600"
+          : "bg-destructive hover:bg-destructive",
+      )}
     >
       {isCorrect ? "Правильно" : "Неправильно"}
     </Badge>
