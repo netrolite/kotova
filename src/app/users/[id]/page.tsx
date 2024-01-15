@@ -1,6 +1,7 @@
 import PageTitle from "@/components/PageTitle";
 import UserProfileAvatar from "@/components/userProfile/Avatar";
 import UserProfileEditBtn from "@/components/userProfile/EditBtn";
+import UserProfileInfo from "@/components/userProfile/Info";
 import UserProfileRecentTestResults from "@/components/userProfile/RecentTestResults/Index";
 import UserProfileContextProvider from "@/lib/contexts/user/provider";
 import getSignedInUser from "@/lib/fetchers/getSignedInUser";
@@ -24,23 +25,10 @@ export default async function UserProfile({
   ]);
   if (!user) notFound();
 
-  const userRoleName = getUserRoleName(user.role);
-
   return (
     <UserProfileContextProvider {...{ signedInUser, user, userId }}>
       <div className="space-y-16">
-        <section className="flex gap-6">
-          <UserProfileAvatar />
-          <div className="space-y-2">
-            <div className="space-y-1">
-              <PageTitle className="-mb-1">{user.name}</PageTitle>
-              {userRoleName && (
-                <h3 className="text-muted-foreground">{userRoleName}</h3>
-              )}
-            </div>
-            <UserProfileEditBtn />
-          </div>
-        </section>
+        <UserProfileInfo />
         <UserProfileRecentTestResults />
       </div>
     </UserProfileContextProvider>
