@@ -3,7 +3,7 @@ import useUserTestResultContext from "@/lib/hooks/user/testResults/testResultCon
 
 type Props = {};
 
-export default function UserTestResultTitle({}: Props) {
+export default function UserProfileTestResultTitle({}: Props) {
   const { test } = useUserTestResultContext();
   return <CardTitle className="text-xl tracking-normal">{test.name}</CardTitle>;
 }

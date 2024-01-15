@@ -1,11 +1,10 @@
-import { UsersGetUserTestResultsReturn } from "@/lib/fetchers/users/getUserTestResults";
+import { UserProfileGetRecentTestResultsReturn } from "@/lib/fetchers/userProfile/getRecentTestResults";
 import { createContext } from "react";
 
-export type UserTestResultContextType =
-  UsersGetUserTestResultsReturn["testResults"][number];
+export type UserProfileTestResultContextType =
+  UserProfileGetRecentTestResultsReturn["testResults"][number];
 
-const UserTestResultContext = createContext<UserTestResultContextType | null>(
-  null,
-);
+const UserProfileTestResultContext =
+  createContext<UserProfileTestResultContextType | null>(null);
 
-export default UserTestResultContext;
+export default UserProfileTestResultContext;
