@@ -14,11 +14,12 @@ export default async function SubjectTestList({
   grades,
 }: Props) {
   const tests = await getSubjectTests({ query, subjectId, page: 0, grades });
+
   if (!tests.length) {
     return (
       <p>
-        Не нашлось результатов по запросу {query}. Рекомендуем проверить его на
-        ошибки!
+        По вашему запросу не нашлось результатов.
+        {!!grades.length && " Попробуйте отключить некоторые фильтры"}
       </p>
     );
   }
