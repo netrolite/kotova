@@ -70,7 +70,7 @@ export default function SubjectTestListFilter({}: Props) {
               Выберите те классы, тесты для которых вы хотите увидеть
             </DialogDescription>
           </DialogHeader>
-          <section className="space-y-2">
+          <section className="space-y-3">
             {allGrades.map((grade) => (
               <SubjectTestListFilterOption grade={grade} key={grade} />
             ))}
