@@ -2,7 +2,7 @@ import useUserTestResultContext from "@/lib/hooks/user/testResults/testResultCon
 
 type Props = {};
 
-export default function UserTestResultContent({}: Props) {
+export default function UserProfileTestResultContent({}: Props) {
   const { score } = useUserTestResultContext();
   return (
     <div className="flex gap-2">

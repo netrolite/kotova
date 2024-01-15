@@ -1,18 +1,26 @@
 "use client";
 
+import { UserProfileGetRecentTestResultsReturn } from "@/lib/fetchers/userProfile/getRecentTestResults";
 import { User } from "@prisma/client";
 import { ReactNode, createContext } from "react";
 
-export type UserContextType = {
+export type UserProfileContextType = {
   signedInUser: (User & { testResults: { testId: string }[] }) | null;
-  user: User;
+  user: UserProfileGetRecentTestResultsReturn;
+  userId: string;
 };
 
-export const UserContext = createContext<UserContextType | null>(null);
+export const UserProfileContext = createContext<UserProfileContextType | null>(
+  null,
+);
 
-export default function UserContextProvider({
+export default function UserProfileContextProvider({
   children,
   ...value
-}: UserContextType & { children: ReactNode }) {
-  return <UserContext.Provider {...{ value }}>{children}</UserContext.Provider>;
+}: UserProfileContextType & { children: ReactNode }) {
+  return (
+    <UserProfileContext.Provider {...{ value }}>
+      {children}
+    </UserProfileContext.Provider>
+  );
 }

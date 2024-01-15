@@ -1,4 +1,4 @@
-import useUserContext from "@/lib/hooks/user/context";
+import useUserProfileContext from "@/lib/hooks/user/context";
 import useUserTestResultContext from "@/lib/hooks/user/testResults/testResultContext";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -8,9 +8,9 @@ type Props = {
   children: ReactNode;
 };
 
-export default function UserTestResultLink({ children }: Props) {
+export default function UserProfileTestResultLink({ children }: Props) {
   const { testId, id: testResultId } = useUserTestResultContext();
-  const { signedInUser } = useUserContext();
+  const { signedInUser } = useUserProfileContext();
 
   const hasSignedInUserTakenThisTest = !!signedInUser?.testResults.find(
     (signedInUserTestResult) => signedInUserTestResult.testId === testId,

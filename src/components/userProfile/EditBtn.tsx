@@ -3,14 +3,12 @@
 import { PencilIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import useUserContext from "@/lib/hooks/user/context";
+import useUserProfileContext from "@/lib/hooks/user/context";
 
 type Props = {};
 
-export default async function UserEditProfileBtn({}: Props) {
-  console.log("hello");
-  const { user, signedInUser } = useUserContext();
-  console.log(signedInUser);
+export default async function UserProfileEditBtn({}: Props) {
+  const { user, signedInUser } = useUserProfileContext();
   if (signedInUser?.id !== user.id) return null;
 
   return (

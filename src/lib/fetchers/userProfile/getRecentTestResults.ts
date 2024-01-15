@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { cache } from "react";
 
-const getUserRecentTestResults = cache(async (userId: string) => {
+const userProfileGetRecentTestResults = cache(async (userId: string) => {
   return await db.user.findFirst({
     where: { id: userId },
     include: {
@@ -11,9 +11,9 @@ const getUserRecentTestResults = cache(async (userId: string) => {
   });
 });
 
-export type UsersGetUserTestResultsReturn = Exclude<
-  Awaited<ReturnType<typeof getUserRecentTestResults>>,
+export type UserProfileGetRecentTestResultsReturn = Exclude<
+  Awaited<ReturnType<typeof userProfileGetRecentTestResults>>,
   null
 >;
 
-export default getUserRecentTestResults;
+export default userProfileGetRecentTestResults;

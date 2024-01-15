@@ -1,6 +1,6 @@
-import { UserContext } from "@/lib/contexts/user/provider";
+import { UserProfileContext } from "@/lib/contexts/user/provider";
 import useContextVal from "../contextVal";
 
-export default function useUserContext() {
-  return useContextVal(UserContext);
+export default function useUserProfileContext() {
+  return useContextVal(UserProfileContext);
 }

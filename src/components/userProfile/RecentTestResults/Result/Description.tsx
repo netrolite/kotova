@@ -3,7 +3,7 @@ import useUserTestResultContext from "@/lib/hooks/user/testResults/testResultCon
 
 type Props = {};
 
-export default function UserTestResultDescription({}: Props) {
+export default function UserProfileTestResultDescription({}: Props) {
   const { test, createdAt } = useUserTestResultContext();
   const createdAtString = new Date(createdAt).toLocaleDateString(
     "ru",
