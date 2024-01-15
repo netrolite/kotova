@@ -18,7 +18,7 @@ export default async function User({
   params: { id: string };
 }) {
   const signedInUserPromise = getSignedInUser({
-    select: { testResults: { select: { testId: true } } },
+    select: { id: true, testResults: { select: { testId: true } } },
   }) as Promise<(User & { testResults: { testId: string }[] }) | null>;
   const userPromise = getUserRecentTestResults(id);
   const [signedInUser, user] = await Promise.all([
@@ -28,7 +28,6 @@ export default async function User({
   if (!user) notFound();
 
   const userRoleName = getUserRoleName(user.role);
-  const isOwnProfile = signedInUser?.id === user.id;
 
   return (
     <UserContextProvider {...{ signedInUser, user }}>
@@ -49,7 +48,7 @@ export default async function User({
                 <h3 className="text-muted-foreground">{userRoleName}</h3>
               )}
             </div>
-            {isOwnProfile && <UserEditProfileBtn userId={id} />}
+            <UserEditProfileBtn />
           </div>
         </section>
         <section>

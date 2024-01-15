@@ -1,15 +1,17 @@
+"use client";
+
 import { PencilIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import getSignedInUser from "@/lib/fetchers/getSignedInUser";
+import useUserContext from "@/lib/hooks/user/context";
 
-type Props = {
-  userId: string;
-};
+type Props = {};
 
-export default async function UserEditProfileBtn({ userId }: Props) {
-  const signedInUser = await getSignedInUser();
-  if (signedInUser?.id !== userId) return null;
+export default async function UserEditProfileBtn({}: Props) {
+  console.log("hello");
+  const { user, signedInUser } = useUserContext();
+  console.log(signedInUser);
+  if (signedInUser?.id !== user.id) return null;
 
   return (
     <Link href={`/users/${signedInUser.id}/edit`}>
