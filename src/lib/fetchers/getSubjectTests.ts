@@ -20,6 +20,7 @@ const getSubjectTests = cache(
       },
       include: { createdBy: true, testResults: { select: { id: true } } },
       ...getPagination({ page, itemsPerPage: SUBJECT_TESTS_TESTS_PER_PAGE }),
+      orderBy: { createdAt: "desc" },
     });
   },
 );
