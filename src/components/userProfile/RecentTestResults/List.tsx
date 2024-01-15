@@ -1,3 +1,5 @@
+"use client";
+
 import UserProfileTestResultContext from "@/lib/contexts/user/testResult";
 import useUserProfileContext from "@/lib/hooks/user/context";
 import UserProfileTestResult from "./Result/Index";
