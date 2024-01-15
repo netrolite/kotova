@@ -5,7 +5,10 @@ const userProfileGetRecentTestResults = cache(async (userId: string) => {
   return await db.user.findFirst({
     where: { id: userId },
     include: {
-      testResults: { include: { test: { include: { subject: true } } } },
+      testResults: {
+        orderBy: { createdAt: "desc" },
+        include: { test: { include: { subject: true } } },
+      },
     },
     take: 10,
   });
