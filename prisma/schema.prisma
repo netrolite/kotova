@@ -1,11 +1,11 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
-  provider  = "cockroachdb"
+  provider  = "postgresql"
   url       = env("DB_URL")
   directUrl = env("DIRECT_DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Account {
