@@ -3,9 +3,8 @@ name: Prisma Migrate Production
 on:
   workflow_dispatch:
   push:
-    branches: [main]
-    paths:
-      - "./prisma/**/*.*"
+    branches:
+      - main
 
 jobs:
   migrate:
