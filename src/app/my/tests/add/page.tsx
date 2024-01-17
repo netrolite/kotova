@@ -11,7 +11,9 @@ export default async function AddTest() {
     getSubjects(),
     getSignedInUserOrRedirect(),
   ]);
-  if (user.role !== ROLE.TEACHER) return <AccessDenied />;
+  if (user.role !== ROLE.TEACHER && user.role !== ROLE.ADMIN) {
+    return <AccessDenied />;
+  }
   const subjects: SelectItemType<string>[] = subjectsRaw.map((subject) => ({
     label: subject.title,
     value: subject.id,
