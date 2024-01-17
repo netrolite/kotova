@@ -7,9 +7,7 @@
     "build": "npx prisma generate && next build",
     "buildnoqueryengine": "npx prisma generate --no-engine && next build",
     "start": "next start",
-    "lint": "next lint",
-    "dbstart": "cockroach start --insecure --store=cockroachdb --listen-addr=localhost:26257 --http-addr=localhost:8080 --join=localhost:26257",
-    "dbinitcluster": "cockroach init --insecure --host=localhost:26257"
+    "lint": "next lint"
   },
   "dependencies": {
     "@auth/core": "^0.19.0",
