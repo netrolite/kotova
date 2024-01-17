@@ -23,9 +23,6 @@ dependencies:
   '@prisma/client':
     specifier: 5.8.0
     version: 5.8.0(prisma@5.8.0)
-  '@prisma/extension-accelerate':
-    specifier: ^0.6.2
-    version: 0.6.2(@prisma/client@5.8.0)
   '@radix-ui/react-alert-dialog':
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.2.17)(@types/react@18.2.42)(react-dom@18.2.0)(react@18.2.0)
@@ -616,15 +613,6 @@ packages:
       '@prisma/engines-version': 5.8.0-37.0a83d8541752d7582de2ebc1ece46519ce72a848
       '@prisma/fetch-engine': 5.8.0
       '@prisma/get-platform': 5.8.0
-
-  /@prisma/extension-accelerate@0.6.2(@prisma/client@5.8.0):
-    resolution: {integrity: sha512-KIBVPeWt8qaSg7wQ+TXmCVeUDoW75whtXcdS9dbHxRoO2OWFH5I9+qbkHBhx5Wj/h1wQpS8usuxGnsZqiBjUpQ==}
-    engines: {node: '>=16'}
-    peerDependencies:
-      '@prisma/client': '>=4.16.1'
-    dependencies:
-      '@prisma/client': 5.8.0(prisma@5.8.0)
-    dev: false
 
   /@prisma/fetch-engine@5.8.0:
     resolution: {integrity: sha512-1CAuE+JoYsPNggMEn6qk0zos06Uc9bYZBJ0VBPHD6R7REL05614koAbOCmn52IaYz3nobb7f25hqW6AY7rLkIw==}
