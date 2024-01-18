@@ -91,11 +91,13 @@ export default function AddTestForm({ subjects }: Props) {
             <AddTestFormSubjectId />
             <AddTestFormGrades />
           </div>
-          <AddTestFormQuestions />
-          <div className="space-y-12">
+
+          <div className="space-y-4">
+            <AddTestFormQuestions />
             <AddTestFormAddQuestionBtn />
-            <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
           </div>
+
+          <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
         </form>
       </AddTestFormContext.Provider>
     </FormProvider>

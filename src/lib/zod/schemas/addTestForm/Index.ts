@@ -21,7 +21,12 @@ const AddTestFormSchema = z.object({
       NAME_MAX_LEN,
       `Название должно быть не длиннее ${NAME_MAX_LEN} символов`,
     ),
-  questions: AddTestFormQuestionSchema.array(),
+  questions: AddTestFormQuestionSchema.array().refine(
+    (questions) => questions.length > 0,
+    {
+      message: "Добавьте хотя бы один вопрос",
+    },
+  ),
 });
 
 export const AddTestFormSavedValuesSchema = AddTestFormSchema.extend({
