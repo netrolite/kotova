@@ -1,5 +1,6 @@
 import urlRegex from "@/lib/regexes/url";
 import { z } from "zod";
+import emailValidator from "email-validator";
 
 const NAME_MIN_LEN = 3;
 const NAME_MAX_WORDS = 5;
@@ -20,32 +21,40 @@ const UserEditSchema = z.object({
     ),
   email: z
     .string()
-    .email("Неверный формат электронной почты")
     .max(
       EMAIL_MAX_LEN,
       `Электронная почта должна быть не длиннее ${EMAIL_MAX_LEN} символов`,
-    ),
+    )
+    .transform((data) => (!data ? null : data))
+    .refine((data) => (!data ? true : emailValidator.validate(data)), {
+      message: "Неверный формат электронной почты",
+    })
+    .nullable(),
   phone: z
     .string()
     .transform((data) => data.replaceAll(/\D/g, ""))
-    .refine(
-      (data) => data === "" || data.length >= PHONE_MIN_LEN,
-      `Номер телефона должен быть не короче ${PHONE_MIN_LEN} символов (не учитывая любые символы, кроме цифр)`,
-    )
-    .refine(
-      (data) => data === "" || data.length <= PHONE_MAX_LEN,
-      `Номер телефона должен быть не длиннее ${PHONE_MAX_LEN} символов (не учитывая любые символы, кроме цифр)`,
-    ),
+    .transform((data) => (!data ? null : data))
+    .nullable()
+    .refine((data) => {
+      if (!data) return true;
+      return data.length >= PHONE_MIN_LEN;
+    }, `Номер телефона должен быть не короче ${PHONE_MIN_LEN} символов (не учитывая любые символы, кроме цифр)`)
+    .refine((data) => {
+      if (!data) return true;
+      return data.length <= PHONE_MAX_LEN;
+    }, `Номер телефона должен быть не длиннее ${PHONE_MAX_LEN} символов (не учитывая любые символы, кроме цифр)`),
   avatarUrl: z
     .string()
-    .refine(
-      (data) => data === "" || data.length <= AVATAR_URL_MAX_LEN,
-      `Ссылка на аватар должна быть не длиннее ${AVATAR_URL_MAX_LEN} символов`,
-    )
-    .refine(
-      (data) => data === "" || urlRegex.test(data),
-      "Ссылка на аватар должна быть рабочей ссылкой на изображение",
-    ),
+    .transform((data) => (!data ? null : data))
+    .nullable()
+    .refine((data) => {
+      if (!data) return true;
+      return data.length <= AVATAR_URL_MAX_LEN;
+    }, `Ссылка на аватар должна быть не длиннее ${AVATAR_URL_MAX_LEN} символов`)
+    .refine((data) => {
+      if (!data) return true;
+      return urlRegex.test(data);
+    }, "Неверный формат ссылки"),
 });
 
 export type UserEditSchemaType = z.infer<typeof UserEditSchema>;
