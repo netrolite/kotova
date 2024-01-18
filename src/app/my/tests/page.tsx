@@ -15,7 +15,7 @@ export default async function Tests() {
     <>
       <div className="mb-8">
         <PageTitle className="mb-2">Ваши тесты</PageTitle>
-        <Link href="/my/tests/add">
+        <Link href="/my/tests/create">
           <BtnWithIcon icon={<PlusIcon />}>Добавить тест</BtnWithIcon>
         </Link>
       </div>
