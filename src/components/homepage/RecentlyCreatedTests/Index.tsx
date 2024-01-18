@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import formatGrades from "@/lib/formatGrades";
-import { dateFormatterReasonableDefaults } from "@/lib/constants";
 import styles from "./styles.module.scss";
+import wait from "@/lib/wait";
 
 type Props = {};
 
@@ -21,7 +21,7 @@ export default async function HomepageRecentlyCreatedTests({}: Props) {
     );
 
   return (
-    <ul>
+    <ul className="space-y-2">
       {tests.map(({ name, grades, subject, id, createdAt }) => {
         const createdAtStringDayMonth = new Date(createdAt).toLocaleDateString(
           "ru",
