@@ -14,7 +14,7 @@ type Props = {};
 
 export default async function HomepageRecentlyCreatedTests({}: Props) {
   const tests = await homepageGetRecentlyCreatedTests();
-  if (!tests)
+  if (!tests.length)
     return (
       <p className="text-muted-foreground">Ещё не был создан ни один тест</p>
     );
