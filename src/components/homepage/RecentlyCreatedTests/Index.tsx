@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import formatGrades from "@/lib/formatGrades";
 import styles from "./styles.module.scss";
-import wait from "@/lib/wait";
 
 type Props = {};
 
@@ -38,7 +37,7 @@ export default async function HomepageRecentlyCreatedTests({}: Props) {
           },
         );
         return (
-          <li>
+          <li key={id}>
             <Link href={`/take-test/${id}`}>
               <Card className={styles.testCard}>
                 <CardHeader className="pb-4">
