@@ -33,9 +33,9 @@ export default function UserEditProfileForm({ user }: Props) {
     resolver: zodResolver(UserEditSchema),
     defaultValues: {
       name: user.name ?? "",
-      avatarUrl: user.image ?? "",
-      email: user.email ?? "",
-      phone: user.phone ?? "",
+      avatarUrl: user.image ?? null,
+      email: user.email ?? null,
+      phone: user.phone ?? null,
     },
   });
   const { isLoading, setIsLoading } = useLoading();
@@ -84,7 +84,7 @@ export default function UserEditProfileForm({ user }: Props) {
             <FormItem>
               <FormLabel>Электронная почта</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ""} />
               </FormControl>
               <FormDescription>
                 Электронная почта не будет показана другим пользователям
@@ -101,7 +101,7 @@ export default function UserEditProfileForm({ user }: Props) {
             <FormItem>
               <FormLabel>Телефон</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ""} />
               </FormControl>
               <FormDescription>
                 Номер телефона не будет показан другим пользователям
@@ -118,7 +118,7 @@ export default function UserEditProfileForm({ user }: Props) {
             <FormItem>
               <FormLabel>Ссылка на аватар</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ""} />
               </FormControl>
               <FormMessage />
             </FormItem>
