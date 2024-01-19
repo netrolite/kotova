@@ -33,7 +33,6 @@ export default function UserEditProfileForm({ user }: Props) {
     resolver: zodResolver(UserEditSchema),
     defaultValues: {
       name: user.name ?? "",
-      avatarUrl: user.image ?? null,
       email: user.email ?? null,
       phone: user.phone ?? null,
     },
@@ -111,19 +110,6 @@ export default function UserEditProfileForm({ user }: Props) {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="avatarUrl"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Ссылка на аватар</FormLabel>
-              <FormControl>
-                <Input {...field} value={field.value || ""} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormSubmitBtn {...{ isLoading }}>Изменить</FormSubmitBtn>
       </form>
     </FormProvider>
