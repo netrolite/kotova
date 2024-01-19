@@ -41,7 +41,9 @@ export default async function checkTestAnswers(
 
   const checkedAnswers: Prisma.TestResultAnswerUncheckedCreateWithoutTestResultInput[] =
     [];
-  test.questions.forEach((question, i) => {
+
+  for (let i = 0, n = test.questions.length; i < n; i++) {
+    const question = test.questions[i];
     const answer = answers[i];
     const {
       isCheckboxQuestion,
@@ -57,7 +59,7 @@ export default async function checkTestAnswers(
     } else if (isTableQuestion) {
       checkTestAnswersTableQuestion({ answer, checkedAnswers, question });
     }
-  });
+  }
 
   return checkTestAnswersCreateTestResult({ checkedAnswers, test, user });
 }
