@@ -7,5 +7,5 @@ type Props = {
 
 export default function SubjectTestListTestAvatar({ user }: Props) {
   const { image } = user || {};
-  return <AvatarWithFallback width={24} src={image || undefined} />;
+  return <AvatarWithFallback src={image || undefined} />;
 }

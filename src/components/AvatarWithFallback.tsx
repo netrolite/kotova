@@ -43,7 +43,7 @@ export default function AvatarWithFallback({
   } else {
     content = (
       <UserIcon
-        className={cn(`text-slate-500`, userIconClassName)}
+        className={cn(`text-slate-400`, userIconClassName)}
         style={{ width, height: width }}
       />
     );
@@ -51,7 +51,10 @@ export default function AvatarWithFallback({
 
   return (
     <div
-      className={cn(`relative`, containerClassName)}
+      className={cn(
+        `relative flex items-center justify-center rounded-full border`,
+        containerClassName,
+      )}
       style={{ width, height: width }}
     >
       {content}

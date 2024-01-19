@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -6,6 +5,7 @@ import {
 import { auth } from "@/auth";
 import getUsername from "@/lib/getUsername";
 import HeaderAvatarDropdownMenuContent from "./DropdownMenuContent/Index";
+import AvatarWithFallback from "@/components/AvatarWithFallback";
 
 export default async function HeaderAvatar() {
   const session = await auth();
@@ -17,10 +17,13 @@ export default async function HeaderAvatar() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="h-8 w-8">
-          <AvatarImage src={avatarSrc} />
-          <AvatarFallback>{username.slice(0, 1)}</AvatarFallback>
-        </Avatar>
+        <AvatarWithFallback
+          {...{
+            width: 32,
+            src: avatarSrc,
+            username,
+          }}
+        />
       </DropdownMenuTrigger>
       <HeaderAvatarDropdownMenuContent
         {...{ username, userId: session.user.id }}
