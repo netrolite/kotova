@@ -17,9 +17,13 @@ export default function checkTestAnswersTextQuestion({
   answer,
 }: Params) {
   let isCorrect = true;
-  if (question.correctAnswerText !== answer.textAnswer) {
+  if (
+    question.correctAnswerText?.toLowerCase() !==
+    answer.textAnswer?.toLowerCase()
+  ) {
     isCorrect = false;
   }
+
   checkedAnswers.push({
     isCorrect,
     questionId: question.id,
