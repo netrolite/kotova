@@ -12,14 +12,12 @@ export default async function editOwnProfileAction(
   const session = await auth();
   const validationResult = UserEditSchema.safeParse(data);
   if (!validationResult.success || !session?.user) return { error: true };
-  const {
-    data: { avatarUrl: image, ...profileData },
-  } = validationResult;
+  const { data: profileData } = validationResult;
 
   try {
     await db.user.update({
       where: { id: session.user.id },
-      data: { ...profileData, image },
+      data: profileData,
     });
   } catch (err) {
     return { error: true };

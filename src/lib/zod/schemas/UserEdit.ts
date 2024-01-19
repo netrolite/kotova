@@ -43,18 +43,6 @@ const UserEditSchema = z.object({
       if (!data) return true;
       return data.length <= PHONE_MAX_LEN;
     }, `Номер телефона должен быть не длиннее ${PHONE_MAX_LEN} символов (не учитывая любые символы, кроме цифр)`),
-  avatarUrl: z
-    .string()
-    .transform((data) => (!data ? null : data))
-    .nullable()
-    .refine((data) => {
-      if (!data) return true;
-      return data.length <= AVATAR_URL_MAX_LEN;
-    }, `Ссылка на аватар должна быть не длиннее ${AVATAR_URL_MAX_LEN} символов`)
-    .refine((data) => {
-      if (!data) return true;
-      return urlRegex.test(data);
-    }, "Неверный формат ссылки"),
 });
 
 export type UserEditSchemaType = z.infer<typeof UserEditSchema>;
