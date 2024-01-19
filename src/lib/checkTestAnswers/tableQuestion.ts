@@ -27,7 +27,10 @@ export default function checkTestAnswersTableQuestion({
       isChecked: answerOption?.isChecked,
       tableAnswer: answerOption?.tableAnswer,
     });
-    if (questionOption.tableColumnAnswer !== answerOption?.tableAnswer) {
+    if (
+      questionOption.tableColumnAnswer?.toLowerCase() !==
+      answerOption?.tableAnswer?.toLowerCase()
+    ) {
       isCorrect = false;
     }
   }
