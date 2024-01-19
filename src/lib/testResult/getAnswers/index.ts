@@ -1,10 +1,10 @@
+import filterOutNullishValues from "@/lib/filterOutNulls";
 import { TestResultAnswerContextType } from "../../contexts/testResult/Answer";
 import getQuestionTypes from "../../getQuestionTypes";
 import { TestQuestionType } from "../../types/enums/TestQuestionType";
-import testResultFormatAnswer from "../formatAnswer";
 import testResultGetAnswerForCheckboxQuestion from "./checkboxQuestion";
 
-export default function testResultGetAnswer({
+export default function testResultGetAnswers({
   type,
   textAnswer,
   options,
@@ -16,17 +16,17 @@ export default function testResultGetAnswer({
     isCheckboxQuestion,
     isRadioQuestion,
   } = getQuestionTypes(type as TestQuestionType);
-  let answerContent: string | (string | null)[] | null = null;
+  let answer: string | (string | null)[] | null = null;
 
-  if (isTextQuestion) answerContent = [textAnswer];
+  if (isTextQuestion) answer = [textAnswer];
   else if (isCheckboxQuestion || isRadioQuestion) {
-    answerContent = testResultGetAnswerForCheckboxQuestion({
+    answer = testResultGetAnswerForCheckboxQuestion({
       options,
       question,
     });
   } else if (isTableQuestion) {
-    answerContent = options.map((option) => option.tableAnswer);
-  } else answerContent = null;
+    answer = options.map((option) => option.tableAnswer);
+  } else answer = null;
 
-  return testResultFormatAnswer(answerContent);
+  return answer ? filterOutNullishValues(answer) : null;
 }

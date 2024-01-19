@@ -1,9 +1,9 @@
 import { TestResultAnswerContextType } from "../contexts/testResult/Answer";
+import filterOutNullishValues from "../filterOutNulls";
 import getQuestionTypes from "../getQuestionTypes";
 import { TestQuestionType } from "../types/enums/TestQuestionType";
-import testResultFormatAnswer from "./formatAnswer";
 
-export default function testResultGetCorrectAnswer({
+export default function testResultGetCorrectAnswers({
   question,
   type,
 }: TestResultAnswerContextType) {
@@ -13,17 +13,17 @@ export default function testResultGetCorrectAnswer({
     isCheckboxQuestion,
     isRadioQuestion,
   } = getQuestionTypes(type as TestQuestionType);
-  let answerContent: string | (string | null)[] | null = null;
+  let answer: string | (string | null)[] | null = null;
 
-  if (isTextQuestion) answerContent = [question.correctAnswerText];
+  if (isTextQuestion) answer = [question.correctAnswerText];
   else if (isRadioQuestion || isCheckboxQuestion) {
     const correctOptions = question.options.filter(
       (option) => option.isCorrect,
     );
-    answerContent = correctOptions.map((option) => option.content);
+    answer = correctOptions.map((option) => option.content);
   } else if (isTableQuestion) {
-    answerContent = question.options.map((option) => option.tableColumnAnswer);
-  } else answerContent = null;
+    answer = question.options.map((option) => option.tableColumnAnswer);
+  } else answer = null;
 
-  return testResultFormatAnswer(answerContent);
+  return answer ? filterOutNullishValues(answer) : null;
 }
