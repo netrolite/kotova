@@ -13,9 +13,12 @@ export default async function Tests() {
 
   return (
     <>
-      <div className="mb-8">
-        <PageTitle className="mb-2">Ваши тесты</PageTitle>
-        <Link href="/my/tests/create">
+      <div className="mb-8 flex flex-col gap-2">
+        <PageTitle>Ваши тесты</PageTitle>
+        {!tests.length && (
+          <p className="text-muted-foreground">Вы ещё не создавали тесты</p>
+        )}
+        <Link className="max-w-min" href="/my/tests/create">
           <BtnWithIcon icon={<PlusIcon />}>Добавить тест</BtnWithIcon>
         </Link>
       </div>
