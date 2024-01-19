@@ -11,6 +11,7 @@ export default function TestResultAnswerExplanation({}: Props) {
   } = useTestResultAnswerContext();
   const [isOpen, setIsOpen] = useState(false);
 
+  if (!explanation) return null;
   return (
     <div className="space-y-2">
       <DynamicHeight {...{ isOpen }}>
