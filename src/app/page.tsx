@@ -11,7 +11,6 @@ export const metadata = {
 };
 
 export default async function Home() {
-  console.log(await db.user.findMany());
   return (
     <>
       <PageTitle className="mb-8">Недавно созданные тесты</PageTitle>

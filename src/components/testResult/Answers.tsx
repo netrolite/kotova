@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import TestResultAnswerIsCorrectSection from "./IsCorrectSection/Index";
 import useTestResultContext from "@/lib/hooks/testResult/context";
 import { TestResultAnswerContext } from "@/lib/contexts/testResult/Answer";
+import TestResultAnswerExplanation from "./Explanation/Index";
 
 type Props = {};
 
@@ -22,9 +23,12 @@ export default function TestResultAnswers({}: Props) {
                   <CardTitle>{answer.question.question}</CardTitle>
                 </CardHeader>
                 <Separator />
-                <CardContent>
-                  <TestResultAnswer />
-                  <TestResultAnswerIsCorrectSection />
+                <CardContent className="space-y-3">
+                  <div>
+                    <TestResultAnswer />
+                    <TestResultAnswerIsCorrectSection />
+                  </div>
+                  <TestResultAnswerExplanation />
                 </CardContent>
               </Card>
             </TestResultAnswerContext.Provider>
