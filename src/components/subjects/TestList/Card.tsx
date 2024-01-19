@@ -39,7 +39,7 @@ export default function SubjectTestListCard({
       </CardContent>
       <CardFooter>
         <Link
-          className="flex gap-2 hover:underline"
+          className="flex items-center gap-2 hover:underline"
           href={createdBy?.id ? `/users/${createdBy.id}` : "/users/deleted"}
         >
           <SubjectTestListTestAvatar user={createdBy} />
