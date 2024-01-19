@@ -11,6 +11,7 @@ import SubjectTestListTestAvatar from "./Avatar";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import getSubjectTestsAction from "@/lib/actions/getSubjectTests";
+import roundTestScore from "@/lib/roundTestScore";
 
 type Props = Awaited<ReturnType<typeof getSubjectTestsAction>>[0];
 
@@ -32,7 +33,7 @@ export default function SubjectTestListCard({
       </CardHeader>
       <CardContent>
         <KeyValue label="Средний балл">
-          {avgScore ? `${avgScore}%` : "Нет данных"}
+          {avgScore ? `${roundTestScore(avgScore)}%` : "Нет данных"}
         </KeyValue>
         <KeyValue label="Раз пройден">{testResults.length}</KeyValue>
       </CardContent>
