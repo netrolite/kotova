@@ -16,6 +16,10 @@ import checkTestAnswersCheckboxQuestion from "../checkTestAnswers/checkboxQuesti
 import checkTestAnswersTextQuestion from "../checkTestAnswers/textQuestion";
 import checkTestAnswersTableQuestion from "../checkTestAnswers/tableQuestion";
 import checkTestAnswersCreateTestResult from "../checkTestAnswers/createTestResult";
+import checkTestAnswersGetTestResults from "../fetchers/checkTestAnswers/getTestResults";
+import checkTestAnswersCalcAvgTestScoreAndUpdate from "../checkTestAnswers/calcAvgTestScoreAndUpdate";
+import getTestScore from "../getTestScore";
+import checkTestAnswersGetCorrectAnswersAmount from "../checkTestAnswers/getCorrectAnswersAmount";
 
 type Data = {
   testResultId: string;
@@ -33,8 +37,13 @@ export default async function checkTestAnswers(
   } = validationResult;
 
   const testPromise = checkTestAnswersGetTest(testId);
+  const testResultsPromise = checkTestAnswersGetTestResults(testId);
   const userPromise = getSignedInUser();
-  const [test, user] = await Promise.all([testPromise, userPromise]);
+  const [test, testResults, user] = await Promise.all([
+    testPromise,
+    testResultsPromise,
+    userPromise,
+  ]);
 
   if (!test) return { error: "test not found" };
   if (!user) return { error: "user not found" };
@@ -61,5 +70,16 @@ export default async function checkTestAnswers(
     }
   }
 
-  return checkTestAnswersCreateTestResult({ checkedAnswers, test, user });
+  const correctAnswersAmount =
+    checkTestAnswersGetCorrectAnswersAmount(checkedAnswers);
+  const score = getTestScore({
+    correctAnswersAmount,
+    questionsAmount: test.questions.length,
+  });
+  const [testCreationResult] = await Promise.all([
+    checkTestAnswersCreateTestResult({ checkedAnswers, test, user, score }),
+    checkTestAnswersCalcAvgTestScoreAndUpdate({ test, score, testResults }),
+  ]);
+
+  return testCreationResult;
 }

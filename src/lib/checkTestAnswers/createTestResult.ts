@@ -7,22 +7,19 @@ type Params = {
   checkedAnswers: Prisma.TestResultAnswerUncheckedCreateWithoutTestResultInput[];
   test: Exclude<Awaited<ReturnType<typeof checkTestAnswersGetTest>>, null>;
   user: Exclude<Awaited<ReturnType<typeof getSignedInUser>>, null>;
+  score: number;
 };
 
 export default async function checkTestAnswersCreateTestResult({
   checkedAnswers,
   test,
   user,
+  score,
 }: Params) {
-  const correctAnswersAmount = checkedAnswers.reduce((prev, curr) => {
-    if (curr.isCorrect) return (prev += 1);
-    return prev;
-  }, 0);
-
   try {
     const testResult = await db.testResult.create({
       data: {
-        score: (correctAnswersAmount / test.questions.length) * 100,
+        score,
         testId: test.id,
         userId: user.id,
         answers: { create: checkedAnswers },
