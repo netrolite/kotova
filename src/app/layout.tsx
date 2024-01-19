@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
-import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import Header from "@/components/layout/Header/Header";
 import MobileNav from "@/components/layout/MobileNav/Index";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +24,9 @@ export default async function RootLayout({
     <html lang="ru">
       <body>
         <Toaster />
+
         <SpeedInsights />
+        <Analytics />
 
         <div className="flex w-full justify-center">
           <Sidebar />
