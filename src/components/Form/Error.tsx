@@ -9,7 +9,6 @@ type Props = {
 
 export default function FormError({ error, className }: Props) {
   let content: ReactNode;
-  console.log("hell");
   if (!error) content = null;
   else if (typeof error === "boolean") {
     content = GENERIC_ERROR_MSG;
