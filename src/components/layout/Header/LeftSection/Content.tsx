@@ -2,6 +2,7 @@
 
 import { HeaderBackBtn } from "../BackBtn/Index";
 import Logo from "@/components/Logo";
+import useIsOnHomepage from "@/lib/hooks/isOnHomepage";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,7 @@ export default function HeaderLeftSectionContent({
   initPageLoadTimestamp,
 }: Props) {
   const pathname = usePathname();
-  const isOnHomepage = pathname === "/";
+  const isOnHomepage = useIsOnHomepage();
   const [isInitLoad, setIsInitLoad] = useState(
     getIsInitLoad(initPageLoadTimestamp),
   );
@@ -47,9 +48,6 @@ export default function HeaderLeftSectionContent({
   // show back btn if on the same page after inital hard navigation
   // and over 200ms has passed since that hard navigation
   // (if 200ms hasn't passed it means the current page is where we ended up after a hard navigation)
-  console.log(`urlHasHideBackBtnParam: ${urlHasHideBackBtnParam}`);
-  console.log(`isOnSamePageAfterInitLoad: ${isOnSamePageAfterInitLoad}`);
-  console.log(`isInitLoad: ${isInitLoad}`);
   if (!urlHasHideBackBtnParam && (!isOnSamePageAfterInitLoad || !isInitLoad)) {
     shouldShowBackBtn = true;
   }
