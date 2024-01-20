@@ -2,13 +2,16 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { auth } from "@/auth";
 import getUsername from "@/lib/getUsername";
 import HeaderAvatarDropdownMenuContent from "./DropdownMenuContent/Index";
 import AvatarWithFallback from "@/components/AvatarWithFallback";
+import { Session } from "next-auth";
 
-export default async function HeaderAvatar() {
-  const session = await auth();
+type Props = {
+  session: Session;
+};
+
+export default async function HeaderAvatar({ session }: Props) {
   if (!session?.user?.id) return null;
 
   const avatarSrc = session?.user?.image ?? undefined;
