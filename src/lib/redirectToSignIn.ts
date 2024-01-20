@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import getUrlFromHeaders from "./getUrlFromHeaders";
 
 export default function redirectToSignIn() {
-  const callbackUrlFromHeaders = getUrlFromHeaders();
+  const callbackUrlFromHeaders = getUrlFromHeaders() || "/";
   const callbackUrl = new URL(callbackUrlFromHeaders);
   callbackUrl.searchParams.append("hideBackBtn", "");
 
