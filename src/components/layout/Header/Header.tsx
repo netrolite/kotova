@@ -1,5 +1,5 @@
 import HeaderWrapper from "./Wrapper";
-import HeaderLeftSection from "./LeftSection";
+import HeaderLeftSection from "./LeftSection/Index";
 import HeaderRightSection from "./RightSection/Index";
 
 export default function Header() {
