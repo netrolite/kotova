@@ -6,6 +6,7 @@ import Header from "@/components/layout/Header/Header";
 import MobileNav from "@/components/layout/MobileNav/Index";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import isProduction from "@/lib/isProduction";
 
 export const metadata: Metadata = {
   title: {
@@ -25,8 +26,12 @@ export default async function RootLayout({
       <body>
         <Toaster />
 
-        <SpeedInsights />
-        <Analytics />
+        {isProduction() && (
+          <>
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
 
         <div className="flex w-full justify-center">
           <Sidebar />
