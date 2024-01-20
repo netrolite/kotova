@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type Props = {
-  shouldHideBackBtn: boolean;
+  shouldShowBackBtn: boolean;
   initPageLoadUrl: string;
   initPageLoadTimestamp: number;
 };
@@ -14,8 +14,8 @@ type Props = {
 const TIMESTAMP_OFFSET = 1000;
 
 export default function HeaderLeftSectionContent({
-  shouldHideBackBtn,
-  initPageLoadUrl: initPageLoadUrl,
+  shouldShowBackBtn,
+  initPageLoadUrl,
   initPageLoadTimestamp,
 }: Props) {
   const pathname = usePathname();
@@ -47,8 +47,11 @@ export default function HeaderLeftSectionContent({
   // show back btn if on the same page after inital hard navigation
   // and over 200ms has passed since that hard navigation
   // (if 200ms hasn't passed it means the current page is where we ended up after a hard navigation)
+  console.log(`urlHasHideBackBtnParam: ${urlHasHideBackBtnParam}`);
+  console.log(`isOnSamePageAfterInitLoad: ${isOnSamePageAfterInitLoad}`);
+  console.log(`isInitLoad: ${isInitLoad}`);
   if (!urlHasHideBackBtnParam && (!isOnSamePageAfterInitLoad || !isInitLoad)) {
-    shouldHideBackBtn = false;
+    shouldShowBackBtn = true;
   }
 
   if (isOnHomepage) {
@@ -58,11 +61,10 @@ export default function HeaderLeftSectionContent({
         <span className="hidden md:block">Главная</span>
       </>
     );
-  } else if (shouldHideBackBtn) {
-    return <Logo className="max-w-[100px]" linkClassName="md:hidden" />;
+  } else if (shouldShowBackBtn) {
+    return <HeaderBackBtn />;
   }
-
-  return <HeaderBackBtn />;
+  return <Logo className="max-w-[100px]" linkClassName="md:hidden" />;
 }
 
 function getUrlHasHideBackBtnParam() {

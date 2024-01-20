@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import HeaderLeftSectionContent from "./Content";
 
 type Props = {
-  shouldHideBackBtn: boolean;
+  shouldShowBackBtn: boolean;
   initPageLoadUrl: string;
   initPageLoadTimestamp: number;
 };

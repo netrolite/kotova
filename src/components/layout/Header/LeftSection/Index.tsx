@@ -3,11 +3,11 @@ import HeaderLeftSectionContentWrapper from "./ContentWrapper";
 
 export default function HeaderLeftSection() {
   const url = new URL(getUrlFromHeaders() || "/");
-  const shouldHideBackBtn = url.searchParams.get("hideBackBtn") !== null;
+  const shouldShowBackBtn = url.searchParams.get("hideBackBtn") === null;
   return (
     <HeaderLeftSectionContentWrapper
       {...{
-        shouldHideBackBtn,
+        shouldShowBackBtn,
         initPageLoadUrl: url.toString(),
         initPageLoadTimestamp: Date.now(),
       }}
