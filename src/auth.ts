@@ -11,6 +11,9 @@ import { ROLE } from "./lib/types/enums/Role";
 export const nextAuthConfig = {
   adapter: PrismaAdapter(db),
   trustHost: true,
+  pages: {
+    signIn: "/sign-in",
+  },
   providers: [
     Vk({
       profile: (profile): CustomUser => {
