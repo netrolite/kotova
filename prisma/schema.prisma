@@ -35,17 +35,18 @@ model Session {
 
 model User {
   id            String       @id @default(cuid())
+  role          Int
   name          String?
   email         String?      @unique
   emailVerified DateTime?
   phone         String?      @unique
   image         String?
-  accounts      Account[]
-  role          Int
+  password      String?
+  createdAt     DateTime     @default(now())
   sessions      Session[]
+  accounts      Account[]
   createdTests  Test[]
   testResults   TestResult[]
-  createdAt     DateTime     @default(now())
 }
 
 model VerificationToken {
