@@ -14,5 +14,9 @@ export default function FormError({ error, className }: Props) {
     content = GENERIC_ERROR_MSG;
   } else content = error;
 
-  return <p className={cn("text-destructive", className)}>{content}</p>;
+  return (
+    <p aria-live="polite" className={cn("text-destructive", className)}>
+      {content}
+    </p>
+  );
 }
