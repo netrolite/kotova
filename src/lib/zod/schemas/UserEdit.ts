@@ -1,14 +1,10 @@
-import urlRegex from "@/lib/regexes/url";
 import { z } from "zod";
 import emailValidator from "email-validator";
+import { EMAIL_MAX_LEN, PHONE_MAX_LEN, PHONE_MIN_LEN } from "@/lib/constants";
 
 const NAME_MIN_LEN = 3;
 const NAME_MAX_WORDS = 5;
 const NAME_MAX_LEN = 100;
-const EMAIL_MAX_LEN = 254;
-const PHONE_MIN_LEN = 5;
-const PHONE_MAX_LEN = 20;
-const AVATAR_URL_MAX_LEN = 300;
 
 const UserEditSchema = z.object({
   name: z
