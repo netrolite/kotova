@@ -1,15 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import signInAction from "@/lib/actions/signIn";
+import { signIn } from "next-auth/react";
 
 export default function HeaderSignInBtn() {
-  return (
-    <form
-      action={async () => {
-        "use server";
-        signInAction();
-      }}
-    >
-      <Button>Войти</Button>
-    </form>
-  );
+  return <Button onClick={() => signIn()}>Войти</Button>;
 }
