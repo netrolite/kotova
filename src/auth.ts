@@ -1,19 +1,38 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Yandex from "next-auth/providers/yandex";
+import Credentials from "next-auth/providers/credentials";
 import { type NextAuthConfig } from "next-auth";
 import { db } from "./lib/db";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import CustomUser from "./lib/types/CustomUser";
 import { ROLE } from "./lib/types/enums/Role";
+import SignInSchema from "./lib/zod/schemas/SignIn";
+import bcrypt from "bcrypt";
 
 export const nextAuthConfig = {
   adapter: PrismaAdapter(db),
-  trustHost: true,
   pages: {
     signIn: "/sign-in",
   },
+  session: {
+    strategy: "jwt",
+  },
   providers: [
+    Credentials({
+      authorize: async (credentials) => {
+        const { email, password } = SignInSchema.parse(credentials);
+        const user = await db.user.findUnique({ where: { email } });
+        if (!user?.password) return null;
+
+        const doPasswordHashesMatch = await bcrypt.compare(
+          password,
+          user.password,
+        );
+        if (!doPasswordHashesMatch) return null;
+        return user;
+      },
+    }),
     Google({
       // the return value of this callback is used to create a user record in the database
       profile: (profile) => {
@@ -48,12 +67,24 @@ export const nextAuthConfig = {
     }),
   ],
   callbacks: {
-    session({ session, user }) {
-      if (session.user) {
-        (session.user as CustomUser).role = (user as any).role;
-        session.user.id = user.id;
+    session: ({ session, token }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+        },
+      };
+    },
+    jwt: ({ token, user }) => {
+      if (user) {
+        const u = user as unknown as any;
+        return {
+          ...token,
+          id: u.id,
+        };
       }
-      return session;
+      return token;
     },
   },
 } satisfies NextAuthConfig;
@@ -63,5 +94,5 @@ export const {
   auth,
   signIn,
   signOut,
-  update,
+  unstable_update,
 } = NextAuth(nextAuthConfig);
