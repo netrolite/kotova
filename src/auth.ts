@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Yandex from "next-auth/providers/yandex";
-import Vk from "next-auth/providers/vk";
 import { type NextAuthConfig } from "next-auth";
 import { db } from "./lib/db";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -15,18 +14,6 @@ export const nextAuthConfig = {
     signIn: "/sign-in",
   },
   providers: [
-    Vk({
-      profile: (profile): CustomUser => {
-        console.log(profile);
-        return {
-          id: profile.sub,
-          role: ROLE.STUDENT,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-        };
-      },
-    }),
     Google({
       // the return value of this callback is used to create a user record in the database
       profile: (profile) => {
