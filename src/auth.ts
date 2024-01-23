@@ -68,6 +68,8 @@ export const nextAuthConfig = {
   ],
   callbacks: {
     session: ({ session, token }) => {
+      // Apparently setting the id like this is needed for sign in.
+      // It breaks if I just return the token. Same for the `jwt` callback
       return {
         ...session,
         user: {
@@ -77,14 +79,11 @@ export const nextAuthConfig = {
       };
     },
     jwt: ({ token, user }) => {
-      if (user) {
-        const u = user as unknown as any;
-        return {
-          ...token,
-          id: u.id,
-        };
-      }
-      return token;
+      if (!user) return token;
+      return {
+        ...token,
+        id: user.id,
+      };
     },
   },
 } satisfies NextAuthConfig;
