@@ -19,5 +19,12 @@ export const NAME_MAX_LEN = 120;
 export const PASSWORD_MAX_LEN = 254;
 export const PASSWORD_MIN_LEN = 6;
 
-export const INVALID_CREDENTIALS_ERROR = "invalidCredentials";
-export const UNKNOWN_ERROR = "unknownErr";
+export const errCodes = {
+  USER_ALREADY_EXISTS: "USER_ALREADY_EXISTS",
+  INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
+  UNKNOWN: "UNKNOWN", // unknown error
+} as const;
+
+export const prismaErrs = {
+  uniqueConstraintFailed: "P2002",
+};

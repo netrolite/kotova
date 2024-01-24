@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import BtnWithIcon from "../Btns/WithIcon";
 import { signIn } from "next-auth/react";
 import { FcGoogle as GoogleIcon } from "react-icons/fc";
@@ -19,11 +19,7 @@ import FormSubmitBtn from "../Btns/Submit";
 import { useState } from "react";
 import FormError from "../Form/Error";
 import HiddenInput from "../HiddenInput";
-import {
-  GENERIC_ERROR_MSG,
-  INVALID_CREDENTIALS_ERROR,
-  UNKNOWN_ERROR,
-} from "@/lib/constants";
+import { GENERIC_ERROR_MSG, errCodes } from "@/lib/constants";
 
 type Props = {};
 
@@ -55,8 +51,8 @@ export default function SignInForm({}: Props) {
       if (resp.error) {
         switch (resp.error) {
           case "CredentialsSignin":
-            form.setError(`root.${INVALID_CREDENTIALS_ERROR}`, {
-              message: "Неверный пароль или почта",
+            form.setError(`root.${errCodes.INVALID_CREDENTIALS}`, {
+              message: "Неверный пароль или электронная почта",
             });
             break;
           default:
@@ -65,12 +61,10 @@ export default function SignInForm({}: Props) {
         return;
       }
 
-      toast.success(<pre>{JSON.stringify(formData)}</pre>);
-      console.log(callbackUrl);
       location.replace(callbackUrl);
     } catch (err) {
       console.error(err);
-      form.setError(`root.${UNKNOWN_ERROR}`, {
+      form.setError(`root.${errCodes.UNKNOWN}`, {
         message: GENERIC_ERROR_MSG,
       });
     }
@@ -103,11 +97,12 @@ export default function SignInForm({}: Props) {
 
           <FormError
             error={
-              form.formState.errors.root?.[INVALID_CREDENTIALS_ERROR]?.message
+              form.formState.errors.root?.[errCodes.INVALID_CREDENTIALS]
+                ?.message
             }
           />
           <FormError
-            error={form.formState.errors.root?.[UNKNOWN_ERROR]?.message}
+            error={form.formState.errors.root?.[errCodes.UNKNOWN]?.message}
           />
         </form>
 
