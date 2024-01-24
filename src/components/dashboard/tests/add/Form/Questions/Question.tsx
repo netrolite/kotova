@@ -14,7 +14,7 @@ export default function AddTestFormQuestion({}: Props) {
   const { index } = useAddTestFormQuestionContext();
 
   return (
-    <div className="space-y-2">
+    <div className="mb-4 space-y-2">
       <Controller
         control={control}
         name={`questions.${index}`}

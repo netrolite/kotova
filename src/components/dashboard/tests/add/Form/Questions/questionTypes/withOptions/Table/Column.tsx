@@ -3,14 +3,14 @@ import { FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
-import useAddTestFormQuestionOption from "@/lib/hooks/addTestForm/questionOptionContext";
+import useAddTestFormQuestionOptionContext from "@/lib/hooks/addTestForm/questionOptionContext";
 
 type Props = {};
 
 export default function AddTestFormTableQuestionOptionColumn({}: Props) {
   const { control } = useAddTestFormContext();
   const { index: questionIndex } = useAddTestFormQuestionContext();
-  const { optionIndex } = useAddTestFormQuestionOption();
+  const { optionIndex } = useAddTestFormQuestionOptionContext();
 
   return (
     <FormItemField

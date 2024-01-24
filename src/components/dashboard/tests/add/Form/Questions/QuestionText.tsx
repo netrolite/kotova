@@ -16,13 +16,13 @@ export default function AddTestFormQuestionText({}: Props) {
       name={`questions.${index}.question`}
       control={control}
       render={({ field }) => (
-        <>
+        <div className="mb-4">
           <FormLabel>Вопрос</FormLabel>
           <FormControl>
             <Input {...field} />
           </FormControl>
           <FormMessage />
-        </>
+        </div>
       )}
     />
   );

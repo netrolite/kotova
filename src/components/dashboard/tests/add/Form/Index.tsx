@@ -20,12 +20,13 @@ import AddTestFormQuestions from "./Questions/Index";
 import AddTestFormSubjectId from "./SubjectId";
 import SelectItemType from "@/lib/types/SelectItem";
 import AddTestFormName from "./Name";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import AddTestFormGrades from "./Grades";
 import AddTestFormContext from "@/lib/contexts/addTestForm";
 import createTestAction from "@/lib/actions/createTest";
 import { useRouter } from "next/navigation";
 import isProduction from "@/lib/isProduction";
+import AddTestFormCreateTestBtn from "./CreateTestBtn";
 
 type Props = {
   subjects: SelectItemType<string>[];
@@ -46,6 +47,7 @@ export default function AddTestForm({ subjects }: Props) {
     resolver: zodResolver(AddTestFormSchema),
     defaultValues: ADD_TEST_FORM_DEFAULT_VALUES,
   });
+  const formRef = useRef<HTMLFormElement>(null);
   const questions = useFieldArray<AddTestFormSchemaType>({
     control: form.control,
     name: "questions",
@@ -80,11 +82,12 @@ export default function AddTestForm({ subjects }: Props) {
   return (
     <FormProvider {...form}>
       <AddTestFormContext.Provider
-        value={{ questionsFields: questions, subjects }}
+        value={{ questionsFields: questions, subjects, formRef }}
       >
         <form
           className="space-y-16"
           onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
+          ref={formRef}
         >
           <div className="space-y-10">
             <AddTestFormName />
@@ -97,7 +100,7 @@ export default function AddTestForm({ subjects }: Props) {
             <AddTestFormAddQuestionBtn />
           </div>
 
-          <FormSubmitBtn {...{ isLoading }}>Создать тест</FormSubmitBtn>
+          <AddTestFormCreateTestBtn {...{ isLoading }} />
         </form>
       </AddTestFormContext.Provider>
     </FormProvider>
