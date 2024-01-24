@@ -17,7 +17,9 @@ export default function UserProfileInfo({}: Props) {
       <UserProfileAvatar />
       <div className="space-y-2">
         <div className="space-y-1">
-          <PageTitle className="-mb-1">{user.name}</PageTitle>
+          <PageTitle className="-mb-1">
+            {user.name || "Безымянный пользователь"}
+          </PageTitle>
           {userRoleName && (
             <h3 className="text-muted-foreground">{userRoleName}</h3>
           )}
