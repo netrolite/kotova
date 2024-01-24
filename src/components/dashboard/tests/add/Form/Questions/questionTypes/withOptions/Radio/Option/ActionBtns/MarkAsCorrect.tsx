@@ -16,10 +16,11 @@ export default function AddTestFormRadioQuestionOptionMarkAsCorrectBtn({}: Props
   const { option, optionIndex } = useAddTestFormQuestionOptionContext();
 
   function handleMarkAnswerAsCorrect(indexToUpdate: number) {
-    const prevOption = optionsFields.fields[indexToUpdate];
-    optionsFields.update(indexToUpdate, {
-      ...option,
-      isCorrect: !prevOption.isCorrect,
+    optionsFields.fields.forEach((option, i) => {
+      optionsFields.update(i, {
+        ...option,
+        isCorrect: i === indexToUpdate ? !option.isCorrect : false,
+      });
     });
   }
 
