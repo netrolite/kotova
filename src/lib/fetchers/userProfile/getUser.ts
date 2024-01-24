@@ -1,22 +1,23 @@
 import { db } from "@/lib/db";
 import { cache } from "react";
 
-const userProfileGetRecentTestResults = cache(async (userId: string) => {
-  return await db.user.findFirst({
+const userProfileGetUser = cache(async (userId: string) => {
+  return await db.user.findUnique({
     where: { id: userId },
     include: {
+      _count: true,
       testResults: {
         orderBy: { createdAt: "desc" },
         include: { test: { include: { subject: true } } },
+        take: 10,
       },
     },
-    take: 10,
   });
 });
 
 export type UserProfileGetRecentTestResultsReturn = Exclude<
-  Awaited<ReturnType<typeof userProfileGetRecentTestResults>>,
+  Awaited<ReturnType<typeof userProfileGetUser>>,
   null
 >;
 
-export default userProfileGetRecentTestResults;
+export default userProfileGetUser;

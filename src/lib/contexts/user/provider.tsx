@@ -1,6 +1,6 @@
 "use client";
 
-import { UserProfileGetRecentTestResultsReturn } from "@/lib/fetchers/userProfile/getRecentTestResults";
+import { UserProfileGetRecentTestResultsReturn } from "@/lib/fetchers/userProfile/getUser";
 import { User } from "@prisma/client";
 import { ReactNode, createContext } from "react";
 

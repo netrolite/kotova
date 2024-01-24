@@ -2,7 +2,7 @@ import UserProfileInfo from "@/components/userProfile/Info";
 import UserProfileRecentTestResults from "@/components/userProfile/RecentTestResults/Index";
 import UserProfileContextProvider from "@/lib/contexts/user/provider";
 import getSignedInUser from "@/lib/fetchers/getSignedInUser";
-import userProfileGetRecentTestResults from "@/lib/fetchers/userProfile/getRecentTestResults";
+import userProfileGetUser from "@/lib/fetchers/userProfile/getUser";
 import { User } from "@prisma/client";
 import { notFound } from "next/navigation";
 
@@ -14,7 +14,7 @@ export default async function UserProfile({
   const signedInUserPromise = getSignedInUser({
     select: { id: true, testResults: { select: { testId: true } } },
   }) as Promise<(User & { testResults: { testId: string }[] }) | null>;
-  const userPromise = userProfileGetRecentTestResults(userId);
+  const userPromise = userProfileGetUser(userId);
   const [signedInUser, user] = await Promise.all([
     signedInUserPromise,
     userPromise,
