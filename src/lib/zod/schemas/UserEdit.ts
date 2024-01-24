@@ -9,6 +9,7 @@ const NAME_MAX_LEN = 100;
 const UserEditSchema = z.object({
   name: z
     .string()
+    .trim()
     .min(NAME_MIN_LEN, `Имя должно быть не короче ${NAME_MIN_LEN} символов`)
     .max(NAME_MAX_LEN, `Имя должно быть не длиннее ${NAME_MAX_LEN} символов`)
     .refine(
