@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import Google from "next-auth/providers/google";
 import Yandex from "next-auth/providers/yandex";
 import Credentials from "next-auth/providers/credentials";
@@ -12,8 +12,11 @@ import bcrypt from "bcrypt";
 
 export const nextAuthConfig = {
   adapter: PrismaAdapter(db),
+  trustHost: true,
   pages: {
     signIn: "/sign-in",
+    // TODO: add error page
+    // error: "/auth-error"
   },
   session: {
     strategy: "jwt",
@@ -67,7 +70,9 @@ export const nextAuthConfig = {
     }),
   ],
   callbacks: {
-    session: ({ session, token }) => {
+    session: (params) => {
+      const { session } = params;
+      const token = (params as any).token;
       // Apparently setting the id like this is needed for sign in.
       // It breaks if I just return the token. Same for the `jwt` callback
       return {
