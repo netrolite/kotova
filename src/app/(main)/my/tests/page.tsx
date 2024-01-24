@@ -19,7 +19,7 @@ export default async function Tests() {
           <p className="text-muted-foreground">Вы ещё не создавали тесты</p>
         )}
         <Link className="max-w-min" href="/my/tests/create">
-          <BtnWithIcon icon={<PlusIcon />}>Добавить тест</BtnWithIcon>
+          <BtnWithIcon icon={<PlusIcon />}>Создать тест</BtnWithIcon>
         </Link>
       </div>
       <section>
