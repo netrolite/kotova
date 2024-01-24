@@ -18,6 +18,13 @@ export default async function TakeTest({ params: { id } }: Context) {
   return (
     <>
       <PageTitle className="mb-8">{test.name}</PageTitle>
+      <button
+        onClick={() => {
+          throw new Error();
+        }}
+      >
+        sldkfj
+      </button>
       <TakeTestQuestions {...test} />
     </>
   );

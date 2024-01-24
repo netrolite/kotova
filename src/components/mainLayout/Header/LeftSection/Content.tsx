@@ -14,7 +14,7 @@ type Props = {
 
 const TIMESTAMP_OFFSET = 1000;
 
-export default function HeaderLeftSectionContent({
+export default function MainLayoutHeaderLeftSectionContent({
   shouldShowBackBtn,
   initPageLoadUrl,
   initPageLoadTimestamp,

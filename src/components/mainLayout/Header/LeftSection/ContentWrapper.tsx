@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import HeaderLeftSectionContent from "./Content";
+import MainLayoutHeaderLeftSectionContent from "./Content";
 
 type Props = {
   shouldShowBackBtn: boolean;
@@ -9,10 +9,12 @@ type Props = {
   initPageLoadTimestamp: number;
 };
 
-export default function HeaderLeftSectionContentWrapper(props: Props) {
+export default function MainLayoutHeaderLeftSectionContentWrapper(
+  props: Props,
+) {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
 
   if (!isMounted) return null;
-  return <HeaderLeftSectionContent {...props} />;
+  return <MainLayoutHeaderLeftSectionContent {...props} />;
 }
