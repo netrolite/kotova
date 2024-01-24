@@ -16,13 +16,13 @@ export default async function credentialsSignUpAction(
   const validationResult = SignUpSchema.safeParse(formData);
   if (!validationResult.success) return { error: true };
   const {
-    data: { email, password: plaintextPassword },
+    data: { email, password: plaintextPassword, name },
   } = validationResult;
   const salt = await bcrypt.genSalt();
   const hashedPassword = await bcrypt.hash(plaintextPassword, salt);
 
   try {
-    await credentialsSignUpCreateUser({ email, hashedPassword });
+    await credentialsSignUpCreateUser({ email, hashedPassword, name });
     await credentialsSignUpSignIn({ email, plaintextPassword });
     return { data: true };
   } catch (err) {
