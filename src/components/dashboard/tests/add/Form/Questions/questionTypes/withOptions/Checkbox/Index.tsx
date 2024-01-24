@@ -1,6 +1,5 @@
 import { FormLabel, FormMessage } from "@/components/ui/form";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
-import { useFieldArray } from "react-hook-form";
 import AddTestFormQuestionOptionContext from "@/lib/contexts/addTestForm/questionOption";
 import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
 import AddTestFormQuestionAddOptionBtn from "../AddOptionBtn";
@@ -20,13 +19,13 @@ export default function AddTestFormRadioQuestion() {
       <FormItemField
         control={control}
         name={`questions.${index}.options`}
-        render={() => (
+        render={({ field }) => (
           <>
             <ul className="space-y-1">
-              {optionsFields.fields.map((option, i) => (
+              {field.value.map((option, i) => (
                 <AddTestFormQuestionOptionContext.Provider
                   value={{ option, optionIndex: i }}
-                  key={option.id}
+                  key={i}
                 >
                   <li className="flex gap-2">
                     <AddTestFormCheckboxQuestionOptionInput />
