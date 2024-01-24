@@ -48,27 +48,25 @@ export default function SignInForm({}: Props) {
         callbackUrl,
       });
       if (!resp) throw new Error();
-      if (resp.error) {
-        switch (resp.error) {
-          case "CredentialsSignin":
-            form.setError(`root.${errCodes.INVALID_CREDENTIALS}`, {
-              message: "Неверный пароль или электронная почта",
-            });
-            break;
-          default:
-            throw new Error();
-        }
-        return;
-      }
+      if (!resp?.error) return location.replace(callbackUrl);
 
-      location.replace(callbackUrl);
+      setIsLoading(false); // only set loading to false if an error occurs
+      switch (resp.error) {
+        case "CredentialsSignin":
+          form.setError(`root.${errCodes.INVALID_CREDENTIALS}`, {
+            message: "Неверный пароль или электронная почта",
+          });
+          break;
+        default:
+          throw new Error();
+      }
     } catch (err) {
       console.error(err);
+      setIsLoading(false);
       form.setError(`root.${errCodes.UNKNOWN}`, {
         message: GENERIC_ERROR_MSG,
       });
     }
-    setIsLoading(false);
   }
 
   return (

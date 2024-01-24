@@ -1,10 +1,10 @@
 import PageTitle from "@/components/PageTitle";
 import SignUpForm from "@/components/signUp/Form";
 
-export default function SignUp() {
+export default async function SignUp() {
   return (
     <>
-      <PageTitle className="mb-8">Создать аккаунт</PageTitle>
+      <PageTitle className="mb-8 text-center">Создать аккаунт</PageTitle>
       <SignUpForm />
     </>
   );

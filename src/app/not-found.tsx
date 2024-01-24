@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 export default function NotFound() {
   const router = useRouter();
   return (
-    <>
+    <main>
       <PageTitle>Страница не найдена</PageTitle>
       <p className="mb-4">Возможно, вы перешли по нерабочей ссылке.</p>
       <Button onClick={router.back}>Вернуться назад</Button>
-    </>
+    </main>
   );
 }

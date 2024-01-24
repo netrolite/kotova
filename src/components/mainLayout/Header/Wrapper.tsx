@@ -7,7 +7,7 @@ type Props = {
   className?: string;
 };
 
-export default function HeaderWrapper({
+export default function MainLayoutHeaderWrapper({
   children,
   asDiv = false,
   className: classNameProp,

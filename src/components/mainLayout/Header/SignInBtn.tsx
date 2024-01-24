@@ -7,7 +7,7 @@ type Props = {
   url: string;
 };
 
-export default function HeaderSignInBtn({ url }: Props) {
+export default function MainLayoutHeaderSignInBtn({ url }: Props) {
   const urlObj = new URL(url);
   urlObj.searchParams.append("hideBackBtn", "");
   return (
