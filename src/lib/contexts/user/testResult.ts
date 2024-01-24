@@ -1,4 +1,4 @@
-import { UserProfileGetRecentTestResultsReturn } from "@/lib/fetchers/userProfile/getRecentTestResults";
+import { UserProfileGetRecentTestResultsReturn } from "@/lib/fetchers/userProfile/getUser";
 import { createContext } from "react";
 
 export type UserProfileTestResultContextType =
