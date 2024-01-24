@@ -1,5 +1,3 @@
-"use client";
-
 import PageTitle from "@/components/PageTitle";
 import SignInForm from "@/components/signIn/Form";
 
