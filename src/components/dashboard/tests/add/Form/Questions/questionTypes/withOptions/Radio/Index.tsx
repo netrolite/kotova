@@ -9,7 +9,7 @@ import AddTestFormQuestionAddOptionBtn from "../AddOptionBtn";
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
 
 export default function AddTestFormRadioQuestion() {
-  const { index, optionsFields } = useAddTestFormQuestionContext();
+  const { index: questionIndex } = useAddTestFormQuestionContext();
   const { control } = useAddTestFormContext();
 
   return (
@@ -17,14 +17,14 @@ export default function AddTestFormRadioQuestion() {
       <FormLabel htmlFor={undefined}>Варианты ответа</FormLabel>
       <FormItemField
         control={control}
-        name={`questions.${index}.options`}
-        render={() => (
+        name={`questions.${questionIndex}.options`}
+        render={({ field }) => (
           <>
             <ul className="space-y-1">
-              {optionsFields.fields.map((option, i) => (
+              {field.value.map((option, i) => (
                 <AddTestFormQuestionOptionContext.Provider
                   value={{ option, optionIndex: i }}
-                  key={option.id}
+                  key={i}
                 >
                   <li className="flex gap-2">
                     <AddTestFormRadioQuestionOptionInput />

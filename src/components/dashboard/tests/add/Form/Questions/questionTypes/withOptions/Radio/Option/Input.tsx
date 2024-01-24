@@ -1,18 +1,18 @@
 import FormItemField from "@/components/Form/ItemField";
 import { FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import AddTestFormQuestionContext from "@/lib/contexts/addTestForm/question";
-import useAddTestFormQuestionOption from "@/lib/hooks/addTestForm/questionOptionContext";
+import useAddTestFormQuestionOptionContext from "@/lib/hooks/addTestForm/questionOptionContext";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
-import useContextVal from "@/lib/hooks/contextVal";
 import { cn } from "@/lib/shadcnUtils";
+import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
 
 type Props = {};
 
 export default function AddTestFormRadioQuestionOptionInput({}: Props) {
   const { control } = useAddTestFormContext();
-  const { index } = useContextVal(AddTestFormQuestionContext);
-  const { option, optionIndex } = useAddTestFormQuestionOption();
+  const { index } = useAddTestFormQuestionContext();
+  const { option, optionIndex } = useAddTestFormQuestionOptionContext();
+
   return (
     <FormItemField
       control={control}

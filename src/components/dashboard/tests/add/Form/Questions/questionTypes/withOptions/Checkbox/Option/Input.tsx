@@ -3,7 +3,7 @@ import { FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import AddTestFormQuestionContext from "@/lib/contexts/addTestForm/question";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
-import useAddTestFormQuestionOption from "@/lib/hooks/addTestForm/questionOptionContext";
+import useAddTestFormQuestionOptionContext from "@/lib/hooks/addTestForm/questionOptionContext";
 import useContextVal from "@/lib/hooks/contextVal";
 import { cn } from "@/lib/shadcnUtils";
 
@@ -12,7 +12,7 @@ type Props = {};
 export default function AddTestFormCheckboxQuestionOptionInput({}: Props) {
   const { control } = useAddTestFormContext();
   const { index } = useContextVal(AddTestFormQuestionContext);
-  const { option, optionIndex } = useAddTestFormQuestionOption();
+  const { option, optionIndex } = useAddTestFormQuestionOptionContext();
   return (
     <FormItemField
       control={control}
