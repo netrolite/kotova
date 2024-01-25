@@ -10,10 +10,10 @@ import {
 
 const AddTestFormQuestionSchema = z
   .object({
-    question: z.string().min(1, { message: "Вопрос не заполнен" }),
+    question: z.string().trim().min(1, { message: "Вопрос не заполнен" }),
     type: QuestionTypeSchema,
-    explanation: z.string().nullable(),
-    correctAnswerText: z.string().nullable(),
+    explanation: z.string().trim().nullable(),
+    correctAnswerText: z.string().trim().nullable(),
     options: AddTestFormQuestionOption.array(),
   })
   .refine(

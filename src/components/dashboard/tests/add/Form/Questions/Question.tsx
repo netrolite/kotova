@@ -11,29 +11,26 @@ import { FormField } from "@/components/ui/form";
 type Props = {};
 
 export default function AddTestFormQuestion({}: Props) {
-  const { control } = useFormContext<AddTestFormSchemaType>();
-  const { index } = useAddTestFormQuestionContext();
+  const { control, watch } = useFormContext<AddTestFormSchemaType>();
+  const { index: questionIndex } = useAddTestFormQuestionContext();
+  const question = watch(`questions.${questionIndex}`);
 
   return (
     <div className="space-y-2">
-      <FormField
-        control={control}
-        name={`questions.${index}`}
-        render={({ field: { value: question } }) => {
-          switch (question.type) {
-            case TEST_QUESTION_TYPE.TEXT:
-              return <AddTestFormTextQuestion />;
-            case TEST_QUESTION_TYPE.RADIO:
-              return <AddTestFormRadioQuestion />;
-            case TEST_QUESTION_TYPE.CHECKBOX:
-              return <AddTestFormCheckboxQuestion />;
-            case TEST_QUESTION_TYPE.TABLE:
-              return <AddTestFormTableQuestion />;
-            default:
-              return <AddTestFormTextQuestion />;
-          }
-        }}
-      />
+      {(() => {
+        switch (question.type) {
+          case TEST_QUESTION_TYPE.TEXT:
+            return <AddTestFormTextQuestion />;
+          case TEST_QUESTION_TYPE.RADIO:
+            return <AddTestFormRadioQuestion />;
+          case TEST_QUESTION_TYPE.CHECKBOX:
+            return <AddTestFormCheckboxQuestion />;
+          case TEST_QUESTION_TYPE.TABLE:
+            return <AddTestFormTableQuestion />;
+          default:
+            return <AddTestFormTextQuestion />;
+        }
+      })()}
     </div>
   );
 }

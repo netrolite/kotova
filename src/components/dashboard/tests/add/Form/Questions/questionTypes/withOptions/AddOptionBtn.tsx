@@ -21,7 +21,7 @@ export default function AddTestFormQuestionAddOptionBtn({
       isRadioQuestion,
     } = getQuestionTypes(questionType);
     optionsFields.append({
-      content: "",
+      content: !isTableQuestion ? "" : null,
       isCorrect: isCheckboxQuestion || isRadioQuestion ? false : null,
       tableColumn: isTableQuestion ? "" : null,
       tableColumnAnswer: isTableQuestion ? "" : null,

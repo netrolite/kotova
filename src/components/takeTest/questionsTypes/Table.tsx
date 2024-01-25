@@ -18,7 +18,7 @@ export default function TakeTestTableQuestion() {
           key={option.id}
           control={control}
           name={`answers.${questionIndex}.options.${i}.tableAnswer`}
-          formItemClassName="flex space-y-0"
+          formItemClassName="flex space-y-0 items-center"
           render={({ field }) => (
             <>
               <FormLabel className="p-4 pl-0">

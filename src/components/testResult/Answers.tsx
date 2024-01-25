@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import TestResultAnswer from "./Answer";
 import { Separator } from "@/components/ui/separator";
 import TestResultAnswerIsCorrectSection from "./IsCorrectSection/Index";
 import useTestResultContext from "@/lib/hooks/testResult/context";
@@ -24,10 +23,7 @@ export default function TestResultAnswers({}: Props) {
                 </CardHeader>
                 <Separator />
                 <CardContent className="space-y-3">
-                  <div>
-                    <TestResultAnswer />
-                    <TestResultAnswerIsCorrectSection />
-                  </div>
+                  <TestResultAnswerIsCorrectSection />
                   <TestResultAnswerExplanation />
                 </CardContent>
               </Card>
