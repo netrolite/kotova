@@ -43,6 +43,7 @@ model User {
   image         String?
   password      String?
   createdAt     DateTime     @default(now())
+  avgTestScore  Float?
   sessions      Session[]
   accounts      Account[]
   createdTests  Test[]

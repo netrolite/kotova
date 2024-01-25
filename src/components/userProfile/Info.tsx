@@ -14,7 +14,7 @@ export default function UserProfileInfo({}: Props) {
   const userRoleName = getUserRoleName(user.role);
 
   return (
-    <section>
+    <section className="space-y-6">
       <div className="flex gap-6">
         <UserProfileAvatar />
         <div className="space-y-2">
