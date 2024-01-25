@@ -1,5 +1,5 @@
 import FormItemField from "@/components/Form/ItemField";
-import { FormLabel, FormMessage } from "@/components/ui/form";
+import { FormField, FormLabel, FormMessage } from "@/components/ui/form";
 import AddTestFormQuestionOptionContext from "@/lib/contexts/addTestForm/questionOption";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
@@ -13,30 +13,37 @@ type Props = {};
 
 export default function AddTestFormTableQuestion({}: Props) {
   const { control } = useAddTestFormContext();
-  const { index } = useAddTestFormQuestionContext();
+  const { index: questionIndex } = useAddTestFormQuestionContext();
   const { optionsFields } = useAddTestFormQuestionContext();
 
   return (
     <>
-      <FormLabel htmlFor={undefined}>Столбцы и ответы</FormLabel>
-      <FormItemField
+      <FormField
         control={control}
-        name={`questions.${index}.options`}
+        name={`questions.${questionIndex}.options`}
         render={() => (
           <>
+            <FormLabel htmlFor={undefined}>Столбцы и ответы</FormLabel>
             <ul className="space-y-1">
-              {optionsFields.fields.map((option, i) => (
+              {optionsFields.fields.map((option, optionIndex) => (
                 <AddTestFormQuestionOptionContext.Provider
-                  value={{ option, optionIndex: i }}
+                  value={{ option, optionIndex }}
                   key={option.id}
                 >
-                  <div className="flex gap-2">
-                    <div className="grid w-full grid-cols-2 gap-1 md:gap-2">
-                      <AddTestFormTableQuestionOptionColumn />
-                      <AddTestFormTableQuestionOptionAnswer />
-                    </div>
-                    <AddTestFormTableQuestionOptionDeleteBtn />
-                  </div>
+                  <FormField
+                    control={control}
+                    name={`questions.${questionIndex}.options.${optionIndex}`}
+                    render={() => (
+                      <div className="flex gap-2">
+                        <div className="grid w-full grid-cols-2 gap-1 md:gap-2">
+                          <AddTestFormTableQuestionOptionColumn />
+                          <AddTestFormTableQuestionOptionAnswer />
+                        </div>
+                        <AddTestFormTableQuestionOptionDeleteBtn />
+                        <FormMessage />
+                      </div>
+                    )}
+                  />
                 </AddTestFormQuestionOptionContext.Provider>
               ))}
             </ul>

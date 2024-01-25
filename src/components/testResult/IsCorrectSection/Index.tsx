@@ -11,14 +11,14 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
   const correctAnswers = testResultGetCorrectAnswers(answerData);
 
   return (
-    <>
+    <div>
       <TestResultAnswerIsCorrectSectionBadge />
       <div className="flex gap-2">
         <span className="text-muted-foreground">Ваш ответ:</span>
         <div className="font-semibold">
           {!answers && <p>Нет данных</p>}
           {answers && (
-            <ul className="font-semibold">
+            <ul className="flex font-semibold">
               {answers.map((answer, i, arr) => {
                 const isLast = arr.length - 1 === i;
                 return (
@@ -51,6 +51,6 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
