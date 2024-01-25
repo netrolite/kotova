@@ -12,7 +12,6 @@ export default function AddTestFormRadioQuestionOptionInput({}: Props) {
   const { control } = useAddTestFormContext();
   const { index: questionIndex } = useAddTestFormQuestionContext();
   const { option, optionIndex } = useAddTestFormQuestionOptionContext();
-
   return (
     <FormItemField
       control={control}
