@@ -20,6 +20,7 @@ const getTestsForDashboardTestsList = cache(async ({ user, page }: Params) => {
       subject: { select: { title: true } },
       testResults: { select: { id: true } },
     },
+    orderBy: { updatedAt: "desc" },
   });
 });
 
