@@ -12,6 +12,10 @@ export default function AddTestFormRadioQuestionOptionDeleteBtn() {
   const { optionsFields } = useAddTestFormQuestionContext();
   const { optionIndex } = useAddTestFormQuestionOptionContext();
 
+  function handleDeleteOption() {
+    optionsFields.remove(optionIndex);
+  }
+
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -19,7 +23,7 @@ export default function AddTestFormRadioQuestionOptionDeleteBtn() {
           variant="ghost"
           type="button"
           className="text-muted-foreground hover:text-destructive"
-          onClick={() => optionsFields.remove(optionIndex)}
+          onClick={handleDeleteOption}
         >
           <TrashIcon />
         </Button>
