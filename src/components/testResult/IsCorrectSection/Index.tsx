@@ -16,8 +16,8 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
       <div className="flex gap-2">
         <span className="text-muted-foreground">Ваш ответ:</span>
         <div className="font-semibold">
-          {!answers && <p>Нет данных</p>}
-          {answers && (
+          {!answers?.length && <p>Нет данных</p>}
+          {!!answers?.length && (
             <ul className="flex font-semibold">
               {answers.map((answer, i, arr) => {
                 const isLast = arr.length - 1 === i;
@@ -35,8 +35,8 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
       {!answerData.isCorrect && (
         <div className="flex gap-2">
           <span className="text-muted-foreground">Правильный ответ:</span>
-          {!correctAnswers && <p>Нет данных</p>}
-          {correctAnswers && (
+          {!correctAnswers?.length && <p>Нет данных</p>}
+          {!!correctAnswers?.length && (
             <ul className="font-semibold">
               {correctAnswers.map((answer, i, arr) => {
                 const isLast = arr.length - 1 === i;
