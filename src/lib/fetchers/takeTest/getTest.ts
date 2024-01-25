@@ -4,7 +4,11 @@ import { db } from "../../db";
 const takeTestGetTest = cache(async (id: string) => {
   return await db.test.findFirst({
     where: { id },
-    include: { questions: { include: { options: true } } },
+    include: {
+      questions: { include: { options: true } },
+      subject: { select: { title: true } },
+      createdBy: { select: { id: true, image: true, name: true } },
+    },
   });
 });
 

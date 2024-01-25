@@ -43,7 +43,7 @@ export default function SubjectTestListCard({
           href={createdBy?.id ? `/users/${createdBy.id}` : "/users/deleted"}
         >
           <SubjectTestListTestAvatar user={createdBy} />
-          {createdBy?.name || "Удаленный пользователь"}
+          {createdBy ? createdBy.name : "Удаленный пользователь"}
         </Link>
       </CardFooter>
     </Card>

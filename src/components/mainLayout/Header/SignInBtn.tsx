@@ -13,6 +13,7 @@ export default function MainLayoutHeaderSignInBtn({ url }: Props) {
   return (
     <Button
       onClick={() => signIn(undefined, { callbackUrl: urlObj.toString() })}
+      className="hover:underline"
     >
       Войти
     </Button>
