@@ -14,11 +14,12 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
     <div>
       <TestResultAnswerIsCorrectSectionBadge />
       <div className="flex gap-2">
-        <span className="text-muted-foreground">Ваш ответ:</span>
+        <span className="whitespace-nowrap text-muted-foreground">
+          Ваш ответ:
+        </span>
         <div className="font-semibold">
-          {!answers?.length && <p>Нет данных</p>}
           {!!answers?.length && (
-            <ul className="flex font-semibold">
+            <ul className="flex flex-wrap gap-x-2">
               {answers.map((answer, i, arr) => {
                 const isLast = arr.length - 1 === i;
                 return (
@@ -30,25 +31,30 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
               })}
             </ul>
           )}
+          {!answers?.length && <p>Нет данных</p>}
         </div>
       </div>
       {!answerData.isCorrect && (
         <div className="flex gap-2">
-          <span className="text-muted-foreground">Правильный ответ:</span>
-          {!correctAnswers?.length && <p>Нет данных</p>}
-          {!!correctAnswers?.length && (
-            <ul className="font-semibold">
-              {correctAnswers.map((answer, i, arr) => {
-                const isLast = arr.length - 1 === i;
-                return (
-                  <li key={i}>
-                    {answer}
-                    {!isLast && ","}
-                  </li>
-                );
-              })}
-            </ul>
-          )}
+          <span className="whitespace-nowrap text-muted-foreground">
+            Правильный ответ:
+          </span>
+          <div className="font-semibold">
+            {!!correctAnswers?.length && (
+              <ul className="flex flex-wrap gap-x-2">
+                {correctAnswers.map((answer, i, arr) => {
+                  const isLast = arr.length - 1 === i;
+                  return (
+                    <li key={i}>
+                      {answer}
+                      {!isLast && ","}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+            {!correctAnswers?.length && <p>Нет данных</p>}
+          </div>
         </div>
       )}
     </div>
