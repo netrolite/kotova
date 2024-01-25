@@ -1,11 +1,6 @@
 "use server";
 
-import {
-  Prisma,
-  TestResultAnswer,
-  TestResultAnswerOption,
-} from "@prisma/client";
-import { db } from "../db";
+import { Prisma } from "@prisma/client";
 import checkTestAnswersGetTest from "../fetchers/checkTestAnswers/getTest";
 import getSignedInUser from "../fetchers/getSignedInUser";
 import getQuestionTypes from "../getQuestionTypes";
@@ -16,10 +11,10 @@ import checkTestAnswersCheckboxQuestion from "../checkTestAnswers/checkboxQuesti
 import checkTestAnswersTextQuestion from "../checkTestAnswers/textQuestion";
 import checkTestAnswersTableQuestion from "../checkTestAnswers/tableQuestion";
 import checkTestAnswersCreateTestResult from "../checkTestAnswers/createTestResult";
-import checkTestAnswersGetTestResults from "../fetchers/checkTestAnswers/getTestResults";
 import checkTestAnswersCalcAvgTestScoreAndUpdate from "../checkTestAnswers/calcAvgTestScoreAndUpdate";
 import getTestScore from "../getTestScore";
 import checkTestAnswersGetCorrectAnswersAmount from "../checkTestAnswers/getCorrectAnswersAmount";
+import checkTestAnswersCalcUserAvgTestScoreAndUpdate from "../checkTestAnswers/calcUserAvgTestScoreAndUpdate";
 
 type Data = {
   testResultId: string;
@@ -37,13 +32,10 @@ export default async function checkTestAnswers(
   } = validationResult;
 
   const testPromise = checkTestAnswersGetTest(testId);
-  const testResultsPromise = checkTestAnswersGetTestResults(testId);
-  const userPromise = getSignedInUser();
-  const [test, testResults, user] = await Promise.all([
-    testPromise,
-    testResultsPromise,
-    userPromise,
-  ]);
+  const userPromise = getSignedInUser({
+    include: { _count: { select: { testResults: true } } },
+  });
+  const [test, user] = await Promise.all([testPromise, userPromise]);
 
   if (!test) return { error: "test not found" };
   if (!user) return { error: "user not found" };
@@ -78,7 +70,16 @@ export default async function checkTestAnswers(
   });
   const [testCreationResult] = await Promise.all([
     checkTestAnswersCreateTestResult({ checkedAnswers, test, user, score }),
-    checkTestAnswersCalcAvgTestScoreAndUpdate({ test, score, testResults }),
+    checkTestAnswersCalcAvgTestScoreAndUpdate({
+      score,
+      test,
+      testResultsAmount: test._count.testResults,
+    }),
+    checkTestAnswersCalcUserAvgTestScoreAndUpdate({
+      score,
+      user,
+      userTestResultsAmount: user._count.testResults,
+    }),
   ]);
 
   return testCreationResult;
