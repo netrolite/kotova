@@ -36,11 +36,15 @@ export default function TakeTestQuestions({ id: testId, questions }: Props) {
   });
 
   async function handleSubmit(formData: TakeTestSchemaType) {
-    setIsLoading(true);
-    const result = await checkTestAnswers(formData);
-    if (result.error || !result.data) toast.error(GENERIC_ERROR_MSG);
-    else router.replace(`/test-result/${result.data.testResultId}`);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const result = await checkTestAnswers(formData);
+      if (result.error || !result.data) throw new Error();
+      router.replace(`/test-result/${result.data.testResultId}`);
+    } catch (err) {
+      setIsLoading(false);
+      toast.error(GENERIC_ERROR_MSG);
+    }
   }
 
   function handleSubmitError(err: FieldErrors<TakeTestSchemaType>) {
