@@ -1,11 +1,7 @@
 import { z } from "zod";
 
 const AddTestFormQuestionOption = z.object({
-  content: z
-    .string()
-    .trim()
-    .min(1, { message: "Ответ не заполнен" })
-    .nullable(),
+  content: z.string().trim().min(1, { message: "Ответ не заполнен" }),
   isCorrect: z.boolean().nullable(),
   tableColumn: z
     .string()
@@ -19,9 +15,9 @@ const AddTestFormQuestionOption = z.object({
     .nullable(),
 });
 
-export const AddTestFormSavedQuestionOption = AddTestFormQuestionOption.extend(
-  {},
-);
+export const AddTestFormSavedQuestionOption = AddTestFormQuestionOption.extend({
+  content: z.string(),
+});
 
 export default AddTestFormQuestionOption;
 
