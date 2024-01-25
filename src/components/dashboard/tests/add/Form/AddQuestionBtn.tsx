@@ -33,13 +33,23 @@ import AddTestFormAddQuestionFormSchema, {
 import QuestionTypesList from "@/components/QuestionTypesList";
 import useAddTestFormStore from "@/lib/stores/addTestForm";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
+import { AddTestFormQuestionSchemaType } from "@/lib/zod/schemas/addTestForm/Question";
+import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
 
-export const QUESTION_DEFAULT_VALUES = {
+export const TEXT_QUESTION_DEFAULT_VALUES = {
   correctAnswerText: "",
   explanation: "",
   options: [],
   question: "",
-} satisfies Omit<AddTestFormAddQuestionFormSchemaType, "type">;
+  type: TEST_QUESTION_TYPE.TEXT,
+} satisfies AddTestFormQuestionSchemaType;
+
+export const QUESTION_WITH_OPTIONS_DEFAULT_VALUES = {
+  correctAnswerText: null,
+  explanation: "",
+  options: [],
+  question: "",
+} satisfies Omit<AddTestFormQuestionSchemaType, "type">;
 
 export default function AddTestFormAddQuestionBtn() {
   const { questionsFields: questions } = useAddTestFormContext();
@@ -64,16 +74,20 @@ export default function AddTestFormAddQuestionBtn() {
     e.stopPropagation(); // prevents the other form from triggering
     form.handleSubmit(({ type }) => {
       form.reset();
-      questions.append({
-        ...QUESTION_DEFAULT_VALUES,
-        type,
-      });
+      if (type === TEST_QUESTION_TYPE.TEXT) {
+        questions.append(TEXT_QUESTION_DEFAULT_VALUES);
+      } else {
+        questions.append({
+          ...QUESTION_WITH_OPTIONS_DEFAULT_VALUES,
+          type,
+        });
+      }
       setIsDialogOpen(false);
     })(e);
   }
 
   return (
-    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} modal>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <BtnWithIcon type="button" icon={<PlusIcon />}>
           Добавить вопрос

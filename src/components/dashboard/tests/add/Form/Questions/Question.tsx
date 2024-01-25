@@ -6,6 +6,7 @@ import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionConte
 import AddTestFormRadioQuestion from "./questionTypes/withOptions/Radio/Index";
 import AddTestFormCheckboxQuestion from "./questionTypes/withOptions/Checkbox/Index";
 import AddTestFormTableQuestion from "./questionTypes/withOptions/Table/Index";
+import { FormField } from "@/components/ui/form";
 
 type Props = {};
 
@@ -14,8 +15,8 @@ export default function AddTestFormQuestion({}: Props) {
   const { index } = useAddTestFormQuestionContext();
 
   return (
-    <div className="mb-4 space-y-2">
-      <Controller
+    <div className="space-y-2">
+      <FormField
         control={control}
         name={`questions.${index}`}
         render={({ field: { value: question } }) => {
