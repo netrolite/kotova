@@ -1,18 +1,12 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AddTestFormCheckboxQuestionOptionMarkAsCorrectBtn from "./MarkAsCorrect";
 import AddTestFormCheckboxQuestionOptionDeleteBtn from "./Delete";
-import useAddTestFormQuestionOptionContext from "@/lib/hooks/addTestForm/questionOptionContext";
 
-type Props = {};
-
-export default function AddTestFormCheckboxQuestionOptionActionBtns({}: Props) {
-  const { option, optionIndex } = useAddTestFormQuestionOptionContext();
+export default function AddTestFormCheckboxQuestionOptionActionBtns() {
   return (
     <TooltipProvider>
-      <AddTestFormCheckboxQuestionOptionMarkAsCorrectBtn
-        {...{ option, optionIndex }}
-      />
-      <AddTestFormCheckboxQuestionOptionDeleteBtn {...{ optionIndex }} />
+      <AddTestFormCheckboxQuestionOptionMarkAsCorrectBtn />
+      <AddTestFormCheckboxQuestionOptionDeleteBtn />
     </TooltipProvider>
   );
 }

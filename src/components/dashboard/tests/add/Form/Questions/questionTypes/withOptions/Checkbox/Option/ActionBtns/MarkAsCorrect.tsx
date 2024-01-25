@@ -4,21 +4,20 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
 import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
+import useAddTestFormQuestionOptionContext from "@/lib/hooks/addTestForm/questionOptionContext";
 import { cn } from "@/lib/shadcnUtils";
-import { AddTestFormSavedQuestionOptionSchemaType } from "@/lib/zod/schemas/addTestForm/QuestionOption";
 import { CheckIcon } from "lucide-react";
 
-type Props = {
-  option: AddTestFormSavedQuestionOptionSchemaType;
-  optionIndex: number;
-};
-
-export default function AddTestFormCheckboxQuestionOptionMarkAsCorrectBtn({
-  option,
-  optionIndex,
-}: Props) {
-  const { optionsFields } = useAddTestFormQuestionContext();
+export default function AddTestFormCheckboxQuestionOptionMarkAsCorrectBtn() {
+  // DO NOT use optionsFields.fields[number].content!!! For some reason it's an empty string.
+  // use watch(`questions.${questionIndex}.options`) instead (like i do below)
+  const { optionsFields, index: questionIndex } =
+    useAddTestFormQuestionContext();
+  const { optionIndex } = useAddTestFormQuestionOptionContext();
+  const { watch } = useAddTestFormContext();
+  const option = watch(`questions.${questionIndex}.options.${optionIndex}`);
 
   function handleMarkAnswerAsCorrect(indexToUpdate: number) {
     optionsFields.update(indexToUpdate, {
