@@ -5,7 +5,6 @@ import AddTestFormQuestionSchema, {
 
 const NAME_MAX_LEN = 300;
 
-// grades need to be objects for react-hook-form to work properly
 const AddTestFormGrades = z.number().array();
 
 const AddTestFormSchema = z.object({
