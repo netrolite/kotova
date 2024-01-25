@@ -5,19 +5,18 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AddTestFormQuestionContext from "@/lib/contexts/addTestForm/question";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
-import useContextVal from "@/lib/hooks/contextVal";
+import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
 import { MoreVerticalIcon, TrashIcon } from "lucide-react";
 import { useState } from "react";
 
 export default function AddTestFormQuestionActions() {
   const [isOpen, setIsOpen] = useState(false);
-  const { index } = useContextVal(AddTestFormQuestionContext);
-  const { questionsFields: questions } = useAddTestFormContext();
+  const { index } = useAddTestFormQuestionContext();
+  const { questionsFields } = useAddTestFormContext();
 
   function handleDeleteQuestion() {
-    questions.remove(index);
+    questionsFields.remove(index);
     setIsOpen(false);
   }
 

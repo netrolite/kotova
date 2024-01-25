@@ -5,16 +5,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import useAddTestFormQuestionContext from "@/lib/hooks/addTestForm/questionContext";
+import useAddTestFormQuestionOptionContext from "@/lib/hooks/addTestForm/questionOptionContext";
 import { TrashIcon } from "lucide-react";
 
-type Props = {
-  optionIndex: number;
-};
-
-export default function AddTestFormRadioQuestionOptionDeleteBtn({
-  optionIndex,
-}: Props) {
+export default function AddTestFormRadioQuestionOptionDeleteBtn() {
   const { optionsFields } = useAddTestFormQuestionContext();
+  const { optionIndex } = useAddTestFormQuestionOptionContext();
 
   return (
     <Tooltip>

@@ -2,7 +2,7 @@ import { AddTestFormSchemaType } from "@/lib/zod/schemas/addTestForm/Index";
 import { createContext } from "react";
 import { UseFieldArrayReturn } from "react-hook-form";
 
-type AddTestFormQuestionContextType = {
+export type AddTestFormQuestionContextType = {
   index: number;
   optionsFields: UseFieldArrayReturn<
     AddTestFormSchemaType,
