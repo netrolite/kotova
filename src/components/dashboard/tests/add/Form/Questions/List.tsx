@@ -11,12 +11,12 @@ import AddTestFormQuestionType from "./QuestionType";
 type Props = {};
 
 export default function AddTestFormQuestionList({}: Props) {
-  const { questionsFields: questions } = useAddTestFormContext();
-  if (!questions.fields.length) return null;
+  const { questionsFields } = useAddTestFormContext();
+  if (!questionsFields.fields.length) return null;
 
   return (
     <ul className="space-y-10">
-      {questions.fields.map((question, i, arr) => {
+      {questionsFields.fields.map((question, i, arr) => {
         const isLast = arr.length - 1 === i;
         return (
           <li key={question.id} className="space-y-1">

@@ -10,13 +10,13 @@ type Props = {};
 
 export default function AddTestFormRadioQuestionOptionInput({}: Props) {
   const { control } = useAddTestFormContext();
-  const { index } = useAddTestFormQuestionContext();
+  const { index: questionIndex } = useAddTestFormQuestionContext();
   const { option, optionIndex } = useAddTestFormQuestionOptionContext();
 
   return (
     <FormItemField
       control={control}
-      name={`questions.${index}.options.${optionIndex}.content`}
+      name={`questions.${questionIndex}.options.${optionIndex}.content`}
       formItemClassName="w-full"
       render={({ field }) => (
         <>
