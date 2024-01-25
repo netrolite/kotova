@@ -73,13 +73,13 @@ export default function AddTestFormAddQuestionBtn() {
   }
 
   return (
-    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} modal>
       <DialogTrigger asChild>
         <BtnWithIcon type="button" icon={<PlusIcon />}>
           Добавить вопрос
         </BtnWithIcon>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent onCloseAutoFocus={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle>Добавить вопрос</DialogTitle>
         </DialogHeader>
