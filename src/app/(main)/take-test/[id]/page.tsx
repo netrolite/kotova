@@ -30,24 +30,16 @@ export default async function TakeTest({ params: { id } }: Context) {
           <h2 className="text-muted-foreground">{test.subject?.title}</h2>
         </div>
         <div>
-          <time
-            className="text-muted-foreground"
-            dateTime={test.createdAt.toISOString()}
-          >
-            Тест создан {createdAtDateString} в {createdAtTimeString}
-          </time>
-          <Link
-            className="flex w-min items-center gap-2 hover:underline"
-            href={`/users/${test.createdBy?.id ?? "deleteduser"}`}
-          >
-            <AvatarWithFallback
-              username={test.createdBy?.name ?? undefined}
-              src={test.createdBy?.image ?? undefined}
-            />
-            <span className="whitespace-nowrap">
-              {test.createdBy ? test.createdBy.name : "Удаленный пользователь"}
-            </span>
-          </Link>
+          <p className="text-muted-foreground">
+            Создан пользователем{" "}
+            <Link
+              className="text-black hover:underline"
+              href={`/users/${test.createdBy?.id ?? "/deleteduser"}`}
+            >
+              {test.createdBy?.name ?? "Удаленный пользователь"}
+            </Link>{" "}
+            {createdAtDateString} в {createdAtTimeString}
+          </p>
         </div>
       </div>
       <TakeTestQuestions {...test} />
