@@ -6,7 +6,15 @@ const getTestResult = cache(async (id: string) => {
     where: { id },
     include: {
       user: { select: { name: true } },
-      test: { select: { name: true } },
+      test: {
+        select: {
+          id: true,
+          name: true,
+          createdAt: true,
+          subject: true,
+          createdBy: true,
+        },
+      },
       answers: {
         select: {
           id: true,
