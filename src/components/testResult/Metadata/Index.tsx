@@ -5,7 +5,7 @@ import TestResultMetadataTakenByUser from "./TakenByUser/Index";
 export default async function TestResultMetadata() {
   return (
     <div className="mb-8 space-y-2">
-      <div className="flex flex-col">
+      <div>
         <TestResultMetadataTitle />
         <TestResultMetadataSubject />
       </div>

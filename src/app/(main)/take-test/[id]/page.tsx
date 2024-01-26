@@ -18,7 +18,7 @@ export default async function TakeTest({ params: { id } }: Context) {
   return (
     <TakeTestContextProvider {...test}>
       <div className="mb-8 space-y-2">
-        <div className="flex flex-col">
+        <div>
           <TakeTestMetadataTitle />
           <TakeTestMetadataSubject />
         </div>

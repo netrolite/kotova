@@ -7,8 +7,10 @@ export default function TestResultMetadataTitle() {
   const testResult = useTestResultContext();
 
   return (
-    <Link className="w-min" href={`/take-test/${testResult.test.id}`}>
-      <PageTitle>{testResult.test.name}</PageTitle>
-    </Link>
+    <div>
+      <Link href={`/take-test/${testResult.test.id}`}>
+        <PageTitle className="inline">{testResult.test.name}</PageTitle>
+      </Link>
+    </div>
   );
 }
