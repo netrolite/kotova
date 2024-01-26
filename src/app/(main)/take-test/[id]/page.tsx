@@ -5,13 +5,14 @@ import TakeTestMetadataTitle from "@/components/takeTest/Metadata/Title";
 import TakeTestMetadataSubject from "@/components/takeTest/Metadata/Subject";
 import TakeTestMetadataCreatedByUser from "@/components/takeTest/Metadata/TakenByUser/Index";
 import TakeTestContextProvider from "@/lib/contexts/takeTest/Index/Provider";
+import authOrRedirect from "@/lib/authOrRedirect";
 
 type Context = {
   params: { id: string };
 };
 
 export default async function TakeTest({ params: { id } }: Context) {
-  const test = await takeTestGetTest(id);
+  const [test] = await Promise.all([takeTestGetTest(id), authOrRedirect()]);
   if (!test) notFound();
 
   return (
