@@ -6,7 +6,7 @@ import {
 } from "@/lib/types/enums/TestQuestionType";
 import useTakeTestQuestionContext from "@/lib/hooks/takeTest/questionContext";
 import useTakeTestFormContext from "@/lib/hooks/takeTest/formContext";
-import TakeTestQuestionOptionsContext from "@/lib/contexts/takeTest/question/options";
+import TakeTestQuestionOptionsContext from "@/lib/contexts/takeTest/question/Options";
 import { useFieldArray } from "react-hook-form";
 import TakeTestTextQuestion from "./questionsTypes/Text";
 import TakeTestRadioQuestion from "./questionsTypes/Radio";
