@@ -10,6 +10,7 @@ import formatGrades from "@/lib/formatGrades";
 import roundTestScore from "@/lib/roundTestScore";
 import { Test } from "@prisma/client";
 import Link from "next/link";
+import cardStyles from "@/styles/card.module.scss";
 
 type Props = Test & {
   subject: { title: string } | null;
@@ -26,8 +27,8 @@ export default function DashboardTestsTestListTest({
 }: Props) {
   return (
     <li className="max-w-[500px]">
-      <Link href={`/my/tests/${id}`}>
-        <Card>
+      <Link className="hover:no-underline" href={`/my/tests/${id}`}>
+        <Card className={cardStyles.card}>
           <CardHeader>
             <CardTitle>{name}</CardTitle>
             <CardDescription>

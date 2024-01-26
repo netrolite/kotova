@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import formatGrades from "@/lib/formatGrades";
-import styles from "./styles.module.scss";
+import cardStyles from "@/styles/card.module.scss";
 
 type Props = {};
 
@@ -38,8 +38,8 @@ export default async function HomepageRecentlyCreatedTests({}: Props) {
         );
         return (
           <li key={id}>
-            <Link href={`/take-test/${id}`}>
-              <Card className={styles.testCard}>
+            <Link className="hover:no-underline" href={`/take-test/${id}`}>
+              <Card className={cardStyles.card}>
                 <CardHeader className="pb-4">
                   <CardTitle>{name}</CardTitle>
                   <CardDescription>

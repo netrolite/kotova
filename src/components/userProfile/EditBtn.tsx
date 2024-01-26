@@ -2,8 +2,8 @@
 
 import { PencilIcon } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import useUserProfileContext from "@/lib/hooks/user/context";
+import BtnWithIcon from "../Btns/WithIcon";
 
 type Props = {};
 
@@ -12,11 +12,13 @@ export default function UserProfileEditBtn({}: Props) {
   if (signedInUser?.id !== user.id) return null;
 
   return (
-    <Link href={`/users/${signedInUser.id}/edit`}>
-      <Button variant="outline" className="flex gap-1">
-        <PencilIcon width={20} />
-        <span>Изменить профиль</span>
-      </Button>
+    <Link
+      className="hover:no-underline"
+      href={`/users/${signedInUser.id}/edit`}
+    >
+      <BtnWithIcon icon={<PencilIcon width={20} />} variant="outline">
+        Изменить профиль
+      </BtnWithIcon>
     </Link>
   );
 }

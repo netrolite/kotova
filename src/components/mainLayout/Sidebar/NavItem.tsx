@@ -17,7 +17,7 @@ export default function SidebarNavItem({ href, icon, label }: NavItemType) {
           buttonVariants({ variant: "ghost" }),
           pathname === href
             ? "bg-muted hover:bg-muted"
-            : "hover:bg-transparent hover:underline",
+            : "hover:bg-transparent",
           "w-full justify-start text-lg",
         )}
       >

@@ -7,9 +7,7 @@ import getUserRoleName from "@/lib/getUserRoleName";
 import UserProfileEditBtn from "./EditBtn";
 import UserProfileStats from "./Stats";
 
-type Props = {};
-
-export default function UserProfileInfo({}: Props) {
+export default function UserProfileInfo() {
   const { user } = useUserProfileContext();
   const userRoleName = getUserRoleName(user.role);
 
