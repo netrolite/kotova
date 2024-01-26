@@ -9,7 +9,6 @@ import {
 import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 import styles from "./card.module.scss";
-import { cn } from "@/lib/shadcnUtils";
 
 type Props = {
   title: string;
@@ -21,23 +20,26 @@ type Props = {
 };
 
 export default function DashboardCard({ children, title, link }: Props) {
-  return (
-    <Card>
+  const content = (
+    <Card className={`${styles.card}`}>
       <CardHeader className="pb-1">
         <CardDescription>{title}</CardDescription>
       </CardHeader>
       <CardContent className="text-xl font-semibold">{children}</CardContent>
       {link && (
-        <CardFooter>
-          <Link
-            className={cn("flex gap-1 underline", styles.cardLink)}
-            href={link.href}
-          >
-            <span>{link.label}</span>
-            <ArrowRightIcon />
-          </Link>
+        <CardFooter className={`flex gap-1`}>
+          <span className={styles.cardFooterLinkLabel}>{link.label}</span>
+          <ArrowRightIcon />
         </CardFooter>
       )}
     </Card>
   );
+
+  if (link)
+    return (
+      <Link className="hover:no-underline" href={link.href}>
+        {content}
+      </Link>
+    );
+  return content;
 }
