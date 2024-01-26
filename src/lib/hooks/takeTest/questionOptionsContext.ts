@@ -1,4 +1,4 @@
-import TakeTestQuestionOptionsContext from "@/lib/contexts/takeTest/question/options";
+import TakeTestQuestionOptionsContext from "@/lib/contexts/takeTest/question/Options";
 import useContextVal from "../contextVal";
 
 export default function useTakeTestQuestionOptionsContext() {

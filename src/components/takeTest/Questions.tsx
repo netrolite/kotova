@@ -1,19 +1,13 @@
 "use client";
 
-import { Test, TestQuestion, TestQuestionOption } from "@prisma/client";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { TestQuestion, TestQuestionOption } from "@prisma/client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import TakeTestQuestion from "./Question";
 import { FieldErrors, FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import TakeTestSchema, { TakeTestSchemaType } from "@/lib/zod/schemas/takeTest";
 import { zodResolver } from "@hookform/resolvers/zod";
-import TakeTestQuestionContext from "@/lib/contexts/takeTest/question";
+import TakeTestQuestionContext from "@/lib/contexts/takeTest/question/Index";
 import FormSubmitBtn from "../Btns/Submit";
 import useLoading from "@/lib/hooks/loading";
 import takeTestFormGetDefaultValues from "@/lib/takeTest/formGetDefaultValues";
@@ -21,13 +15,14 @@ import TakeTestQuestionError from "./QuestionError";
 import checkTestAnswers from "@/lib/actions/checkTestAnswers";
 import { GENERIC_ERROR_MSG } from "@/lib/constants";
 import { useRouter } from "next/navigation";
+import useTakeTestContext from "@/lib/hooks/takeTest/context";
 
-type Props = Test & { questions: TakeTestQuestion[] };
 export type TakeTestQuestion = TestQuestion & {
   options: TestQuestionOption[];
 };
 
-export default function TakeTestQuestions({ id: testId, questions }: Props) {
+export default function TakeTestQuestions() {
+  const { id: testId, questions } = useTakeTestContext();
   const router = useRouter();
   const { isLoading, setIsLoading } = useLoading();
   const form = useForm<TakeTestSchemaType>({

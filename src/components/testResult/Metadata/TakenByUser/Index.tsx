@@ -1,4 +1,5 @@
 "use client";
+
 import useTestResultContext from "@/lib/hooks/testResult/context";
 import Link from "next/link";
 import TestResultMetadataTakenByUserTooltip from "./Tooltip";
@@ -12,7 +13,7 @@ export default function TestResultMetadataTakenByUser() {
         className="font-semibold text-black"
         href={`/users/${testResult.userId ?? "deleteduser"}`}
       >
-        {testResult.user?.name}
+        {testResult.user?.name ?? "Удаленный пользователь"}
       </Link>{" "}
       <TestResultMetadataTakenByUserTooltip />
     </div>

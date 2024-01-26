@@ -8,7 +8,7 @@ export default function TestResultMetadataTitle() {
 
   return (
     <Link className="w-min" href={`/take-test/${testResult.test.id}`}>
-      <PageTitle>{testResult?.test?.name}</PageTitle>
+      <PageTitle>{testResult.test.name}</PageTitle>
     </Link>
   );
 }
