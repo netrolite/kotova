@@ -30,17 +30,11 @@ export default async function TestResult({
         <div>
           <PageTitle>
             Результаты теста{" "}
-            <Link
-              className="hover:underline"
-              href={`/take-test/${testResult.test.id}`}
-            >
+            <Link href={`/take-test/${testResult.test.id}`}>
               {testResult?.test?.name}
             </Link>
           </PageTitle>
-          <Link
-            href={`/subjects/${testResult.test.subject?.id}`}
-            className="hover:underline"
-          >
+          <Link href={`/subjects/${testResult.test.subject?.id}`}>
             <h2 className="text-muted-foreground">
               {testResult.test?.subject?.title}
             </h2>
@@ -51,7 +45,7 @@ export default async function TestResult({
           <p className="text-muted-foreground">
             Пройден пользователем{" "}
             <Link
-              className="font-semibold text-black hover:underline"
+              className="font-semibold text-black"
               href={`/users/${testResult.userId ?? "deleteduser"}`}
             >
               {testResult.user?.name}

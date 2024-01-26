@@ -17,7 +17,14 @@ export default function UserProfileTestResultLink({ children }: Props) {
   );
 
   if (hasSignedInUserTakenThisTest) {
-    return <Link href={`/test-result/${testResultId}`}>{children}</Link>;
+    return (
+      <Link
+        className="hover:no-underline"
+        href={`/test-result/${testResultId}`}
+      >
+        {children}
+      </Link>
+    );
   }
 
   return (

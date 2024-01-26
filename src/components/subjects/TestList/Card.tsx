@@ -9,7 +9,7 @@ import formatGrades from "@/lib/formatGrades";
 import KeyValue from "@/components/KeyValue";
 import SubjectTestListTestAvatar from "./Avatar";
 import Link from "next/link";
-import styles from "./styles.module.scss";
+import cardStyles from "@/styles/card.module.scss";
 import getSubjectTestsAction from "@/lib/actions/getSubjectTests";
 import roundTestScore from "@/lib/roundTestScore";
 
@@ -25,7 +25,10 @@ export default function SubjectTestListCard({
 }: Props) {
   return (
     <Card key={id}>
-      <Link href={`/take-test/${id}`} className={styles.cardHeaderLink}>
+      <Link
+        href={`/take-test/${id}`}
+        className={`${cardStyles.card} hover:no-underline`}
+      >
         <CardHeader>
           <h2 className="text-2xl font-semibold">{name}</h2>
           <CardDescription>{formatGrades(grades)}</CardDescription>
@@ -39,7 +42,7 @@ export default function SubjectTestListCard({
       </Link>
       <CardFooter>
         <Link
-          className="flex items-center gap-2 hover:underline"
+          className="flex items-center gap-2"
           href={createdBy?.id ? `/users/${createdBy.id}` : "/users/deleted"}
         >
           <SubjectTestListTestAvatar user={createdBy} />

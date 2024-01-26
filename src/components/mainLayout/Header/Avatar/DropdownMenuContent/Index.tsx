@@ -22,9 +22,7 @@ export default function HeaderAvatarDropdownMenuContent({
   return (
     <DropdownMenuContent align="end" className="min-w-[200px] max-w-[350px]">
       <DropdownMenuLabel>
-        <Link className="hover:underline" href={`/users/${userId}/`}>
-          {username}
-        </Link>
+        <Link href={`/users/${userId}/`}>{username}</Link>
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <HeaderAvatarDropdownMenuContentItem
