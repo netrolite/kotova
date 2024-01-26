@@ -27,14 +27,17 @@ export default async function TestResult({
   return (
     <TestResultContextProvider {...testResult}>
       <div className="mb-8 space-y-2">
-        <div>
+        <div className="flex flex-col">
           <PageTitle>
             Результаты теста{" "}
-            <Link href={`/take-test/${testResult.test.id}`}>
+            <Link className="w-min" href={`/take-test/${testResult.test.id}`}>
               {testResult?.test?.name}
             </Link>
           </PageTitle>
-          <Link href={`/subjects/${testResult.test.subject?.id}`}>
+          <Link
+            className="w-min"
+            href={`/subjects/${testResult.test.subject?.id}`}
+          >
             <h2 className="text-muted-foreground">
               {testResult.test?.subject?.title}
             </h2>
