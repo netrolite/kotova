@@ -41,13 +41,17 @@ export default function UserEditProfileForm({ user }: Props) {
 
   async function handleSubmit(data: UserEditSchemaType) {
     setIsLoading(true);
-    const result = await editOwnProfileAction(data);
-    if (result.data) {
+    try {
+      const result = await editOwnProfileAction(data);
+      if (result.error) throw new Error();
+
       toast.success("Профиль успешно изменен");
       router.replace(`/users/${user.id}`);
-    } else toast.error(GENERIC_ERROR_MSG);
-
-    setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      toast.error(GENERIC_ERROR_MSG);
+      console.error(err);
+    }
   }
 
   function handleSubmitError() {
