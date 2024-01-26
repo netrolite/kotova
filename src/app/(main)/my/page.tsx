@@ -8,8 +8,13 @@ export default async function Dashboard() {
     <>
       <PageTitle className="mb-8">Личный кабинет</PageTitle>
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <DashboardCardWrapper card={<DashboardTestsCard />} />
-        <DashboardCardWrapper card={<DashboardSubjectsCard />} />
+        <DashboardCardWrapper>
+          <DashboardTestsCard />
+        </DashboardCardWrapper>
+
+        <DashboardCardWrapper>
+          <DashboardSubjectsCard />
+        </DashboardCardWrapper>
       </section>
     </>
   );

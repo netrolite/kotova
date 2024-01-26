@@ -1,10 +1,13 @@
-.cardLink {
+.card {
   svg {
     transition: 200ms;
   }
   &:hover {
     svg {
       translate: 12px;
+    }
+    .cardFooterLinkLabel {
+      text-decoration: underline;
     }
   }
 }
