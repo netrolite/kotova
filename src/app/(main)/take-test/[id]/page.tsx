@@ -1,10 +1,16 @@
-import AvatarWithFallback from "@/components/AvatarWithFallback";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import PageTitle from "@/components/PageTitle";
 import TakeTestQuestions from "@/components/takeTest/Questions";
 import { dateFormatterDefaults, timeFormatterDefaults } from "@/lib/constants";
 import takeTestGetTest from "@/lib/fetchers/takeTest/getTest";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import getRelativeDateString from "@/lib/getRelativeDateString";
 
 type Context = {
   params: { id: string };
@@ -21,6 +27,7 @@ export default async function TakeTest({ params: { id } }: Context) {
     "ru",
     timeFormatterDefaults,
   );
+  const createdAtDateRelativeString = getRelativeDateString(test.createdAt);
 
   return (
     <>
@@ -34,7 +41,7 @@ export default async function TakeTest({ params: { id } }: Context) {
           </Link>
         </div>
         <div>
-          <p className="text-muted-foreground">
+          <div className="text-muted-foreground">
             Создан пользователем{" "}
             <Link
               className="font-semibold text-black"
@@ -42,8 +49,15 @@ export default async function TakeTest({ params: { id } }: Context) {
             >
               {test.createdBy?.name ?? "Удаленный пользователь"}
             </Link>{" "}
-            {createdAtDateString} в {createdAtTimeString}
-          </p>
+            <TooltipProvider>
+              <Tooltip delayDuration={0}>
+                <TooltipTrigger>{createdAtDateRelativeString}</TooltipTrigger>
+                <TooltipContent>
+                  {createdAtDateString} в {createdAtTimeString}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
       </div>
       <TakeTestQuestions {...test} />
