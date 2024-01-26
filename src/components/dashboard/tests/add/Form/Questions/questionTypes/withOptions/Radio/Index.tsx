@@ -24,12 +24,12 @@ export default function AddTestFormRadioQuestion() {
             <ul className="space-y-1">
               {optionsFields.fields.map((option, optionIndex) => (
                 <FormField
+                  key={option.id}
                   control={control}
                   name={`questions.${questionIndex}.options.${optionIndex}`}
                   render={() => (
                     <AddTestFormQuestionOptionContext.Provider
                       value={{ option, optionIndex }}
-                      key={option.id}
                     >
                       <li>
                         <div className="flex gap-2">
