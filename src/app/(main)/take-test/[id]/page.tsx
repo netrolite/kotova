@@ -25,11 +25,11 @@ export default async function TakeTest({ params: { id } }: Context) {
   return (
     <>
       <div className="mb-8 space-y-2">
-        <div>
-          <Link href={`/take-test/${test.id}`}>
+        <div className="flex flex-col">
+          <Link className="w-min" href={`/take-test/${test.id}`}>
             <PageTitle>{test.name}</PageTitle>
           </Link>
-          <Link href={`/subjects/${test.subject?.id}`}>
+          <Link className="w-min" href={`/subjects/${test.subject?.id}`}>
             <h2 className="text-muted-foreground">{test.subject?.title}</h2>
           </Link>
         </div>
