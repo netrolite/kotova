@@ -26,14 +26,18 @@ export default async function TakeTest({ params: { id } }: Context) {
     <>
       <div className="mb-8 space-y-2">
         <div>
-          <PageTitle className="">{test.name}</PageTitle>
-          <h2 className="text-muted-foreground">{test.subject?.title}</h2>
+          <Link href={`/take-test/${test.id}`}>
+            <PageTitle>{test.name}</PageTitle>
+          </Link>
+          <Link href={`/subjects/${test.subject?.id}`}>
+            <h2 className="text-muted-foreground">{test.subject?.title}</h2>
+          </Link>
         </div>
         <div>
           <p className="text-muted-foreground">
             Создан пользователем{" "}
             <Link
-              className="text-black hover:underline"
+              className="font-semibold text-black"
               href={`/users/${test.createdBy?.id ?? "/deleteduser"}`}
             >
               {test.createdBy?.name ?? "Удаленный пользователь"}
