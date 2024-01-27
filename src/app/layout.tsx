@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   },
   description: "Сайт учителя русского языка и литературы Котовой Виктории",
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
 };
 
 export default async function RootLayout({
