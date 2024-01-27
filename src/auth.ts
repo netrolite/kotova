@@ -15,8 +15,7 @@ export const nextAuthConfig = {
   trustHost: true,
   pages: {
     signIn: "/sign-in",
-    // TODO: add error page
-    // error: "/auth-error"
+    error: "/auth-error",
   },
   session: {
     strategy: "jwt",
