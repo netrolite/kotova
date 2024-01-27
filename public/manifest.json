@@ -1,32 +1,33 @@
 {
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "browser",
-    "scope": "/",
-    "start_url": "/",
-    "name": "Kotova",
-    "short_name": "Kotova",
-    "description": "\u0421\u0430\u0439\u0442 \u0443\u0447\u0438\u0442\u0435\u043b\u044f \u0440\u0443\u0441\u0441\u043a\u043e\u0433\u043e \u044f\u0437\u044b\u043a\u0430 \u0438 \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u044b \u041a\u043e\u0442\u043e\u0432\u043e\u0439 \u0412\u0438\u043a\u0442\u043e\u0440\u0438\u0438",
-    "icons": [
-        {
-            "src": "/icon-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/icon-256x256.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        },
-        {
-            "src": "/icon-384x384.png",
-            "sizes": "384x384",
-            "type": "image/png"
-        },
-        {
-            "src": "/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "name": "Kotova",
+  "short_name": "Kotova",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "description": "\u0421\u0430\u0439\u0442 \u0443\u0447\u0438\u0442\u0435\u043b\u044f \u0440\u0443\u0441\u0441\u043a\u043e\u0433\u043e \u044f\u0437\u044b\u043a\u0430 \u0438 \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u044b \u041a\u043e\u0442\u043e\u0432\u043e\u0439 \u0412\u0438\u043a\u0442\u043e\u0440\u0438\u0438",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
