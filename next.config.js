@@ -12,6 +12,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    scrollRestoration: false,
+  },
   webpack(config) {
     // svgs as react components
     const fileLoaderRule = config.module.rules.find((rule) =>
