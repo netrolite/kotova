@@ -9,7 +9,7 @@ export default function MobileNavItem({ href, icon, label }: NavItemType) {
   const pathname = usePathname();
   const isActive = href === pathname;
   return (
-    <Link key={href} href={href}>
+    <Link key={href} href={href} className="hover:no-underline">
       <li
         className={cn("flex flex-col items-center", isActive && "text-primary")}
       >
