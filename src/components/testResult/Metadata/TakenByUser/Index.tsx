@@ -2,7 +2,7 @@
 
 import useTestResultContext from "@/lib/hooks/testResult/context";
 import Link from "next/link";
-import TestResultMetadataTakenByUserTooltip from "./Tooltip";
+import TestResultMetadataTakenByUserPopover from "./Popover";
 
 export default function TestResultMetadataTakenByUser() {
   const testResult = useTestResultContext();
@@ -15,7 +15,7 @@ export default function TestResultMetadataTakenByUser() {
       >
         {testResult.user?.name ?? "Удаленный пользователь"}
       </Link>{" "}
-      <TestResultMetadataTakenByUserTooltip />
+      <TestResultMetadataTakenByUserPopover />
     </div>
   );
 }

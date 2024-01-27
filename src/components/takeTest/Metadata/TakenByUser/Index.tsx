@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import TakeTestMetadataCreatedByUserTooltip from "./Tooltip";
+import TakeTestMetadataCreatedByUserPopover from "./Popover";
 import useTakeTestContext from "@/lib/hooks/takeTest/context";
 
 export default function TakeTestMetadataCreatedByUser() {
@@ -15,7 +15,7 @@ export default function TakeTestMetadataCreatedByUser() {
       >
         {test.createdBy?.name ?? "Удаленный пользователь"}
       </Link>{" "}
-      <TakeTestMetadataCreatedByUserTooltip />
+      <TakeTestMetadataCreatedByUserPopover />
     </div>
   );
 }
