@@ -10,7 +10,8 @@ export const metadata: Metadata = {
     template: "%s | Kotova",
     default: "Kotova",
   },
-  description: "TODO",
+  description: "Сайт учителя русского языка и литературы Котовой Виктории",
+  manifest: "/manifest.json",
 };
 
 export default async function RootLayout({
