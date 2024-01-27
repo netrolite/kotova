@@ -1,14 +1,13 @@
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { dateFormatterDefaults, timeFormatterDefaults } from "@/lib/constants";
 import getRelativeDateString from "@/lib/getRelativeDateString";
 import useTakeTestContext from "@/lib/hooks/takeTest/context";
 
-export default function TakeTestMetadataCreatedByUserTooltip() {
+export default function TakeTestMetadataCreatedByUserPopover() {
   const testResult = useTakeTestContext();
 
   const createdAtDateString = new Date(testResult.createdAt).toLocaleDateString(
@@ -24,13 +23,11 @@ export default function TakeTestMetadataCreatedByUserTooltip() {
   );
 
   return (
-    <TooltipProvider>
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger>{createdAtDateRelativeString}</TooltipTrigger>
-        <TooltipContent>
-          {createdAtDateString} в {createdAtTimeString}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Popover>
+      <PopoverTrigger>{createdAtDateRelativeString}</PopoverTrigger>
+      <PopoverContent className="max-w-max">
+        {createdAtDateString} в {createdAtTimeString}
+      </PopoverContent>
+    </Popover>
   );
 }
