@@ -18,7 +18,7 @@ export default async function Tests() {
         {!tests.length && (
           <p className="text-muted-foreground">Вы ещё не создавали тесты</p>
         )}
-        <Link className="max-w-min" href="/my/tests/create">
+        <Link className="max-w-min hover:no-underline" href="/my/tests/create">
           <BtnWithIcon icon={<PlusIcon />}>Создать тест</BtnWithIcon>
         </Link>
       </div>
