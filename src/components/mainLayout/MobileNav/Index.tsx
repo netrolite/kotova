@@ -3,6 +3,8 @@ import { ReactElement, Suspense } from "react";
 import { PanelTopIcon } from "lucide-react";
 import MobileNavItem from "./NavItem";
 import MobileNavProfileNavItem from "./Profile";
+import { cn } from "@/lib/shadcnUtils";
+import styles from "./styles.module.scss";
 
 export type NavItemType = {
   href: string;
@@ -41,7 +43,12 @@ export const MOBILE_NAVBAR_DEPENDENT_NAV_ITEMS = {
 
 export default async function MobileNav() {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-20 overflow-auto border-t border-slate-300 bg-white/80 px-4 py-4 text-slate-500 backdrop-blur-md md:hidden">
+    <nav
+      className={cn(
+        "fixed bottom-0 left-0 right-0 z-20 overflow-auto border-t border-slate-300 bg-white/80 px-4 text-slate-500 backdrop-blur-md md:hidden",
+        styles.nav,
+      )}
+    >
       <ul className="flex justify-around">
         {NAV_ITEMS_BASE.map((navItem) => (
           <MobileNavItem key={navItem.href} {...navItem} />
