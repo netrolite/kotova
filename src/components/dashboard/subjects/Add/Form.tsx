@@ -18,6 +18,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import BtnWithLoading from "@/components/Btns/WithLoading";
 import useAddSubjectStore from "@/lib/stores/addSubject";
+import FormItemField from "@/components/Form/ItemField";
 
 export default function AddSubjectForm() {
   const setIsAddSubjectDialogOpen = useAddSubjectStore(
@@ -48,17 +49,17 @@ export default function AddSubjectForm() {
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
-        <FormField
+        <FormItemField
           control={form.control}
           name="title"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Название</FormLabel>
+            <>
+              <FormLabel className="block text-left">Название</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
               <FormMessage />
-            </FormItem>
+            </>
           )}
         />
 
