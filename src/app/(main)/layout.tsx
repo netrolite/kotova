@@ -11,9 +11,9 @@ export default async function MainLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex min-h-screen w-full justify-center">
       <Sidebar />
-      <main className="flex min-h-screen w-full flex-col md:max-w-[650px] md:border-l md:border-r md:border-slate-200">
+      <main className="flex w-full flex-col md:max-w-[650px] md:border-l md:border-r md:border-slate-200">
         <MainLayoutHeader />
         <div className={cn(styles.mainContentContainer, "flex-grow px-4")}>
           {children}

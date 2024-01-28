@@ -26,6 +26,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#ffffff",
   viewportFit: "cover", // needed for css env variables like safe-area-inset-bottom to work
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default async function RootLayout({
