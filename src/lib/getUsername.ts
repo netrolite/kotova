@@ -1,5 +1,5 @@
-import { Session } from "next-auth";
+import { User } from "@prisma/client";
 
-export default function getUsername(session: Session | null) {
-  return session?.user?.name || session?.user?.email || "Безымянный";
+export default function getUsername(user: User | null) {
+  return user?.name || user?.email || "Безымянный";
 }

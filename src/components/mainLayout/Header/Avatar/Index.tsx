@@ -5,17 +5,17 @@ import {
 import getUsername from "@/lib/getUsername";
 import HeaderAvatarDropdownMenuContent from "./DropdownMenuContent/Index";
 import AvatarWithFallback from "@/components/AvatarWithFallback";
-import { Session } from "next-auth";
+import { User } from "@prisma/client";
 
 type Props = {
-  session: Session;
+  user: User;
 };
 
-export default async function HeaderAvatar({ session }: Props) {
-  if (!session?.user?.id) return null;
+export default async function HeaderAvatar({ user }: Props) {
+  if (!user?.id) return null;
 
-  const avatarSrc = session?.user?.image ?? undefined;
-  const username = getUsername(session);
+  const avatarSrc = user?.image ?? undefined;
+  const username = getUsername(user);
 
   return (
     <DropdownMenu>
@@ -28,9 +28,7 @@ export default async function HeaderAvatar({ session }: Props) {
           }}
         />
       </DropdownMenuTrigger>
-      <HeaderAvatarDropdownMenuContent
-        {...{ username, userId: session.user.id }}
-      />
+      <HeaderAvatarDropdownMenuContent {...{ username, userId: user.id }} />
     </DropdownMenu>
   );
 }
