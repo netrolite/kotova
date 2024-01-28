@@ -1,12 +1,12 @@
-import { auth } from "@/auth";
 import MainLayoutHeaderSignInBtn from "../SignInBtn";
 import HeaderAvatar from "../Avatar/Index";
 import getUrlFromHeaders from "@/lib/getUrlFromHeaders";
+import getSignedInUser from "@/lib/fetchers/getSignedInUser";
 
 export default async function MainLayoutHeaderRightSectionContent() {
-  const session = await auth();
+  const user = await getSignedInUser();
   const url = getUrlFromHeaders() || "/";
 
-  if (session?.user?.id) return <HeaderAvatar {...{ session }} />;
+  if (user?.id) return <HeaderAvatar {...{ user }} />;
   else return <MainLayoutHeaderSignInBtn {...{ url }} />;
 }
