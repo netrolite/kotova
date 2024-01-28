@@ -1,5 +1,6 @@
 import { cn } from "@/lib/shadcnUtils";
 import { ReactNode } from "react";
+import styles from "./styles.module.scss";
 
 type Props = {
   children: ReactNode;
@@ -13,8 +14,8 @@ export default function MainLayoutHeaderWrapper({
   className: classNameProp,
 }: Props) {
   const classNameBase =
-    "flex h-[60px] items-center justify-between border-b border-slate-300 px-4 py-3";
-  const className = cn(classNameBase, classNameProp);
+    "flex items-center justify-between border-b border-slate-300 px-4";
+  const className = cn(classNameBase, styles.header, classNameProp);
 
   if (asDiv) return <div {...{ className }}>{children}</div>;
   return <header {...{ className }}>{children}</header>;
