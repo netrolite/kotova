@@ -27,17 +27,17 @@ type Props = {
   user: User;
 };
 
-export default function UserEditProfileForm({ user }: Props) {
+export default function UserEditProfileForm({ user: initUser }: Props) {
   const router = useRouter();
+  const { isLoading, setIsLoading } = useLoading();
   const form = useForm<UserEditSchemaInputType>({
     resolver: zodResolver(UserEditSchema),
     defaultValues: {
-      name: user.name ?? "",
-      email: user.email ?? null,
-      phone: user.phone ?? null,
+      name: initUser.name ?? "",
+      email: initUser.email ?? null,
+      phone: initUser.phone ?? null,
     },
   });
-  const { isLoading, setIsLoading } = useLoading();
 
   async function handleSubmit(data: UserEditSchemaType) {
     setIsLoading(true);
@@ -46,7 +46,7 @@ export default function UserEditProfileForm({ user }: Props) {
       if (result.error) throw new Error();
 
       toast.success("Профиль успешно изменен");
-      router.replace(`/users/${user.id}`);
+      router.replace(`/users/${initUser.id}`);
     } catch (err) {
       setIsLoading(false);
       toast.error(GENERIC_ERROR_MSG);
