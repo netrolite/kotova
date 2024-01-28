@@ -21,6 +21,8 @@ const AddTestFormQuestionOption = z.object({
 
 export const AddTestFormSavedQuestionOption = AddTestFormQuestionOption.extend({
   content: z.string().nullable(),
+  tableColumn: z.string().nullable(),
+  tableColumnAnswer: z.string().nullable(),
 });
 
 export default AddTestFormQuestionOption;
