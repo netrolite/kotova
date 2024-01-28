@@ -19,10 +19,9 @@ export default async function editOwnProfileAction(
       where: { id: session.user.id },
       data: profileData,
     });
+    revalidatePath(`/users/${session.user.id}`);
+    return { data: true };
   } catch (err) {
     return { error: true };
   }
-
-  revalidatePath(`/users/${session.user.id}`);
-  return { data: true };
 }
