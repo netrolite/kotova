@@ -24,4 +24,6 @@ const FormSubmitBtn = forwardRef<HTMLButtonElement, Props>(
   },
 );
 
+FormSubmitBtn.displayName = "FormSubmitBtn";
+
 export default FormSubmitBtn;
