@@ -17,11 +17,15 @@ export const metadata: Metadata = {
       ? "https://${process.env.VERCEL_URL}"
       : `http://localhost:${process.env.PORT || 3000}`,
   ),
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
-  viewportFit: "cover",
+  viewportFit: "cover", // needed for css env variables like safe-area-inset-bottom to work
 };
 
 export default async function RootLayout({
