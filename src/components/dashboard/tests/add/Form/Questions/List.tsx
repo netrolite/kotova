@@ -35,7 +35,7 @@ export default function AddTestFormQuestionList({}: Props) {
               <FormMessage />
             </AddTestFormQuestionContextProvider>
 
-            {!isLast && <Separator />}
+            {!isLast && <Separator style={{ marginTop: 52 }} />}
           </li>
         );
       })}
