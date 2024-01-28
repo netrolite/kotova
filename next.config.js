@@ -1,6 +1,12 @@
-const withPwa = require("next-pwa")({
+// @ts-check
+
+const withPwa = require("@ducanh2912/next-pwa").default({
   dest: "public",
-  disable: process.env.NODE_ENV === "development",
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  cacheStartUrl: true,
+  dynamicStartUrl: true,
+  reloadOnOnline: true,
 });
 
 /** @type {import('next').NextConfig} */
