@@ -1,0 +1,11 @@
+.mainContentContainer {
+  $padding-y: 5rem; // padding on mobile to account for the header and nav menu, which have `position: fixed` because some shit browsers don't properly support `position: sticky`
+  padding-top: calc($padding-y + env(safe-area-inset-top));
+  padding-bottom: calc($padding-y + env(safe-area-inset-bottom));
+
+  @media (min-width: 768px) {
+    // desktop padding (where the header uses `position: sticky`, because desktop browsers do properly support `position: sticky`)
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}

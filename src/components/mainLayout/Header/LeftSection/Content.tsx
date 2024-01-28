@@ -52,7 +52,9 @@ export default function MainLayoutHeaderLeftSectionContent({
     shouldShowBackBtn = true;
   }
 
-  const logo = <Logo className="max-h-[30px]" linkClassName="md:hidden" />;
+  const logo = (
+    <Logo className="max-h-[30px] max-w-[98px]" linkClassName="md:hidden" />
+  );
   if (isOnHomepage) {
     return (
       <>
