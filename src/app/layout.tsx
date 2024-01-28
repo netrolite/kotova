@@ -12,10 +12,16 @@ export const metadata: Metadata = {
   },
   description: "Сайт учителя русского языка и литературы Котовой Виктории",
   manifest: "/manifest.json",
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? "https://${process.env.VERCEL_URL}"
+      : `http://localhost:${process.env.PORT || 3000}`,
+  ),
 };
 
 export const viewport: Viewport = {
   themeColor: "#ffffff",
+  viewportFit: "cover",
 };
 
 export default async function RootLayout({
