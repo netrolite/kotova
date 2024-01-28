@@ -52,17 +52,18 @@ export default function MainLayoutHeaderLeftSectionContent({
     shouldShowBackBtn = true;
   }
 
+  const logo = <Logo className="max-h-[30px]" linkClassName="md:hidden" />;
   if (isOnHomepage) {
     return (
       <>
-        <Logo className="max-w-[100px]" linkClassName="md:hidden" />
+        {logo}
         <span className="hidden md:block">Главная</span>
       </>
     );
   } else if (shouldShowBackBtn) {
     return <HeaderBackBtn />;
   }
-  return <Logo className="max-w-[100px]" linkClassName="md:hidden" />;
+  return logo;
 }
 
 function getUrlHasHideBackBtnParam() {

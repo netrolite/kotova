@@ -8,18 +8,21 @@ export function HeaderBackBtn() {
   const router = useRouter();
 
   function handleNavigate() {
-    const canNavigateBack = history.length <= 1;
-    if (canNavigateBack) router.push("/");
-    else router.back();
+    const canNavigateBack = history.length >= 1;
+    if (canNavigateBack) router.back();
+    else router.push("/");
   }
 
   return (
-    <Button
-      variant="ghost"
-      className="aspect-square rounded-full p-1 hover:bg-slate-100 active:bg-slate-200"
+    <button
+      className="relative flex h-[30px] w-[30px] items-center justify-center rounded-full p-1 hover:[&_div]:bg-slate-100 active:[&_div]:bg-slate-200 "
       onClick={handleNavigate}
     >
-      <ArrowLeft />
-    </Button>
+      <div
+        aria-hidden
+        className="absolute -bottom-1 -left-1 -right-1 -top-1 z-10 rounded-full"
+      />
+      <ArrowLeft className="pointer-events-none absolute z-20" />
+    </button>
   );
 }
