@@ -4,8 +4,9 @@ import { Subject } from "@prisma/client";
 import { db } from "../db";
 import ServerActionReturn from "../types/ServerActionReturn";
 import AddSubjectSchema from "../zod/schemas/AddSubject";
-import { revalidatePath } from "next/cache";
 
+// TODO: investigate if this allows anyone to add a subject, regardless of their role.
+// Same thing for other potentially destructive requests!
 export default async function addSubjectAction(
   data: unknown,
 ): Promise<ServerActionReturn<Subject>> {
