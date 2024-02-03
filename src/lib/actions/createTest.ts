@@ -1,6 +1,7 @@
 "use server";
 
 import { Prisma } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { db } from "../db";
 import getSignedInUserOrRedirect from "../fetchers/getSignedInUserOrRedirect";
 import ServerActionReturn from "../types/ServerActionReturn";
@@ -52,6 +53,7 @@ export default async function createTestAction(
       data: optionsToCreate,
     });
 
+    revalidatePath("/my/tests");
     return { data: { testId: createdTest.id } };
   } catch (err) {
     console.error(err);
