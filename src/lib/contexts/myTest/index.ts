@@ -1,6 +1,6 @@
-import { Test } from "@prisma/client";
+import { MyTestGetTestReturn } from "@/lib/fetchers/myTest/getTest";
 import { createContext } from "react";
 
-export type MyTestContextType = Test;
+export type MyTestContextType = MyTestGetTestReturn;
 const MyTestContext = createContext<MyTestContextType | null>(null);
 export default MyTestContext;

@@ -1,4 +1,6 @@
 import MyTestActionBtns from "@/components/myTest/ActionBtns";
+import MyTestResults from "@/components/myTest/ResultsList/Index";
+import MyTestSearch from "@/components/myTest/Search";
 import PageTitle from "@/components/PageTitle";
 import MyTestContextProvider from "@/lib/contexts/myTest/provider";
 import myTestGetTest from "@/lib/fetchers/myTest/getTest";
@@ -14,8 +16,16 @@ export default async function MyTest({ params: { id: testId } }: Context) {
 
   return (
     <MyTestContextProvider {...test}>
-      <PageTitle className="mb-2">{test.name}</PageTitle>
-      <MyTestActionBtns />
+      <div className="space-y-6">
+        <div className="space-y-2">
+          <PageTitle>{test.name}</PageTitle>
+          <MyTestActionBtns />
+        </div>
+        <div className="space-y-2">
+          <MyTestSearch />
+          <MyTestResults />
+        </div>
+      </div>
     </MyTestContextProvider>
   );
 }
