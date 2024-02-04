@@ -2,7 +2,6 @@
 
 import useMyTestContext from "@/lib/contexts/myTest/useContext";
 import getApiData from "@/lib/fetchers/getApiData";
-import { TestResult } from "@prisma/client";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 import { Input } from "../ui/input";
