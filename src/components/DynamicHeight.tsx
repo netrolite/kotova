@@ -6,9 +6,15 @@ type Props = {
   children: ReactNode;
   isOpen: boolean;
   className?: string;
+  containerClassName?: string;
 };
 
-export default function DynamicHeight({ children, isOpen, className }: Props) {
+export default function DynamicHeight({
+  children,
+  isOpen,
+  className,
+  containerClassName,
+}: Props) {
   const [innerContainerRef, innerContainerBounds] = useMeasure();
 
   return (
@@ -16,12 +22,14 @@ export default function DynamicHeight({ children, isOpen, className }: Props) {
       className={cn(
         "duration-200",
         !isOpen && "pointer-events-none opacity-0",
-        className,
+        containerClassName,
       )}
       aria-hidden={!isOpen}
       style={{ height: isOpen ? innerContainerBounds.height : 0 }}
     >
-      <div ref={innerContainerRef}>{children}</div>
+      <div ref={innerContainerRef} className={className ?? ""}>
+        {children}
+      </div>
     </div>
   );
 }

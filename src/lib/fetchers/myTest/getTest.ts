@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import ExcludeNull from "@/lib/types/ExcludeNull";
 import { cache } from "react";
 
 const myTestGetTest = cache(async (testId: string) => {
@@ -8,5 +9,7 @@ const myTestGetTest = cache(async (testId: string) => {
   });
 });
 
-export type MyTestGetTestReturn = Awaited<ReturnType<typeof myTestGetTest>>;
+export type MyTestGetTestReturn = ExcludeNull<
+  Awaited<ReturnType<typeof myTestGetTest>>
+>;
 export default myTestGetTest;

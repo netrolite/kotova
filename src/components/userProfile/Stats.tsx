@@ -1,6 +1,6 @@
 import useUserProfileContext from "@/lib/hooks/user/context";
 import KeyValue from "../KeyValue";
-import roundTestScore from "@/lib/roundTestScore";
+import formatTestScore from "@/lib/formatTestScore";
 
 type Props = {};
 
@@ -11,7 +11,7 @@ export default function UserProfileStats({}: Props) {
       <KeyValue label={"Пройдено тестов"}>{user._count.testResults}</KeyValue>
       <KeyValue label={"Средний балл"}>
         {user.avgTestScore !== null
-          ? `${roundTestScore(user.avgTestScore)}%`
+          ? formatTestScore(user.avgTestScore)
           : "Нет данных"}
       </KeyValue>
     </div>
