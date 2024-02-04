@@ -20,7 +20,9 @@ import { Button } from "../ui/button";
 
 export default function MyTestActionBtns() {
   const [open, setOpen] = useState(false);
-  const { id: testId } = useMyTestContext();
+  const {
+    test: { id: testId },
+  } = useMyTestContext();
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 

@@ -1,43 +1,63 @@
 "use client";
 
 import useMyTestContext from "@/lib/contexts/myTest/useContext";
-import getApiData from "@/lib/fetchers/getApiData";
 import { useSearchParams } from "next/navigation";
-import useSWR from "swr";
 import { Input } from "../ui/input";
 import { SearchIcon } from "lucide-react";
-import { FormEvent, useState } from "react";
-import { swrKeys } from "@/lib/constants";
-import { MyTestGetTestResultsReturn } from "@/lib/fetchers/myTest/getTestResults";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import useMyTestResultsSwr from "@/lib/hooks/swr/myTestResults";
+import { useDebouncedCallback } from "use-debounce";
+import { useHotkeys } from "react-hotkeys-hook";
+import updateUrlQueryString from "@/lib/updateUrlQueryString";
 
 type Props = {};
 
 export default function MyTestSearch({}: Props) {
-  const { id: testId } = useMyTestContext();
+  const {
+    test: { id: testId },
+  } = useMyTestContext();
   const initSearchParams = useSearchParams();
-  const [searchParams, setSearchParams] = useState(initSearchParams);
-  const [query, setQuery] = useState("");
-
-  const { mutate } = useSWR<MyTestGetTestResultsReturn>(
-    [swrKeys.myTest, testId],
-    () => getApiData(`/api/test-results/${testId}?${searchParams.toString()}`),
+  const [searchParams, setSearchParams] = useState(
+    new URLSearchParams(initSearchParams),
   );
+  const [query, setQuery] = useState(initSearchParams.get("q") ?? "");
+  const { mutate } = useMyTestResultsSwr({ testId, searchParams });
+  const queryInputRef = useRef<HTMLInputElement>(null);
+  useHotkeys("mod+k", () => queryInputRef.current?.focus(), [queryInputRef]);
 
   async function handleSearch(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    mutate();
+    await mutate();
   }
+
+  function handleQueryChange(e: ChangeEvent<HTMLInputElement>) {
+    const query = e.target.value;
+    setQuery(query);
+    setSearchParams((sp) => {
+      sp.delete("q");
+      if (query) {
+        sp.append("q", query);
+      }
+      return sp;
+    });
+  }
+  useEffect(() => updateUrlQueryStringDebounced(), [searchParams.toString()]);
+
+  const updateUrlQueryStringDebounced = useDebouncedCallback(() => {
+    updateUrlQueryString(searchParams);
+  }, 300);
 
   return (
     <form
-      className="relative flex items-center rounded border"
+      className="relative flex items-center rounded-md border"
       onSubmit={handleSearch}
     >
       <Input
         placeholder="Поиск по имени и фамилии"
         className="border-none"
-        onChange={({ target: { value } }) => setQuery(value)}
+        onChange={handleQueryChange}
         value={query}
+        ref={queryInputRef}
       />
       <button className="border-l p-2">
         <SearchIcon width={20} className="text-muted-foreground" />

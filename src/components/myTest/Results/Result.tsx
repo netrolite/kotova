@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { MyTestGetTestResultsReturn } from "@/lib/fetchers/myTest/getTestResults";
 import Link from "next/link";
@@ -7,38 +7,57 @@ import KeyValue from "@/components/KeyValue";
 import { Button } from "@/components/ui/button";
 import DynamicHeight from "@/components/DynamicHeight";
 import { dateToLocaleTimeString } from "@/lib/dateFormatters";
-import roundTestScore from "@/lib/roundTestScore";
+import formatTestScore from "@/lib/formatTestScore";
 
 type Props = MyTestGetTestResultsReturn[number];
 
 export default function MyTestResult({ id, image, name, testResults }: Props) {
-  const [showResults, setShowResults] = useState(true);
+  const [showResults, setShowResults] = useState(false);
+
+  const minTestResultScore = Math.min(
+    ...testResults.map((result) => result.score),
+  );
+  const maxTestResultScore = Math.max(
+    ...testResults.map((result) => result.score),
+  );
+
+  let testResultsElem: ReactNode;
+  if (testResults.length > 1 && minTestResultScore !== maxTestResultScore) {
+    testResultsElem = (
+      <>
+        <KeyValue label="Макс. баллы">
+          {formatTestScore(maxTestResultScore)}
+        </KeyValue>
+        <KeyValue label="Мин. баллы">
+          {formatTestScore(minTestResultScore)}
+        </KeyValue>
+      </>
+    );
+  } else {
+    testResultsElem = (
+      <KeyValue label="Баллы">
+        {formatTestScore(
+          Math.max(...testResults.map((result) => result.score)),
+        )}
+      </KeyValue>
+    );
+  }
 
   return (
-    <li key={id}>
+    <li>
       <Card>
         <CardHeader>
-          <Link href={`/users/${id}`} className="flex items-center gap-2">
+          <Link
+            href={`/users/${id}`}
+            className="flex items-center gap-2 hover:text-primary"
+          >
             <AvatarWithFallback
               src={image ?? undefined}
               username={name ?? undefined}
             />
             <p className="font-medium">{name ?? "Удаленный пользователь"}</p>
           </Link>
-          <div>
-            <KeyValue label="Макс. баллы">
-              {roundTestScore(
-                Math.max(...testResults.map((result) => result.score)),
-              )}
-              %
-            </KeyValue>
-            <KeyValue label="Мин. баллы">
-              {roundTestScore(
-                Math.max(...testResults.map((result) => result.score)),
-              )}
-              %
-            </KeyValue>
-          </div>
+          <div>{testResultsElem}</div>
         </CardHeader>
         <CardContent className="space-y-2">
           <Button
@@ -49,7 +68,10 @@ export default function MyTestResult({ id, image, name, testResults }: Props) {
               ? "Скрыть прохождения теста"
               : "Показать прохождения теста"}
           </Button>
-          <DynamicHeight isOpen={showResults} className="max-w-[400px]">
+          <DynamicHeight
+            isOpen={showResults}
+            className="max-w-[400px] space-y-1"
+          >
             <div className="grid grid-cols-2">
               <p>Дата</p>
               <p>Баллы</p>
@@ -67,7 +89,7 @@ export default function MyTestResult({ id, image, name, testResults }: Props) {
                       href={`/test-result/${id}`}
                     >
                       <p>{createdAtString}</p>
-                      <p>{roundTestScore(score)}%</p>
+                      {formatTestScore(score)}
                     </Link>
                   </li>
                 );

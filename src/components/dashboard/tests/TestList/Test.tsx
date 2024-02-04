@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import formatGrades from "@/lib/formatGrades";
-import roundTestScore from "@/lib/roundTestScore";
+import formatTestScore from "@/lib/formatTestScore";
 import { Test } from "@prisma/client";
 import Link from "next/link";
 import cardStyles from "@/styles/card.module.scss";
@@ -44,7 +44,7 @@ export default function DashboardTestsTestListTest({
           <CardContent>
             <ul>
               <KeyValue label="Средний балл">
-                {avgScore ? `${roundTestScore(avgScore)}%` : "Нет данных"}
+                {avgScore !== null ? formatTestScore(avgScore) : "Нет данных"}
               </KeyValue>
               <KeyValue label="Раз пройден">{testResults.length}</KeyValue>
             </ul>

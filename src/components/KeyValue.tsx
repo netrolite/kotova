@@ -15,13 +15,13 @@ export default function KeyValue({
   childrenContainerClassName,
 }: Props) {
   return (
-    <div className="space-x-2">
+    <div className="flex gap-2">
       <span className={cn("text-muted-foreground", labelClassName)}>
         {label}
       </span>
-      <span className={cn("font-semibold", childrenContainerClassName)}>
+      <div className={cn("font-semibold", childrenContainerClassName)}>
         {children}
-      </span>
+      </div>
     </div>
   );
 }

@@ -15,7 +15,6 @@ type Props = {
 
 /**
  * Please provide the `sizes` prop if you don't provide the `width` prop. Not required though!
- * @returns
  */
 export default function AvatarWithFallback({
   userIconClassName,

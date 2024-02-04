@@ -1,19 +1,17 @@
 "use client";
 
-import { GENERIC_ERROR_MSG, swrKeys } from "@/lib/constants";
+import { GENERIC_ERROR_MSG } from "@/lib/constants";
 import useMyTestContext from "@/lib/contexts/myTest/useContext";
-import useSWR from "swr";
 import Loading from "../../Loading/Loading";
-import { MyTestGetTestResultsReturn } from "@/lib/fetchers/myTest/getTestResults";
 import MyTestResult from "./Result";
+import useMyTestResultsSwr from "@/lib/hooks/swr/myTestResults";
 
 export default function MyTestResults() {
-  const { id: testId, testResults: initTestResults } = useMyTestContext();
   const {
-    data: users,
-    isValidating,
-    error,
-  } = useSWR<MyTestGetTestResultsReturn>([swrKeys.myTest, testId]);
+    test: { id: testId },
+    testResults: initTestResults,
+  } = useMyTestContext();
+  const { data: users, isValidating, error } = useMyTestResultsSwr({ testId });
 
   if (isValidating) return <Loading />;
   if (error) return <p>{GENERIC_ERROR_MSG}</p>;
@@ -25,7 +23,7 @@ export default function MyTestResults() {
   return (
     <ul>
       {users.map((user) => (
-        <MyTestResult {...user} />
+        <MyTestResult key={user.id} {...user} />
       ))}
     </ul>
   );

@@ -4,10 +4,11 @@ import { cache } from "react";
 type Params = {
   testId: string;
   searchParams?: {
-    scoreGt: number;
-    scoreLt: number;
-    timesTakenGt: number;
-    timesTakenLt: number;
+    query?: string;
+    scoreGt?: number;
+    scoreLt?: number;
+    timesTakenGt?: number;
+    timesTakenLt?: number;
   };
 };
 
@@ -17,17 +18,23 @@ const myTestGetTestResults = cache(async ({ testId, searchParams }: Params) => {
     scoreLt,
     timesTakenGt = Number.NEGATIVE_INFINITY,
     timesTakenLt = Number.POSITIVE_INFINITY,
+    query: textQuery,
   } = searchParams ?? {};
-  const query = { testId, score: { gt: scoreGt, lt: scoreLt } };
+
+  const testResultsQuery = { testId, score: { gt: scoreGt, lt: scoreLt } };
   const users = await db.user.findMany({
     where: {
-      testResults: { some: query },
+      testResults: { some: testResultsQuery },
+      name: {
+        contains: textQuery,
+        mode: "insensitive",
+      },
     },
     select: {
       id: true,
       name: true,
       image: true,
-      testResults: { where: query },
+      testResults: { where: testResultsQuery, orderBy: { createdAt: "desc" } },
     },
   });
   if (!timesTakenGt && !timesTakenLt) return users;
