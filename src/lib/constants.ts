@@ -31,3 +31,8 @@ export const errCodes = {
 export const prismaErrs = {
   uniqueConstraintFailed: "P2002",
 };
+
+export const swrKeys = {
+  myTest: "/api/test-stats",
+  subjects: "/api/subjects",
+} as const;
