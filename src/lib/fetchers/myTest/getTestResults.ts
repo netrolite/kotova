@@ -5,26 +5,21 @@ type Params = {
   testId: string;
   searchParams?: {
     query?: string;
-    scoreGt?: number;
-    scoreLt?: number;
-    timesTakenGt?: number;
-    timesTakenLt?: number;
+    scoreMin?: number;
+    scoreMax?: number;
   };
 };
 
 const myTestGetTestResults = cache(async ({ testId, searchParams }: Params) => {
-  const {
-    scoreGt,
-    scoreLt,
-    timesTakenGt = Number.NEGATIVE_INFINITY,
-    timesTakenLt = Number.POSITIVE_INFINITY,
-    query: textQuery,
-  } = searchParams ?? {};
+  const { scoreMin, scoreMax, query: textQuery } = searchParams ?? {};
+  console.log(scoreMin, scoreMax);
 
-  const testResultsQuery = { testId, score: { gt: scoreGt, lt: scoreLt } };
-  const users = await db.user.findMany({
+  const testResultsQuery = { testId, score: { gt: scoreMin, lt: scoreMax } };
+  return await db.user.findMany({
     where: {
-      testResults: { some: testResultsQuery },
+      testResults: {
+        some: { id: testId, score: { gte: scoreMin, lte: scoreMax } },
+      },
       name: {
         contains: textQuery,
         mode: "insensitive",
@@ -34,15 +29,11 @@ const myTestGetTestResults = cache(async ({ testId, searchParams }: Params) => {
       id: true,
       name: true,
       image: true,
-      testResults: { where: testResultsQuery, orderBy: { createdAt: "desc" } },
+      testResults: {
+        where: { id: testId, score: { gte: scoreMin, lte: scoreMax } },
+        orderBy: { createdAt: "desc" },
+      },
     },
-  });
-  if (!timesTakenGt && !timesTakenLt) return users;
-
-  return users.filter((user) => {
-    if (!(timesTakenGt < user.testResults.length)) return false;
-    if (!(timesTakenLt > user.testResults.length)) return false;
-    return true;
   });
 });
 

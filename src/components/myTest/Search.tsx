@@ -10,9 +10,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { useHotkeys } from "react-hotkeys-hook";
 import updateUrlQueryString from "@/lib/updateUrlQueryString";
 
-type Props = {};
-
-export default function MyTestSearch({}: Props) {
+export default function MyTestSearch() {
   const {
     test: { id: testId },
   } = useMyTestContext();
