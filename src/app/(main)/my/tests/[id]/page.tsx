@@ -1,4 +1,5 @@
 import MyTestActionBtns from "@/components/myTest/ActionBtns";
+import MyTestFilters from "@/components/myTest/Filters";
 import MyTestResults from "@/components/myTest/Results/Index";
 import MyTestSearch from "@/components/myTest/Search";
 import PageTitle from "@/components/PageTitle";
@@ -38,7 +39,10 @@ export default async function MyTest({ params: { id: testId } }: Context) {
               },
             }}
           >
-            <MyTestSearch />
+            <div className="space-y-1">
+              <MyTestSearch />
+              <MyTestFilters />
+            </div>
             <MyTestResults />
           </SwrProvider>
         </div>

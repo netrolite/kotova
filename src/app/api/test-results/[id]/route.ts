@@ -7,29 +7,24 @@ type Context = {
 
 type SearchParams = {
   q?: string;
-  scoreGt?: string;
-  scoreLt?: string;
-  timesTakenGt?: string;
-  timesTakenLt?: string;
+  scoreMin?: string;
+  scoreMax?: string;
 };
 
 export async function GET(req: NextRequest, { params: { testId } }: Context) {
   const {
     q,
-    scoreGt: rawScoreGt,
-    scoreLt: rawScoreLt,
-    timesTakenGt: rawTimesTakenGt,
-    timesTakenLt: rawTimesTakenLt,
+    scoreMin: rawScoreMin,
+    scoreMax: rawScoreMax,
   }: SearchParams = Object.fromEntries(req.nextUrl.searchParams.entries());
+  console.log(req.nextUrl.toString());
 
-  const scoreGt = parseSearchParamNumber(rawScoreGt);
-  const scoreLt = parseSearchParamNumber(rawScoreLt);
-  const timesTakenGt = parseSearchParamNumber(rawTimesTakenGt);
-  const timesTakenLt = parseSearchParamNumber(rawTimesTakenLt);
+  const scoreMin = parseSearchParamNumber(rawScoreMin);
+  const scoreMax = parseSearchParamNumber(rawScoreMax);
 
   const data = await myTestGetTestResults({
     testId,
-    searchParams: { scoreGt, scoreLt, timesTakenGt, timesTakenLt, query: q },
+    searchParams: { scoreMin, scoreMax, query: q },
   });
   return NextResponse.json(data);
 }
