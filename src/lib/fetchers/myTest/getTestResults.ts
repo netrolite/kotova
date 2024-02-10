@@ -12,7 +12,6 @@ type Params = {
 
 const myTestGetTestResults = cache(async ({ testId, searchParams }: Params) => {
   const { scoreMin, scoreMax, query: textQuery } = searchParams ?? {};
-  console.log(scoreMin, scoreMax);
 
   const testResultsQuery = {
     testId,

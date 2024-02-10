@@ -16,12 +16,21 @@ import useMyTestContext from "@/lib/contexts/myTest/useContext";
 import updateUrlQueryString from "@/lib/updateUrlQueryString";
 import { useDebouncedCallback } from "use-debounce";
 import { Range } from "react-range";
+import parseSearchParamNumber from "@/lib/parseSearchParamNumber";
 
 const SCORE_DEFAULT = [0, 100];
 
 export default function MyTestFilters() {
-  const [score, setScore] = useState(SCORE_DEFAULT);
-  const { searchParams, setSearchParams } = useMyTestContext();
+  const { searchParams, setSearchParams, initSearchParams } =
+    useMyTestContext();
+  const [score, setScore] = useState(
+    [
+      parseSearchParamNumber(initSearchParams.get("scoreMin")) ??
+        SCORE_DEFAULT[0],
+      parseSearchParamNumber(initSearchParams.get("scoreMax")) ??
+        SCORE_DEFAULT[1],
+    ].sort(),
+  );
   const { mutate } = useMyTestResultsSwr();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
