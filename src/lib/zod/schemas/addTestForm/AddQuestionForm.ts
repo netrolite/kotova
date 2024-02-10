@@ -1,18 +1,18 @@
 import { z } from "zod";
 import AddTestFormAddQuestionQuestionType from "./AddQuestionFormQuestionType";
 
-const AddTestFormAddQuestionFormSchema = z.object({
+const AddTestFormAddQuestionSchema = z.object({
   type: AddTestFormAddQuestionQuestionType,
 });
 
-export default AddTestFormAddQuestionFormSchema;
+export default AddTestFormAddQuestionSchema;
 
 export type AddTestFormAddQuestionFormSchemaInputType = z.input<
-  typeof AddTestFormAddQuestionFormSchema
+  typeof AddTestFormAddQuestionSchema
 >;
 
 export type AddTestFormAddQuestionFormSchemaType = z.infer<
-  typeof AddTestFormAddQuestionFormSchema
+  typeof AddTestFormAddQuestionSchema
 > & {
   type: Exclude<AddTestFormAddQuestionFormSchemaInputType, null>;
 };

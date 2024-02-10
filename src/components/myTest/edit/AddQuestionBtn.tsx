@@ -26,15 +26,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { getQuestionTypeLabelByNumber } from "@/lib/getQuestionType";
-import AddTestFormAddQuestionSchema, {
-  AddTestFormAddQuestionFormSchemaInputType,
-  AddTestFormAddQuestionFormSchemaType,
-} from "@/lib/zod/schemas/addTestForm/AddQuestionForm";
 import QuestionTypesList from "@/components/QuestionTypesList";
-import useAddTestFormStore from "@/lib/stores/addTestForm";
-import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
-import { AddTestFormQuestionSchemaType } from "@/lib/zod/schemas/addTestForm/Question";
+import useMyTestEditFormStore from "@/lib/stores/myTestEditForm";
+import useMyTestEditFormContext from "@/lib/hooks/myTestEditForm/context";
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
+import { MyTestEditFormQuestionSchemaType } from "@/lib/zod/schemas/myTestEditForm/Question";
+import MyTestEditFormAddQuestionSchema, {
+  MyTestEditFormAddQuestionSchemaInputType,
+  MyTestEditFormAddQuestionSchemaType,
+} from "@/lib/zod/schemas/myTestEditForm/AddQuestionForm";
 
 export const TEXT_QUESTION_DEFAULT_VALUES = {
   correctAnswerText: "",
@@ -42,29 +42,29 @@ export const TEXT_QUESTION_DEFAULT_VALUES = {
   options: [],
   question: "",
   type: TEST_QUESTION_TYPE.TEXT,
-} satisfies AddTestFormQuestionSchemaType;
+} satisfies MyTestEditFormQuestionSchemaType;
 
 export const QUESTION_WITH_OPTIONS_DEFAULT_VALUES = {
   correctAnswerText: null,
   explanation: "",
   options: [],
   question: "",
-} satisfies Omit<AddTestFormQuestionSchemaType, "type">;
+} satisfies Omit<MyTestEditFormQuestionSchemaType, "type">;
 
-export default function AddTestFormAddQuestionBtn() {
-  const { questionsFields: questions } = useAddTestFormContext();
+export default function MyTestEditFormAddQuestionBtn() {
+  const { questionsFields: questions } = useMyTestEditFormContext();
   const form = useForm<
-    AddTestFormAddQuestionFormSchemaInputType,
+    MyTestEditFormAddQuestionSchemaInputType,
     any,
-    AddTestFormAddQuestionFormSchemaType
+    MyTestEditFormAddQuestionSchemaType
   >({
-    resolver: zodResolver(AddTestFormAddQuestionSchema),
+    resolver: zodResolver(MyTestEditFormAddQuestionSchema),
     defaultValues: {
       type: null,
     },
   });
 
-  const { isDialogOpen, setIsDialogOpen } = useAddTestFormStore((s) => ({
+  const { isDialogOpen, setIsDialogOpen } = useMyTestEditFormStore((s) => ({
     isDialogOpen: s.isQuestionTypeDialogOpen,
     setIsDialogOpen: s.setIsQuestionTypeDialogOpen,
   }));

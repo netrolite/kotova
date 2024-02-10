@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const AddTestFormQuestionOption = z.object({
+const AddTestFormQuestionOptionSchema = z.object({
   content: z
     .string()
     .trim()
@@ -19,19 +19,20 @@ const AddTestFormQuestionOption = z.object({
     .nullable(),
 });
 
-export const AddTestFormSavedQuestionOption = AddTestFormQuestionOption.extend({
-  content: z.string().nullable(),
-  tableColumn: z.string().nullable(),
-  tableColumnAnswer: z.string().nullable(),
-});
+export const AddTestFormSavedQuestionOption =
+  AddTestFormQuestionOptionSchema.extend({
+    content: z.string().nullable(),
+    tableColumn: z.string().nullable(),
+    tableColumnAnswer: z.string().nullable(),
+  });
 
-export default AddTestFormQuestionOption;
+export default AddTestFormQuestionOptionSchema;
 
 export type AddTestFormQuestionOptionSchemaType = z.infer<
-  typeof AddTestFormQuestionOption
+  typeof AddTestFormQuestionOptionSchema
 >;
 export type AddTestFormQuestionOptionInputSchemaType = z.input<
-  typeof AddTestFormQuestionOption
+  typeof AddTestFormQuestionOptionSchema
 >;
 
 export type AddTestFormSavedQuestionOptionSchemaType = z.infer<
