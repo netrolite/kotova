@@ -23,6 +23,7 @@ const SCORE_DEFAULT = [0, 100];
 export default function MyTestFilters() {
   const { searchParams, setSearchParams, initSearchParams } =
     useMyTestContext();
+  const [isOpen, setIsOpen] = useState(false);
   const [score, setScore] = useState(
     [
       parseSearchParamNumber(initSearchParams.get("scoreMin")) ??
@@ -35,6 +36,7 @@ export default function MyTestFilters() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsOpen(false);
     mutate();
   }
 
@@ -62,7 +64,7 @@ export default function MyTestFilters() {
   }, 200);
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <BtnWithIcon variant="outline" icon={<FilterIcon width={16} />}>
           Фильтры
