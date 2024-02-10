@@ -1,4 +1,5 @@
 import myTestGetTestResults from "@/lib/fetchers/myTest/getTestResults";
+import parseSearchParamNumber from "@/lib/parseSearchParamNumber";
 import { NextRequest, NextResponse } from "next/server";
 
 type Context = {
@@ -17,7 +18,6 @@ export async function GET(req: NextRequest, { params: { testId } }: Context) {
     scoreMin: rawScoreMin,
     scoreMax: rawScoreMax,
   }: SearchParams = Object.fromEntries(req.nextUrl.searchParams.entries());
-  console.log(req.nextUrl.toString());
 
   const scoreMin = parseSearchParamNumber(rawScoreMin);
   const scoreMax = parseSearchParamNumber(rawScoreMax);
@@ -27,12 +27,6 @@ export async function GET(req: NextRequest, { params: { testId } }: Context) {
     searchParams: { scoreMin, scoreMax, query: q },
   });
   return NextResponse.json(data);
-}
-
-function parseSearchParamNumber(val?: string) {
-  const parsed = Number(val);
-  if (isNaN(parsed)) return undefined;
-  return parsed;
 }
 
 export const dynamic = "force-dynamic";
