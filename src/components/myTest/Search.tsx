@@ -44,6 +44,8 @@ export default function MyTestSearch() {
     >
       <Input
         placeholder="Поиск по имени и фамилии"
+        name="search"
+        type="search"
         className="border-none"
         onChange={handleQueryChange}
         value={query}
