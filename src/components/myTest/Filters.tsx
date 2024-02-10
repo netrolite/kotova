@@ -32,6 +32,9 @@ export default function MyTestFilters() {
         SCORE_DEFAULT[1],
     ].sort(),
   );
+  const enabledFiltersAmount = [
+    JSON.stringify(score) !== JSON.stringify(SCORE_DEFAULT),
+  ].filter((filter) => filter === true).length;
   const { mutate } = useMyTestResultsSwr();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -67,7 +70,7 @@ export default function MyTestFilters() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <BtnWithIcon variant="outline" icon={<FilterIcon width={16} />}>
-          Фильтры
+          Фильтры {enabledFiltersAmount ? `(${enabledFiltersAmount})` : null}
         </BtnWithIcon>
       </DialogTrigger>
       <DialogContent>
