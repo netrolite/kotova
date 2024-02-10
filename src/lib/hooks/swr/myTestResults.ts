@@ -1,14 +1,14 @@
 import { swrKeys } from "@/lib/constants";
+import useMyTestContext from "@/lib/contexts/myTest/useContext";
 import getApiData from "@/lib/fetchers/getApiData";
 import { MyTestGetTestResultsReturn } from "@/lib/fetchers/myTest/getTestResults";
 import useSWR, { unstable_serialize } from "swr";
 
-type Params = {
-  testId: string;
-  searchParams?: URLSearchParams;
-};
-
-export default function useMyTestResultsSwr({ testId, searchParams }: Params) {
+export default function useMyTestResultsSwr() {
+  const {
+    test: { id: testId },
+    searchParams,
+  } = useMyTestContext();
   return useSWR<MyTestGetTestResultsReturn>(
     unstable_serialize([swrKeys.myTest, testId]),
     () =>

@@ -3,7 +3,6 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,7 +13,6 @@ import { FormEvent, useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import useMyTestResultsSwr from "@/lib/hooks/swr/myTestResults";
 import useMyTestContext from "@/lib/contexts/myTest/useContext";
-import { useSearchParams } from "next/navigation";
 import updateUrlQueryString from "@/lib/updateUrlQueryString";
 import { useDebouncedCallback } from "use-debounce";
 import { Range } from "react-range";
@@ -23,15 +21,8 @@ const SCORE_DEFAULT = [0, 100];
 
 export default function MyTestFilters() {
   const [score, setScore] = useState(SCORE_DEFAULT);
-  const {
-    test: { id: testId },
-  } = useMyTestContext();
-  const initSearchParams = useSearchParams();
-  const [searchParams, setSearchParams] = useState(
-    new URLSearchParams(initSearchParams),
-  );
-  const { mutate } = useMyTestResultsSwr({ testId, searchParams });
-  console.log(score);
+  const { searchParams, setSearchParams } = useMyTestContext();
+  const { mutate } = useMyTestResultsSwr();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -59,7 +50,7 @@ export default function MyTestFilters() {
 
   const updateUrlQueryStringDebounced = useDebouncedCallback(() => {
     updateUrlQueryString(searchParams);
-  }, 300);
+  }, 200);
 
   return (
     <Dialog>

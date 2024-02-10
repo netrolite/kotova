@@ -14,12 +14,13 @@ const myTestGetTestResults = cache(async ({ testId, searchParams }: Params) => {
   const { scoreMin, scoreMax, query: textQuery } = searchParams ?? {};
   console.log(scoreMin, scoreMax);
 
-  const testResultsQuery = { testId, score: { gt: scoreMin, lt: scoreMax } };
-  return await db.user.findMany({
+  const testResultsQuery = {
+    testId,
+    score: { gte: scoreMin, lte: scoreMax },
+  };
+  const results = await db.user.findMany({
     where: {
-      testResults: {
-        some: { id: testId, score: { gte: scoreMin, lte: scoreMax } },
-      },
+      testResults: { some: testResultsQuery },
       name: {
         contains: textQuery,
         mode: "insensitive",
@@ -30,11 +31,12 @@ const myTestGetTestResults = cache(async ({ testId, searchParams }: Params) => {
       name: true,
       image: true,
       testResults: {
-        where: { id: testId, score: { gte: scoreMin, lte: scoreMax } },
+        where: testResultsQuery,
         orderBy: { createdAt: "desc" },
       },
     },
   });
+  return results;
 });
 
 export type MyTestGetTestResultsReturn = Awaited<
