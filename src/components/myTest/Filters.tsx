@@ -75,16 +75,19 @@ export default function MyTestFilters() {
           <DialogTitle>Фильтры</DialogTitle>
         </DialogHeader>
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label>
-              Баллы
+          <div className="space-y-2">
+            <span>Баллы</span>
+            <div className="flex items-center gap-4">
+              <div className="w-10 rounded border p-1 text-center font-mono">
+                {score[0]}
+              </div>
               <Range
                 min={0}
                 max={100}
                 values={score}
                 onChange={(val) => setScore(val)}
                 renderTrack={({ props, children }) => (
-                  <div {...props} className="h-2 bg-gray-500">
+                  <div {...props} className="h-2 flex-grow rounded bg-primary">
                     {children}
                   </div>
                 )}
@@ -92,11 +95,14 @@ export default function MyTestFilters() {
                   <div
                     {...props}
                     key={props.key}
-                    className="h-4 w-4 rounded-full bg-primary"
+                    className="h-5 w-5 rounded-full border border-white bg-primary"
                   />
                 )}
               />
-            </label>
+              <div className="w-10 rounded border p-1 text-center font-mono">
+                {score[1]}
+              </div>
+            </div>
           </div>
 
           <Button>Применить фильтры</Button>
