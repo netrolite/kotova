@@ -5,14 +5,11 @@ import AddTestFormQuestionSchema, {
 
 const NAME_MAX_LEN = 300;
 
-const AddTestFormGrades = z.number().array();
+export const AddTestFormGrades = z.number().array();
 
 const AddTestFormSchema = z.object({
   grades: AddTestFormGrades.min(1, { message: "Не выбран класс" }),
-  subjectId: z
-    .string()
-    .min(1, { message: "Не выбран предмет" })
-    .cuid({ message: "Неверный формат предмета" }),
+  subjectId: z.string().min(1, { message: "Не выбран предмет" }),
   name: z
     .string()
     .min(1, "Название не заполнено")

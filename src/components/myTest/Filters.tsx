@@ -20,6 +20,7 @@ import parseSearchParamNumber from "@/lib/parseSearchParamNumber";
 
 const SCORE_DEFAULT = [0, 100];
 
+// should probably use a filters object if more filters are needed
 export default function MyTestFilters() {
   const { searchParams, setSearchParams, initSearchParams } =
     useMyTestContext();

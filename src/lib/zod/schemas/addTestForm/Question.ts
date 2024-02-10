@@ -1,5 +1,5 @@
 import { z } from "zod";
-import AddTestFormQuestionOption, {
+import AddTestFormQuestionOptionSchema, {
   AddTestFormSavedQuestionOption,
 } from "./QuestionOption";
 import QuestionTypeSchema from "../QuestionType";
@@ -14,7 +14,7 @@ const AddTestFormQuestionSchema = z
     type: QuestionTypeSchema,
     explanation: z.string().trim().nullable(),
     correctAnswerText: z.string().trim().nullable(),
-    options: AddTestFormQuestionOption.array(),
+    options: AddTestFormQuestionOptionSchema.array(),
   })
   .refine(
     (data) =>
