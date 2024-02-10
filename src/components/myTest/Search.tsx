@@ -1,7 +1,6 @@
 "use client";
 
 import useMyTestContext from "@/lib/contexts/myTest/useContext";
-import { useSearchParams } from "next/navigation";
 import { Input } from "../ui/input";
 import { SearchIcon } from "lucide-react";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
@@ -11,15 +10,10 @@ import { useHotkeys } from "react-hotkeys-hook";
 import updateUrlQueryString from "@/lib/updateUrlQueryString";
 
 export default function MyTestSearch() {
-  const {
-    test: { id: testId },
-  } = useMyTestContext();
-  const initSearchParams = useSearchParams();
-  const [searchParams, setSearchParams] = useState(
-    new URLSearchParams(initSearchParams),
-  );
+  const { initSearchParams, searchParams, setSearchParams } =
+    useMyTestContext();
   const [query, setQuery] = useState(initSearchParams.get("q") ?? "");
-  const { mutate } = useMyTestResultsSwr({ testId, searchParams });
+  const { mutate } = useMyTestResultsSwr();
   const queryInputRef = useRef<HTMLInputElement>(null);
   useHotkeys("mod+k", () => queryInputRef.current?.focus(), [queryInputRef]);
 
@@ -33,9 +27,7 @@ export default function MyTestSearch() {
     setQuery(query);
     setSearchParams((sp) => {
       sp.delete("q");
-      if (query) {
-        sp.append("q", query);
-      }
+      if (query) sp.append("q", query);
       return sp;
     });
   }

@@ -7,11 +7,8 @@ import MyTestResult from "./Result";
 import useMyTestResultsSwr from "@/lib/hooks/swr/myTestResults";
 
 export default function MyTestResults() {
-  const {
-    test: { id: testId },
-    testResults: initTestResults,
-  } = useMyTestContext();
-  const { data: users, isValidating, error } = useMyTestResultsSwr({ testId });
+  const { testResults: initTestResults } = useMyTestContext();
+  const { data: users, isValidating, error } = useMyTestResultsSwr();
 
   if (isValidating) return <Loading />;
   if (error) return <p>{GENERIC_ERROR_MSG}</p>;
