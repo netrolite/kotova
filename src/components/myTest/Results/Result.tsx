@@ -5,14 +5,13 @@ import Link from "next/link";
 import AvatarWithFallback from "@/components/AvatarWithFallback";
 import KeyValue from "@/components/KeyValue";
 import { Button } from "@/components/ui/button";
-import DynamicHeight from "@/components/DynamicHeight";
 import { dateToLocaleTimeString } from "@/lib/dateFormatters";
 import formatTestScore from "@/lib/formatTestScore";
 
 type Props = MyTestGetTestResultsReturn[number];
 
 export default function MyTestResult({ id, image, name, testResults }: Props) {
-  const [showResults, setShowResults] = useState(false);
+  const [shouldShowResults, setShouldShowResults] = useState(false);
 
   const minTestResultScore = Math.min(
     ...testResults.map((result) => result.score),
@@ -62,40 +61,39 @@ export default function MyTestResult({ id, image, name, testResults }: Props) {
         <CardContent className="space-y-2">
           <Button
             variant="outline"
-            onClick={() => setShowResults((prev) => !prev)}
+            onClick={() => setShouldShowResults((prev) => !prev)}
           >
-            {showResults
+            {shouldShowResults
               ? "Скрыть прохождения теста"
               : "Показать прохождения теста"}
           </Button>
-          <DynamicHeight
-            isOpen={showResults}
-            className="max-w-[400px] space-y-1"
-          >
-            <div className="grid grid-cols-2">
-              <p>Дата</p>
-              <p>Баллы</p>
-            </div>
-            <ul className="space-y-1">
-              {testResults.map(({ createdAt, id, score }) => {
-                const createdAtString = dateToLocaleTimeString(createdAt, {
-                  month: "long",
-                  day: "numeric",
-                });
-                return (
-                  <li key={id}>
-                    <Link
-                      className="grid w-full grid-cols-2 rounded border px-3 py-1"
-                      href={`/test-result/${id}`}
-                    >
-                      <p>{createdAtString}</p>
-                      {formatTestScore(score)}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </DynamicHeight>
+          {shouldShowResults && (
+            <>
+              <div className="grid grid-cols-2">
+                <p>Дата</p>
+                <p>Баллы</p>
+              </div>
+              <ul className="space-y-1">
+                {testResults.map(({ createdAt, id, score }) => {
+                  const createdAtString = dateToLocaleTimeString(createdAt, {
+                    month: "long",
+                    day: "numeric",
+                  });
+                  return (
+                    <li key={id}>
+                      <Link
+                        className="grid w-full grid-cols-2 rounded border px-3 py-1"
+                        href={`/test-result/${id}`}
+                      >
+                        <p>{createdAtString}</p>
+                        {formatTestScore(score)}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          )}
         </CardContent>
       </Card>
     </li>
