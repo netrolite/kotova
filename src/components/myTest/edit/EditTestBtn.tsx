@@ -10,13 +10,17 @@ import {
 import FormSubmitBtn from "@/components/Btns/Submit";
 import useMyTestEditFormContext from "@/lib/hooks/myTestEditForm/context";
 import { Button } from "@/components/ui/button";
+import useEditTestFormStore from "@/lib/stores/editTestForm";
 
 type Props = { isLoading: boolean };
 
 export default function MyTestEditFormEditTestBtn({ isLoading }: Props) {
   const { formRef } = useMyTestEditFormContext();
+  const [isEditTestDialogOpen, setIsEditTestDialogOpen] = useEditTestFormStore(
+    (s) => [s.isEditTestDialogOpen, s.setIsEditTestDialogOpen],
+  );
   return (
-    <Dialog>
+    <Dialog open={isEditTestDialogOpen} onOpenChange={setIsEditTestDialogOpen}>
       <DialogTrigger asChild>
         <FormSubmitBtn {...{ isLoading }}>Изменить тест</FormSubmitBtn>
       </DialogTrigger>
@@ -32,7 +36,7 @@ export default function MyTestEditFormEditTestBtn({ isLoading }: Props) {
               )
             }
           >
-            Создать
+            Изменить
           </Button>
         </DialogFooter>
       </DialogContent>
