@@ -64,7 +64,6 @@ export default function MyTestEditForm({ subjects, test }: Props) {
         );
       }
       toast.success("Тест успешно изменён");
-      setIsEditTestDialogOpen(false);
       router.replace(`/my/tests/${test.id}`);
     },
     [],
@@ -76,7 +75,6 @@ export default function MyTestEditForm({ subjects, test }: Props) {
         "Не удалось изменить тест. Пожалуйста, проверьте его на ошибки",
       );
       if (!isProduction()) console.error(errs);
-      setIsEditTestDialogOpen(false);
     },
     [],
   );
@@ -88,7 +86,10 @@ export default function MyTestEditForm({ subjects, test }: Props) {
       >
         <form
           className="space-y-16"
-          onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
+          onSubmit={(e) => {
+            setIsEditTestDialogOpen(false);
+            form.handleSubmit(handleSubmit, handleSubmitError)(e);
+          }}
           ref={formRef}
         >
           <div className="space-y-10">
