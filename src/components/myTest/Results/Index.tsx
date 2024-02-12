@@ -18,7 +18,7 @@ export default function MyTestResults() {
   if (!users?.length) return <p>По вашему запросу не нашлось результатов</p>;
 
   return (
-    <ul>
+    <ul className="space-y-2">
       {users.map((user) => (
         <MyTestResult key={user.id} {...user} />
       ))}
