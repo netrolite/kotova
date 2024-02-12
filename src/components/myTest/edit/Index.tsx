@@ -26,17 +26,12 @@ import MyTestEditFormSchema, {
 } from "@/lib/zod/schemas/myTestEditForm/Index";
 import editTestAction from "@/lib/actions/editTest";
 import { MyTestEditGetTestReturn } from "@/lib/fetchers/myTest/editGetTest";
+import HiddenInput from "@/components/HiddenInput";
+import useEditTestFormStore from "@/lib/stores/editTestForm";
 
 type Props = {
   subjects: SelectItemType<string>[];
   test: MyTestEditGetTestReturn;
-};
-
-export const MY_TEST_EDIT_FORM_DEFAULT_VALUES: MyTestEditFormSchemaType = {
-  grades: [],
-  name: "",
-  questions: [],
-  subjectId: "",
 };
 
 export type MyTestEditFormQuestions =
@@ -54,11 +49,14 @@ export default function MyTestEditForm({ subjects, test }: Props) {
     name: "questions",
   });
   const { isLoading, setIsLoading } = useLoading();
+  const [setIsEditTestDialogOpen] = useEditTestFormStore((s) => [
+    s.setIsEditTestDialogOpen,
+  ]);
 
   const handleSubmit = useCallback(
     async (formData: MyTestEditFormSchemaType) => {
       setIsLoading(true);
-      const { data, error } = await editTestAction(formData);
+      const { error } = await editTestAction(formData);
       if (error) {
         setIsLoading(false);
         return toast.error(
@@ -66,7 +64,8 @@ export default function MyTestEditForm({ subjects, test }: Props) {
         );
       }
       toast.success("Тест успешно изменён");
-      router.replace(`/my/tests/${data.testId}`);
+      setIsEditTestDialogOpen(false);
+      router.replace(`/my/tests/${test.id}`);
     },
     [],
   );
@@ -77,6 +76,7 @@ export default function MyTestEditForm({ subjects, test }: Props) {
         "Не удалось изменить тест. Пожалуйста, проверьте его на ошибки",
       );
       if (!isProduction()) console.error(errs);
+      setIsEditTestDialogOpen(false);
     },
     [],
   );
@@ -102,6 +102,7 @@ export default function MyTestEditForm({ subjects, test }: Props) {
             <MyTestEditFormAddQuestionBtn />
           </div>
 
+          <HiddenInput {...form.register("testId")} value={test.id} />
           <MyTestEditFormEditTestBtn {...{ isLoading }} />
         </form>
       </MyTestEditFormContext.Provider>
