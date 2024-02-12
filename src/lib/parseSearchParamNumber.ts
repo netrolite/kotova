@@ -1,5 +1,6 @@
 export default function parseSearchParamNumber(val?: string | null) {
-  const parsed = Number(val);
-  if (isNaN(parsed)) return undefined;
-  return parsed;
+  if (val === null || val == undefined || isNaN(val as any)) {
+    return undefined;
+  }
+  return Number(val);
 }
