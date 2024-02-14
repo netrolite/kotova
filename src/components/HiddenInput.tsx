@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, forwardRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-type Props = UseFormRegisterReturn<string> & {
+type Props = Omit<UseFormRegisterReturn<string>, "onChange" | "onBlur"> & {
   value: InputHTMLAttributes<HTMLInputElement>["value"];
 };
 
