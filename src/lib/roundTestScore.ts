@@ -3,7 +3,7 @@ export default function roundTestScore(score: number) {
 
   const scoreRoundedToInt = Math.round(score);
   const isDiffBetweenRoundedAndNormalScoreNegligible =
-    Math.abs(scoreRoundedToInt - score) <= 0.1;
+    Math.abs(scoreRoundedToInt - score) < 0.1;
 
   if (isDiffBetweenRoundedAndNormalScoreNegligible) {
     return scoreRoundedToInt;
