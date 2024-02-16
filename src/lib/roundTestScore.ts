@@ -1,4 +1,5 @@
-export default function roundTestScore(score: number) {
+export default function roundTestScore(score: number | null) {
+  if (score === null) return null;
   if (Number.isInteger(score)) return score;
 
   const scoreRoundedToInt = Math.round(score);
