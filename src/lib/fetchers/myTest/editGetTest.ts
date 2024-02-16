@@ -6,7 +6,12 @@ import { cache } from "react";
 const myTestEditGetTest = cache(async (testId: string) => {
   return db.test.findUnique({
     where: { id: testId },
-    include: { questions: { include: { options: true } } },
+    include: {
+      questions: {
+        include: { options: { orderBy: { order: "asc" } } },
+        orderBy: { order: "asc" },
+      },
+    },
   });
 });
 

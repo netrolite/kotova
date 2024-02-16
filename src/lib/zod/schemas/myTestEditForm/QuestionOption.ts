@@ -1,13 +1,16 @@
 import { z } from "zod";
 import AddTestFormQuestionOptionSchema from "../addTestForm/QuestionOption";
 
-const MyTestEditFormQuestionOption = AddTestFormQuestionOptionSchema.extend({});
+const MyTestEditFormQuestionOptionSchema =
+  AddTestFormQuestionOptionSchema.extend({
+    id: z.string().nullable(), // the id is used if the user tries to edit an existing question. Newly added questions will not have this
+  });
 
-export default MyTestEditFormQuestionOption;
+export default MyTestEditFormQuestionOptionSchema;
 
 export type MyTestEditFormQuestionOptionSchemaType = z.infer<
-  typeof MyTestEditFormQuestionOption
+  typeof MyTestEditFormQuestionOptionSchema
 >;
 export type MyTestEditFormQuestionOptionInputSchemaType = z.input<
-  typeof MyTestEditFormQuestionOption
+  typeof MyTestEditFormQuestionOptionSchema
 >;

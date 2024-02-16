@@ -80,6 +80,7 @@ model TestQuestion {
   // prisma doesn't yet support union types so we can't use something like `options (TextQuestion | RadioQuestion)[]`
   question          String
   type              Int
+  order             Int?                 @default(autoincrement())
   options           TestQuestionOption[]
   correctAnswerText String?
   explanation       String?
@@ -94,6 +95,7 @@ model TestQuestionOption {
   tableColumnAnswer       String?
   testQuestion            TestQuestion             @relation(fields: [testQuestionId], references: [id], onDelete: Cascade)
   testQuestionId          String
+  order                   Int?                     @default(autoincrement())
   testResultAnswerOptions TestResultAnswerOption[]
 }
 
