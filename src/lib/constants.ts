@@ -33,6 +33,6 @@ export const prismaErrs = {
 };
 
 export const swrKeys = {
-  myTest: "/api/test-stats",
+  myTest: "/api/test-results",
   subjects: "/api/subjects",
 } as const;
