@@ -37,6 +37,7 @@ import MyTestEditFormAddQuestionSchema, {
 } from "@/lib/zod/schemas/myTestEditForm/AddQuestionForm";
 
 export const TEXT_QUESTION_DEFAULT_VALUES = {
+  id: null,
   correctAnswerText: "",
   explanation: "",
   options: [],
@@ -45,6 +46,7 @@ export const TEXT_QUESTION_DEFAULT_VALUES = {
 } satisfies MyTestEditFormQuestionSchemaType;
 
 export const QUESTION_WITH_OPTIONS_DEFAULT_VALUES = {
+  id: null,
   correctAnswerText: null,
   explanation: "",
   options: [],

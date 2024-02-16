@@ -14,13 +14,10 @@ export default function MyTestEditFormQuestionAddOptionBtn({
   const { optionsFields } = useMyTestEditFormQuestionContext();
 
   function handleAppendOption() {
-    const {
-      isTextQuestion,
-      isTableQuestion,
-      isCheckboxQuestion,
-      isRadioQuestion,
-    } = getQuestionTypes(questionType);
+    const { isTableQuestion, isCheckboxQuestion, isRadioQuestion } =
+      getQuestionTypes(questionType);
     optionsFields.append({
+      id: null,
       content: !isTableQuestion ? "" : null,
       isCorrect: isCheckboxQuestion || isRadioQuestion ? false : null,
       tableColumn: isTableQuestion ? "" : null,
