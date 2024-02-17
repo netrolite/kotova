@@ -17,12 +17,11 @@ export default async function Dashboard() {
     <>
       <PageTitle className="mb-8">Личный кабинет</PageTitle>
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {isAdmin ||
-          (isTeacher && (
-            <DashboardCardWrapper>
-              <DashboardMyTestsCard />
-            </DashboardCardWrapper>
-          ))}
+        {(isAdmin || isTeacher) && (
+          <DashboardCardWrapper>
+            <DashboardMyTestsCard />
+          </DashboardCardWrapper>
+        )}
 
         {isAdmin && (
           <DashboardCardWrapper>
@@ -30,18 +29,16 @@ export default async function Dashboard() {
           </DashboardCardWrapper>
         )}
 
-        {isStudent ||
-          (isAdmin && (
-            <>
-              <DashboardCardWrapper>
-                <DashboardAvgScoreCard />
-              </DashboardCardWrapper>
-
-              <DashboardCardWrapper>
-                <DashboardTakenTestsCard />
-              </DashboardCardWrapper>
-            </>
-          ))}
+        {(isStudent || isAdmin) && (
+          <>
+            <DashboardCardWrapper>
+              <DashboardAvgScoreCard />
+            </DashboardCardWrapper>
+            <DashboardCardWrapper>
+              <DashboardTakenTestsCard />
+            </DashboardCardWrapper>
+          </>
+        )}
       </section>
     </>
   );
