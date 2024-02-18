@@ -44,6 +44,7 @@ export default function AvatarWithFallback({
       <UserIcon
         className={cn(`text-slate-400`, userIconClassName)}
         style={{ width, height: width }}
+        role="avatar"
       />
     );
   }

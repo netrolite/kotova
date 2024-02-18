@@ -57,7 +57,11 @@
     @apply bg-background text-foreground;
   }
   a:hover {
-    text-decoration: underline;
-    @apply text-primary;
+    h1,
+    h2,
+    h3,
+    h4 {
+      @apply text-primary underline;
+    }
   }
 }

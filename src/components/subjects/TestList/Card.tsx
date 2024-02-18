@@ -25,32 +25,21 @@ export default function SubjectTestListCard({
 }: Props) {
   return (
     <Card key={id}>
-      <Link
-        href={`/take-test/${id}`}
-        className={`${cardStyles.card} hover:no-underline`}
-      >
+      <Link href={`/take-test/${id}`}>
         <CardHeader>
           <h2 className="text-2xl font-semibold">{name}</h2>
           <CardDescription>{formatGrades(grades)}</CardDescription>
         </CardHeader>
         <CardContent>
-          <KeyValue
-            label="Средний балл"
-            childrenContainerClassName="text-foreground"
-          >
+          <KeyValue label="Средний балл">
             {avgScore !== null ? formatTestScore(avgScore) : "Нет данных"}
           </KeyValue>
-          <KeyValue
-            label="Раз пройден"
-            childrenContainerClassName="text-foreground"
-          >
-            {testResults.length}
-          </KeyValue>
+          <KeyValue label="Раз пройден">{testResults.length}</KeyValue>
         </CardContent>
       </Link>
       <CardFooter>
         <Link
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 hover:text-primary hover:underline"
           href={createdBy?.id ? `/users/${createdBy.id}` : "/users/deleted"}
         >
           <SubjectTestListTestAvatar user={createdBy} />
