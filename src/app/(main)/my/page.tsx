@@ -6,6 +6,7 @@ import DashboardTakenTestsCard from "@/components/dashboard/Cards/TakenTests";
 import DashboardMyTestsCard from "@/components/dashboard/Cards/MyTests";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
 import { ROLE } from "@/lib/types/enums/Role";
+import DashboardAllUsersCard from "@/components/dashboard/Cards/AllUsers";
 
 export default async function Dashboard() {
   const user = await getSignedInUserOrRedirect();
@@ -24,9 +25,14 @@ export default async function Dashboard() {
         )}
 
         {isAdmin && (
-          <DashboardCardWrapper>
-            <DashboardSubjectsCard />
-          </DashboardCardWrapper>
+          <>
+            <DashboardCardWrapper>
+              <DashboardSubjectsCard />
+            </DashboardCardWrapper>
+            <DashboardCardWrapper>
+              <DashboardAllUsersCard />
+            </DashboardCardWrapper>
+          </>
         )}
 
         {(isStudent || isAdmin) && (

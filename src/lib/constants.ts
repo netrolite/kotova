@@ -35,4 +35,5 @@ export const prismaErrs = {
 export const swrKeys = {
   myTest: "/api/test-results",
   subjects: "/api/subjects",
+  allUsers: "/api/users",
 } as const;
