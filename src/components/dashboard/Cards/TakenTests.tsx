@@ -9,7 +9,7 @@ export default async function DashboardTakenTestsCard() {
   return (
     <DashboardCard
       title="Пройденные тесты"
-      link={{ label: "Все пройденные тесты", href: "/my/taken-tests" }}
+      link={{ label: "Все пройденные тесты", href: "/my/test-results" }}
     >
       {user._count.testResults}
     </DashboardCard>
