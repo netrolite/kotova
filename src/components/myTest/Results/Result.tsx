@@ -82,7 +82,7 @@ export default function MyTestResult({ id, image, name, testResults }: Props) {
                   return (
                     <li key={id}>
                       <Link
-                        className="grid w-full grid-cols-2 rounded border px-3 py-1"
+                        className="grid w-full grid-cols-2 rounded border px-3 py-1 hover:text-primary hover:underline"
                         href={`/test-result/${id}`}
                       >
                         <p>{createdAtString}</p>
