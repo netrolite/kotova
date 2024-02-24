@@ -1,27 +1,27 @@
 import { Button } from "@/components/ui/button";
 import useTestResultAnswerContext from "@/lib/hooks/testResult/answerContext";
 import { useState } from "react";
+import AnimateHeight from "react-animate-height";
 
-type Props = {};
-
-export default function TestResultAnswerExplanation({}: Props) {
+export default function TestResultAnswerExplanation() {
   const {
     question: { explanation },
   } = useTestResultAnswerContext();
-  const [isOpen, setIsOpen] = useState(false);
+  const [height, setHeight] = useState<"auto" | number>(0);
 
   if (!explanation) return null;
   return (
     <div className="space-y-2">
-      {isOpen && (
-        <>
-          <p className="text-lg font-semibold">Объяснение</p>
-          <p>{explanation}</p>
-        </>
-      )}
+      <AnimateHeight {...{ height }} duration={300}>
+        <p className="text-lg font-semibold">Объяснение</p>
+        <p>{explanation}</p>
+      </AnimateHeight>
 
-      <Button variant="outline" onClick={() => setIsOpen((prev) => !prev)}>
-        {isOpen ? "Скрыть объяснение" : "Показать объяснение"}
+      <Button
+        variant="outline"
+        onClick={() => setHeight((h) => (h === 0 ? "auto" : 0))}
+      >
+        {height ? "Скрыть объяснение" : "Показать объяснение"}
       </Button>
     </div>
   );
