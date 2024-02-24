@@ -6,7 +6,11 @@ import useTestResultContext from "@/lib/hooks/testResult/context";
 export default function TestResultMetadataScore() {
   const testResult = useTestResultContext();
   return (
-    <KeyValue label="Баллы" childrenContainerClassName="text-xl">
+    <KeyValue
+      label="Баллы"
+      labelClassName="text-xl"
+      childrenContainerClassName="text-xl"
+    >
       {formatTestScore(testResult.score)}
     </KeyValue>
   );
