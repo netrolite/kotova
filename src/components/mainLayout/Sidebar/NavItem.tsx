@@ -18,7 +18,7 @@ export default function SidebarNavItem({ href, icon, label }: NavItemType) {
           pathname === href
             ? "bg-muted hover:bg-muted"
             : "hover:bg-transparent",
-          "w-full justify-start text-lg hover:text-primary",
+          "w-full justify-start text-lg hover:text-primary hover:underline",
         )}
       >
         {label}
