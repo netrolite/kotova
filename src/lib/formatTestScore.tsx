@@ -2,7 +2,7 @@ import roundTestScore from "./roundTestScore";
 
 export default function formatTestScore(score: number | null) {
   const roundedScore = roundTestScore(score);
-  if (!roundedScore) return null;
+  if (!roundedScore === null) return null;
   return (
     <div className="flex gap-1">
       <span>{roundedScore}</span>
