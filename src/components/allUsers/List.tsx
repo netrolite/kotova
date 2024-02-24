@@ -37,6 +37,7 @@ export default function AllUsersList() {
   const users = flatten(userPages);
   const isSearching = !userPages && isLoading;
   if (isSearching) return <Loading />;
+  if (!users.length) return <p>Ничего не найдено</p>;
   if (!userPages) return null;
 
   const lastUserPage = userPages.at(-1) ?? [];
