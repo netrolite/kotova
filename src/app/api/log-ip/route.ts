@@ -8,9 +8,8 @@ export async function GET(req: NextRequest) {
 
   const existingIps = user.ips.map((ip) => ip.ip);
   if (req.ip && !existingIps.includes(req.ip)) {
-    await db.user.update({
-      where: { id: user.id },
-      data: { ips: { create: { ip: req.ip } } },
+    await db.ip.create({
+      data: { ip: req.ip, user: { connect: { id: user.id } } },
     });
   }
 
