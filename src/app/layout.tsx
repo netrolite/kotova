@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import isProduction from "@/lib/isProduction";
+import IpLogger from "@/components/IpLogger";
 
 const APP_NAME = "Kotova";
 const APP_DEFAULT_TITLE = "Kotova";
@@ -64,6 +65,7 @@ export default async function RootLayout({
     <html lang="ru">
       <body>
         <Toaster />
+        <IpLogger />
 
         {isProduction() && (
           <>

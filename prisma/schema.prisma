@@ -44,6 +44,7 @@ model User {
   password      String?
   createdAt     DateTime     @default(now())
   avgTestScore  Float?
+  ips           Ip[]
   sessions      Session[]
   accounts      Account[]
   createdTests  Test[]
@@ -138,4 +139,11 @@ model Subject {
   id    String @id @default(cuid())
   title String
   tests Test[]
+}
+
+model Ip {
+  id     String @id @default(uuid())
+  ip     String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
