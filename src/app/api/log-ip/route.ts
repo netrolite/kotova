@@ -1,14 +1,14 @@
 import { db } from "@/lib/db";
 import getSignedInUser from "@/lib/fetchers/getSignedInUser";
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
-import requestIp from "request-ip";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
   const user = await getSignedInUser({ select: { id: true, ips: true } });
   if (!user) return NextResponse.json({ ok: true });
 
-  const currIp = requestIp.getClientIp(req);
+  const currIp = (req.headers.get("x-forwarded-for") ?? "127.0.0.1").split(
+    ",",
+  )[0];
   const existingIps = user.ips.map((ip) => ip.ip);
   if (currIp && !existingIps.includes(currIp)) {
     await db.ip.create({
