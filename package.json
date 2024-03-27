@@ -40,6 +40,7 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "email-validator": "^2.0.4",
+    "eslint-plugin-react": "^7.34.1",
     "lodash": "^4.17.21",
     "lucide-react": "^0.300.0",
     "nanoid": "3.3.4",

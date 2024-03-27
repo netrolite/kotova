@@ -8,8 +8,8 @@ import MyTestEditFormSchema, {
   MyTestEditFormSchemaType,
 } from "../zod/schemas/myTestEditForm/Index";
 import isEqual from "lodash/isEqual";
-import { Test, TestQuestion, TestQuestionOption } from "@prisma/client";
 import areOverlappingPropertiesEqual from "../areOverlappingPropertiesEqual";
+import { TestQuestion } from "@prisma/client";
 
 export default async function editTestAction(
   data: unknown,
@@ -48,7 +48,7 @@ export default async function editTestAction(
 }
 
 function updateTest(newTestData: MyTestEditFormSchemaType, userId: string) {
-  const { subjectId: _, questions: __, testId, ...safeTestData } = newTestData;
+  const { subjectId: _, questions: __, ...safeTestData } = newTestData;
   return db.test.update({
     where: { id: newTestData.testId },
     data: {
