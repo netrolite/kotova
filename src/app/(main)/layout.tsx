@@ -1,5 +1,4 @@
 import MainLayoutHeader from "@/components/mainLayout/Header/Index";
-import MobileNav from "@/components/mainLayout/MobileNav/Index";
 import Sidebar from "@/components/mainLayout/Sidebar/Index";
 import { cn } from "@/lib/shadcnUtils";
 import { ReactNode } from "react";
@@ -18,7 +17,6 @@ export default async function MainLayout({
         <div className={cn(styles.mainContentContainer, "flex-grow px-4")}>
           {children}
         </div>
-        <MobileNav />
       </main>
     </div>
   );
