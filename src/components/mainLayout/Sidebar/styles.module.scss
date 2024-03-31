@@ -1,0 +1,5 @@
+.sidebar {
+  $default-padding-y: 10px;
+  padding-top: max($default-padding-y, env(safe-area-inset-top));
+  padding-bottom: $default-padding-y;
+}
