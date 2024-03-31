@@ -1,11 +1,9 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "extends": ["next/core-web-vitals"],
   "rules": {
     "react/no-unescaped-entities": "off",
+    "react/props-types": "off",
+    "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "off"
   }
 }
