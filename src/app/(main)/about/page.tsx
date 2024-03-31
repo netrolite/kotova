@@ -62,8 +62,6 @@ const IMAGES = {
 };
 
 export default function About() {
-  console.log(Testimonial6);
-
   return (
     <>
       <h1 className="mb-14 text-4xl font-medium">О сайте</h1>
