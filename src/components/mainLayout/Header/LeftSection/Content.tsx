@@ -4,6 +4,7 @@ import { HeaderBackBtn } from "../BackBtn/Index";
 import useIsOnHomepage from "@/lib/hooks/isOnHomepage";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import MainLayoutHeaderLeftSectionBurgetMenuBtn from "./BurgerMenuBtn";
 
 type Props = {
   shouldShowBackBtn: boolean;
@@ -62,9 +63,9 @@ export default function MainLayoutHeaderLeftSectionContent({
 
   if (!isMounted) return null;
   return (
-    <div className="flex items-center">
-      <div className="hidden md:block">burger menu</div>
+    <div className="flex items-center justify-start gap-3">
       {shouldShowBackBtn && <HeaderBackBtn />}
+      <MainLayoutHeaderLeftSectionBurgetMenuBtn />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import getUrlFromHeaders from "@/lib/getUrlFromHeaders";
 export default function MainLayoutHeaderRightSection() {
   const url = getUrlFromHeaders() || "/";
   return (
-    <div className="flex items-center">
+    <div className="flex items-center justify-end">
       <Suspense fallback={<MainLayoutHeaderSignInBtn {...{ url }} />}>
         <MainLayoutHeaderRightSectionContent />
       </Suspense>
