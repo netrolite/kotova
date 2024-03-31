@@ -1,3 +1,12 @@
+import {
+  InfoIcon,
+  LayoutDashboardIcon,
+  ListTodoIcon,
+  PanelTopIcon,
+  UserIcon,
+} from "lucide-react";
+
+import { NavItem } from "./types/NavItem";
 export const GENERIC_ERROR_MSG =
   "Что-то пошло не так. Попробуйте еще раз позже";
 export const DASHBOARD_TESTS_LIST_TESTS_PER_PAGE = 30;
@@ -37,3 +46,32 @@ export const swrKeys = {
   subjects: "/api/subjects",
   allUsers: "/api/users",
 } as const;
+
+export const NAV_ITEMS: NavItem[] = [
+  {
+    href: "/",
+    label: "Главная",
+    icon: <PanelTopIcon />,
+  },
+  {
+    href: "/subjects",
+    label: "Тесты",
+    icon: <ListTodoIcon />,
+  },
+  {
+    href: "/my",
+    label: "Личный Кабинет",
+    icon: <LayoutDashboardIcon />,
+  },
+  {
+    href: "/users/{userId}",
+    label: "Мой Профиль",
+    icon: <UserIcon />,
+    requiresAuth: true,
+  },
+  {
+    href: "/about",
+    label: "О сайте",
+    icon: <InfoIcon />,
+  },
+];

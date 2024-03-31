@@ -1,12 +1,12 @@
 import { Suspense } from "react";
-import SidebarNavItemWithAuth from "./Content";
-import { NavItem } from "../NavItems";
+import SidebarNavItemWithAuthContent from "./Content";
 import SidebarNavItemWithAuthFallback from "./Fallback";
+import { NavItem } from "@/lib/types/NavItem";
 
-export default function SidevarNavItemWithAuth(props: NavItem) {
+export default function SidebarNavItemWithAuth(props: NavItem) {
   return (
     <Suspense fallback={<SidebarNavItemWithAuthFallback />}>
-      <SidebarNavItemWithAuth {...props} />
+      <SidebarNavItemWithAuthContent {...props} />
     </Suspense>
   );
 }

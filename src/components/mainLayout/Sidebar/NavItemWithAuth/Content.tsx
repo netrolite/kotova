@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
-import { NavItem } from "../NavItems";
 import SidebarNavItem from "../NavItem";
+import { NavItem } from "@/lib/types/NavItem";
 
 export default async function SidebarNavItemWithAuthContent(props: NavItem) {
   const session = await auth();
