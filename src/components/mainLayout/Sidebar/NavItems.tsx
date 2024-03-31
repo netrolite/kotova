@@ -1,15 +1,22 @@
 import {
+  InfoIcon,
   LayoutDashboardIcon,
   ListTodoIcon,
   PanelTopIcon,
   UserIcon,
 } from "lucide-react";
-import { NavItemType } from "../MobileNav/Index";
 import SidebarNavItem from "./NavItem";
-import { Suspense } from "react";
-import SidebarProfileNavItem from "./Profile";
+import SidebarNavItemWithAuth from "./NavItemWithAuth/Index";
+import { ReactElement } from "react";
 
-const NAV_ITEMS_BASE: NavItemType[] = [
+export type NavItem = {
+  href: string;
+  label: string;
+  icon: ReactElement;
+  requiresAuth?: boolean;
+};
+
+const NAV_ITEMS: NavItem[] = [
   {
     href: "/",
     label: "Главная",
@@ -22,36 +29,32 @@ const NAV_ITEMS_BASE: NavItemType[] = [
   },
   {
     href: "/my",
-    label: "Лич. Кабинет",
+    label: "Личный Кабинет",
     icon: <LayoutDashboardIcon />,
   },
-];
-
-export const SIDEBAR_DEPENDENT_NAV_ITEMS = {
-  profile: (userId?: string) => ({
-    href: userId ? `/users/${userId}` : "/api/auth/signin",
-    label: "Профиль",
+  {
+    href: "/my",
+    label: "Мой Профиль",
     icon: <UserIcon />,
-  }),
-} as const satisfies Record<
-  string,
-  NavItemType | ((userId: string) => NavItemType)
->;
+    requiresAuth: true,
+  },
+  {
+    href: "/about",
+    label: "О сайте",
+    icon: <InfoIcon />,
+  },
+];
 
 export default async function SidebarLinks() {
   return (
     <nav className="flex flex-col gap-1">
       <ul>
-        {NAV_ITEMS_BASE.map((navItem) => (
-          <SidebarNavItem key={navItem.href} {...navItem} />
-        ))}
-        <Suspense
-          fallback={
-            <SidebarNavItem {...SIDEBAR_DEPENDENT_NAV_ITEMS.profile()} />
+        {NAV_ITEMS.map((navItem) => {
+          if (navItem.requiresAuth) {
+            return <SidebarNavItemWithAuth {...navItem} />;
           }
-        >
-          <SidebarProfileNavItem />
-        </Suspense>
+          return <SidebarNavItem key={navItem.href} {...navItem} />;
+        })}
       </ul>
     </nav>
   );

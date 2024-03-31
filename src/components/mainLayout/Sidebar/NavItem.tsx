@@ -1,12 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { NavItemType } from "../MobileNav/Index";
 import Link from "next/link";
 import { cn } from "@/lib/shadcnUtils";
 import { buttonVariants } from "@/components/ui/button";
+import { NavItem } from "./NavItems";
 
-export default function SidebarNavItem({ href, icon, label }: NavItemType) {
+export default function SidebarNavItem({ href, label }: NavItem) {
   const pathname = usePathname();
 
   return (
