@@ -4,7 +4,8 @@ import SidebarNavItem from "../NavItem";
 
 export default async function SidebarNavItemWithAuthContent(props: NavItem) {
   const session = await auth();
-  if (!session) return null;
+  if (!session?.user?.id) return null;
+  const href = props.href.replaceAll("{userId}", session.user.id);
 
-  return <SidebarNavItem {...props} />;
+  return <SidebarNavItem {...{ ...props, href }} />;
 }

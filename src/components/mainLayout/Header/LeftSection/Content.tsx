@@ -1,7 +1,6 @@
 "use client";
 
 import { HeaderBackBtn } from "../BackBtn/Index";
-import Logo from "@/components/Logo";
 import useIsOnHomepage from "@/lib/hooks/isOnHomepage";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -51,25 +50,23 @@ export default function MainLayoutHeaderLeftSectionContent({
   // show back btn if on the same page after initial hard navigation
   // and over 200ms has passed since that hard navigation
   // (if 200ms hasn't passed it means the current page is where we ended up after a hard navigation)
-  if (!urlHasHideBackBtnParam && (!isOnSamePageAfterInitLoad || !isInitLoad)) {
+  if (
+    !isOnHomepage &&
+    !urlHasHideBackBtnParam &&
+    (!isOnSamePageAfterInitLoad || !isInitLoad)
+  ) {
     shouldShowBackBtn = true;
+  } else {
+    shouldShowBackBtn = false;
   }
 
   if (!isMounted) return null;
-  const logo = (
-    <Logo className="max-h-[30px] max-w-[98px]" linkClassName="md:hidden" />
+  return (
+    <div className="flex items-center">
+      <div className="hidden md:block">burger menu</div>
+      {shouldShowBackBtn && <HeaderBackBtn />}
+    </div>
   );
-  if (isOnHomepage) {
-    return (
-      <>
-        {logo}
-        <span className="hidden md:block">Главная</span>
-      </>
-    );
-  } else if (shouldShowBackBtn) {
-    return <HeaderBackBtn />;
-  }
-  return logo;
 }
 
 function getUrlHasHideBackBtnParam() {
