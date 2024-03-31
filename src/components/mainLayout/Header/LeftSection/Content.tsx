@@ -4,9 +4,9 @@ import { HeaderBackBtn } from "../BackBtn/Index";
 import useIsOnHomepage from "@/lib/hooks/isOnHomepage";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import MainLayoutHeaderLeftSectionBurgetMenuBtn from "./BurgerMenuBtn";
+import MainLayoutHeaderLeftSectionBurgerMenu from "./BurgerMenu/Index";
 
-type Props = {
+export type MainLayoutHeaderLeftSectionContentProps = {
   shouldShowBackBtn: boolean;
   initPageLoadUrl: string;
   initPageLoadTimestamp: number;
@@ -18,10 +18,7 @@ export default function MainLayoutHeaderLeftSectionContent({
   shouldShowBackBtn,
   initPageLoadUrl,
   initPageLoadTimestamp,
-}: Props) {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => setIsMounted(true), []);
-
+}: MainLayoutHeaderLeftSectionContentProps) {
   const pathname = usePathname();
   const isOnHomepage = useIsOnHomepage();
   const [isInitLoad, setIsInitLoad] = useState(
@@ -61,11 +58,10 @@ export default function MainLayoutHeaderLeftSectionContent({
     shouldShowBackBtn = false;
   }
 
-  if (!isMounted) return null;
   return (
     <div className="flex items-center justify-start gap-3">
       {shouldShowBackBtn && <HeaderBackBtn />}
-      <MainLayoutHeaderLeftSectionBurgetMenuBtn />
+      <MainLayoutHeaderLeftSectionBurgerMenu />
     </div>
   );
 }
