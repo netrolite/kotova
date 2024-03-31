@@ -24,11 +24,16 @@ export default function MainLayoutHeaderLeftSectionContent({
   const [isInitLoad, setIsInitLoad] = useState(
     getIsInitLoad(initPageLoadTimestamp),
   );
+  const [pageLocation, setPageLocation] = useState<null | Location>(null);
+  useEffect(() => {
+    setPageLocation(location);
+  }, []);
+
   const [isOnSamePageAfterInitLoad, setIsOnSamePageAfterInitLoad] = useState(
-    location.href === initPageLoadUrl,
+    pageLocation ? pageLocation.href === initPageLoadUrl : true,
   );
   const [urlHasHideBackBtnParam, setUrlHasHideBackBtnParam] = useState(
-    getUrlHasHideBackBtnParam(),
+    getUrlHasHideBackBtnParam(pageLocation),
   );
   const [isFirstRender, setIsFirstRender] = useState(true);
 
@@ -41,7 +46,7 @@ export default function MainLayoutHeaderLeftSectionContent({
     if (isFirstRender) return;
 
     setIsOnSamePageAfterInitLoad(false);
-    setUrlHasHideBackBtnParam(getUrlHasHideBackBtnParam());
+    setUrlHasHideBackBtnParam(getUrlHasHideBackBtnParam(pageLocation));
     setIsInitLoad(getIsInitLoad(initPageLoadTimestamp));
   }, [pathname]);
 
@@ -66,8 +71,9 @@ export default function MainLayoutHeaderLeftSectionContent({
   );
 }
 
-function getUrlHasHideBackBtnParam() {
-  return new URL(location.href).searchParams.get("hideBackBtn") !== null;
+function getUrlHasHideBackBtnParam(pageLocation: Location | null) {
+  if (pageLocation === null) return null;
+  return new URL(pageLocation.href).searchParams.get("hideBackBtn") !== null;
 }
 
 function getIsInitLoad(initPageLoadTimestamp: number) {
