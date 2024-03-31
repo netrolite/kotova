@@ -1,11 +1,11 @@
 import getUrlFromHeaders from "@/lib/getUrlFromHeaders";
-import MainLayoutHeaderLeftSectionContentWrapper from "./ContentWrapper";
+import MainLayoutHeaderLeftSectionContent from "./Content";
 
 export default function MainLayoutHeaderLeftSection() {
   const url = new URL(getUrlFromHeaders() || "/");
   const shouldShowBackBtn = url.searchParams.get("hideBackBtn") === null;
   return (
-    <MainLayoutHeaderLeftSectionContentWrapper
+    <MainLayoutHeaderLeftSectionContent
       {...{
         shouldShowBackBtn,
         initPageLoadUrl: url.toString(),
