@@ -19,6 +19,9 @@ export default function MainLayoutHeaderLeftSectionContent({
   initPageLoadUrl,
   initPageLoadTimestamp,
 }: Props) {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+
   const pathname = usePathname();
   const isOnHomepage = useIsOnHomepage();
   const [isInitLoad, setIsInitLoad] = useState(
@@ -45,13 +48,14 @@ export default function MainLayoutHeaderLeftSectionContent({
     setIsInitLoad(getIsInitLoad(initPageLoadTimestamp));
   }, [pathname]);
 
-  // show back btn if on the same page after inital hard navigation
+  // show back btn if on the same page after initial hard navigation
   // and over 200ms has passed since that hard navigation
   // (if 200ms hasn't passed it means the current page is where we ended up after a hard navigation)
   if (!urlHasHideBackBtnParam && (!isOnSamePageAfterInitLoad || !isInitLoad)) {
     shouldShowBackBtn = true;
   }
 
+  if (!isMounted) return null;
   const logo = (
     <Logo className="max-h-[30px] max-w-[98px]" linkClassName="md:hidden" />
   );
