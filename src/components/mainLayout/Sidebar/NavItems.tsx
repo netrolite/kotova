@@ -33,7 +33,7 @@ const NAV_ITEMS: NavItem[] = [
     icon: <LayoutDashboardIcon />,
   },
   {
-    href: "/my",
+    href: "/users/{userId}",
     label: "Мой Профиль",
     icon: <UserIcon />,
     requiresAuth: true,
