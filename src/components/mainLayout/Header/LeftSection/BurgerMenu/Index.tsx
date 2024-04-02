@@ -1,5 +1,7 @@
 "use client";
 
+import ReactStateSetter from "@/lib/types/SetState";
+import { createContext } from "react";
 import {
   InfoIcon,
   LayoutDashboardIcon,
@@ -8,6 +10,11 @@ import {
   UserIcon,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { MenuIcon } from "lucide-react";
+import { useState } from "react";
+import MainLayoutHeaderBurgerMenuNavItem from "./NavItem";
+import { NavItem } from "@/lib/types/NavItem";
+import MainLayoutHeaderBurgerMenuNavItemWithAuthContent from "./NavItemWithAuth/Index";
 
 const NAV_ITEMS: NavItem[] = [
   {
@@ -38,12 +45,12 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-import { MenuIcon } from "lucide-react";
-import { useState } from "react";
-import MainLayoutHeaderBurgerMenuNavItem from "./NavItem";
-import { NavItem } from "@/lib/types/NavItem";
-import MainLayoutHeaderBurgerMenuNavItemWithAuthContent from "./NavItemWithAuth/Index";
-import MainLayoutBurgerMenyContext from "@/lib/contexts/mainLayout/BurgerMenu";
+export type MainLayoutBurgerMenyContextType = {
+  isBurgerMenuOpen: boolean;
+  setIsBurgerMenuOpen: ReactStateSetter<boolean>;
+};
+export const MainLayoutBurgerMenyContext =
+  createContext<MainLayoutBurgerMenyContextType | null>(null);
 
 export default function MainLayoutHeaderLeftSectionBurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);

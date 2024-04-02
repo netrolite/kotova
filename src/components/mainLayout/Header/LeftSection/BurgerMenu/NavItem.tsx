@@ -6,7 +6,7 @@ import { cn } from "@/lib/shadcnUtils";
 import { buttonVariants } from "@/components/ui/button";
 import { NavItem } from "@/lib/types/NavItem";
 import useContextVal from "@/lib/hooks/contextVal";
-import MainLayoutBurgerMenyContext from "@/lib/contexts/mainLayout/BurgerMenu";
+import { MainLayoutBurgerMenyContext } from "./Index";
 
 export default function MainLayoutHeaderBurgerMenuNavItem({
   href,
