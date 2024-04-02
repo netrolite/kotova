@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import styles from "./layout.module.scss";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import "react-medium-image-zoom-fixed/dist/styles.css";
 
 export default async function MainLayout({
   children,
