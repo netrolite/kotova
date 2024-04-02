@@ -1,5 +1,3 @@
-import ProfileImg from "../../../../images/certificate1.webp";
-
 import Certificate1 from "../../../../images/certificate1.webp";
 import Certificate2 from "../../../../images/certificate2.webp";
 import Certificate3 from "../../../../images/certificate3.webp";
@@ -26,8 +24,8 @@ import Testimonial4 from "../../../../images/testimonial4.webp";
 import Testimonial5 from "../../../../images/testimonial5.webp";
 import Testimonial6 from "../../../../images/testimonial6.webp";
 
-import Image from "next/image";
 import AboutImagesSection from "@/components/dashboard/about/ImagesSection";
+import AboutProfileImg from "@/components/dashboard/about/ProfileImg";
 
 const IMAGES = {
   certificates: [
@@ -67,7 +65,7 @@ export default function About() {
       <h1 className="mb-14 text-4xl font-medium">О сайте</h1>
       <section>
         <div className="relative m-auto mb-4 aspect-square max-w-[400px] overflow-hidden rounded-full border border-gray-300">
-          <Image alt="Фото Виктории Альбертовны" src={ProfileImg} />
+<AboutProfileImg />
         </div>
         <div className="mb-24 text-center">
           <h2 className="text-2xl font-semibold">Котова Виктория</h2>
@@ -87,6 +85,7 @@ export default function About() {
           name="Дипломы, сертификаты и грамоты моих учеников"
           images={IMAGES.studentCertificates}
         />
+        <dialog open>hello this is a dialog</dialog>
 
         <AboutImagesSection
           name="Мои письма благодарности и рекомендации"
