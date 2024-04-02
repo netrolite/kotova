@@ -14,8 +14,11 @@ export default function AboutImagesSection({ name, images }: Props) {
       <h2 className="mb-6 text-center text-2xl font-semibold">{name}</h2>
       <div className="flex flex-col gap-4">
         {images.map((img, i) => (
-          <div className="overflow-hidden rounded border border-gray-300">
-            <Zoom key={i}>
+          <div
+            key={i}
+            className="overflow-hidden rounded border border-gray-300"
+          >
+            <Zoom>
               <Image src={img} alt="Сертификат" />
             </Zoom>
           </div>
