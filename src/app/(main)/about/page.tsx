@@ -65,7 +65,7 @@ export default function About() {
       <h1 className="mb-14 text-4xl font-medium">О сайте</h1>
       <section>
         <div className="relative m-auto mb-4 aspect-square max-w-[400px] overflow-hidden rounded-full border border-gray-300">
-<AboutProfileImg />
+          <AboutProfileImg />
         </div>
         <div className="mb-24 text-center">
           <h2 className="text-2xl font-semibold">Котова Виктория</h2>
@@ -85,7 +85,6 @@ export default function About() {
           name="Дипломы, сертификаты и грамоты моих учеников"
           images={IMAGES.studentCertificates}
         />
-        <dialog open>hello this is a dialog</dialog>
 
         <AboutImagesSection
           name="Мои письма благодарности и рекомендации"
