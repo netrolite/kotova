@@ -1,11 +1,8 @@
-import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
 const db = new PrismaClient();
 
 (async () => {
-  const pwdSalt = await bcrypt.genSalt();
-  const pwdHash = await bcrypt.hash("1234567890", pwdSalt);
   const userEmail = "testuser@mail.com";
   const user = await db.user.upsert({
     update: {},
@@ -14,7 +11,7 @@ const db = new PrismaClient();
       role: 3,
       email: userEmail,
       name: "John Doe",
-      password: pwdHash,
+      password: "1234567890",
     },
   });
 
