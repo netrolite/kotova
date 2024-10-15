@@ -70,7 +70,7 @@ export default function SignUpForm() {
             name="name"
             render={({ field }) => (
               <>
-                <FormLabel>Имя</FormLabel>
+                <FormLabel>Имя и фамилия</FormLabel>
                 <FormControl>
                   <Input {...field} type="text" />
                 </FormControl>
