@@ -2,7 +2,6 @@
 
 import ServerActionReturn from "../types/ServerActionReturn";
 import SignUpSchema from "../zod/schemas/SignUp";
-import bcrypt from "bcrypt";
 import { errCodes, prismaErrs } from "../constants";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import credentialsSignUpCreateUser from "../credentialsSignUp/createUser";
@@ -16,14 +15,12 @@ export default async function credentialsSignUpAction(
   const validationResult = SignUpSchema.safeParse(formData);
   if (!validationResult.success) return { error: true };
   const {
-    data: { email, password: plaintextPassword, name },
+    data: { email, password, name },
   } = validationResult;
-  const salt = await bcrypt.genSalt();
-  const hashedPassword = await bcrypt.hash(plaintextPassword, salt);
 
   try {
-    await credentialsSignUpCreateUser({ email, hashedPassword, name });
-    await credentialsSignUpSignIn({ email, plaintextPassword });
+    await credentialsSignUpCreateUser({ email, password, name });
+    await credentialsSignUpSignIn({ email, password });
     return { data: true };
   } catch (err) {
     console.error(err);
