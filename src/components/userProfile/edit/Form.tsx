@@ -71,7 +71,7 @@ export default function UserEditProfileForm({ user: initUser }: Props) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Имя</FormLabel>
+              <FormLabel>Имя и фамилия</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
