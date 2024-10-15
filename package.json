@@ -35,6 +35,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^1.1.2",
     "@vercel/speed-insights": "^1.0.3",
+    "aws-sdk": "^2.1691.0",
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
