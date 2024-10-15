@@ -1,15 +1,10 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import BtnWithIcon from "../Btns/WithIcon";
 import { signIn } from "next-auth/react";
-import { FcGoogle as GoogleIcon } from "react-icons/fc";
-import { FaYandex as YandexIcon } from "react-icons/fa";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import SignInSchema, { SignInSchemaType } from "@/lib/zod/schemas/SignIn";
-import { toast } from "sonner";
-import { Separator } from "../ui/separator";
 import { FormControl, FormLabel, FormMessage } from "../ui/form";
 import FormItemField from "../Form/ItemField";
 import { Input } from "../ui/input";
@@ -113,30 +108,6 @@ export default function SignInForm({}: Props) {
             Создать аккаунт
           </Link>
         </p>
-
-        <div className="flex items-center gap-2">
-          <Separator className="shrink" />
-          <span className="text-center text-muted-foreground">Или</span>
-          <Separator className="shrink" />
-        </div>
-        <div className="space-y-2">
-          <BtnWithIcon
-            className="w-full gap-2"
-            variant="outline"
-            onClick={() => signIn("google", { callbackUrl })}
-            icon={<GoogleIcon className="h-6 w-6" />}
-          >
-            Продолжить с Google
-          </BtnWithIcon>
-          <BtnWithIcon
-            className="w-full gap-2"
-            variant="outline"
-            onClick={() => signIn("yandex", { callbackUrl })}
-            icon={<YandexIcon className="h-6 w-6 fill-red-500" />}
-          >
-            Продолжить с Яндекс
-          </BtnWithIcon>
-        </div>
       </div>
     </FormProvider>
   );
