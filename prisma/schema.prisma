@@ -49,6 +49,7 @@ model User {
   accounts      Account[]
   createdTests  Test[]
   testResults   TestResult[]
+  testFiles     TestFile[]
 }
 
 model VerificationToken {
@@ -72,6 +73,18 @@ model Test {
   createdByUserId String?
   subject         Subject?       @relation(fields: [subjectId], references: [id])
   subjectId       String?
+  files           TestFile[]
+}
+
+model TestFile {
+  key             String  @unique
+  filename        String
+  byteLength      Int
+  contentType     String
+  createdBy       User?   @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
+  createdByUserId String?
+  test            Test?   @relation(fields: [testId], references: [id], onDelete: Cascade)
+  testId          String?
 }
 
 model TestQuestion {
@@ -85,7 +98,7 @@ model TestQuestion {
   options           TestQuestionOption[]
   correctAnswerText String?
   explanation       String?
-  TestResultAnswer  TestResultAnswer[]
+  testResultAnswer  TestResultAnswer[]
 }
 
 model TestQuestionOption {

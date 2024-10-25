@@ -2,6 +2,7 @@ import { z } from "zod";
 import AddTestFormQuestionSchema, {
   AddTestFormSavedQuestionSchema,
 } from "./Question";
+import { UploadedFileSchema } from "./Files";
 
 const NAME_MAX_LEN = 300;
 
@@ -17,6 +18,7 @@ const AddTestFormSchema = z.object({
       NAME_MAX_LEN,
       `Название должно быть не длиннее ${NAME_MAX_LEN} символов`,
     ),
+  files: UploadedFileSchema.array(),
   questions: AddTestFormQuestionSchema.array().refine(
     (questions) => questions.length > 0,
     {

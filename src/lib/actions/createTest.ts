@@ -18,7 +18,7 @@ export default async function createTestAction(
   const validationResult = AddTestFormSchema.safeParse(data);
   if (!validationResult.success) return { error: true };
   const { data: testData } = validationResult;
-  const { subjectId, questions, ...safeTestData } = testData;
+  const { subjectId, questions, files, ...safeTestData } = testData;
 
   try {
     const createdTest = await db.test.create({
@@ -28,18 +28,30 @@ export default async function createTestAction(
         createdBy: { connect: { id: userId } },
       },
     });
+
+    await db.testFile.updateMany({
+      where: { key: { in: files.map((file) => file.key) } },
+      data: {
+        createdByUserId: userId,
+        testId: createdTest.id,
+      },
+    });
+
     await db.testQuestion.createMany({
       data: testData.questions.map(({ options, ...question }) => ({
         ...question,
         testId: createdTest.id,
       })),
     });
+
     const createdQuestions = await db.testQuestion.findMany({
       where: { testId: createdTest.id },
       include: { options: true },
     });
+
     const optionsToCreate: Prisma.TestQuestionOptionCreateManyInput[] = [];
     // this is so fucked! i hate this!
+    // edit 6 months later: i don't hate this. This is fine.
     for (let i = 0; i < questions.length; i++) {
       const optionsData = questions[i].options;
       const createdQuestion = createdQuestions[i];
