@@ -48,7 +48,12 @@ export default async function editTestAction(
 }
 
 function updateTest(newTestData: MyTestEditFormSchemaType, userId: string) {
-  const { subjectId: _, questions: __, ...safeTestData } = newTestData;
+  const {
+    subjectId: _,
+    questions: __,
+    files: ___,
+    ...safeTestData
+  } = newTestData;
   return db.test.update({
     where: { id: newTestData.testId },
     data: {

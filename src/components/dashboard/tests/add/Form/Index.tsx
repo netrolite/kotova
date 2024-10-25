@@ -12,7 +12,6 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import FormSubmitBtn from "@/components/Btns/Submit";
 import { toast } from "sonner";
 import AddTestFormAddQuestionBtn from "./AddQuestionBtn";
 import usePersistAddTestForm from "@/lib/hooks/addTestForm/persistForm";
@@ -27,6 +26,7 @@ import createTestAction from "@/lib/actions/createTest";
 import { useRouter } from "next/navigation";
 import isProduction from "@/lib/isProduction";
 import AddTestFormCreateTestBtn from "./CreateTestBtn";
+import AddTestFormFiles from "./Files";
 
 type Props = {
   subjects: SelectItemType<string>[];
@@ -36,6 +36,7 @@ export const ADD_TEST_FORM_DEFAULT_VALUES: AddTestFormSchemaType = {
   grades: [],
   name: "",
   questions: [],
+  files: [],
   subjectId: "",
 };
 
@@ -54,6 +55,7 @@ export default function AddTestForm({ subjects }: Props) {
   });
   usePersistAddTestForm(form);
   const { isLoading, setIsLoading } = useLoading();
+  console.log(form.getValues());
 
   const handleSubmit = useCallback(async (formData: AddTestFormSchemaType) => {
     setIsLoading(true);
@@ -82,7 +84,12 @@ export default function AddTestForm({ subjects }: Props) {
   return (
     <FormProvider {...form}>
       <AddTestFormContext.Provider
-        value={{ questionsFields: questions, subjects, formRef }}
+        value={{
+          questionsFields: questions,
+          subjects,
+          files: [],
+          formRef,
+        }}
       >
         <form
           className="space-y-16"
@@ -96,6 +103,7 @@ export default function AddTestForm({ subjects }: Props) {
           </div>
 
           <div className="space-y-4">
+            <AddTestFormFiles />
             <AddTestFormQuestions />
             <AddTestFormAddQuestionBtn />
           </div>

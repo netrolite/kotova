@@ -6,6 +6,7 @@ import TakeTestMetadataSubject from "@/components/takeTest/Metadata/Subject";
 import TakeTestMetadataCreatedByUser from "@/components/takeTest/Metadata/TakenByUser/Index";
 import TakeTestContextProvider from "@/lib/contexts/takeTest/Index/Provider";
 import authOrRedirect from "@/lib/authOrRedirect";
+import TakeTestFiles from "@/components/takeTest/Files/Index";
 
 type Context = {
   params: { id: string };
@@ -14,6 +15,7 @@ type Context = {
 export default async function TakeTest({ params: { id } }: Context) {
   const [test] = await Promise.all([takeTestGetTest(id), authOrRedirect()]);
   if (!test) notFound();
+  console.log(test);
 
   return (
     <TakeTestContextProvider {...test}>
@@ -24,6 +26,7 @@ export default async function TakeTest({ params: { id } }: Context) {
         </div>
         <TakeTestMetadataCreatedByUser />
       </div>
+      <TakeTestFiles />
       <TakeTestQuestions />
     </TakeTestContextProvider>
   );

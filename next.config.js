@@ -10,6 +10,11 @@ const withPwa = require("@ducanh2912/next-pwa").default({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "500mb",
+    },
+  },
   images: {
     remotePatterns: [
       {
