@@ -15,7 +15,6 @@ type Context = {
 export default async function TakeTest({ params: { id } }: Context) {
   const [test] = await Promise.all([takeTestGetTest(id), authOrRedirect()]);
   if (!test) notFound();
-  console.log(test);
 
   return (
     <TakeTestContextProvider {...test}>
