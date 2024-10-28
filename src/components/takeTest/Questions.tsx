@@ -48,34 +48,39 @@ export default function TakeTestQuestions() {
     );
     console.error(err);
   }
+  console.log(questions);
 
   return (
-    <FormProvider {...form}>
-      <form
-        className="space-y-8"
-        onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
-      >
-        <ul className="space-y-6">
-          {questions.map((question, i) => (
-            <li key={question.id}>
-              <TakeTestQuestionContext.Provider
-                value={{ ...question, questionIndex: i }}
-              >
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{question.question}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <TakeTestQuestion />
-                  </CardContent>
-                  <TakeTestQuestionError questionIndex={i} />
-                </Card>
-              </TakeTestQuestionContext.Provider>
-            </li>
-          ))}
-        </ul>
-        <FormSubmitBtn {...{ isLoading }}>Проверить</FormSubmitBtn>
-      </form>
-    </FormProvider>
+    <>
+      <FormProvider {...form}>
+        <form
+          className="space-y-8"
+          onSubmit={form.handleSubmit(handleSubmit, handleSubmitError)}
+        >
+          <ul className="space-y-6">
+            {questions.map((question, i) => (
+              <li key={question.id}>
+                <TakeTestQuestionContext.Provider
+                  value={{ ...question, questionIndex: i }}
+                >
+                  <Card>
+                    <CardHeader>
+                      <h3 className="whitespace-pre-line text-lg font-normal">
+                        {question.question}
+                      </h3>
+                    </CardHeader>
+                    <CardContent>
+                      <TakeTestQuestion />
+                    </CardContent>
+                    <TakeTestQuestionError questionIndex={i} />
+                  </Card>
+                </TakeTestQuestionContext.Provider>
+              </li>
+            ))}
+          </ul>
+          <FormSubmitBtn {...{ isLoading }}>Проверить</FormSubmitBtn>
+        </form>
+      </FormProvider>
+    </>
   );
 }
