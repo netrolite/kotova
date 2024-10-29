@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "npx prisma generate && next build",
     "buildandstart": "next build && next start",
-    "buildproduction": "npx prisma migrate deploy && next build",
+    "buildproduction": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint"
   },
