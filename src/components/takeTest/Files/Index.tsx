@@ -5,6 +5,7 @@ import TakeTestFile from "./File";
 
 export default function TakeTestFiles() {
   const test = useTakeTestContext();
+  if (!test.files.length) return null;
 
   return (
     <div>
