@@ -131,7 +131,7 @@ model TestResultAnswer {
   options    TestResultAnswerOption[]
   isCorrect  Boolean
 
-  question   TestQuestion @relation(fields: [questionId], references: [id])
+  question   TestQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
   questionId String
 
   testResult   TestResult @relation(fields: [testResultId], references: [id], onDelete: Cascade)
