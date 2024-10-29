@@ -12,7 +12,7 @@ const FormDataSchema = z.instanceof(FormData);
 
 export default async function uploadFileAction(
   data: unknown,
-): Promise<ServerActionReturn<UploadedFileSchemaType[]>> {
+): Promise<ServerActionReturn<UploadedFileSchemaType[], string | true>> {
   try {
     const session = await auth();
     const validationResult = FormDataSchema.safeParse(data);
@@ -62,6 +62,6 @@ export default async function uploadFileAction(
     return { data: uploads };
   } catch (err) {
     console.log(err);
-    return { error: true };
+    return { error: JSON.stringify(err) };
   }
 }
