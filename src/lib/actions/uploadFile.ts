@@ -14,11 +14,12 @@ export default async function uploadFileAction(
   data: unknown,
 ): Promise<ServerActionReturn<UploadedFileSchemaType[], string | true>> {
   try {
+    console.log("uploadFileAction");
     const session = await auth();
     const validationResult = FormDataSchema.safeParse(data);
 
     if (!validationResult.success || !session?.user) {
-      return { error: true };
+      throw new Error("invalid input data");
     }
     const { data: formData } = validationResult;
 
@@ -28,7 +29,7 @@ export default async function uploadFileAction(
       .array()
       .safeParse(formDataFiles);
     if (!filesValidationResult.success) {
-      return { error: true };
+      throw new Error("invalid form data");
     }
     const { data: files } = filesValidationResult;
 
@@ -43,7 +44,8 @@ export default async function uploadFileAction(
       const uploadResultRaw = await s3Upload(uint8Array, file.name);
       const uploadResultValidated =
         S3UploadResultSchema.safeParse(uploadResultRaw);
-      if (!uploadResultValidated.success) return { error: true };
+      if (!uploadResultValidated.success)
+        throw new Error("invalid S3UploadResult");
 
       uploads.push({
         filename: decodedFilename,
