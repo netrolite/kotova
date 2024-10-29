@@ -8,7 +8,7 @@ const userProfileGetUser = cache(async (userId: string) => {
       _count: true,
       testResults: {
         orderBy: { createdAt: "desc" },
-        include: { test: { include: { subject: true } } },
+        include: { test: { include: { category: true } } },
         take: 10,
       },
     },

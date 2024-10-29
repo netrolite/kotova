@@ -13,7 +13,7 @@ import Link from "next/link";
 import cardStyles from "@/styles/card.module.scss";
 
 type Props = Test & {
-  subject: { title: string } | null;
+  category: { title: string } | null;
   testResults: { id: string }[];
 };
 
@@ -21,7 +21,7 @@ export default function DashboardTestsTestListTest({
   avgScore,
   grades,
   id,
-  subject,
+  category,
   name,
   testResults,
 }: Props) {
@@ -33,9 +33,9 @@ export default function DashboardTestsTestListTest({
             <CardTitle>{name}</CardTitle>
             <CardDescription>
               {!!grades.length && <span>{formatGrades(grades)}</span>}
-              {subject && (
+              {category && (
                 <span>
-                  {grades.length ? ` | ${subject.title}` : subject.title}
+                  {grades.length ? ` | ${category.title}` : category.title}
                 </span>
               )}
             </CardDescription>

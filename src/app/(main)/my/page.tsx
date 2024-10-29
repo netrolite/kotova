@@ -1,7 +1,7 @@
 import PageTitle from "@/components/PageTitle";
 import DashboardCardWrapper from "@/components/dashboard/Card/Wrapper";
 import DashboardAvgScoreCard from "@/components/dashboard/Cards/AvgScore";
-import DashboardSubjectsCard from "@/components/dashboard/Cards/Subjects";
+import DashboardCategoriesCard from "@/components/dashboard/Cards/Categories";
 import DashboardTakenTestsCard from "@/components/dashboard/Cards/TakenTests";
 import DashboardMyTestsCard from "@/components/dashboard/Cards/MyTests";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
@@ -27,7 +27,7 @@ export default async function Dashboard() {
         {isAdmin && (
           <>
             <DashboardCardWrapper>
-              <DashboardSubjectsCard />
+              <DashboardCategoriesCard />
             </DashboardCardWrapper>
             <DashboardCardWrapper>
               <DashboardAllUsersCard />

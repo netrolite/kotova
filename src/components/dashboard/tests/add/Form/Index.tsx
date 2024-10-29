@@ -16,7 +16,7 @@ import { toast } from "sonner";
 import AddTestFormAddQuestionBtn from "./AddQuestionBtn";
 import usePersistAddTestForm from "@/lib/hooks/addTestForm/persistForm";
 import AddTestFormQuestions from "./Questions/Index";
-import AddTestFormSubjectId from "./SubjectId";
+import AddTestFormCategoryId from "./CategoryId";
 import SelectItemType from "@/lib/types/SelectItem";
 import AddTestFormName from "./Name";
 import { useCallback, useRef } from "react";
@@ -29,7 +29,7 @@ import AddTestFormCreateTestBtn from "./CreateTestBtn";
 import AddTestFormFiles from "./Files";
 
 type Props = {
-  subjects: SelectItemType<string>[];
+  categories: SelectItemType<string>[];
 };
 
 export const ADD_TEST_FORM_DEFAULT_VALUES: AddTestFormSchemaType = {
@@ -37,12 +37,12 @@ export const ADD_TEST_FORM_DEFAULT_VALUES: AddTestFormSchemaType = {
   name: "",
   questions: [],
   files: [],
-  subjectId: "",
+  categoryId: "",
 };
 
 export type AddTestFormQuestions = UseFieldArrayReturn<AddTestFormSchemaType>;
 
-export default function AddTestForm({ subjects }: Props) {
+export default function AddTestForm({ categories }: Props) {
   const router = useRouter();
   const form = useForm<AddTestFormSchemaType>({
     resolver: zodResolver(AddTestFormSchema),
@@ -86,7 +86,7 @@ export default function AddTestForm({ subjects }: Props) {
       <AddTestFormContext.Provider
         value={{
           questionsFields: questions,
-          subjects,
+          categories: categories,
           files: [],
           formRef,
         }}
@@ -98,7 +98,7 @@ export default function AddTestForm({ subjects }: Props) {
         >
           <div className="space-y-10">
             <AddTestFormName />
-            <AddTestFormSubjectId />
+            <AddTestFormCategoryId />
             <AddTestFormGrades />
           </div>
 

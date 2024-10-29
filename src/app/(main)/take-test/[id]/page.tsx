@@ -2,7 +2,7 @@ import TakeTestQuestions from "@/components/takeTest/Questions";
 import takeTestGetTest from "@/lib/fetchers/takeTest/getTest";
 import { notFound } from "next/navigation";
 import TakeTestMetadataTitle from "@/components/takeTest/Metadata/Title";
-import TakeTestMetadataSubject from "@/components/takeTest/Metadata/Subject";
+import TakeTestMetadataCategory from "@/components/takeTest/Metadata/Category";
 import TakeTestMetadataCreatedByUser from "@/components/takeTest/Metadata/TakenByUser/Index";
 import TakeTestContextProvider from "@/lib/contexts/takeTest/Index/Provider";
 import authOrRedirect from "@/lib/authOrRedirect";
@@ -21,7 +21,7 @@ export default async function TakeTest({ params: { id } }: Context) {
       <div className="mb-8 space-y-2">
         <div>
           <TakeTestMetadataTitle />
-          <TakeTestMetadataSubject />
+          <TakeTestMetadataCategory />
         </div>
         <TakeTestMetadataCreatedByUser />
       </div>

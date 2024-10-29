@@ -12,7 +12,7 @@ import {
 import { toast } from "sonner";
 import MyTestEditFormAddQuestionBtn from "./AddQuestionBtn";
 import MyTestEditFormQuestions from "./Questions/Index";
-import MyTestEditFormSubjects from "./Subjects";
+import MyTestEditFormCategories from "./Categories";
 import SelectItemType from "@/lib/types/SelectItem";
 import MyTestEditFormName from "./Name";
 import { useCallback, useRef } from "react";
@@ -30,18 +30,18 @@ import HiddenInput from "@/components/HiddenInput";
 import useEditTestFormStore from "@/lib/stores/editTestForm";
 
 type Props = {
-  subjects: SelectItemType<string>[];
+  categories: SelectItemType<string>[];
   test: MyTestEditGetTestReturn;
 };
 
 export type MyTestEditFormQuestions =
   UseFieldArrayReturn<MyTestEditFormSchemaType>;
 
-export default function MyTestEditForm({ subjects, test }: Props) {
+export default function MyTestEditForm({ categories, test }: Props) {
   const router = useRouter();
   const form = useForm<MyTestEditFormSchemaType>({
     resolver: zodResolver(MyTestEditFormSchema),
-    defaultValues: { ...test, subjectId: test.subjectId ?? undefined },
+    defaultValues: { ...test, categoryId: test.categoryId ?? undefined },
   });
   const formRef = useRef<HTMLFormElement>(null);
   const questions = useFieldArray<MyTestEditFormSchemaType>({
@@ -82,7 +82,12 @@ export default function MyTestEditForm({ subjects, test }: Props) {
   return (
     <FormProvider {...form}>
       <MyTestEditFormContext.Provider
-        value={{ questionsFields: questions, subjects, formRef, test }}
+        value={{
+          questionsFields: questions,
+          categories: categories,
+          formRef,
+          test,
+        }}
       >
         <form
           className="space-y-16"
@@ -94,7 +99,7 @@ export default function MyTestEditForm({ subjects, test }: Props) {
         >
           <div className="space-y-10">
             <MyTestEditFormName />
-            <MyTestEditFormSubjects />
+            <MyTestEditFormCategories />
             <MyTestEditFormGrades />
           </div>
 

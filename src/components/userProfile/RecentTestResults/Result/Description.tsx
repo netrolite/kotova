@@ -13,7 +13,7 @@ export default function UserProfileTestResultDescription({}: Props) {
   return (
     <>
       <div className="space-y-0 text-sm text-muted-foreground">
-        <p>{test.subject?.title || ""}</p>
+        <p>{test.category?.title || ""}</p>
         <p>Пройден {createdAtString}</p>
       </div>
     </>

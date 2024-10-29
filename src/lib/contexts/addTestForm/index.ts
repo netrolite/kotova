@@ -6,9 +6,10 @@ import { UseFieldArrayReturn } from "react-hook-form";
 
 type AddTestFormContextType = {
   questionsFields: UseFieldArrayReturn<AddTestFormSchemaType>;
-  subjects: SelectItemType<string>[];
+  categories: SelectItemType<string>[];
   formRef: RefObject<HTMLFormElement>;
   files: UploadedFileSchemaType[];
 };
+
 const AddTestFormContext = createContext<AddTestFormContextType | null>(null);
 export default AddTestFormContext;

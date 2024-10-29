@@ -49,7 +49,7 @@ export default async function editTestAction(
 
 function updateTest(newTestData: MyTestEditFormSchemaType, userId: string) {
   const {
-    subjectId: _,
+    categoryId: _,
     questions: __,
     files: ___,
     ...safeTestData
@@ -58,7 +58,7 @@ function updateTest(newTestData: MyTestEditFormSchemaType, userId: string) {
     where: { id: newTestData.testId },
     data: {
       ...safeTestData,
-      subject: { connect: { id: newTestData.subjectId } },
+      category: { connect: { id: newTestData.categoryId } },
       createdBy: { connect: { id: userId } },
     },
   });

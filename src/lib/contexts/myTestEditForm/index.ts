@@ -6,7 +6,7 @@ import { UseFieldArrayReturn } from "react-hook-form";
 
 type MyTestEditFormContextType = {
   questionsFields: UseFieldArrayReturn<MyTestEditFormSchemaType>;
-  subjects: SelectItemType<string>[];
+  categories: SelectItemType<string>[];
   formRef: RefObject<HTMLFormElement>;
   test: MyTestEditGetTestReturn;
 };
