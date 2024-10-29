@@ -11,7 +11,7 @@ const getTestResult = cache(async (id: string) => {
           id: true,
           name: true,
           createdAt: true,
-          subject: true,
+          category: true,
           createdBy: true,
         },
       },

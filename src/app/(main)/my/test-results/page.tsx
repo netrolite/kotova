@@ -28,7 +28,7 @@ export default async function OwnTestResults() {
           <p className="mb-2 text-muted-foreground">
             Вы еще не прошли ни один тест
           </p>
-          <Link href="/subjects">
+          <Link href="/categories">
             <Button>Пройти тест</Button>
           </Link>
         </>

@@ -18,13 +18,13 @@ export default async function createTestAction(
   const validationResult = AddTestFormSchema.safeParse(data);
   if (!validationResult.success) return { error: true };
   const { data: testData } = validationResult;
-  const { subjectId, questions, files, ...safeTestData } = testData;
+  const { categoryId, questions, files, ...safeTestData } = testData;
 
   try {
     const createdTest = await db.test.create({
       data: {
         ...safeTestData,
-        subject: { connect: { id: testData.subjectId } },
+        category: { connect: { id: testData.categoryId } },
         createdBy: { connect: { id: userId } },
       },
     });

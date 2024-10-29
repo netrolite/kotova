@@ -1,7 +1,7 @@
 import PageTitle from "@/components/PageTitle";
 import MyTestEditForm from "@/components/myTest/edit/Index";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
-import getSubjects from "@/lib/fetchers/getSubjects";
+import getCategories from "@/lib/fetchers/getCategories";
 import myTestEditGetTest, {
   MyTestEditGetTestReturn,
 } from "@/lib/fetchers/myTest/editGetTest";
@@ -13,23 +13,25 @@ export default async function MyTestEdit({
 }: {
   params: { id: string };
 }) {
-  const [test, user, subjectsRaw] = await Promise.all([
+  const [test, user, categoriesRaw] = await Promise.all([
     myTestEditGetTest(testId),
     getSignedInUserOrRedirect(),
-    getSubjects(),
+    getCategories(),
   ]);
   if (!test || test.createdByUserId !== user.id) notFound();
 
-  const subjects: SelectItemType<string>[] = subjectsRaw.map((subject) => ({
-    label: subject.title,
-    value: subject.id,
-  }));
+  const categories: SelectItemType<string>[] = categoriesRaw.map(
+    (category) => ({
+      label: category.title,
+      value: category.id,
+    }),
+  );
 
   return (
     <>
       <PageTitle className="mb-10">Изменить тест {test.name}</PageTitle>
       <MyTestEditForm
-        {...{ subjects, test: test as MyTestEditGetTestReturn }}
+        {...{ categories, test: test as MyTestEditGetTestReturn }}
       />
     </>
   );

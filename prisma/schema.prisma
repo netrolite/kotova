@@ -71,8 +71,8 @@ model Test {
   grades          Int[] // which grades (1st, 2nd, 12th, etc) this test is made for
   createdBy       User?          @relation(fields: [createdByUserId], references: [id])
   createdByUserId String?
-  subject         Subject?       @relation(fields: [subjectId], references: [id])
-  subjectId       String?
+  category        Category?      @relation(fields: [categoryId], references: [id])
+  categoryId      String?
   files           TestFile[]
 }
 
@@ -148,7 +148,7 @@ model TestResultAnswerOption {
   testQuestionOptionId String?
 }
 
-model Subject {
+model Category {
   id    String @id @default(cuid())
   title String
   tests Test[]

@@ -17,7 +17,7 @@ const getTestsForDashboardTestsList = cache(async ({ user, page }: Params) => {
       page,
     }),
     include: {
-      subject: { select: { title: true } },
+      category: { select: { title: true } },
       testResults: { select: { id: true } },
     },
     orderBy: { updatedAt: "desc" },

@@ -21,7 +21,7 @@ export default async function HomepageRecentlyCreatedTests({}: Props) {
 
   return (
     <ul className="space-y-2">
-      {tests.map(({ name, grades, subject, id, createdAt }) => {
+      {tests.map(({ name, grades, category, id, createdAt }) => {
         const createdAtStringDayMonth = new Date(createdAt).toLocaleDateString(
           "ru",
           {
@@ -44,9 +44,11 @@ export default async function HomepageRecentlyCreatedTests({}: Props) {
                   <CardTitle>{name}</CardTitle>
                   <CardDescription>
                     {!!grades.length && <span>{formatGrades(grades)}</span>}
-                    {subject && (
+                    {category && (
                       <span>
-                        {grades.length ? ` | ${subject.title}` : subject.title}
+                        {grades.length
+                          ? ` | ${category.title}`
+                          : category.title}
                       </span>
                     )}
                   </CardDescription>

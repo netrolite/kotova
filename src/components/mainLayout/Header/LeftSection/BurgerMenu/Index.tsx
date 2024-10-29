@@ -23,7 +23,7 @@ const NAV_ITEMS: NavItem[] = [
     icon: <PanelTopIcon />,
   },
   {
-    href: "/subjects",
+    href: "/categories",
     label: "Тесты",
     icon: <ListTodoIcon />,
   },

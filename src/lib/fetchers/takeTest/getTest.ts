@@ -6,7 +6,7 @@ const takeTestGetTest = cache(async (id: string) => {
     where: { id },
     include: {
       questions: { include: { options: true } },
-      subject: { select: { title: true, id: true } },
+      category: { select: { title: true, id: true } },
       createdBy: { select: { id: true, image: true, name: true } },
       files: { select: { filename: true, key: true, contentType: true } },
     },
