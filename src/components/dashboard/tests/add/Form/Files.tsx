@@ -44,7 +44,7 @@ export default function AddTestFormFiles() {
       setIsSendingFiles(true);
 
       const { data: uploadedFiles, error } = await uploadFileAction(formData);
-      if (error) throw new Error("upload failed");
+      if (error || !uploadedFiles) throw new Error("upload failed");
 
       setValue("files", [...filesState, ...uploadedFiles]);
     } catch (error: any) {
