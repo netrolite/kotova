@@ -3,9 +3,7 @@ import CategoriesList from "@/components/categories/CategoriesList";
 import { db } from "@/lib/db";
 
 export const metadata = {
-  title: "Список тестов по предметам",
-  description:
-    "На этой странице показан список предметов, по которым можно пройти тесты",
+  title: "Список категорий тестов",
 };
 
 export default async function Categories() {
@@ -16,7 +14,7 @@ export default async function Categories() {
   return (
     <>
       <div className="mb-8 space-y-2">
-        <PageTitle className="mb-0">Тесты по предметам</PageTitle>
+        <PageTitle className="mb-0">Категории тестов</PageTitle>
       </div>
       <CategoriesList {...{ categories: categories }} />
     </>

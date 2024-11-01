@@ -10,7 +10,7 @@ export default function CategoriesList({ categories }: Props) {
   if (!categories?.length) {
     return (
       <div>
-        Нет предметов. Зайдите на эту страницу немного позже, может быть здесь
+        Нет категорий. Зайдите на эту страницу немного позже, может быть здесь
         что-нибудь появится!
       </div>
     );
