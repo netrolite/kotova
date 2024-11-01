@@ -21,11 +21,11 @@ export default function AddTestFormCategory() {
       name="categoryId"
       render={({ field }) => (
         <>
-          <FormLabel>Предмет</FormLabel>
+          <FormLabel>Категория</FormLabel>
           <Select onValueChange={field.onChange} value={field.value}>
             <FormControl>
               <SelectTrigger>
-                <SelectValue placeholder="Выберите предмет" />
+                <SelectValue placeholder="Выберите категорию" />
               </SelectTrigger>
             </FormControl>
             <SelectContent>

@@ -34,9 +34,9 @@ export default function AddCategoryForm() {
     setIsAddCategoryDialogOpen(false);
 
     if (result.error) {
-      return toast.error("Не удалось добавить предмет");
+      return toast.error("Не удалось добавить категорию");
     }
-    toast.success("Предмет успешно добавлен");
+    toast.success("Категория успешно добавлена");
     await mutate([...(categories || []), result.data]);
   }
 

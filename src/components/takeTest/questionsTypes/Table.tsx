@@ -12,7 +12,7 @@ export default function TakeTestTableQuestion() {
   const { optionsFields } = useTakeTestQuestionOptionsContext();
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-4">
       {optionsFields.fields.map((option, i) => (
         <FormItemField
           key={option.id}
@@ -20,11 +20,13 @@ export default function TakeTestTableQuestion() {
           name={`answers.${questionIndex}.options.${i}.tableAnswer`}
           formItemClassName="flex space-y-0 items-center"
           render={({ field }) => (
-            <>
-              <FormLabel className="p-4 pl-0">
-                {questionOptions[i].tableColumn}
-              </FormLabel>
-              <div className="space-y-0.5">
+            <div>
+              <div className="mb-2 leading-5">
+                <FormLabel className="font-normal">
+                  {questionOptions[i].tableColumn}
+                </FormLabel>
+              </div>
+              <div className="max-w-[220px]">
                 <FormControl>
                   <Input
                     {...field}
@@ -34,7 +36,7 @@ export default function TakeTestTableQuestion() {
                 </FormControl>
                 <FormMessage />
               </div>
-            </>
+            </div>
           )}
         />
       ))}

@@ -6,7 +6,7 @@ export default async function DashboardAvgScoreCard() {
   const user = await getSignedInUserOrRedirect();
 
   return (
-    <DashboardCard title="Средний балл">
+    <DashboardCard title="Мой средний балл">
       {roundTestScore(user.avgTestScore) ?? "Нет данных"}
     </DashboardCard>
   );

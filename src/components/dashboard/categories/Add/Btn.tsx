@@ -20,11 +20,11 @@ export default function AddCategoryBtn() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant={"outline"}>Создать предмет</Button>
+        <Button variant={"outline"}>Создать категорию</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Создать новый предмет</DialogTitle>
+          <DialogTitle>Создать новую категорию</DialogTitle>
           <AddCategoryForm />
         </DialogHeader>
       </DialogContent>

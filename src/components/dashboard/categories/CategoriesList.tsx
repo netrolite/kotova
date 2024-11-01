@@ -73,7 +73,7 @@ export default function CategoriesList() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Вы уверены, что хотите навсегда удалить предмет{" "}
+              Вы уверены, что хотите навсегда удалить категорию{" "}
               {selectedCategory?.title}?
             </AlertDialogTitle>
             <AlertDialogDescription>

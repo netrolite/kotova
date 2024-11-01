@@ -10,7 +10,7 @@ export const AddTestFormGrades = z.number().array();
 
 const AddTestFormSchema = z.object({
   grades: AddTestFormGrades.min(1, { message: "Не выбран класс" }),
-  categoryId: z.string().min(1, { message: "Не выбран предмет" }),
+  categoryId: z.string().min(1, { message: "Не выбрана категория" }),
   name: z
     .string()
     .min(1, "Название не заполнено")
