@@ -19,7 +19,7 @@ export default function TestResultAnswers({}: Props) {
             <TestResultAnswerContext.Provider value={answer}>
               <Card className="space-y-6">
                 <CardHeader className="pb-0">
-                  <CardTitle>{answer.question.question}</CardTitle>
+                  <h3 className="whitespace-pre-line text-lg font-semibold">{answer.question.question}</h3>
                 </CardHeader>
                 <Separator />
                 <CardContent className="space-y-3">
