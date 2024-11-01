@@ -60,7 +60,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     href: "/categories",
-    label: "Тесты",
+    label: "Категории Тестов",
     icon: <ListTodoIcon />,
   },
   {

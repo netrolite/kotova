@@ -39,7 +39,7 @@ export default function CategoriesList() {
   }
   if (error) return <p>{GENERIC_ERROR_MSG}</p>;
   if (categories && !categories.length) {
-    return <p>Нет предметов</p>;
+    return <p>Нет категорий</p>;
   }
 
   function handleOpenDeleteDialog(id: string) {
