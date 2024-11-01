@@ -26,7 +26,7 @@ export default async function CategoryTests({
   return (
     <>
       <section className="mb-8 space-y-4">
-        <PageTitle>Тесты по предмету {category.title}</PageTitle>
+        <PageTitle>Тесты в категории {category.title}</PageTitle>
         <div className="space-y-2">
           <TestListSearch initQuery={query} />
           <CategoryTestListFilter />

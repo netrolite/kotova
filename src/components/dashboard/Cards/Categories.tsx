@@ -6,8 +6,8 @@ export default async function DashboardCategoriesCard() {
 
   return (
     <DashboardCard
-      title="Предметы"
-      link={{ href: "/my/categories", label: "Предметы" }}
+      title="Категории"
+      link={{ href: "/my/categories", label: "Категории" }}
     >
       {categoriesCount}
     </DashboardCard>

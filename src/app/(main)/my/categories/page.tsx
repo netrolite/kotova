@@ -6,7 +6,7 @@ export default async function Categories() {
   return (
     <>
       <div className="mb-8">
-        <PageTitle className="mb-2">Предметы</PageTitle>
+        <PageTitle className="mb-2">Категории</PageTitle>
         <AddCategoryBtn />
       </div>
       <CategoriesList />
