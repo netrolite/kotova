@@ -1,5 +1,8 @@
 import AccessDenied from "@/components/AccessDenied";
+import PageTitle from "@/components/PageTitle";
+import FilesAddFile from "@/components/files/AddFile";
 import FilesListFile, { FilesListFileProps } from "@/components/files/File";
+import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
 import { ROLE } from "@/lib/types/enums/Role";
@@ -21,8 +24,9 @@ export default async function ManageFilesPage() {
 
   return (
     <>
-      <h1>Управление файлами</h1>
-      <ul>
+      <PageTitle className="mb-6">Управление файлами</PageTitle>
+      <FilesAddFile />
+      <ul className="space-y-2">
         {files.map((file) => (
           <FilesListFile key={file.fileKey} {...file} />
         ))}

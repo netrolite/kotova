@@ -5,10 +5,10 @@ import Loading from "@/components/Loading/Loading";
 import { Button } from "@/components/ui/button";
 import { FormMessage } from "@/components/ui/form";
 import deleteFileAction from "@/lib/actions/deleteFile";
-import uploadFileAction from "@/lib/actions/uploadFile";
+import uploadFilesAction from "@/lib/actions/uploadFiles";
 import {
   ADD_TEST_FORM_MAX_FILES_AMOUNT,
-  ADD_TEST_FORM_MAX_FILE_SIZE_BYTES,
+  MAX_FILE_SIZE_BYTES,
   errCodes,
 } from "@/lib/constants";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
@@ -35,15 +35,15 @@ export default function AddTestFormFiles() {
       const formData = new FormData();
       for (let i = 0; i < files.length; i += 1) {
         const file = files[i];
-        if (file.size > ADD_TEST_FORM_MAX_FILE_SIZE_BYTES) {
+        if (file.size > MAX_FILE_SIZE_BYTES) {
           throw new Error(errCodes.FILE_TOO_BIG);
         }
-        formData.append("files[]", file);
+        formData.append("file", file);
       }
 
       setIsSendingFiles(true);
 
-      const { data: uploadedFiles, error } = await uploadFileAction(formData);
+      const { data: uploadedFiles, error } = await uploadFilesAction(formData);
       if (error || !uploadedFiles) throw new Error("upload failed");
 
       setValue("files", [...filesState, ...uploadedFiles]);
@@ -55,7 +55,7 @@ export default function AddTestFormFiles() {
       } else if (error?.message === errCodes.FILE_TOO_BIG) {
         setError("files", {
           message: `Слишком большой файл. Максимальный размер ${
-            ADD_TEST_FORM_MAX_FILE_SIZE_BYTES / 1_000_000
+            MAX_FILE_SIZE_BYTES / 1_000_000
           } мегабайт`,
         });
       } else {
