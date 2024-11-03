@@ -8,7 +8,7 @@ import TestListSearch from "@/components/categories/Search";
 import CategoryTestListFilter from "@/components/categories/Filter/Index";
 import CategoryTestList from "@/components/categories/TestList/Index";
 
-type Context = {
+type Props = {
   params: { id: string };
   searchParams: { q?: string; grades?: string };
 };
@@ -16,7 +16,7 @@ type Context = {
 export default async function CategoryTests({
   params: { id: categoryId },
   searchParams: { q: queryRaw, grades: gradesRaw },
-}: Context) {
+}: Props) {
   const grades = parseUriComponent(gradesRaw || "", z.number().array()) || [];
   const query = queryRaw || "";
   getCategoryTests({ query, categoryId: categoryId, page: 0, grades });
