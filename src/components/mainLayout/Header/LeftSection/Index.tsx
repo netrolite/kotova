@@ -2,7 +2,7 @@ import getUrlFromHeaders from "@/lib/getUrlFromHeaders";
 import MainLayoutHeaderLeftSectionContent from "./Content";
 
 export default async function MainLayoutHeaderLeftSection() {
-  const url = new URL(getUrlFromHeaders() || "/");
+  const url = new URL((await getUrlFromHeaders()) || "/");
   const shouldShowBackBtn = url.searchParams.get("hideBackBtn") === null;
 
   return (
