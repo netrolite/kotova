@@ -31,7 +31,7 @@ export const NAME_MAX_LEN = 120;
 export const PASSWORD_MAX_LEN = 254;
 export const PASSWORD_MIN_LEN = 6;
 export const ADD_TEST_FORM_MAX_FILES_AMOUNT = 100;
-export const ADD_TEST_FORM_MAX_FILE_SIZE_BYTES = 500_000_000;
+export const MAX_FILE_SIZE_BYTES = 500_000_000;
 
 export const errCodes = {
   USER_ALREADY_EXISTS: "USER_ALREADY_EXISTS",

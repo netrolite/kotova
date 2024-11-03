@@ -12,56 +12,48 @@ const FormDataSchema = z.instanceof(FormData);
 
 export default async function uploadFileAction(
   data: unknown,
-): Promise<ServerActionReturn<UploadedFileSchemaType[], string | true>> {
+): Promise<ServerActionReturn<UploadedFileSchemaType, string | true>> {
   try {
     console.log("uploadFileAction");
     const session = await auth();
     const validationResult = FormDataSchema.safeParse(data);
+    console.log("validationResult:");
+    console.log(validationResult);
 
     if (!validationResult.success || !session?.user) {
       throw new Error("invalid input data");
     }
     const { data: formData } = validationResult;
 
-    const formDataFiles = formData.getAll("files[]");
-    const filesValidationResult = z
-      .instanceof(File)
-      .array()
-      .safeParse(formDataFiles);
-    if (!filesValidationResult.success) {
+    const formDataFile = formData.get("file");
+    console.log(formDataFile);
+
+    const fileValidationResult = z.instanceof(File).safeParse(formDataFile);
+    if (!fileValidationResult.success) {
       throw new Error("invalid form data");
     }
-    const { data: files } = filesValidationResult;
+    const { data: file } = fileValidationResult;
 
-    const uploads: UploadedFileSchemaType[] = [];
+    const uint8Array = new Uint8Array(await file.arrayBuffer());
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const decodedFilename = Buffer.from(file.name, "latin1").toString("utf8");
+    const uploadResultRaw = await s3Upload(uint8Array, file.name);
+    const uploadResultValidated =
+      S3UploadResultSchema.safeParse(uploadResultRaw);
+    if (!uploadResultValidated.success)
+      throw new Error("invalid S3UploadResult");
 
-      const uint8Array = new Uint8Array(await file.arrayBuffer());
+    const upload = {
+      filename: file.name,
+      byteLength: uint8Array.byteLength,
+      key: uploadResultValidated.data.Key,
+      contentType: file.type,
+    };
 
-      const uploadResultRaw = await s3Upload(uint8Array, file.name);
-      const uploadResultValidated =
-        S3UploadResultSchema.safeParse(uploadResultRaw);
-      if (!uploadResultValidated.success)
-        throw new Error("invalid S3UploadResult");
+    await db.testFile.create({
+      data: { ...upload, createdByUserId: session.user.id },
+    });
 
-      uploads.push({
-        filename: decodedFilename,
-        byteLength: uint8Array.byteLength,
-        key: uploadResultValidated.data.Key,
-        contentType: file.type,
-      });
-    }
-
-    const uploadsForDb = uploads.map((upload) => ({
-      ...upload,
-      createdByUserId: session.user?.id,
-    }));
-    await db.testFile.createMany({ data: uploadsForDb });
-
-    return { data: uploads };
+    return { data: upload };
   } catch (err) {
     console.log(err);
     return { error: JSON.stringify(err) };

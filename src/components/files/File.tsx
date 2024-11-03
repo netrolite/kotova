@@ -17,6 +17,10 @@ import Link from "next/link";
 import { toast } from "sonner";
 import KeyValue from "../KeyValue";
 import bytesToSize from "@/lib/bytesToSize";
+import { useState } from "react";
+import deleteFileAction from "@/lib/actions/deleteFile";
+import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
 export type FilesListFileProps = {
   filename: string;
@@ -55,6 +59,8 @@ export default function FilesListFile({
   createdAt,
   createdBy,
 }: FilesListFileProps) {
+  const [error, setError] = useState("");
+  const router = useRouter();
   const createdAtDateString = createdAt
     ? new Date(createdAt).toLocaleDateString("ru", dateFormatterDefaults)
     : null;
@@ -67,6 +73,12 @@ export default function FilesListFile({
     if (error || !url) return toast.error(GENERIC_ERROR_MSG);
 
     console.log(url);
+  }
+
+  async function deleteFile(fileKey: string) {
+    const { error } = await deleteFileAction({ fileKey });
+    if (error) return setError("Не удалось удалить файл");
+    router.refresh();
   }
 
   return (
@@ -110,6 +122,10 @@ export default function FilesListFile({
 
             <KeyValue label="Размер">{bytesToSize(byteLength)}</KeyValue>
           </ul>
+          <Button disabled={!!tests.length} onClick={() => deleteFile(fileKey)}>
+            Удалить файл
+          </Button>
+          {error && <p>{error}</p>}
         </CardContent>
       </Card>
     </li>
