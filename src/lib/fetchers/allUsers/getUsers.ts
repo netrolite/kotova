@@ -5,10 +5,9 @@ export const USERS_PER_PAGE = 10;
 
 type Params = {
   query?: string;
-  page: number;
 };
 
-const getUsers = cache(({ query, page }: Params) => {
+const getUsers = cache(({ query }: Params) => {
   return db.user.findMany({
     where: {
       name: {
@@ -25,8 +24,6 @@ const getUsers = cache(({ query, page }: Params) => {
       avgTestScore: true,
       phone: true,
     },
-    skip: USERS_PER_PAGE * page,
-    take: USERS_PER_PAGE,
   });
 });
 

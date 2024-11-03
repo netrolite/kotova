@@ -1,20 +1,10 @@
 "use client";
 
-import allUsersGetKey from "@/lib/fetchers/allUsers/getKey";
-import { GetUsersReturn } from "@/lib/fetchers/allUsers/getUsers";
+import { swrKeys } from "@/lib/constants";
 import getApiData from "@/lib/fetchers/getApiData";
-import useAllUsersStore from "@/lib/stores/allUsers";
-import useSWRInfinite from "swr/infinite";
+import { User } from "@prisma/client";
+import useSWR from "swr";
 
 export default function useAllUsersListSwr() {
-  const query = useAllUsersStore((s) => s.query);
-  return useSWRInfinite(
-    (...args) => allUsersGetKey(...args, { query }),
-    (key) => getApiData<GetUsersReturn>(key),
-    {
-      revalidateOnMount: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
+  return useSWR<User[]>([swrKeys.allUsers], getApiData);
 }

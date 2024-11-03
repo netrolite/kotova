@@ -8,11 +8,17 @@ import myTestEditGetTest, {
 import SelectItemType from "@/lib/types/SelectItem";
 import { notFound } from "next/navigation";
 
-export default async function MyTestEdit({
-  params: { id: testId },
-}: {
-  params: { id: string };
-}) {
+export default async function MyTestEdit(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    id: testId
+  } = params;
+
   const [test, user, categoriesRaw] = await Promise.all([
     myTestEditGetTest(testId),
     getSignedInUserOrRedirect(),

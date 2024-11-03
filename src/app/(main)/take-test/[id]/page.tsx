@@ -9,10 +9,16 @@ import authOrRedirect from "@/lib/authOrRedirect";
 import TakeTestFiles from "@/components/takeTest/Files/Index";
 
 type Context = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export default async function TakeTest({ params: { id } }: Context) {
+export default async function TakeTest(props: Context) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const [test] = await Promise.all([takeTestGetTest(id), authOrRedirect()]);
   if (!test) notFound();
 

@@ -19,7 +19,7 @@ import AddTestFormQuestions from "./Questions/Index";
 import AddTestFormCategoryId from "./CategoryId";
 import SelectItemType from "@/lib/types/SelectItem";
 import AddTestFormName from "./Name";
-import { useCallback, useRef } from "react";
+import { RefObject, useCallback, useRef } from "react";
 import AddTestFormGrades from "./Grades";
 import AddTestFormContext from "@/lib/contexts/addTestForm";
 import createTestAction from "@/lib/actions/createTest";
@@ -88,7 +88,7 @@ export default function AddTestForm({ categories }: Props) {
           questionsFields: questions,
           categories: categories,
           files: [],
-          formRef,
+          formRef: formRef as RefObject<HTMLFormElement>,
         }}
       >
         <form

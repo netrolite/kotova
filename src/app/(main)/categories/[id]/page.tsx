@@ -9,14 +9,24 @@ import CategoryTestListFilter from "@/components/categories/Filter/Index";
 import CategoryTestList from "@/components/categories/TestList/Index";
 
 type Props = {
-  params: { id: string };
-  searchParams: { q?: string; grades?: string };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ q?: string; grades?: string }>;
 };
 
-export default async function CategoryTests({
-  params: { id: categoryId },
-  searchParams: { q: queryRaw, grades: gradesRaw },
-}: Props) {
+export default async function CategoryTests(props: Props) {
+  const searchParams = await props.searchParams;
+
+  const {
+    q: queryRaw,
+    grades: gradesRaw
+  } = searchParams;
+
+  const params = await props.params;
+
+  const {
+    id: categoryId
+  } = params;
+
   const grades = parseUriComponent(gradesRaw || "", z.number().array()) || [];
   const query = queryRaw || "";
   getCategoryTests({ query, categoryId: categoryId, page: 0, grades });

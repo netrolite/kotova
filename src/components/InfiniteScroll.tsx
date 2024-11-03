@@ -55,8 +55,8 @@ export default function InfiniteScroll<T, K>({
 
   return (
     <>
-      {data.map((d, index) => (
-        <div key={index}>{render(d)}</div>
+      {data.map((data, index) => (
+        <div key={index}>{render(data)}</div>
       ))}
       {!hasReachedEnd && (
         <div ref={ref}>
