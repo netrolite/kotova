@@ -18,7 +18,7 @@ export default function HeaderAvatarDropdownMenuContentItem({
   const btn = (
     <BtnWithIcon
       variant="ghost"
-      icon={icon && cloneElement(icon, { width: 16 })}
+      icon={icon && cloneElement<any>(icon, { width: 16 })}
       className="w-full cursor-pointer justify-start"
       {...props}
     />

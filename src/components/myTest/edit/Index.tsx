@@ -15,7 +15,7 @@ import MyTestEditFormQuestions from "./Questions/Index";
 import MyTestEditFormCategories from "./Categories";
 import SelectItemType from "@/lib/types/SelectItem";
 import MyTestEditFormName from "./Name";
-import { useCallback, useRef } from "react";
+import { RefObject, useCallback, useRef } from "react";
 import MyTestEditFormGrades from "./Grades";
 import MyTestEditFormContext from "@/lib/contexts/myTestEditForm";
 import { useRouter } from "next/navigation";
@@ -85,7 +85,7 @@ export default function MyTestEditForm({ categories, test }: Props) {
         value={{
           questionsFields: questions,
           categories: categories,
-          formRef,
+          formRef: formRef as RefObject<HTMLFormElement>,
           test,
         }}
       >

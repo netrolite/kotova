@@ -8,12 +8,11 @@ import useAllUsersStore from "@/lib/stores/allUsers";
 export default function AllUsersSearch() {
   const setQuery = useAllUsersStore((s) => s.setQuery);
   const [inputVal, setInputVal] = useState("");
-  const { setSize } = useAllUsersListSwr();
+  const {} = useAllUsersListSwr();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setQuery(inputVal);
-    setSize(1);
   }
 
   return (

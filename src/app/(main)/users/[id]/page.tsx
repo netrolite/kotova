@@ -6,11 +6,17 @@ import userProfileGetUser from "@/lib/fetchers/userProfile/getUser";
 import { User } from "@prisma/client";
 import { notFound } from "next/navigation";
 
-export default async function UserProfile({
-  params: { id: userId },
-}: {
-  params: { id: string };
-}) {
+export default async function UserProfile(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    id: userId
+  } = params;
+
   const signedInUserPromise = getSignedInUser({
     select: { id: true, testResults: { select: { testId: true } } },
   }) as Promise<(User & { testResults: { testId: string }[] }) | null>;

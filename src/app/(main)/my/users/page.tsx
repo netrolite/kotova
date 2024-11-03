@@ -13,7 +13,7 @@ export default async function AllUsers() {
   const signedInUser = await getSignedInUserOrRedirect();
   if (signedInUser.role !== ROLE.ADMIN) return <AccessDenied />;
 
-  const usersFirstPage = await getUsers({ page: 0 });
+  const usersFirstPage = await getUsers({});
 
   return (
     <>

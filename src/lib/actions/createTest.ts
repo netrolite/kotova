@@ -29,11 +29,20 @@ export default async function createTestAction(
       },
     });
 
+    files.map(async (file) => {
+      await db.testFile.update({
+        where: { key: file.key },
+        data: {
+          createdByUserId: userId,
+          tests: { connect: { id: createdTest.id } },
+        },
+      });
+    });
+
     await db.testFile.updateMany({
       where: { key: { in: files.map((file) => file.key) } },
       data: {
         createdByUserId: userId,
-        testId: createdTest.id,
       },
     });
 

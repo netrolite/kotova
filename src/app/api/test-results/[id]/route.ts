@@ -3,7 +3,7 @@ import parseSearchParamNumber from "@/lib/parseSearchParamNumber";
 import { NextRequest, NextResponse } from "next/server";
 
 type Context = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 type SearchParams = {
@@ -12,10 +12,13 @@ type SearchParams = {
   scoreMax?: string;
 };
 
-export async function GET(
-  req: NextRequest,
-  { params: { id: testId } }: Context,
-) {
+export async function GET(req: NextRequest, props: Context) {
+  const params = await props.params;
+
+  const {
+    id: testId
+  } = params;
+
   const {
     q,
     scoreMin: rawScoreMin,

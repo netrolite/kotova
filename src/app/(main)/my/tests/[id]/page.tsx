@@ -13,10 +13,16 @@ import { notFound } from "next/navigation";
 import { unstable_serialize } from "swr";
 
 type Context = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export default async function MyTest({ params: { id: testId } }: Context) {
+export default async function MyTest(props: Context) {
+  const params = await props.params;
+
+  const {
+    id: testId
+  } = params;
+
   const [test, user, testResults] = await Promise.all([
     myTestGetTest(testId),
     getSignedInUserOrRedirect(),
