@@ -1,17 +1,28 @@
 "use client";
 
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardDescription,
+  CardTitle,
+} from "@/components/ui/card";
 import getTestFileUrlAction from "@/lib/actions/getTestFileUrl";
 import {
   GENERIC_ERROR_MSG,
   dateFormatterDefaults,
   timeFormatterDefaults,
 } from "@/lib/constants";
-import { toast } from "sonner";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import KeyValue from "../KeyValue";
 import Link from "next/link";
+import { toast } from "sonner";
+import KeyValue from "../KeyValue";
+import bytesToSize from "@/lib/bytesToSize";
+import { useState } from "react";
+import deleteFileAction from "@/lib/actions/deleteFile";
+import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
-export type FilesFileProps = {
+export type ManageFilesListFileProps = {
   filename: string;
   fileKey: string;
   createdAt: Date | null;
@@ -40,13 +51,16 @@ export type FilesFileProps = {
   }[];
 };
 
-export default function FilesFile({
-  filename,
-  createdAt,
-  fileKey,
+export default function ManageFilesListFile({
   tests,
+  filename,
+  fileKey,
+  byteLength,
+  createdAt,
   createdBy,
-}: FilesFileProps) {
+}: ManageFilesListFileProps) {
+  const [error, setError] = useState("");
+  const router = useRouter();
   const createdAtDateString = createdAt
     ? new Date(createdAt).toLocaleDateString("ru", dateFormatterDefaults)
     : null;
@@ -58,7 +72,13 @@ export default function FilesFile({
     const { data: url, error } = await getTestFileUrlAction({ key, filename });
     if (error || !url) return toast.error(GENERIC_ERROR_MSG);
 
-    window.open(url, "_blank");
+    console.log(url);
+  }
+
+  async function deleteFile(fileKey: string) {
+    const { error } = await deleteFileAction({ fileKey });
+    if (error) return setError("Не удалось удалить файл");
+    router.refresh();
   }
 
   return (
@@ -71,6 +91,7 @@ export default function FilesFile({
           >
             {filename}
           </CardTitle>
+          <CardDescription>desciprtion</CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -91,14 +112,20 @@ export default function FilesFile({
             <KeyValue label="Используется в тестах">
               {tests.length
                 ? tests.map((test) => (
-                    <Link key={test.id} href={`/take-test/${test.id}`}>
+                    <Link key={test.id} href={`/my/tests/${test.id}`}>
                       {test.name}
                     </Link>
                   ))
                 : "Нет"}
               {}
             </KeyValue>
+
+            <KeyValue label="Размер">{bytesToSize(byteLength)}</KeyValue>
           </ul>
+          <Button disabled={!!tests.length} onClick={() => deleteFile(fileKey)}>
+            Удалить файл
+          </Button>
+          {error && <p>{error}</p>}
         </CardContent>
       </Card>
     </li>

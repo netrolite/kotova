@@ -7,7 +7,7 @@ import DashboardMyTestsCard from "@/components/dashboard/Cards/MyTests";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
 import { ROLE } from "@/lib/types/enums/Role";
 import DashboardAllUsersCard from "@/components/dashboard/Cards/AllUsers";
-import DashboardFilesCard from "@/components/dashboard/Cards/Files";
+import DashboardManageFilesCard from "@/components/dashboard/Cards/ManageFiles";
 
 export default async function Dashboard() {
   const user = await getSignedInUserOrRedirect();
@@ -25,7 +25,7 @@ export default async function Dashboard() {
               <DashboardMyTestsCard />
             </DashboardCardWrapper>
             <DashboardCardWrapper>
-              <DashboardFilesCard />
+              <DashboardManageFilesCard />
             </DashboardCardWrapper>
           </>
         )}
