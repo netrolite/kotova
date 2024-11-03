@@ -5,9 +5,8 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import Loading from "../Loading/Loading";
 import uploadFileAction from "@/lib/actions/uploadFile";
-import deleteFileAction from "@/lib/actions/deleteFile";
 
-export default function FilesAddFile() {
+export default function ManageFilesAddFile() {
   const filesInputRef = useRef<HTMLInputElement>(null);
   const [isSendingFiles, setIsSendingFiles] = useState(false);
   const [error, setError] = useState("");

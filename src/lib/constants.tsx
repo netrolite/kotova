@@ -56,27 +56,26 @@ export const NAV_ITEMS: NavItem[] = [
   {
     href: "/",
     label: "Главная",
-    icon: <PanelTopIcon />,
   },
   {
     href: "/categories",
     label: "Категории Тестов",
-    icon: <ListTodoIcon />,
+  },
+  {
+    href: "/files",
+    label: "Файлы с теорией",
   },
   {
     href: "/my",
     label: "Личный Кабинет",
-    icon: <LayoutDashboardIcon />,
   },
   {
     href: "/users/{userId}",
     label: "Мой Профиль",
-    icon: <UserIcon />,
     requiresAuth: true,
   },
   {
     href: "/about",
     label: "О сайте",
-    icon: <InfoIcon />,
   },
 ];
