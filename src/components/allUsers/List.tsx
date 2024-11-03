@@ -1,9 +1,6 @@
 "use client";
 
-import { GENERIC_ERROR_MSG } from "@/lib/constants";
-import Loading from "../Loading/Loading";
 import Link from "next/link";
-import useAllUsersListSwr from "@/lib/hooks/swr/allUsersList";
 import {
   Card,
   CardContent,
@@ -20,27 +17,25 @@ import changeUserRoleAction from "@/lib/actions/changeUserRole";
 import { toast } from "sonner";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { GetUsersReturn } from "@/lib/fetchers/allUsers/getUsers";
 
-export default function AllUsersList() {
-  const swr = useAllUsersListSwr();
-  const { data: users, error, isLoading, mutate } = swr;
-  if (error) return <p>{GENERIC_ERROR_MSG}</p>;
+type Props = {
+  users: GetUsersReturn;
+};
 
-  const isSearching = !users && isLoading;
-  if (isSearching) return <Loading />;
-  if (!users?.length) return <p>Ничего не найдено</p>;
-  if (!users) return null;
+export default function AllUsersList({ users }: Props) {
+  if (!users?.length) return <p>Нет пользователей</p>;
 
   async function handleChangeUserRole(userId: string, role: Role) {
     try {
       const { data, error } = await changeUserRoleAction({ userId, role });
       if (error || !data) throw new Error();
       toast.success("Роль успешно обновлена");
+      location.reload();
     } catch (err) {
       toast.error("Не удалось обновить роль. Попробуйте еще раз позже");
       console.error(err);
     }
-    await mutate(); // refetch users to keep the data fresh
   }
 
   return (
