@@ -5,7 +5,7 @@ import getUrlFromHeaders from "../getUrlFromHeaders";
 import { BuiltInProviderType } from "@auth/core/providers";
 
 export default async function signInAction(provider?: BuiltInProviderType) {
-  const callbackUrlFromHeaders = getUrlFromHeaders() || "/";
+  const callbackUrlFromHeaders = (await getUrlFromHeaders()) || "/";
   const callbackUrl = new URL(callbackUrlFromHeaders);
   callbackUrl.searchParams.append("hideBackBtn", "");
 

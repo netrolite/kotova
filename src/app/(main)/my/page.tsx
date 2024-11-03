@@ -7,6 +7,7 @@ import DashboardMyTestsCard from "@/components/dashboard/Cards/MyTests";
 import getSignedInUserOrRedirect from "@/lib/fetchers/getSignedInUserOrRedirect";
 import { ROLE } from "@/lib/types/enums/Role";
 import DashboardAllUsersCard from "@/components/dashboard/Cards/AllUsers";
+import DashboardFilesCard from "@/components/dashboard/Cards/Files";
 
 export default async function Dashboard() {
   const user = await getSignedInUserOrRedirect();
@@ -19,9 +20,14 @@ export default async function Dashboard() {
       <PageTitle className="mb-8">Личный кабинет</PageTitle>
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {(isAdmin || isTeacher) && (
-          <DashboardCardWrapper>
-            <DashboardMyTestsCard />
-          </DashboardCardWrapper>
+          <>
+            <DashboardCardWrapper>
+              <DashboardMyTestsCard />
+            </DashboardCardWrapper>
+            <DashboardCardWrapper>
+              <DashboardFilesCard />
+            </DashboardCardWrapper>
+          </>
         )}
 
         {isAdmin && (
