@@ -4,7 +4,6 @@ import FormItemField from "@/components/Form/ItemField";
 import Loading from "@/components/Loading/Loading";
 import { Button } from "@/components/ui/button";
 import { FormMessage } from "@/components/ui/form";
-import deleteFileAction from "@/lib/actions/deleteFile";
 import uploadFilesAction from "@/lib/actions/uploadFiles";
 import {
   ADD_TEST_FORM_MAX_FILES_AMOUNT,
@@ -12,22 +11,8 @@ import {
   errCodes,
 } from "@/lib/constants";
 import useAddTestFormContext from "@/lib/hooks/addTestForm/context";
-import { Check, ChevronsUpDown, TrashIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
 import { ChangeEvent, useRef, useState } from "react";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/shadcnUtils";
 import bytesToSize from "@/lib/bytesToSize";
 import {
   DropdownMenu,
@@ -133,6 +118,7 @@ export default function AddTestFormFiles() {
                 <DropdownMenuSeparator />
                 {existingFiles.map((file) => (
                   <DropdownMenuCheckboxItem
+                    key={file.key}
                     checked={!!filesState.find((f) => f.key === file.key)}
                     onCheckedChange={(checked) => {
                       if (checked) {

@@ -2,13 +2,6 @@
 
 import ReactStateSetter from "@/lib/types/SetState";
 import { createContext } from "react";
-import {
-  InfoIcon,
-  LayoutDashboardIcon,
-  ListTodoIcon,
-  PanelTopIcon,
-  UserIcon,
-} from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import { useState } from "react";
@@ -20,28 +13,23 @@ const NAV_ITEMS: NavItem[] = [
   {
     href: "/",
     label: "Главная",
-    icon: <PanelTopIcon />,
   },
   {
     href: "/categories",
     label: "Тесты",
-    icon: <ListTodoIcon />,
   },
   {
     href: "/my",
     label: "Личный Кабинет",
-    icon: <LayoutDashboardIcon />,
   },
   {
     href: "/users/{userId}",
     label: "Мой Профиль",
-    icon: <UserIcon />,
     requiresAuth: true,
   },
   {
     href: "/about",
     label: "О сайте",
-    icon: <InfoIcon />,
   },
 ];
 
