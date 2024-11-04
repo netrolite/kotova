@@ -90,9 +90,14 @@ export default function FilesFile({
 
             <KeyValue label="Используется в тестах">
               {tests.length
-                ? tests.map((test) => (
-                    <Link key={test.id} href={`/take-test/${test.id}`}>
+                ? tests.map((test, index) => (
+                    <Link
+                      key={test.id}
+                      className="hover:text-primary hover:underline"
+                      href={`/take-test/${test.id}`}
+                    >
                       {test.name}
+                      {index + 1 === tests.length ? "" : ", "}
                     </Link>
                   ))
                 : "Нет"}

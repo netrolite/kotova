@@ -27,9 +27,11 @@ import { useRouter } from "next/navigation";
 import isProduction from "@/lib/isProduction";
 import AddTestFormCreateTestBtn from "./CreateTestBtn";
 import AddTestFormFiles from "./Files";
+import { TestFile } from "@prisma/client";
 
 type Props = {
   categories: SelectItemType<string>[];
+  existingFiles: TestFile[];
 };
 
 export const ADD_TEST_FORM_DEFAULT_VALUES: AddTestFormSchemaType = {
@@ -42,7 +44,7 @@ export const ADD_TEST_FORM_DEFAULT_VALUES: AddTestFormSchemaType = {
 
 export type AddTestFormQuestions = UseFieldArrayReturn<AddTestFormSchemaType>;
 
-export default function AddTestForm({ categories }: Props) {
+export default function AddTestForm({ categories, existingFiles }: Props) {
   const router = useRouter();
   const form = useForm<AddTestFormSchemaType>({
     resolver: zodResolver(AddTestFormSchema),
@@ -86,8 +88,9 @@ export default function AddTestForm({ categories }: Props) {
       <AddTestFormContext.Provider
         value={{
           questionsFields: questions,
-          categories: categories,
+          categories,
           files: [],
+          existingFiles,
           formRef: formRef as RefObject<HTMLFormElement>,
         }}
       >
