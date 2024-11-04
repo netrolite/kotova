@@ -19,6 +19,10 @@ const NAV_ITEMS: NavItem[] = [
     label: "Тесты",
   },
   {
+    href: "/files",
+    label: "Файлы с теорией",
+  },
+  {
     href: "/my",
     label: "Личный Кабинет",
   },
