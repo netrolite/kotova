@@ -72,7 +72,7 @@ export default function ManageFilesListFile({
     const { data: url, error } = await getTestFileUrlAction({ key, filename });
     if (error || !url) return toast.error(GENERIC_ERROR_MSG);
 
-    console.log(url);
+    window.open(url, "_blank");
   }
 
   async function deleteFile(fileKey: string) {
@@ -112,7 +112,11 @@ export default function ManageFilesListFile({
             <KeyValue label="Используется в тестах">
               {tests.length
                 ? tests.map((test) => (
-                    <Link key={test.id} href={`/my/tests/${test.id}`}>
+                    <Link
+                      key={test.id}
+                      className="hover:text-primary hover:underline"
+                      href={`/my/tests/${test.id}`}
+                    >
                       {test.name}
                     </Link>
                   ))

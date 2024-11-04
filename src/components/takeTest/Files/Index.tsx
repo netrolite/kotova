@@ -10,7 +10,7 @@ export default function TakeTestFiles() {
   return (
     <div>
       <h3 className="mb-2 text-xl font-semibold">Файлы с теорией к тесту</h3>
-      <ul className="mb-8">
+      <ul className="mb-8 space-y-2">
         {test.files.map((file) => (
           <TakeTestFile
             key={file.key}

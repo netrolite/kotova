@@ -39,8 +39,6 @@ export default async function uploadFilesAction(
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const decodedFilename = Buffer.from(file.name, "latin1").toString("utf8");
-
       const uint8Array = new Uint8Array(await file.arrayBuffer());
 
       const uploadResultRaw = await s3Upload(uint8Array, file.name);
@@ -50,7 +48,7 @@ export default async function uploadFilesAction(
         throw new Error("invalid S3UploadResult");
 
       uploads.push({
-        filename: decodedFilename,
+        filename: file.name,
         byteLength: uint8Array.byteLength,
         key: uploadResultValidated.data.Key,
         contentType: file.type,

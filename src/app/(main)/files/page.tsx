@@ -10,7 +10,7 @@ export default async function FilesPage() {
   return (
     <>
       <PageTitle className="mb-6">Файлы с теорией</PageTitle>
-      <ul>
+      <ul className="space-y-2">
         {files.map(({ key, ...file }) => (
           <FilesFile key={key} {...file} fileKey={key} />
         ))}
