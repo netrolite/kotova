@@ -18,6 +18,7 @@ export default async function getTestFileUrlAction(
 
   const url = await s3GetSignedUrl({
     objectKey: inputData.key,
+    filename: inputData.filename,
     expirationSecs: 60 * 60 * 24,
   });
   return { data: url };
