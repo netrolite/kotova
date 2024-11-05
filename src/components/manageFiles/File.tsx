@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import getTestFileUrlAction from "@/lib/actions/getTestFileUrl";
 import {
   GENERIC_ERROR_MSG,
@@ -21,6 +15,7 @@ import { useState } from "react";
 import deleteFileAction from "@/lib/actions/deleteFile";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import BtnWithLoading from "../Btns/WithLoading";
 
 export type ManageFilesListFileProps = {
   filename: string;
@@ -61,6 +56,9 @@ export default function ManageFilesListFile({
 }: ManageFilesListFileProps) {
   const [error, setError] = useState("");
   const router = useRouter();
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
+  const [isLoadingFileUrl, setIsLoadingFileUrl] = useState(false);
+
   const createdAtDateString = createdAt
     ? new Date(createdAt).toLocaleDateString("ru", dateFormatterDefaults)
     : null;
@@ -68,11 +66,15 @@ export default function ManageFilesListFile({
     ? new Date(createdAt).toLocaleTimeString("ru", timeFormatterDefaults)
     : null;
 
-  async function viewFile(key: string, filename: string) {
+  async function getFileUrl(key: string, filename: string) {
+    setIsLoadingFileUrl(true);
     const { data: url, error } = await getTestFileUrlAction({ key, filename });
-    if (error || !url) return toast.error(GENERIC_ERROR_MSG);
-
-    window.open(url, "_blank");
+    setIsLoadingFileUrl(false);
+    if (error || !url) {
+      toast.error(GENERIC_ERROR_MSG);
+      return null;
+    }
+    setFileUrl(url);
   }
 
   async function deleteFile(fileKey: string) {
@@ -87,14 +89,28 @@ export default function ManageFilesListFile({
         <CardHeader>
           <CardTitle
             className="hover:cursor-pointer hover:text-primary hover:underline"
-            onClick={() => viewFile(fileKey, filename)}
+            onClick={() => getFileUrl(fileKey, filename)}
           >
             {filename}
           </CardTitle>
-          <CardDescription>desciprtion</CardDescription>
         </CardHeader>
 
         <CardContent>
+          <div className="space-y-2">
+            <BtnWithLoading
+              isLoading={isLoadingFileUrl}
+              onClick={() => getFileUrl(fileKey, filename)}
+            >
+              Получить ссылку на файл
+            </BtnWithLoading>
+            {fileUrl && (
+              <div>
+                <Link href={fileUrl} target="_blank">
+                  <Button>Открыть ссылку</Button>
+                </Link>
+              </div>
+            )}
+          </div>
           <ul>
             <KeyValue label="Добавлен пользователем">
               <Link
