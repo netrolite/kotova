@@ -55,10 +55,11 @@ export default function FilesFile({
     : null;
 
   async function viewFile(key: string, filename: string) {
+    const win = window.open("", "_blank");
     const { data: url, error } = await getTestFileUrlAction({ key, filename });
     if (error || !url) return toast.error(GENERIC_ERROR_MSG);
 
-    window.open(url, "_blank");
+    if (win) win.location = url;
   }
 
   return (
