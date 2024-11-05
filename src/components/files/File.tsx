@@ -10,6 +10,9 @@ import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import KeyValue from "../KeyValue";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import { useState } from "react";
+import BtnWithLoading from "../Btns/WithLoading";
 
 export type FilesFileProps = {
   filename: string;
@@ -47,6 +50,9 @@ export default function FilesFile({
   tests,
   createdBy,
 }: FilesFileProps) {
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
+  const [isLoadingFileUrl, setIsLoadingFileUrl] = useState(false);
+
   const createdAtDateString = createdAt
     ? new Date(createdAt).toLocaleDateString("ru", dateFormatterDefaults)
     : null;
@@ -54,11 +60,15 @@ export default function FilesFile({
     ? new Date(createdAt).toLocaleTimeString("ru", timeFormatterDefaults)
     : null;
 
-  async function viewFile(key: string, filename: string) {
+  async function getFileUrl(key: string, filename: string) {
+    setIsLoadingFileUrl(true);
     const { data: url, error } = await getTestFileUrlAction({ key, filename });
-    if (error || !url) return toast.error(GENERIC_ERROR_MSG);
-
-    window.open(url, "_blank");
+    setIsLoadingFileUrl(false);
+    if (error || !url) {
+      toast.error(GENERIC_ERROR_MSG);
+      return null;
+    }
+    setFileUrl(url);
   }
 
   return (
@@ -67,13 +77,28 @@ export default function FilesFile({
         <CardHeader>
           <CardTitle
             className="hover:cursor-pointer hover:text-primary hover:underline"
-            onClick={() => viewFile(fileKey, filename)}
+            onClick={() => getFileUrl(fileKey, filename)}
           >
             {filename}
           </CardTitle>
         </CardHeader>
 
         <CardContent>
+          <div className="space-y-2">
+            <BtnWithLoading
+              isLoading={isLoadingFileUrl}
+              onClick={() => getFileUrl(fileKey, filename)}
+            >
+              Получить ссылку на файл
+            </BtnWithLoading>
+            {fileUrl && (
+              <div>
+                <Link href={fileUrl} target="_blank">
+                  <Button>Открыть ссылку</Button>
+                </Link>
+              </div>
+            )}
+          </div>
           <ul>
             <KeyValue label="Добавлен пользователем">
               <Link
