@@ -3,6 +3,7 @@ import getEnvVar from "./getEnvVar";
 import { z } from "zod";
 import { nanoid } from "nanoid";
 import mime from "mime-types";
+import contentDisposition from "content-disposition";
 
 const s3 = new S3({
   signatureVersion: "v4",
@@ -33,16 +34,21 @@ export async function s3Upload(
 type S3GetSignedUrlParams = {
   objectKey: string;
   expirationSecs: number;
+  filename: string;
 };
 
 export async function s3GetSignedUrl({
   objectKey,
   expirationSecs,
+  filename,
 }: S3GetSignedUrlParams) {
   const params: { [key: string]: unknown } = {
     Bucket: getEnvVar("S3_BUCKET_NAME"),
     Key: objectKey,
     Expires: expirationSecs, // Time in seconds until the URL expires
+    ResponseContentDisposition: contentDisposition(filename, {
+      type: "inline",
+    }),
   };
 
   const url = await s3.getSignedUrlPromise("getObject", params);
