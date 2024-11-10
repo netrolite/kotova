@@ -2,6 +2,8 @@ import TestResultAnswerIsCorrectSectionBadge from "./Badge";
 import testResultGetCorrectAnswers from "@/lib/testResult/getCorrectAnswers";
 import useTestResultAnswerContext from "@/lib/hooks/testResult/answerContext";
 import testResultGetAnswers from "@/lib/testResult/getAnswers";
+import { cn } from "@/lib/shadcnUtils";
+import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
 
 type Props = {};
 
@@ -13,7 +15,7 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
   return (
     <div>
       <TestResultAnswerIsCorrectSectionBadge />
-      <div className="flex gap-2">
+      <div className="flex flex-col">
         <span className="whitespace-nowrap text-muted-foreground">
           Ваш ответ:
         </span>
@@ -35,7 +37,7 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
         </div>
       </div>
       {!answerData.isCorrect && (
-        <div className="flex gap-2">
+        <div className="mt-2 flex flex-col">
           <span className="whitespace-nowrap text-muted-foreground">
             Правильный ответ:
           </span>
