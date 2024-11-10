@@ -14,7 +14,7 @@ export default function TestResultAnswerExplanation() {
     <div className="space-y-2">
       <AnimateHeight {...{ height }} duration={300}>
         <p className="text-lg font-semibold">Объяснение</p>
-        <p>{explanation}</p>
+        <p className="whitespace-pre-line">{explanation}</p>
       </AnimateHeight>
 
       <Button
