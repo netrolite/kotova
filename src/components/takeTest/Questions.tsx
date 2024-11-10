@@ -1,7 +1,7 @@
 "use client";
 
 import { TestQuestion, TestQuestionOption } from "@prisma/client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import TakeTestQuestion from "./Question";
 import { FieldErrors, FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -65,7 +65,7 @@ export default function TakeTestQuestions() {
                 >
                   <Card>
                     <CardHeader>
-                      <h3 className="whitespace-pre-line text-lg font-semibold">
+                      <h3 className="whitespace-pre-line text-lg font-semibold leading-normal">
                         {question.question}
                       </h3>
                     </CardHeader>

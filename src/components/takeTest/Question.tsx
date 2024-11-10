@@ -14,7 +14,7 @@ import TakeTestCheckboxQuestion from "./questionsTypes/Checkbox";
 import TakeTestTableQuestion from "./questionsTypes/Table";
 
 export default function TakeTestQuestion() {
-  const { questionIndex, type, id } = useTakeTestQuestionContext();
+  const { questionIndex, type } = useTakeTestQuestionContext();
   const { control } = useTakeTestFormContext();
   const optionsFields = useFieldArray({
     control,
