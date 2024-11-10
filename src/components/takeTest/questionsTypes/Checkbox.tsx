@@ -1,11 +1,6 @@
 import FormItemField from "@/components/Form/ItemField";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  FormControl,
-  FormField,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormControl, FormLabel } from "@/components/ui/form";
 import useTakeTestQuestionContext from "@/lib/hooks/takeTest/questionContext";
 import useTakeTestQuestionOptionsContext from "@/lib/hooks/takeTest/questionOptionsContext";
 import useTakeTestFormContext from "@/lib/hooks/takeTest/formContext";
@@ -25,7 +20,7 @@ export default function TakeTestCheckboxQuestion() {
   }
 
   return (
-    <>
+    <ul className="space-y-2">
       {optionsFields.fields.map((option, i) => (
         <FormItemField
           key={option.id}
@@ -49,6 +44,6 @@ export default function TakeTestCheckboxQuestion() {
           }}
         />
       ))}
-    </>
+    </ul>
   );
 }

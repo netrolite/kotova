@@ -21,7 +21,7 @@ export default function TakeTestRadioQuestion() {
   }
 
   return (
-    <ul>
+    <ul className="space-y-2">
       {optionsFields.fields.map((option, i) => (
         <FormItemField
           key={option.id}

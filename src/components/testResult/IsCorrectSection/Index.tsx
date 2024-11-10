@@ -11,6 +11,9 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
   const answerData = useTestResultAnswerContext();
   const answers = testResultGetAnswers(answerData);
   const correctAnswers = testResultGetCorrectAnswers(answerData);
+  const isRadioOrCheckBoxQuestion =
+    answerData.type === TEST_QUESTION_TYPE.RADIO ||
+    answerData.type === TEST_QUESTION_TYPE.CHECKBOX;
 
   return (
     <div>
@@ -21,7 +24,12 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
         </span>
         <div className="font-semibold">
           {!!answers?.length && (
-            <ul className="flex flex-wrap gap-x-2">
+            <ul
+              className={cn(
+                "flex flex-wrap gap-2",
+                isRadioOrCheckBoxQuestion ? "flex-col" : "",
+              )}
+            >
               {answers.map((answer, i, arr) => {
                 const isLast = arr.length - 1 === i;
                 return (
@@ -43,7 +51,12 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
           </span>
           <div className="font-semibold">
             {!!correctAnswers?.length && (
-              <ul className="flex flex-wrap gap-x-2">
+              <ul
+                className={cn(
+                  "flex flex-wrap gap-2",
+                  isRadioOrCheckBoxQuestion ? "flex-col" : "",
+                )}
+              >
                 {correctAnswers.map((answer, i, arr) => {
                   const isLast = arr.length - 1 === i;
                   return (
