@@ -27,7 +27,7 @@ export default function TakeTestRadioQuestion() {
           key={option.id}
           control={control}
           name={`answers.${questionIndex}.options.${i}.isChecked`}
-          formItemClassName="flex gap-2 items-center space-y-0"
+          formItemClassName="flex gap-2 items-start space-y-0"
           render={({ field }) => {
             return (
               <>
@@ -35,9 +35,10 @@ export default function TakeTestRadioQuestion() {
                   <Checkbox
                     checked={field.value || false}
                     onCheckedChange={(val) => handleCheckedChange(val, i)}
+                    className="mt-1"
                   />
                 </FormControl>
-                <FormLabel className="text-sm font-normal">
+                <FormLabel className="items- text-sm font-normal">
                   {questionOptions[i].content}
                 </FormLabel>
               </>

@@ -26,7 +26,7 @@ export default function TakeTestCheckboxQuestion() {
           key={option.id}
           control={control}
           name={`answers.${questionIndex}.options.${i}.isChecked`}
-          formItemClassName="flex gap-2 items-center space-y-0"
+          formItemClassName="flex gap-2 items-start space-y-0"
           render={({ field }) => {
             return (
               <>
@@ -34,6 +34,7 @@ export default function TakeTestCheckboxQuestion() {
                   <Checkbox
                     checked={field.value || false}
                     onCheckedChange={(val) => handleCheckedChange(val, i)}
+                    className="mt-1"
                   />
                 </FormControl>
                 <FormLabel className="text-sm font-normal">
