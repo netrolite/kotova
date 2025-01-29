@@ -20,8 +20,25 @@ export default function CategoryTestListCard({
   name,
   testResults,
   createdBy,
+  createdAt,
   id,
 }: Props) {
+
+  const createdAtStringDayMonth = new Date(createdAt).toLocaleDateString(
+    "ru",
+    {
+      day: "numeric",
+      month: "long",
+    },
+  );
+  const createdAtStringTime = new Date(createdAt).toLocaleTimeString(
+    "ru",
+    {
+      hour: "2-digit",
+      minute: "2-digit",
+    },
+  );
+
   return (
     <Card key={id}>
       <Link href={`/take-test/${id}`}>
@@ -34,6 +51,7 @@ export default function CategoryTestListCard({
             {avgScore !== null ? formatTestScore(avgScore) : "Нет данных"}
           </KeyValue>
           <KeyValue label="Раз пройден">{testResults.length}</KeyValue>
+          <KeyValue label="Дата создания">{createdAtStringDayMonth} в {createdAtStringTime}</KeyValue>
         </CardContent>
       </Link>
       <CardFooter>
