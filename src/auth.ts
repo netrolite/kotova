@@ -14,6 +14,7 @@ export const nextAuthConfig = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 365 * 24 * 60 * 60
   },
   providers: [
     Credentials({
