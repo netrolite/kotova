@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import { Separator } from "@/components/ui/separator";
 import TestResultAnswerIsCorrectSection from "./IsCorrectSection/Index";
 import useTestResultContext from "@/lib/hooks/testResult/context";
@@ -9,7 +9,7 @@ import TestResultAnswerExplanation from "./Explanation";
 
 type Props = {};
 
-export default function TestResultAnswers({}: Props) {
+export default function TestResultAnswers({ }: Props) {
   const testResult = useTestResultContext();
   return (
     <ul className="space-y-4">
@@ -19,7 +19,7 @@ export default function TestResultAnswers({}: Props) {
             <TestResultAnswerContext.Provider value={answer}>
               <Card className="space-y-6">
                 <CardHeader className="pb-0">
-                  <h3 className="whitespace-pre-line text-lg font-semibold">{answer.question.question}</h3>
+                  <h3 className="whitespace-pre-line text-md font-semibold">{answer.question.question}</h3>
                 </CardHeader>
                 <Separator />
                 <CardContent className="space-y-3">
