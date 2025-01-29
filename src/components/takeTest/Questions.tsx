@@ -65,7 +65,7 @@ export default function TakeTestQuestions() {
                 >
                   <Card>
                     <CardHeader>
-                      <h3 className="whitespace-pre-line text-lg font-semibold leading-normal">
+                      <h3 className="whitespace-pre-line text-md font-semibold leading-normal">
                         {question.question}
                       </h3>
                     </CardHeader>
