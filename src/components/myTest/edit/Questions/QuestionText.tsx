@@ -1,6 +1,6 @@
 import FormItemField from "@/components/Form/ItemField";
 import { FormControl, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import useMyTestEditFormQuestionContext from "@/lib/hooks/myTestEditForm/questionContext";
 import { MyTestEditFormSchemaType } from "@/lib/zod/schemas/myTestEditForm/Index";
 import { useFormContext } from "react-hook-form";
@@ -17,7 +17,7 @@ export default function MyTestEditFormQuestionText() {
         <>
           <FormLabel>Вопрос</FormLabel>
           <FormControl>
-            <Input {...field} />
+            <Textarea {...field} value={field.value || ""} />
           </FormControl>
           <FormMessage />
         </>

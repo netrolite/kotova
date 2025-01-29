@@ -16,5 +16,6 @@ export type MyTestEditFormSchemaInputType = z.input<
   typeof MyTestEditFormSchema
 >;
 export type MyTestEditFormSchemaType = z.infer<typeof MyTestEditFormSchema>;
+export type MyTestEditFormSchemaTypeWithoutTestId = Omit<z.infer<typeof MyTestEditFormSchema>, "testId">
 
 export default MyTestEditFormSchema;
