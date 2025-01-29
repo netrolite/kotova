@@ -41,7 +41,7 @@ export default function MyTestEditForm({ categories, test }: Props) {
   const router = useRouter();
   const form = useForm<MyTestEditFormSchemaType>({
     resolver: zodResolver(MyTestEditFormSchema),
-    defaultValues: { ...test, categoryId: test.categoryId ?? undefined },
+    defaultValues: { ...test, categoryId: test.categoryId ?? undefined, files: [] },
   });
   const formRef = useRef<HTMLFormElement>(null);
   const questions = useFieldArray<MyTestEditFormSchemaType>({

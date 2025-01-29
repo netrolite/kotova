@@ -5,7 +5,7 @@ import { db } from "../db";
 import getSignedInUserOrRedirect from "../fetchers/getSignedInUserOrRedirect";
 import ServerActionReturn from "../types/ServerActionReturn";
 import MyTestEditFormSchema, {
-  MyTestEditFormSchemaType,
+  MyTestEditFormSchemaType, MyTestEditFormSchemaTypeWithoutTestId,
 } from "../zod/schemas/myTestEditForm/Index";
 import isEqual from "lodash/isEqual";
 import areOverlappingPropertiesEqual from "../areOverlappingPropertiesEqual";
@@ -17,15 +17,15 @@ export default async function editTestAction(
   const { id: userId } = await getSignedInUserOrRedirect();
   const validationResult = MyTestEditFormSchema.safeParse(data);
   if (!validationResult.success) return { error: "invalid data" };
-  const { data: newTestData } = validationResult;
+  const { data: { testId, ...newTestData } } = validationResult;
 
   try {
-    const testToUpdate = await getTestToUpdate(newTestData.testId);
+    const testToUpdate = await getTestToUpdate(testId);
     if (!testToUpdate) return { error: "test not found" };
 
     // purposefully not using Promise.all for parallelizing these operations
     // to decrease the load on the database
-    await updateTest(newTestData, userId);
+    await updateTest(newTestData, userId, testId);
 
     await createQuestionsAndOptions(testToUpdate, newTestData);
     await createOptionsForExistingQuestions(testToUpdate, newTestData);
@@ -37,9 +37,9 @@ export default async function editTestAction(
     await updateOptions(testToUpdate, newTestData);
 
     revalidatePath("/my/tests");
-    revalidatePath(`/my/tests/${newTestData.testId}`);
-    revalidatePath(`/my/tests/${newTestData.testId}/edit`);
-    revalidatePath(`/take-test/${newTestData.testId}`);
+    revalidatePath(`/my/tests/${testId}`);
+    revalidatePath(`/my/tests/${testId}/edit`);
+    revalidatePath(`/take-test/${testId}`);
     return { data: true };
   } catch (err) {
     console.error(err);
@@ -47,7 +47,7 @@ export default async function editTestAction(
   }
 }
 
-function updateTest(newTestData: MyTestEditFormSchemaType, userId: string) {
+function updateTest(newTestData: MyTestEditFormSchemaTypeWithoutTestId, userId: string, testId: string) {
   const {
     categoryId: _,
     questions: __,
@@ -55,7 +55,7 @@ function updateTest(newTestData: MyTestEditFormSchemaType, userId: string) {
     ...safeTestData
   } = newTestData;
   return db.test.update({
-    where: { id: newTestData.testId },
+    where: { id: testId },
     data: {
       ...safeTestData,
       category: { connect: { id: newTestData.categoryId } },
@@ -92,7 +92,7 @@ type GetTestToUpdateReturn = Exclude<
 
 function createQuestionsAndOptions(
   testToUpdate: GetTestToUpdateReturn,
-  newTestData: MyTestEditFormSchemaType,
+  newTestData: MyTestEditFormSchemaTypeWithoutTestId,
 ) {
   const questionsToCreate = newTestData.questions.filter((q) => q.id === null);
 
@@ -119,7 +119,7 @@ function createQuestionsAndOptions(
 
 async function deleteQuestions(
   testToUpdate: GetTestToUpdateReturn,
-  newTestData: MyTestEditFormSchemaType,
+  newTestData: MyTestEditFormSchemaTypeWithoutTestId,
 ) {
   const questionsToDeleteIds = testToUpdate.questions
     .filter((q) => !newTestData.questions.map((q) => q.id).includes(q.id))
@@ -131,7 +131,7 @@ async function deleteQuestions(
 
 async function createOptionsForExistingQuestions(
   testToUpdate: GetTestToUpdateReturn,
-  newTestData: MyTestEditFormSchemaType,
+  newTestData: MyTestEditFormSchemaTypeWithoutTestId,
 ) {
   const testToUpdateOptions = getOptionsFromTestToUpdate(testToUpdate);
   const newTestDataOptions = getOptionsFromNewTestData(newTestData);
@@ -162,7 +162,7 @@ async function createOptionsForExistingQuestions(
 
 async function deleteOptionsForExistingQuestions(
   testToUpdate: GetTestToUpdateReturn,
-  newTestData: MyTestEditFormSchemaType,
+  newTestData: MyTestEditFormSchemaTypeWithoutTestId,
 ) {
   const testToUpdateOptions = getOptionsFromTestToUpdate(testToUpdate);
   const newTestDataOptions = getOptionsFromNewTestData(newTestData);
@@ -192,7 +192,7 @@ async function deleteOptionsForExistingQuestions(
 
 async function updateQuestions(
   testToUpdate: GetTestToUpdateReturn,
-  newTestData: MyTestEditFormSchemaType,
+  newTestData: MyTestEditFormSchemaTypeWithoutTestId,
 ) {
   const questionsToUpdate = newTestData.questions.filter(
     (newTestDataQuestion) => {
@@ -225,7 +225,7 @@ async function updateQuestions(
 
 async function updateOptions(
   testToUpdate: GetTestToUpdateReturn,
-  newTestData: MyTestEditFormSchemaType,
+  newTestData: MyTestEditFormSchemaTypeWithoutTestId,
 ) {
   const newTestDataOptions = getOptionsFromNewTestData(newTestData);
   const testToUpdateOptions = getOptionsFromTestToUpdate(testToUpdate);
@@ -255,8 +255,8 @@ async function updateOptions(
   return Promise.all(updatedOptionsPromises);
 }
 
-function getOptionsFromNewTestData(newTestData: MyTestEditFormSchemaType) {
-  const options: (MyTestEditFormSchemaType["questions"][number]["options"][number] & {
+function getOptionsFromNewTestData(newTestData: MyTestEditFormSchemaTypeWithoutTestId) {
+  const options: (MyTestEditFormSchemaTypeWithoutTestId["questions"][number]["options"][number] & {
     testQuestionId: string | null;
   })[] = [];
   for (const question of newTestData.questions) {
