@@ -5,7 +5,7 @@ const getTestResult = cache(async (id: string) => {
   return db.testResult.findFirst({
     where: { id },
     include: {
-      user: { select: { name: true } },
+      user: { select: { name: true, id: true } },
       test: {
         select: {
           id: true,

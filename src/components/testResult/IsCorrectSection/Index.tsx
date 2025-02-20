@@ -4,10 +4,12 @@ import useTestResultAnswerContext from "@/lib/hooks/testResult/answerContext";
 import testResultGetAnswers from "@/lib/testResult/getAnswers";
 import { cn } from "@/lib/shadcnUtils";
 import { TEST_QUESTION_TYPE } from "@/lib/types/enums/TestQuestionType";
+import useTestResultContext from "@/lib/hooks/testResult/context";
 
 type Props = {};
 
 export default function TestResultAnswerIsCorrectSection({}: Props) {
+  const testResult = useTestResultContext();
   const answerData = useTestResultAnswerContext();
   const answers = testResultGetAnswers(answerData);
   const correctAnswers = testResultGetCorrectAnswers(answerData);
@@ -20,7 +22,9 @@ export default function TestResultAnswerIsCorrectSection({}: Props) {
       <TestResultAnswerIsCorrectSectionBadge />
       <div className="flex flex-col">
         <span className="whitespace-nowrap text-muted-foreground">
-          Ваш ответ:
+          {testResult.userId === testResult.signedInUser?.id
+            ? "Ваш ответ:"
+            : "Ответ пользователя:"}
         </span>
         <div className="font-semibold">
           {!!answers?.length && (
